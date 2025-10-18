@@ -67,7 +67,7 @@ html {
     max-width: 200px;
     height: auto;
   }
-  .about-text {
+  .about .about-text {
     text-align: center;
     padding-left: 0;
   }
