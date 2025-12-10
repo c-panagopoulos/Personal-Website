@@ -67,10 +67,10 @@ Elegant and simple design to encourage connection.
 
 Personal-Website/
 │
-├── images/ # Icons, illustrations, profile image
-├── index.html # Main page
-├── style.css # All styling
-├── index.js # Animation logic
+├── images/         # Icons, illustrations, profile image
+├── index.html      # Main page
+├── style.css       # All styling
+├── index.js        # Animation logic
 └── README.md
 
 
