@@ -65,6 +65,7 @@ Elegant and simple design to encourage connection.
 
 ## 📁 Folder Structure
 
+<pre>
 Personal-Website/
 │
 ├── images/         # Icons, illustrations, profile image
@@ -72,7 +73,7 @@ Personal-Website/
 ├── style.css       # All styling
 ├── index.js        # Animation logic
 └── README.md
-
+</pre>
 
 ---
 
