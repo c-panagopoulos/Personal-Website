@@ -659,6 +659,14 @@ svg {
   color: #3e5879;
 }
 
+.homelab-card .project-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+
 @media (max-width: 768px) {
   .homelab-grid {
     grid-template-columns: 1fr;
