@@ -19,6 +19,15 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 2rem;
+  
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+body p{
+  color: var(--text-color);
 }
 
 .logo {
@@ -356,7 +365,7 @@ section {
 }
 
 .project-card {
-  background: white;
+  background: var(--cards);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -402,11 +411,11 @@ section {
 }
 
 .project-tags .tag {
-  background: #d8c4b6;
+  background: var(--tags-color);
   padding: 0.4rem 1rem;
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #213555;
+  color: var(--cards-accent);
   font-family: "Duru Sans", sans-serif;
 }
 
@@ -418,7 +427,7 @@ section {
 }
 
 .project-link {
-  color: #213555;
+  color: var(--cards-accent);
   text-decoration: none;
   font-family: "Duru Sans", sans-serif;
   font-weight: 500;
@@ -430,16 +439,16 @@ section {
 }
 
 .project-link svg {
-  fill: #213555;
+  fill: var(--cards-accent);
   transition: fill 0.3s ease;
 }
 
 .project-link:hover {
-  color: #3e5879;
+  color: var(--cards-accent-highlight);
 }
 
 .project-link:hover svg {
-  fill: #3e5879;
+  fill: var(--cards-accent-highlight);
 }
 
 @media (max-width: 768px) {
@@ -457,8 +466,9 @@ section {
   }
   
   .project-links {
-    flex-direction: column;
-    gap: 0.75rem;
+    flex-direction:row;
+    gap: 2rem;
+    align-content:center;
   }
 }
 
@@ -589,7 +599,7 @@ svg {
 }
 
 .homelab-card {
-  background: white;
+  background: var(--bg-color);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -635,16 +645,16 @@ svg {
 }
 
 .homelab-tags .tag {
-  background: #d8c4b6;
+  background: var(--tags-color);
   padding: 0.4rem 1rem;
   border-radius: 20px;
   font-size: 0.85rem;
-  color: #213555;
+  color: var(--cards-accent);
   font-family: "Duru Sans", sans-serif;
 }
 
 .homelab-link {
-  color: #213555;
+  color: var(--cards-accent);
   text-decoration: none;
   font-family: "Duru Sans", sans-serif;
   font-weight: 500;
@@ -656,7 +666,7 @@ svg {
 }
 
 .homelab-link:hover {
-  color: #3e5879;
+  color: var(--cards-accent-highlight);
 }
 
 .homelab-card .project-link {

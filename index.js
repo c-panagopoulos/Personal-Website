@@ -14,3 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(el);
   });
 });
+
+document.querySelector(".dark-mode").addEventListener("click", function() {
+   
+  document.body.classList.toggle("dark");
+
+
+})
