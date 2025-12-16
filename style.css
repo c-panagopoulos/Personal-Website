@@ -1,3 +1,51 @@
+:root {
+  --bg-color: white;
+  --text-color: #1e293b;
+  --dark-blue: #213555;
+  --light-blue: #3e5879;
+  --sections-color: #f5efe7;
+  --sections-color-alt: #e8ded2;
+  --tags-color: #d8c4b6;
+  --cards: white;
+  --cards-accent: #213555;
+  --cards-accent-highlight: #3e5879;
+  --cards-border: rgba(0, 0, 0, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.22);
+  --nav-border: rgba(255, 255, 255, 0.4);
+  --nav-link-color: #1b365d;
+  --hero-h1: #213555;
+  --hero-h2: #3e5879;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-hover: rgba(0, 0, 0, 0.15);
+}
+
+.dark {
+  --bg-color: #0f172a;
+  --text-color: #e2e8f0;
+  --dark-blue: #60a5fa;
+  --light-blue: #93c5fd;
+  --sections-color: #1e293b;
+  --sections-color-alt: #334155;
+  --tags-color: #475569;
+  --cards: #1e293b;
+  --cards-accent: #60a5fa;
+  --cards-accent-highlight: #93c5fd;
+  --cards-border: rgba(96, 165, 250, 0.2);
+  --nav-bg: rgba(30, 41, 59, 0.8);
+  --nav-border: rgba(71, 85, 105, 0.4);
+  --nav-link-color: #e2e8f0;
+  --hero-h1: #60a5fa;
+  --hero-h2: #93c5fd;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --shadow-color-hover: rgba(0, 0, 0, 0.6);
+}
+
+.dark .gradient-background {
+  background: linear-gradient(300deg, #1e3a5f, #2d4356, #1a2332);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
 .gradient-background {
   background: linear-gradient(300deg, #3e5879, #d8c4b6, #213555);
   background-size: 180% 180%;
@@ -19,14 +67,15 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 2rem;
-  
 }
 
 body {
   background-color: var(--bg-color);
+  margin: 0;
+  transition: background-color 0.3s ease;
 }
 
-body p{
+body p {
   color: var(--text-color);
 }
 
@@ -37,11 +86,11 @@ body p{
 }
 
 .c-letter {
-  color: #213555;
+  color: var(--dark-blue);
 }
 
 .p-letter {
-  color: #3e5879;
+  color: var(--light-blue);
 }
 
 .noto-sans-logo {
@@ -49,6 +98,56 @@ body p{
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--cards-accent);
+  border: 2px solid var(--cards-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px var(--shadow-color-hover);
+}
+
+.dark-mode-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle:hover svg {
+  transform: rotate(20deg);
+}
+
+.sun-icon {
+  display: block;
+}
+
+.moon-icon {
+  display: none;
+}
+
+.dark .sun-icon {
+  display: none;
+}
+
+.dark .moon-icon {
+  display: block;
 }
 
 .glass-nav {
@@ -60,21 +159,20 @@ body p{
 }
 
 .glass-nav-inner {
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 15px auto;
   padding: 12px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  
-  background: rgba(255, 255, 255, 0.22); 
+  background: var(--nav-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 0.3s ease;
+  border: 1px solid var(--nav-border);
+  box-shadow: 0 12px 32px var(--shadow-color);
+  transition: all 0.3s ease;
 }
 
 .glass-nav-inner a {
@@ -82,13 +180,13 @@ body p{
 }
 
 .glass-nav-inner:hover {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 40px var(--shadow-color-hover);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem; 
+  gap: 2rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -98,10 +196,10 @@ body p{
   text-decoration: none;
   font-size: 0.92rem;
   font-weight: 500;
-  color: #1b365d;
+  color: var(--nav-link-color);
   position: relative;
   transition: color 0.3s ease, transform 0.2s ease;
-  padding: 6px 0; 
+  padding: 6px 0;
 }
 
 .nav-links a::after {
@@ -111,13 +209,13 @@ body p{
   bottom: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #213555, #3e5879);
+  background: linear-gradient(90deg, var(--dark-blue), var(--light-blue));
   transition: width 0.3s ease;
   border-radius: 2px;
 }
 
 .nav-links a:hover {
-  color: #213555;
+  color: var(--dark-blue);
   transform: translateY(-1px);
 }
 
@@ -126,7 +224,7 @@ body p{
 }
 
 .nav-links a.active {
-  color: #213555;
+  color: var(--dark-blue);
   font-weight: 600;
 }
 
@@ -140,11 +238,11 @@ body p{
     max-width: 95%;
     padding: 12px 24px;
   }
-  
+
   .nav-links {
     gap: 1.5rem;
   }
-  
+
   .nav-links a {
     font-size: 0.88rem;
   }
@@ -158,12 +256,19 @@ body p{
   }
 
   .glass-nav {
-    top: 0; 
+    top: 0;
   }
-  
+
   .nav-links {
     gap: 1rem;
     font-size: 0.85rem;
+  }
+
+  .dark-mode-toggle {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -174,7 +279,7 @@ body p{
     gap: 1rem;
     padding: 14px 18px;
   }
-  
+
   .nav-links {
     flex-wrap: wrap;
     justify-content: center;
@@ -182,15 +287,13 @@ body p{
   }
 
   .hero {
-    padding-top: 7.5rem; 
+    padding-top: 7.5rem;
   }
-  
 }
 
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
-   
   }
 
   .hero-image {
@@ -210,20 +313,18 @@ body p{
     grid-template-columns: 1fr;
     row-gap: 20px;
   }
+
   .grid img {
     margin: 0 auto;
     width: 100%;
     max-width: 200px;
     height: auto;
   }
+
   .about .about-text {
     text-align: center;
     padding-left: 0;
   }
-}
-
-body {
-  margin: 0;
 }
 
 .duru-sans-regular {
@@ -239,13 +340,15 @@ body {
 }
 
 h1 {
-  color: #213555;
+  color: var(--hero-h1);
+  transition: color 0.3s ease;
 }
 
 h2 {
   font-family: "Slabo 27px", serif;
   text-align: center;
-  color: #3e5879;
+  color: var(--hero-h2);
+  transition: color 0.3s ease;
 }
 
 #Subtitle {
@@ -289,7 +392,7 @@ p {
 }
 
 .button {
-  background-color: #213555;
+  background-color: var(--cards-accent);
   color: white;
   padding: 0.75rem 0.75rem;
   border: none;
@@ -298,6 +401,7 @@ p {
   width: fit-content;
   text-decoration: none;
   font-size: 0.8rem;
+  transition: background-color 0.3s ease;
 }
 
 .hero-image {
@@ -309,6 +413,8 @@ p {
   justify-content: center;
   align-items: center;
   flex-flow: column;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
 }
 
 .skills p {
@@ -319,6 +425,8 @@ p {
 
 .skills svg {
   padding-right: 3px;
+  fill: var(--text-color);
+  transition: fill 0.3s ease;
 }
 
 .container {
@@ -338,8 +446,9 @@ section {
 }
 
 .projects {
-  background-color: #f5efe7;
+  background-color: var(--sections-color);
   padding: 50px 20px;
+  transition: background-color 0.3s ease;
 }
 
 .projects h2 {
@@ -353,7 +462,8 @@ section {
   margin: 0 auto 3rem auto;
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #3e5879;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .projects-grid {
@@ -368,16 +478,19 @@ section {
   background: var(--cards);
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--cards-border);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
-  min-height: 350px; 
+  min-height: 350px;
 }
 
 .project-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px var(--shadow-color-hover);
+  border-color: var(--cards-accent);
 }
 
 .project-card .card-icon {
@@ -387,19 +500,21 @@ section {
 }
 
 .project-card h3 {
-  color: #213555;
+  color: var(--cards-accent);
   margin: 0 0 1rem 0;
   font-family: "Duru Sans", sans-serif;
   text-align: center;
+  transition: color 0.3s ease;
 }
 
 .project-card p {
-  color: #3e5879;
+  color: var(--text-color);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   flex-grow: 1;
   text-align: center;
   font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
 
 .project-tags {
@@ -417,13 +532,14 @@ section {
   font-size: 0.85rem;
   color: var(--cards-accent);
   font-family: "Duru Sans", sans-serif;
+  transition: all 0.3s ease;
 }
 
 .project-links {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: auto; /
+  margin-top: auto;
 }
 
 .project-link {
@@ -455,20 +571,20 @@ section {
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .projects-intro {
     font-size: 1rem;
     padding: 0 1rem;
   }
-  
+
   .project-card {
     min-height: auto;
   }
-  
+
   .project-links {
-    flex-direction:row;
+    flex-direction: row;
     gap: 2rem;
-    align-content:center;
+    align-content: center;
   }
 }
 
@@ -478,6 +594,8 @@ section {
   justify-content: center;
   align-content: center;
   line-height: 2;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
 }
 
 .grid {
@@ -497,6 +615,11 @@ section {
   border-radius: 20%;
 }
 
+.contact-me {
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
 .contact-me p {
   text-align: center;
   line-height: 2;
@@ -506,6 +629,7 @@ footer {
   text-align: center;
   padding-top: 30px;
   padding-bottom: 10px;
+  color: var(--text-color);
 }
 
 #social {
@@ -513,7 +637,8 @@ footer {
 }
 
 svg {
-  fill: #213555;
+  fill: var(--cards-accent);
+  transition: fill 0.3s ease;
 }
 
 #social a {
@@ -522,11 +647,11 @@ svg {
 }
 
 .hover:hover {
-  fill: #3e5879;
+  fill: var(--cards-accent-highlight);
 }
 
 #button-hover:hover {
-  background-color: #3e5879;
+  background-color: var(--cards-accent-highlight);
 }
 
 .tracking-in-expand {
@@ -535,18 +660,6 @@ svg {
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2025-11-26 18:41:34
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation tracking-in-expand
- * ----------------------------------------
- */
 @-webkit-keyframes tracking-in-expand {
   0% {
     letter-spacing: -0.5em;
@@ -559,6 +672,7 @@ svg {
     opacity: 1;
   }
 }
+
 @keyframes tracking-in-expand {
   0% {
     letter-spacing: -0.5em;
@@ -573,8 +687,9 @@ svg {
 }
 
 .homelab {
-  background-color: #f5efe7;
+  background-color: var(--sections-color);
   padding: 50px 20px;
+  transition: background-color 0.3s ease;
 }
 
 .homelab h2 {
@@ -588,6 +703,8 @@ svg {
   margin: 0 auto 3rem auto;
   font-size: 1.1rem;
   line-height: 1.8;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .homelab-grid {
@@ -599,11 +716,13 @@ svg {
 }
 
 .homelab-card {
-  background: var(--bg-color);
+  background: var(--cards);
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--cards-border);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   min-height: 410px;
@@ -611,7 +730,8 @@ svg {
 
 .homelab-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px var(--shadow-color-hover);
+  border-color: var(--cards-accent);
 }
 
 .card-icon {
@@ -621,19 +741,21 @@ svg {
 }
 
 .homelab-card h3 {
-  color: #213555;
+  color: var(--cards-accent);
   margin: 0 0 1rem 0;
   font-family: "Duru Sans", sans-serif;
   text-align: center;
+  transition: color 0.3s ease;
 }
 
 .homelab-card p {
-  color: #3e5879;
+  color: var(--text-color);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   flex-grow: 1;
   text-align: center;
   font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
 
 .homelab-tags {
@@ -651,6 +773,7 @@ svg {
   font-size: 0.85rem;
   color: var(--cards-accent);
   font-family: "Duru Sans", sans-serif;
+  transition: all 0.3s ease;
 }
 
 .homelab-link {
@@ -676,12 +799,11 @@ svg {
   margin: 0 auto;
 }
 
-
 @media (max-width: 768px) {
   .homelab-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .homelab-intro {
     font-size: 1rem;
     padding: 0 1rem;
