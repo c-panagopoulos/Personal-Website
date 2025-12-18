@@ -27,7 +27,8 @@
 - Clean, minimalistic design with soft gradients  
 - Fixed, responsive navigation bar  
 - Smooth CSS animations & hover effects  
-- Mobile-friendly layout  
+- Mobile-friendly layout
+- Dark Mode
 
 ### 👤 About Me Section
 - Academic background in Theology  
@@ -38,7 +39,7 @@
 ### 💼 Early Project Showcase
 Small foundational projects demonstrating:
 - HTML structure  
-- CSS Grid & responsive design  
+- Javascript fundamentals
 - Bootstrap basics  
 
 ### 🧪 Homelab & Automation Section
@@ -80,7 +81,6 @@ Personal-Website/
 ## 🧩 Future Improvements
 
 - Add real projects as I continue learning  
-- Add dark mode  
 - Contact form with backend integration  
 - Break UI into components  
 - Migrate to React or Next.js later  
