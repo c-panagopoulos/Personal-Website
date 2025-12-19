@@ -41,7 +41,7 @@
 }
 
 .dark .gradient-background {
-  background: linear-gradient(300deg, #1e3a5f, #2d4356, #1a2332);
+  background: linear-gradient(300deg, #1e3a5f, #000000, #2d4356);
   background-size: 180% 180%;
   animation: gradient-animation 18s ease infinite;
 }
