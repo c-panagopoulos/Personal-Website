@@ -38,7 +38,7 @@
 
 ### 💼 Early Project Showcase
 Small foundational projects demonstrating:
-- HTML structure  
+- Simon Game - Interactive memory game showcasing vanilla JavaScript, DOM manipulation, and event-driven programming
 - Javascript fundamentals
 - Bootstrap basics  
 
