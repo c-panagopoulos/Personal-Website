@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <strong>My first full project as an aspiring web developer — built to showcase my early projects, homelab automations, and personal journey.</strong>
+  <strong>My first full project as an web developer — built to showcase my early projects, homelab automations, and personal journey.</strong>
 </p>
 
 <br>
@@ -17,32 +17,32 @@
 
 ## 🔗 Live Demo
 
-👉 **https://c-panagopoulos.github.io/Personal-Website**
+ **https://c-panagopoulos.github.io/Personal-Website**
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🎨 Modern UI & Styling
+###  Modern UI & Styling
 - Clean, minimalistic design with soft gradients  
 - Fixed, responsive navigation bar  
 - Smooth CSS animations & hover effects  
 - Mobile-friendly layout
 - Dark Mode
 
-### 👤 About Me Section
+###  About Me Section
 - Academic background in Theology  
 - Career transition into web development  
 - Customer service experience  
 - Professional portrait & personal story  
 
-### 💼 Early Project Showcase
+###  Early Project Showcase
 Small foundational projects demonstrating:
 - Simon Game - Interactive memory game showcasing vanilla JavaScript, DOM manipulation, and event-driven programming
 - Javascript fundamentals
 - Bootstrap basics  
 
-### 🧪 Homelab & Automation Section
+###  Homelab & Automation Section
 Highlights my self-hosted stack:
 - n8n automations  
 - Nextcloud organization workflow  
@@ -54,7 +54,7 @@ Elegant and simple design to encourage connection.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **HTML5**
 - **CSS3 (Flexbox, Grid, Animations)**
@@ -64,7 +64,7 @@ Elegant and simple design to encourage connection.
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 <pre>
 Personal-Website/
@@ -78,7 +78,7 @@ Personal-Website/
 
 ---
 
-## 🧩 Future Improvements
+##  Future Improvements
 
 - Add real projects as I continue learning  
 - Contact form with backend integration  
@@ -88,10 +88,10 @@ Personal-Website/
 
 ---
 
-## 🧑‍💻 Author
+##  Author
 
 **Charalampos Panagopoulos**  
-Aspiring Full-Stack Web Developer  
+Full-Stack Web Developer  
 Passionate about self-hosting, automation, and building digital tools that improve everyday life.
 
 🔗 GitHub: https://github.com/c-panagopoulos
