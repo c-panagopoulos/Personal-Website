@@ -468,7 +468,9 @@ section {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+  justify-content: center;
+  align-items: stretch;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -493,10 +495,24 @@ section {
   border-color: var(--cards-accent);
 }
 
-.project-card .card-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  text-align: center;
+.project-icon-badge {
+  width: 84px;
+  height: 84px;
+  padding: 16px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--cards-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.project-icon-badge img,
+.project-icon-badge svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .project-card h3 {

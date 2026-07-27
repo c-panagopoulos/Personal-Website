@@ -211,13 +211,93 @@
     <section class="projects fade-in-section" id="projects">
       <h2 class="duru-sans-regular">Projects</h2>
       <p class="projects-intro">
-        A collection of mini projects showcasing HTML, CSS, Javascript and
-        responsive design fundamentals as I build my web development skills.
+        A collection of full-stack projects showcasing React, Node.js,
+        PostgreSQL, Docker, and AI integration as I build my web development
+        skills.
       </p>
 
       <div class="projects-grid container">
         <div class="project-card">
-          <div class="card-icon">🤖</div>
+          <div class="project-icon-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <circle
+                cx="16"
+                cy="16"
+                r="11"
+                fill="none"
+                stroke="#e8935f"
+                stroke-width="1.6"
+                opacity="0.4"
+              />
+              <circle
+                cx="16"
+                cy="16"
+                r="7"
+                fill="none"
+                stroke="#e8935f"
+                stroke-width="1.6"
+                opacity="0.65"
+              />
+              <circle cx="16" cy="16" r="3" fill="#e8935f" />
+            </svg>
+          </div>
+          <h3>TapStudy</h3>
+          <p>
+            Self-hosted study session tracker triggered by an NFC tag - tap
+            your phone to start and stop a session. Single-image Docker
+            deployment (React, Express, PostgreSQL) with a local Ollama model
+            generating fact-checked, injection-resistant AI insights.
+          </p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Express</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Ollama</span>
+          </div>
+          <div class="project-links">
+            <a
+              class="project-link"
+              href="https://tapstudy.cpanagopoulos.dev"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                width="21"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  class="hover"
+                  d="M91.2 36.9c-12.4-6.8-27.4-6.5-39.6 .7S32 57.9 32 72l0 368c0 14.1 7.5 27.2 19.6 34.4s27.2 7.5 39.6 .7l336-184c12.8-7 20.8-20.5 20.8-35.1s-8-28.1-20.8-35.1l-336-184z"
+                />
+              </svg>
+              Live Demo
+            </a>
+            <a
+              class="project-link"
+              href="https://github.com/c-panagopoulos/tapstudy"
+              target="_blank"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                width="24"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  class="hover"
+                  d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3l48.2 0c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-icon-badge">
+            <img src="./images/hermes-logo.png" alt="Hermes AI logo" />
+          </div>
           <h3>Hermes AI</h3>
           <p>
             Production-ready AI customer service chatbot built with React,
@@ -255,110 +335,6 @@
             <a
               class="project-link"
               href="https://github.com/c-panagopoulos/hermes-ai"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                width="24"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  class="hover"
-                  d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3l48.2 0c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"
-                />
-              </svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div class="project-card">
-          <div class="card-icon">🎮</div>
-          <h3>Simon Game</h3>
-          <p>
-            Interactive memory game built with vanilla JavaScript. Demonstrates
-            event-driven programming, pattern-matching logic, and dynamic DOM
-            manipulation.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Desktop Only</span>
-            <span class="tag">Javascript</span>
-          </div>
-          <div class="project-links">
-            <a
-              class="project-link"
-              href="https://c-panagopoulos.github.io/Simon-Game/"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                width="21"
-                viewBox="0 0 448 512"
-              >
-                <path
-                  class="hover"
-                  d="M91.2 36.9c-12.4-6.8-27.4-6.5-39.6 .7S32 57.9 32 72l0 368c0 14.1 7.5 27.2 19.6 34.4s27.2 7.5 39.6 .7l336-184c12.8-7 20.8-20.5 20.8-35.1s-8-28.1-20.8-35.1l-336-184z"
-                />
-              </svg>
-              Live Demo
-            </a>
-            <a
-              class="project-link"
-              href="https://github.com/c-panagopoulos/Simon-Game"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                width="24"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  class="hover"
-                  d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3l48.2 0c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"
-                />
-              </svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="card-icon">✔️</div>
-          <h3>Vanilla To Do App</h3>
-          <p>
-            A clean, responsive To-Do application built with vanilla JavaScript,
-            focusing on DOM manipulation, event handling, and dynamic UI
-            updates. Persistence via localStorage is planned as a future
-            improvement.
-          </p>
-          <div class="project-tags">
-            <span class="tag">Javascript</span>
-            <span class="tag">CSS</span>
-          </div>
-          <div class="project-links">
-            <a
-              class="project-link"
-              href="https://c-panagopoulos.github.io/vanilla-js-todo-app/"
-              target="_blank"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                width="21"
-                viewBox="0 0 448 512"
-              >
-                <path
-                  class="hover"
-                  d="M91.2 36.9c-12.4-6.8-27.4-6.5-39.6 .7S32 57.9 32 72l0 368c0 14.1 7.5 27.2 19.6 34.4s27.2 7.5 39.6 .7l336-184c12.8-7 20.8-20.5 20.8-35.1s-8-28.1-20.8-35.1l-336-184z"
-                />
-              </svg>
-              Live Demo
-            </a>
-            <a
-              class="project-link"
-              href="https://github.com/c-panagopoulos/vanilla-js-todo-app"
               target="_blank"
             >
               <svg
