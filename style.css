@@ -417,16 +417,40 @@ p {
   transition: background-color 0.3s ease;
 }
 
-.skills p {
+.skills-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
 }
 
-.skills svg {
-  padding-right: 3px;
-  fill: var(--text-color);
-  transition: fill 0.3s ease;
+.skill-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--tags-color);
+  color: var(--cards-accent);
+  padding: 0.65rem 1.25rem;
+  border-radius: 30px;
+  font-family: "Duru Sans", sans-serif;
+  font-size: 0.95rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease, color 0.3s ease;
+}
+
+.skill-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px var(--shadow-color);
+}
+
+.skill-badge svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 .container {
