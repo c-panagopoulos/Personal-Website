@@ -301,29 +301,8 @@ body p {
     width: 200px;
   }
 
-  #column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
   .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    row-gap: 20px;
-  }
-
-  .grid img {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-  }
-
-  .about .about-text {
-    text-align: center;
-    padding-left: 0;
+    gap: 1.5rem;
   }
 }
 
@@ -639,20 +618,34 @@ section {
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 200px minmax(auto, 800px);
-  grid-template-rows: 1fr 1fr 1fr;
-  row-gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 2rem auto 0;
   text-align: left;
+}
+
+.about-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.about-label {
+  font-family: "Duru Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  opacity: 0.5;
+  transition: color 0.3s ease;
 }
 
 .grid p {
   text-align: left;
-  padding-left: 30px;
-}
-
-.container img {
-  border-radius: 20%;
 }
 
 .contact-me {
