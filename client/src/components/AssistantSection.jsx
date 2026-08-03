@@ -1,6 +1,7 @@
 import { useChat } from "../hooks/useChat.js";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import { ShaderBackground, chatActivity } from "./ShaderBackground.jsx";
 
 const CHIPS = [
   "Walk me through the RAG pipeline",
@@ -56,7 +57,10 @@ export default function AssistantSection() {
             WHAT IT CAN CITE
           </div>
         </div>
-        <div className="assistant-section__main">
+        <div className="assistant-section__main shader-panel shader-panel--vignette">
+          <ShaderBackground className="shader-panel__canvas" activity={chatActivity(chat)} />
+          <div className="shader-panel__fade shader-panel__fade--x" />
+          <div className="shader-panel__fade shader-panel__fade--y" />
           <h3 className="assistant-section__title">
             Stop reading about me.
             <br />

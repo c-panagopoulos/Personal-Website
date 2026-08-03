@@ -825,6 +825,11 @@ button {
   flex-direction: column;
   gap: 14px;
   animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  background: rgba(6, 11, 22, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 14px;
+  padding: 18px 20px;
 }
 .chat-bubble--user {
   align-self: flex-end;
@@ -1471,4 +1476,50 @@ button {
     transform: scale(1.8);
     opacity: 0;
   }
+}
+
+/* --- Shader background panels (chat surfaces) --- */
+.shader-panel {
+  position: relative;
+  isolation: isolate;
+}
+.shader-panel__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+.shader-panel > :not(.shader-panel__canvas):not(.shader-panel__fade) {
+  position: relative;
+  z-index: 1;
+}
+
+.shader-panel--vignette .shader-panel__canvas {
+  opacity: 0.35;
+}
+.shader-panel__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.shader-panel__fade--x {
+  background: linear-gradient(
+    to right,
+    var(--bg-panel-d) 0%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-panel-d) 100%
+  );
+}
+.shader-panel__fade--y {
+  background: linear-gradient(
+    to bottom,
+    var(--bg-panel-d) 0%,
+    transparent 25%,
+    transparent 75%,
+    var(--bg-panel-d) 100%
+  );
 }

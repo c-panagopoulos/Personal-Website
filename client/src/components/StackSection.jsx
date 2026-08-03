@@ -1,6 +1,7 @@
 import Reveal from "./Reveal.jsx";
 import { useChat } from "../hooks/useChat.js";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import { ShaderBackground, chatActivity } from "./ShaderBackground.jsx";
 
 const STACK = [
   { name: "React", where: "client/, Vite build", note: "hooks-only, no state library" },
@@ -39,7 +40,8 @@ export default function StackSection() {
         ))}
       </Reveal>
       {chat.open && (
-        <div className="stack-answer">
+        <div className="stack-answer shader-panel">
+          <ShaderBackground className="shader-panel__canvas" activity={chatActivity(chat)} />
           <div className="assistant-card__question">&gt; {chat.question}</div>
           {chat.isRetrieving && <RetrievalStatus note="" />}
           {chat.showSources && <SourceChips sources={chat.sources} />}
