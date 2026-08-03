@@ -1,0 +1,16 @@
+{
+  "name": "personal-website",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev:client": "npm run dev --workspace client",
+    "dev:server": "node --watch server/src/index.js",
+    "build": "npm run build --workspace client",
+    "ingest": "node server/src/rag/ingest.js",
+    "start": "node server/src/index.js"
+  }
+}

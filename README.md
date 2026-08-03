@@ -1,102 +1,78 @@
-<h1 align="center">🌐 Personal Portfolio Website</h1>
+<h1 align="center">🌐 Personal Portfolio — React + Express + pgvector + Ollama</h1>
 <p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/pgvector-3B82F6?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Ollama-000000?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-  <img src="https://img.shields.io/badge/GitHub%20Pages-121013?style=for-the-badge&logo=github&logoColor=white" />
 </p>
 <p align="center">
-  <strong>My portfolio as a full-stack developer — built to showcase my projects, homelab automations, and journey into software development.</strong>
+  <strong>My portfolio as a full-stack developer — with a retrieval-augmented assistant that answers
+  questions about me from my own CV, project notes and homelab docs, running entirely on local Ollama models.</strong>
 </p>
-<br>
 
 ---
 
-## 🔗 Live Demo
-**https://c-panagopoulos.github.io/Personal-Website**
+## Architecture
 
----
+A single-page React app talks to an Express API. The API embeds the incoming question, retrieves the
+closest chunks from a Postgres table via `pgvector`, and streams a grounded answer back from a local Ollama
+model over Server-Sent Events. Everything — Postgres, Ollama, and the app itself — runs from one
+`docker compose up`, the same "single-image Docker, own hardware" pattern used by the other projects the
+site describes.
 
-## Features
+```
+client/    React (Vite) — the whole page, including the assistant UI
+server/    Express API — /api/chat (SSE), retrieval + Ollama orchestration
+  content/ Markdown source docs embedded for retrieval (placeholders — see below)
+```
 
-### Modern UI & Styling
-- Clean, minimalistic design with soft gradients
-- Fixed, responsive navigation bar
-- Smooth CSS animations & hover effects
-- Mobile-friendly layout
-- Dark Mode
+## Running it locally
 
-### About Me Section
-- Career transition from customer service into full-stack development
-- Academic background in Theology
-- Self-hosted homelab enthusiast
-- Professional portrait & personal story
+```bash
+cp .env.example .env
+docker compose up --build
+```
 
-### Project Showcase
+Then pull the models Ollama needs (first run only):
 
-#### Hermes — AI Customer Service Chatbot
-Production-ready AI chatbot built for utility companies:
-- Custom RAG pipeline with PostgreSQL + pgvector for document retrieval
-- Real-time token streaming via Server-Sent Events
-- JWT-protected admin dashboard with live analytics
-- Human-handoff escalation via n8n webhooks
-- Dockerized and self-hosted on Hetzner
+```bash
+docker compose exec ollama ollama pull nomic-embed-text
+docker compose exec ollama ollama pull llama3.2:3b
+```
 
-#### Simon Game
-Interactive memory game showcasing:
-- Vanilla JavaScript & DOM manipulation
-- Event-driven programming
-- CSS animations
+Index the content so the assistant has something to retrieve from:
 
-### Homelab & Automation Section
-Highlights my self-hosted stack:
-- n8n automations
-- Nextcloud organization workflow
-- Linux + Docker setups
-- Remote access via Tailscale
+```bash
+npm install
+npm run ingest
+```
 
-### ✉️ Contact Section
-Elegant and simple design to encourage connection.
+The site is then served at `http://localhost:3100` (mapped from the container's internal port 3000 to
+avoid clashing with anything already using 3000 on the host — change the `app` port mapping in
+`docker-compose.yml` if you'd rather use a different one).
 
----
+### Without Docker
+Install Postgres (with the `vector` extension) and Ollama yourself, point `.env` at them, then:
+```bash
+npm install
+npm run dev:server   # Express API on :3000
+npm run dev:client   # Vite dev server on :5173, proxies /api to :3000
+```
+
+## The assistant's content
+`server/content/*.md` currently holds **placeholder** text (CV, about-me, project and homelab notes) so the
+pipeline works out of the box. Replace those files with the real thing, then re-run `npm run ingest` — it's
+idempotent, so re-running it after edits just re-embeds and upserts the changed chunks.
 
 ## Tech Stack
-- **HTML5**
-- **CSS3 (Flexbox, Grid, Animations)**
-- **JavaScript**
-- **React**
-- **Node.js & Express**
-- **PostgreSQL**
-- **Docker**
-- **SVG Elements**
-- **GitHub Pages (Deployment)**
-
----
-
-## Folder Structure
-<pre>
-Personal-Website/
-│
-├── images/         # Icons, illustrations, profile image
-├── index.html      # Main page
-├── style.css       # All styling
-├── index.js        # Animation logic
-└── README.md
-</pre>
-
----
-
-## Future Improvements
-- Add more projects as the stack grows
-- Contact form with backend integration
-- Migrate to React + Next.js for full component-based architecture
-- Add more animations or interactive sections
-
----
+- **React** (Vite) — frontend
+- **Express** — API, SSE streaming, static file serving
+- **PostgreSQL + pgvector** — chunk storage and cosine-similarity retrieval
+- **Ollama** — local embeddings (`nomic-embed-text`) and chat generation (`llama3.2:3b`), no external API keys
+- **Docker / Docker Compose** — one command spins up the whole stack
 
 ## Author
 **Charalampos Panagopoulos**
