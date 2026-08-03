@@ -1,5 +1,6 @@
 import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
+import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
 import AssistantSection from "./components/AssistantSection.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
@@ -24,12 +25,13 @@ export default function App() {
         </Reveal>
       </div>
 
+      <MacbookScroll src="/images/dashboard.png" alt="tapstudy dashboard" />
+
       <ProjectScene
         id="scene-01"
         sceneNumber="01"
         sceneName="TAPSTUDY"
-        browserLabel="tapstudy.local — review"
-        browserTag="TAPSTUDY — REVIEW SESSION"
+        showBrowserPreview={false}
         title="A study tracker you start by tapping your phone."
         body="I kept forgetting to log study sessions, so I stuck an NFC tag on my desk — tap to start, tap to stop. Auth, rate limiting and error handling went in before the first session was ever recorded. Two years later it is still the first thing I touch in the morning."
         ctaLabel="Live demo"

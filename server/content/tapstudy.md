@@ -1,8 +1,8 @@
-<!-- PLACEHOLDER CONTENT — replace with your real TapStudy README/notes, then re-run `npm run ingest`. -->
+<!-- PLACEHOLDER CONTENT — replace with your real tapstudy README/notes, then re-run `npm run ingest`. -->
 
-# TapStudy
+# tapstudy
 
-TapStudy is a study session tracker I built because I kept forgetting to log my own study time. It's
+tapstudy is a study session tracker I built because I kept forgetting to log my own study time. It's
 triggered by an NFC tag stuck to my desk: tap my phone once to start a session, tap again to stop it.
 
 ## Why it exists

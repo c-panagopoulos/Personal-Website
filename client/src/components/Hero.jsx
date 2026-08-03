@@ -4,13 +4,13 @@ import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.js
 
 const CHIPS = [
   "What's Hermes?",
-  "Tell me about TapStudy",
+  "Tell me about tapstudy",
   "Why Ollama instead of a hosted API?",
   "Are you open to opportunities?",
 ];
 
 const TEASER_CARDS = [
-  { title: "TapStudy", score: "featured", body: "An NFC-triggered study tracker, Dockerized and running since day one.", tags: ["React", "Express", "PostgreSQL"] },
+  { title: "tapstudy", score: "featured", body: "An NFC-triggered study tracker, Dockerized and running since day one.", tags: ["React", "Express", "PostgreSQL"] },
   { title: "Hermes", score: "featured", body: "A production RAG support chatbot with streamed answers and source citations.", tags: ["pgvector", "SSE", "Docker"] },
   { title: "Homelab", score: "featured", body: "One Intel N100, no open ports, everything reachable over Tailscale.", tags: ["Linux", "Tailscale", "n8n"] },
 ];

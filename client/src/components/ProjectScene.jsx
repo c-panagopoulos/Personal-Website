@@ -12,22 +12,25 @@ export default function ProjectScene({
   ctaTag,
   ctaHref,
   facts,
+  showBrowserPreview = true,
 }) {
   return (
     <div id={id} className="scene">
-      <Reveal className="scene__browser">
-        <div className="scene__browser-frame">
-          <div className="scene__browser-bar">
-            <span className="scene__browser-dot" />
-            <span className="scene__browser-dot" />
-            <span className="scene__browser-dot" />
-            <span className="scene__browser-title">{browserLabel}</span>
+      {showBrowserPreview && (
+        <Reveal className="scene__browser">
+          <div className="scene__browser-frame">
+            <div className="scene__browser-bar">
+              <span className="scene__browser-dot" />
+              <span className="scene__browser-dot" />
+              <span className="scene__browser-dot" />
+              <span className="scene__browser-title">{browserLabel}</span>
+            </div>
+            <div className="scene__browser-body">
+              <span className="scene__browser-tag">{browserTag}</span>
+            </div>
           </div>
-          <div className="scene__browser-body">
-            <span className="scene__browser-tag">{browserTag}</span>
-          </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      )}
       <div className="scene__grid">
         <Reveal>
           <div className="scene__kicker">

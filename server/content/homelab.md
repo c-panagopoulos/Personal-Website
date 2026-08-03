@@ -8,7 +8,7 @@ My homelab runs on a single Intel N100 mini PC — low power, always on, quiet e
 - Nextcloud for personal file storage and sync
 - n8n for automations: one workflow plans my day from sleep and calendar data each morning, another turns
   photos of handwritten notes into searchable cards
-- A handful of Dockerized side projects, including TapStudy and this portfolio's own backend
+- A handful of Dockerized side projects, including tapstudy and this portfolio's own backend
 - Tailscale mesh for remote access — no ports are exposed to the public internet
 
 ## Philosophy

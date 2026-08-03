@@ -8,7 +8,7 @@ engineering. Comfortable across the stack: React on the frontend, Node.js/Expres
 PostgreSQL for storage, and Docker for shipping everything as a single deployable unit.
 
 ## Experience
-- **Full-Stack Developer (independent projects)** — Designed and shipped TapStudy (an NFC-triggered study
+- **Full-Stack Developer (independent projects)** — Designed and shipped tapstudy (an NFC-triggered study
   tracker) and Hermes (a production RAG customer-service chatbot), both self-hosted and Dockerized on
   personal hardware.
 - **Customer Support** — Several years handling technical support calls, which shaped a debugging habit
