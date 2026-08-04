@@ -1,20 +1,66 @@
-export default function NavBar() {
+import { useState } from "react";
+import {
+  Navbar,
+  NavBody,
+  NavItems,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+} from "./ResizableNavbar.jsx";
+
+const LINKS = [
+  { name: "work", link: "#scene-01" },
+  { name: "assistant", link: "#assistant" },
+  { name: "stack", link: "#stack" },
+  { name: "homelab", link: "#homelab" },
+  { name: "contact", link: "#contact" },
+];
+
+function Brand({ visible }) {
   return (
-    <nav className="nav">
-      <div className="nav__brand">
-        <div className="nav__mark">cp</div>
-        <span className="nav__name">
-          panagopoulos<span>.dev</span>
-        </span>
-        <span className="nav__name caret">_</span>
-      </div>
-      <div className="nav__links">
-        <a href="#scene-01">work</a>
-        <a href="#assistant">assistant</a>
-        <a href="#stack">stack</a>
-        <a href="#homelab">homelab</a>
-        <a href="#contact">contact</a>
-      </div>
-    </nav>
+    <div className="nav__brand">
+      <div className="nav__mark">cp</div>
+      {!visible && (
+        <>
+          <span className="nav__name">
+            panagopoulos<span>.dev</span>
+          </span>
+          <span className="nav__name caret">_</span>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function NavBar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  return (
+    <Navbar>
+      <NavBody>
+        <Brand />
+        <NavItems items={LINKS} />
+      </NavBody>
+
+      <MobileNav>
+        <MobileNavHeader>
+          <Brand />
+          <MobileNavToggle isOpen={mobileOpen} onClick={() => setMobileOpen((v) => !v)} />
+        </MobileNavHeader>
+        <MobileNavMenu isOpen={mobileOpen}>
+          {LINKS.map((item) => (
+            <a
+              key={item.link}
+              href={item.link}
+              className="resizable-navbar__mobile-link"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
   );
 }

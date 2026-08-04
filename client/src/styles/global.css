@@ -112,19 +112,150 @@ button {
   }
 }
 
-/* --- Nav --- */
-.nav {
+/* --- Nav (Aceternity "Resizable Navbar", restyled) --- */
+.resizable-navbar {
   position: sticky;
   top: 0;
+  z-index: 40;
+  width: 100%;
+}
+.resizable-navbar__body {
+  position: relative;
+  z-index: 60;
+  margin: 0 auto;
+  display: none;
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 999px;
+  background: transparent;
+  padding: 12px 24px;
+}
+@media (min-width: 1024px) {
+  .resizable-navbar__body {
+    display: flex;
+  }
+}
+.resizable-navbar__body--visible {
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid var(--border);
+}
+.resizable-navbar__items {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+@media (min-width: 1024px) {
+  .resizable-navbar__items {
+    display: flex;
+  }
+}
+.resizable-navbar__item {
+  position: relative;
+  padding: 8px 18px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), padding 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.resizable-navbar__items--compact {
+  gap: 0;
+}
+.resizable-navbar__items--compact .resizable-navbar__item {
+  padding: 8px 11px;
+}
+.resizable-navbar__item:hover {
+  color: var(--accent);
+}
+.resizable-navbar__item-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.12);
+}
+.resizable-navbar__item-label {
+  position: relative;
   z-index: 20;
-  background: rgba(15, 23, 42, 0.82);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 56px;
+}
+
+.resizable-navbar__mobile {
+  position: relative;
+  z-index: 50;
+  margin: 0 auto;
   display: flex;
+  width: 100%;
+  max-width: calc(100vw - 32px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 12px 16px;
+}
+@media (min-width: 1024px) {
+  .resizable-navbar__mobile {
+    display: none;
+  }
+}
+.resizable-navbar__mobile--visible {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid var(--border);
+}
+.resizable-navbar__mobile-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
+.resizable-navbar__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(96, 165, 250, 0.08);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.resizable-navbar__mobile-menu {
+  position: absolute;
+  inset-inline: 16px;
+  top: 68px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.97);
+  border: 1px solid var(--border);
+  padding: 14px;
+  box-shadow: 0 20px 50px rgba(2, 6, 16, 0.5);
+}
+.resizable-navbar__mobile-link {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.resizable-navbar__mobile-link:hover {
+  color: var(--accent);
+  background: rgba(96, 165, 250, 0.08);
+}
+
 .nav__brand {
   display: flex;
   align-items: center;
@@ -152,32 +283,11 @@ button {
 .nav__name span {
   color: var(--text-quiet);
 }
-.nav__links {
-  display: flex;
-  gap: 1.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-}
-.nav__links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-.nav__links a:hover {
-  color: var(--accent);
-}
-
-@media (max-width: 720px) {
-  .nav__links {
-    display: none;
-  }
-}
-
 /* --- Hero --- */
 .hero {
   display: grid;
   grid-template-columns: 1.18fr 0.82fr;
-  min-height: calc(100vh - 148px);
+  min-height: 100vh;
   background: var(--bg-panel-a);
 }
 @media (max-width: 900px) {
