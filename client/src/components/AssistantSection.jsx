@@ -66,6 +66,8 @@ export default function AssistantSection() {
               cursorRadius={180}
               gradientFrom="rgba(55, 138, 221, 0.85)"
               gradientTo="rgba(42, 58, 82, 0.55)"
+              pulseActive={chat.open && !chat.done}
+              pulseColor="#a9c9f5"
             />
           </div>
           <div className="shader-panel__fade shader-panel__fade--x" />

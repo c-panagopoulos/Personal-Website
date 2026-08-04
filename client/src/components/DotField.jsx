@@ -19,6 +19,11 @@ const DotField = memo(
     waveAmplitude = 0,
     gradientFrom = "rgba(168, 85, 247, 0.35)",
     gradientTo = "rgba(180, 151, 207, 0.25)",
+    // "Thinking" ring: an expanding glow wave from the field's center,
+    // looping while true. Independent of the cursor bulge above.
+    pulseActive = false,
+    pulseColor = "#a9c9f5",
+    pulseSpeed = 1,
     ...rest
   }) => {
     const canvasRef = useRef(null);
@@ -39,6 +44,9 @@ const DotField = memo(
       waveAmplitude,
       gradientFrom,
       gradientTo,
+      pulseActive,
+      pulseColor,
+      pulseSpeed,
     };
     const rebuildRef = useRef(null);
 
@@ -203,9 +211,38 @@ const DotField = memo(
             ctx.moveTo(drawX + rad, drawY);
             ctx.arc(drawX, drawY, rad, 0, TWO_PI);
           }
+
+          if (p.pulseActive) {
+            d.drawX = drawX;
+            d.drawY = drawY;
+          }
         }
 
         ctx.fill();
+
+        if (p.pulseActive) {
+          const cx = w / 2;
+          const cy = h / 2;
+          const maxRadius = Math.hypot(cx, cy);
+          const cycleMs = 2200 / p.pulseSpeed;
+          const waveRadius = ((performance.now() % cycleMs) / cycleMs) * maxRadius;
+          const band = Math.max(30, maxRadius * 0.08);
+
+          for (let i = 0; i < len; i++) {
+            const d = dots[i];
+            const dist = Math.hypot(d.drawX - cx, d.drawY - cy);
+            const diff = Math.abs(dist - waveRadius);
+            if (diff < band) {
+              const strength = 1 - diff / band;
+              ctx.globalAlpha = strength;
+              ctx.beginPath();
+              ctx.arc(d.drawX, d.drawY, rad * (1 + strength), 0, TWO_PI);
+              ctx.fillStyle = p.pulseColor;
+              ctx.fill();
+            }
+          }
+          ctx.globalAlpha = 1;
+        }
 
         rafRef.current = requestAnimationFrame(tick);
       }
