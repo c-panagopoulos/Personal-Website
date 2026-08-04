@@ -4,7 +4,8 @@
 // slide); only the visual layer (colors, chrome, pagination shape) is
 // restyled to match the site.
 import { useCallback, useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "motion/react";
 import useEmblaCarousel from "embla-carousel-react";
 
 const transition = { type: "spring", stiffness: 240, damping: 24, mass: 1 };
@@ -44,9 +45,10 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
   // .motion-carousel__viewport) so align:"center" also centers the first
   // and last slide, not just the interior ones (Embla's default trims the
   // edge snap points, which is what made them hug the container edges).
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "center", containScroll: false });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", containScroll: false });
   const { selectedIndex, scrollSnaps, prevDisabled, nextDisabled, onDotClick, onPrev, onNext } =
     useEmblaControls(emblaApi);
+  const [zoomedSlide, setZoomedSlide] = useState(null);
 
   const current = slides[selectedIndex] ?? slides[0];
   const fileNumber = String(selectedIndex + 1).padStart(2, "0");
@@ -73,8 +75,19 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
                   initial={false}
                   animate={{ scale: isActive ? 1 : 0.9 }}
                   transition={transition}
+                  onClick={() => slide.src && setZoomedSlide(slide)}
                 >
-                  <span className="motion-carousel__slide-tag">{slide.label}</span>
+                  {slide.src ? (
+                    <>
+                      <img className="motion-carousel__slide-img" src={slide.src} alt={slide.label} draggable={false} />
+                      <span className="motion-carousel__zoom-hint" aria-hidden="true">
+                        <ZoomIcon />
+                      </span>
+                    </>
+                  ) : (
+                    <span className="motion-carousel__slide-tag">{slide.label}</span>
+                  )}
+                  <span className="motion-carousel__slide-caption">{slide.label}</span>
                 </motion.div>
               </div>
             );
@@ -111,7 +124,71 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
       </div>
 
       <p className="motion-carousel__meta">{slides.map((s) => s.label).join(" · ")}</p>
+
+      <Lightbox slide={zoomedSlide} onClose={() => setZoomedSlide(null)} />
     </div>
+  );
+}
+
+function Lightbox({ slide, onClose }) {
+  useEffect(() => {
+    if (!slide) return undefined;
+    const onKey = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [slide, onClose]);
+
+  return createPortal(
+    <AnimatePresence>
+      {slide && (
+        <motion.div
+          className="motion-lightbox"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.18 }}
+          onClick={onClose}
+        >
+          <motion.button
+            type="button"
+            className="motion-lightbox__close"
+            onClick={onClose}
+            aria-label="Close preview"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <CloseIcon />
+          </motion.button>
+          <motion.img
+            className="motion-lightbox__img"
+            src={slide.src}
+            alt={slide.label}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.9 }}
+            onClick={(event) => event.stopPropagation()}
+          />
+          <motion.span
+            className="motion-lightbox__caption"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            {slide.label}
+          </motion.span>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
   );
 }
 
@@ -135,6 +212,26 @@ function ChevronIcon({ direction }) {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points={points} />
+    </svg>
+  );
+}
+
+function ZoomIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <line x1="11" y1="8" x2="11" y2="14" />
+      <line x1="8" y1="11" x2="14" y2="11" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="6" y1="6" x2="18" y2="18" />
+      <line x1="6" y1="18" x2="18" y2="6" />
     </svg>
   );
 }

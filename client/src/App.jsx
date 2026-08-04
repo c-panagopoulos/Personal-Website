@@ -11,10 +11,10 @@ import DockNav from "./components/DockNav.jsx";
 import Reveal from "./components/Reveal.jsx";
 
 const HERMES_SLIDES = [
-  { name: "chat-ui", label: "Chat UI" },
-  { name: "admin-dashboard", label: "Admin Dashboard" },
-  { name: "doc-ingest", label: "Doc Ingest Pipeline" },
-  { name: "injection-resistance", label: "Injection Resistance" },
+  { name: "chat-ui", label: "Chat UI", src: "/images/hermes-homepage.png" },
+  { name: "admin-dashboard", label: "Admin Dashboard", src: "/images/admin-stats.png" },
+  { name: "doc-ingest", label: "Doc Ingest Pipeline", src: "/images/admin-document-upload-v2.png" },
+  { name: "injection-resistance", label: "Injection Resistance", src: "/images/prompt-injection.png" },
 ];
 
 export default function App() {
