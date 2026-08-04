@@ -1,7 +1,7 @@
 import { useChat } from "../hooks/useChat.js";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
-import { ShaderBackground, chatActivity } from "./ShaderBackground.jsx";
+import DotField from "./DotField.jsx";
 
 const CHIPS = [
   "What's Hermes?",
@@ -44,7 +44,16 @@ export default function Hero() {
         <div className="hero__interact">
           {chat.open && (
             <div className="assistant-card shader-panel">
-              <ShaderBackground className="shader-panel__canvas" activity={chatActivity(chat)} />
+              <div className="shader-panel__canvas">
+                <DotField
+                  dotRadius={2.2}
+                  dotSpacing={11}
+                  bulgeStrength={26}
+                  cursorRadius={180}
+                  gradientFrom="rgba(55, 138, 221, 0.65)"
+                  gradientTo="rgba(42, 58, 82, 0.4)"
+                />
+              </div>
               <div className="assistant-card__question">&gt; {chat.question}</div>
               {chat.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
               {chat.isThinking && <ThinkingDots note="sources locked — writing an answer" />}

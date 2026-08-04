@@ -1483,11 +1483,18 @@ button {
   position: relative;
   isolation: isolate;
 }
+.dot-field-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 .shader-panel__canvas {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.5;
+  /* DotField controls its own visual weight via gradientFrom/gradientTo
+     alpha, so this wrapper stays fully opaque (no extra dimming on top). */
+  opacity: 1;
   pointer-events: none;
   transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -1509,8 +1516,8 @@ button {
   background: linear-gradient(
     to right,
     var(--bg-panel-d) 0%,
-    transparent 30%,
-    transparent 70%,
+    transparent 5%,
+    transparent 95%,
     var(--bg-panel-d) 100%
   );
 }
@@ -1518,8 +1525,8 @@ button {
   background: linear-gradient(
     to bottom,
     var(--bg-panel-d) 0%,
-    transparent 25%,
-    transparent 75%,
+    transparent 3%,
+    transparent 97%,
     var(--bg-panel-d) 100%
   );
 }

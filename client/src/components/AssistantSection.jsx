@@ -1,7 +1,7 @@
 import { useChat } from "../hooks/useChat.js";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
-import { ShaderBackground, chatActivity } from "./ShaderBackground.jsx";
+import DotField from "./DotField.jsx";
 
 const CHIPS = [
   "Walk me through the RAG pipeline",
@@ -58,7 +58,16 @@ export default function AssistantSection() {
           </div>
         </div>
         <div className="assistant-section__main shader-panel shader-panel--vignette">
-          <ShaderBackground className="shader-panel__canvas" activity={chatActivity(chat)} />
+          <div className="shader-panel__canvas">
+            <DotField
+              dotRadius={2.6}
+              dotSpacing={11}
+              bulgeStrength={26}
+              cursorRadius={180}
+              gradientFrom="rgba(55, 138, 221, 0.85)"
+              gradientTo="rgba(42, 58, 82, 0.55)"
+            />
+          </div>
           <div className="shader-panel__fade shader-panel__fade--x" />
           <div className="shader-panel__fade shader-panel__fade--y" />
           <h3 className="assistant-section__title">
