@@ -324,7 +324,9 @@ export function ShaderBackground({ className, activity = 0, colors = DEFAULT_COL
       if (disposed || !visible || !inView) return;
       const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1);
       lastNow = now;
-      const follow = 1 - Math.exp(-4 * dt);
+      // Slow, eased follow so activity changes (idle <-> retrieving/thinking)
+      // settle smoothly instead of snapping the dot density/speed abruptly.
+      const follow = 1 - Math.exp(-2.2 * dt);
       smoothedActivity += (activityRef.current - smoothedActivity) * follow;
 
       const timeScale = 0.015 + smoothedActivity * 1.4;

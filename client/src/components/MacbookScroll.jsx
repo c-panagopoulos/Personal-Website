@@ -116,10 +116,7 @@ export default function MacbookScroll({ src, alt, title }) {
         <div className="macbook-scroll__trackpad">
           <div
             className="macbook-scroll__nfc"
-            style={{
-              opacity: clamp((progress - 0.75) / 0.25, 0, 1),
-              transform: `scale(${interpolate(progress, [0.75, 1], [0.6, 1])})`,
-            }}
+            style={{ opacity: clamp((progress - 0.75) / 0.25, 0, 1) }}
           >
             <span className="macbook-scroll__nfc-ring" />
             <span className="macbook-scroll__nfc-ring macbook-scroll__nfc-ring--delay" />

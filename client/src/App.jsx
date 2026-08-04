@@ -2,12 +2,20 @@ import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
 import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
+import MotionCarousel from "./components/MotionCarousel.jsx";
 import AssistantSection from "./components/AssistantSection.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
 import StackSection from "./components/StackSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
 import DockNav from "./components/DockNav.jsx";
 import Reveal from "./components/Reveal.jsx";
+
+const HERMES_SLIDES = [
+  { name: "chat-ui", label: "Chat UI" },
+  { name: "admin-dashboard", label: "Admin Dashboard" },
+  { name: "doc-ingest", label: "Doc Ingest Pipeline" },
+  { name: "injection-resistance", label: "Injection Resistance" },
+];
 
 export default function App() {
   return (
@@ -49,8 +57,7 @@ export default function App() {
         id="scene-02"
         sceneNumber="02"
         sceneName="HERMES"
-        browserLabel="hermes.local — support queue"
-        browserTag="HERMES — CUSTOMER SUPPORT CHAT"
+        showBrowserPreview={false}
         title="A support chatbot that only answers what it can cite."
         body="Customers ask questions, the bot retrieves the closest matching chunks from internal docs via pgvector, and answers only from those — streamed token by token, sources attached. When a customer seems dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
         ctaLabel="Read more"
@@ -63,6 +70,10 @@ export default function App() {
           { label: "ESCALATION", lines: ["n8n → Salesforce", "case per dissatisfied customer"] },
         ]}
       />
+
+      <div style={{ padding: "0 0 40px" }}>
+        <MotionCarousel slides={HERMES_SLIDES} terminalHost="hermes.local" />
+      </div>
 
       <AssistantSection />
 
