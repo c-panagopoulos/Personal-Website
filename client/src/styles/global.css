@@ -275,6 +275,22 @@ button {
   font-weight: 700;
   color: var(--accent);
 }
+.nav__bracket {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.nav__bracket-edge {
+  color: var(--text-secondary);
+}
+.nav__bracket-id {
+  color: var(--accent);
+  padding: 0 3px;
+}
 .nav__name {
   font-family: var(--font-mono);
   font-size: 0.82rem;

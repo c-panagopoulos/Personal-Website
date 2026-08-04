@@ -20,7 +20,11 @@ const LINKS = [
 function Brand({ visible }) {
   return (
     <div className="nav__brand">
-      <div className="nav__mark">cp</div>
+      <span className="nav__bracket">
+        <span className="nav__bracket-edge">[</span>
+        <span className="nav__bracket-id">cp</span>
+        <span className="nav__bracket-edge">]</span>
+      </span>
       {!visible && (
         <>
           <span className="nav__name">
