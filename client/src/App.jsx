@@ -53,11 +53,25 @@ export default function App() {
         ]}
       />
 
+      <div className="statement">
+        <Reveal as="h2" className="statement__text">
+          One started as
+          <br />
+          a personal itch.
+          <br />
+          The other had to
+          <br />
+          survive real customers.
+        </Reveal>
+      </div>
+
       <ProjectScene
         id="scene-02"
         sceneNumber="02"
         sceneName="HERMES"
         showBrowserPreview={false}
+        divider
+        mirror
         title="A support chatbot that only answers what it can cite."
         body="Customers ask questions, the bot retrieves the closest matching chunks from internal docs via pgvector, and answers only from those — streamed token by token, sources attached. When a customer seems dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
         ctaLabel="Read more"
@@ -71,7 +85,7 @@ export default function App() {
         ]}
       />
 
-      <div style={{ padding: "0 0 40px" }}>
+      <div className="hermes-evidence">
         <MotionCarousel slides={HERMES_SLIDES} terminalHost="hermes.local" />
       </div>
 

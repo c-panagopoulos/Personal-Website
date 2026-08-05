@@ -25,10 +25,6 @@ export default function ContactSection() {
       </div>
       <div className="contact-footer">
         <span className="contact-footer__copy">© CHARALAMPOS PANAGOPOULOS · ATHENS</span>
-        <span className="contact-footer__status">
-          <span className="status-dot" />
-          ALL SYSTEMS RUNNING
-        </span>
       </div>
     </div>
   );

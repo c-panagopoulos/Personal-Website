@@ -13,9 +13,14 @@ export default function ProjectScene({
   ctaHref,
   facts,
   showBrowserPreview = true,
+  divider = false,
+  mirror = false,
 }) {
+  const sceneClass = ["scene", divider && "scene--divider"].filter(Boolean).join(" ");
+  const gridClass = ["scene__grid", mirror && "scene__grid--mirror"].filter(Boolean).join(" ");
+
   return (
-    <div id={id} className="scene">
+    <div id={id} className={sceneClass}>
       {showBrowserPreview && (
         <Reveal className="scene__browser">
           <div className="scene__browser-frame">
@@ -31,7 +36,7 @@ export default function ProjectScene({
           </div>
         </Reveal>
       )}
-      <div className="scene__grid">
+      <div className={gridClass}>
         <Reveal>
           <div className="scene__kicker">
             <span className="scene__kicker-num">SCENE {sceneNumber}</span>

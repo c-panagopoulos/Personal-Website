@@ -1,18 +1,39 @@
 import Reveal from "./Reveal.jsx";
+import Terminal from "./Terminal.jsx";
+
+const CONTAINERS = [
+  { id: "307b9a57b4a7", image: "tapstudy:latest", status: "Up 38 seconds", name: "tapstudy" },
+  { id: "2ca3cbda2b0b", image: "ghcr.io/mealie-recipes/mealie:latest", status: "Up 38 seconds (healthy)", name: "mealie" },
+  { id: "5d49ccaea73f", image: "caddy:2", status: "Up 39 seconds", name: "caddy" },
+  { id: "317e06d80585", image: "docker.n8n.io/n8nio/n8n:latest", status: "Up 38 seconds", name: "n8n" },
+  { id: "ebdef7165854", image: "lscr.io/linuxserver/nextcloud:latest", status: "Up 38 seconds", name: "nextcloud" },
+  { id: "60959c879f4e", image: "postgres:16", status: "Up 38 seconds", name: "n8n-postgres" },
+  { id: "5b86c56a7b83", image: "postgres:15-alpine", status: "Up 38 seconds", name: "nextcloud-db" },
+  { id: "d65597eae285", image: "redis:7-alpine", status: "Up 39 seconds", name: "nextcloud-redis" },
+  { id: "8983d8dbc8c4", image: "vaultwarden/server:latest", status: "Up 38 seconds (starting)", name: "vaultwarden" },
+];
+
+function formatDockerPsOutput(rows) {
+  const header = { id: "CONTAINER ID", image: "IMAGE", status: "STATUS", name: "NAMES" };
+  const all = [header, ...rows];
+  const colWidth = (key) => Math.max(...all.map((r) => r[key].length)) + 3;
+  const idWidth = colWidth("id");
+  const imageWidth = colWidth("image");
+  const statusWidth = colWidth("status");
+  return all.map((r) => r.id.padEnd(idWidth) + r.image.padEnd(imageWidth) + r.status.padEnd(statusWidth) + r.name);
+}
+
+const DOCKER_PS_OUTPUT = formatDockerPsOutput(CONTAINERS);
 
 export default function HomelabSection() {
   return (
     <div id="homelab">
-      <div className="scene__browser-frame scene__browser-frame--wide">
-        <div className="scene__browser-bar">
-          <span className="scene__browser-dot" />
-          <span className="scene__browser-dot" />
-          <span className="scene__browser-dot" />
-          <span className="scene__browser-title">n100 — docker ps</span>
-        </div>
-        <div className="scene__browser-body">
-          <span className="scene__browser-tag">SCENE 03 — THE HOMELAB, 3AM</span>
-        </div>
+      <div className="scene__browser homelab__terminal-wrap">
+        <Terminal
+          username="xpanago@n10"
+          commands={["docker ps"]}
+          outputs={{ 0: DOCKER_PS_OUTPUT }}
+        />
       </div>
       <Reveal style={{ padding: "30px 56px 0" }}>
         <span className="scene__browser-title" style={{ marginLeft: 0 }}>
