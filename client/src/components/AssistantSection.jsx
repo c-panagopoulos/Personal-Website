@@ -64,10 +64,10 @@ export default function AssistantSection() {
               dotSpacing={11}
               bulgeStrength={26}
               cursorRadius={180}
-              gradientFrom="rgba(166, 139, 139, 0.85)"
-              gradientTo="rgba(50, 47, 54, 0.55)"
+              gradientFrom="rgba(211, 218, 217, 0.32)"
+              gradientTo="rgba(68, 68, 78, 0.55)"
               pulseActive={chat.open && !chat.done}
-              pulseColor="#d9c4c4"
+              pulseColor="#9c8683"
             />
           </div>
           <div className="shader-panel__fade shader-panel__fade--x" />

@@ -17,12 +17,12 @@ const DotField = memo(
     bulgeStrength = 67,
     sparkle = false,
     waveAmplitude = 0,
-    gradientFrom = "rgba(168, 85, 247, 0.35)",
-    gradientTo = "rgba(180, 151, 207, 0.25)",
+    gradientFrom = "rgba(211, 218, 217, 0.3)",
+    gradientTo = "rgba(68, 68, 78, 0.4)",
     // "Thinking" ring: an expanding glow wave from the field's center,
     // looping while true. Independent of the cursor bulge above.
     pulseActive = false,
-    pulseColor = "#d9c4c4",
+    pulseColor = "#9c8683",
     pulseSpeed = 1,
     ...rest
   }) => {
