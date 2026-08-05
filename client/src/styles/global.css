@@ -806,26 +806,26 @@ button {
   word-break: break-word;
 }
 .terminal__prompt-user {
-  color: #5aa9e6;
+  color: var(--accent);
 }
 .terminal__prompt-colon {
   color: #4bc17e;
 }
 .terminal__prompt-tilde {
-  color: #5aa9e6;
+  color: var(--accent);
 }
 .terminal__prompt-dollar {
   color: var(--text-quiet);
 }
 .terminal__output {
-  color: #9aa7bd;
+  color: var(--text-soft);
 }
 .terminal__cursor {
   display: inline-block;
   width: 6px;
   height: 12px;
   margin-left: 2px;
-  background: #dbe6f5;
+  background: var(--text-primary);
   vertical-align: middle;
   transition: opacity 0.1s ease;
 }
@@ -836,7 +836,7 @@ button {
   color: #4bc17e;
 }
 .tok-flag {
-  color: #5aa9e6;
+  color: var(--accent);
 }
 .tok-string {
   color: #e7c34d;
@@ -854,10 +854,10 @@ button {
   color: #ec7bb0;
 }
 .tok-comment {
-  color: #475569;
+  color: var(--text-quiet);
 }
 .tok-default {
-  color: #cbd5e1;
+  color: var(--text-soft);
 }
 @media (max-width: 640px) {
   .terminal {
