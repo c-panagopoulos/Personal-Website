@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Terminal from "./Terminal.jsx";
 
@@ -13,26 +14,51 @@ const CONTAINERS = [
   { id: "8983d8dbc8c4", image: "vaultwarden/server:latest", status: "Up 38 seconds (starting)", name: "vaultwarden" },
 ];
 
-function formatDockerPsOutput(rows) {
+// Strips a registry hostname + org segment (e.g. "ghcr.io/mealie-recipes/")
+// so image names stay readable on narrow terminals; "vaultwarden/server:latest"
+// has no such prefix and is left as-is.
+function shortenImage(image) {
+  return image.replace(/^[\w.-]+\.[a-z]{2,}\/[\w-]+\//, "");
+}
+
+function shortenStatus(status) {
+  return status.replace(/ seconds.*$/, "s");
+}
+
+function formatDockerPsOutput(rows, { compact = false } = {}) {
+  const projected = rows.map((r) => ({
+    id: r.id,
+    image: compact ? shortenImage(r.image) : r.image,
+    status: compact ? shortenStatus(r.status) : r.status,
+    name: r.name,
+  }));
   const header = { id: "CONTAINER ID", image: "IMAGE", status: "STATUS", name: "NAMES" };
-  const all = [header, ...rows];
+  const all = [header, ...projected];
   const colWidth = (key) => Math.max(...all.map((r) => r[key].length)) + 3;
-  const idWidth = colWidth("id");
   const imageWidth = colWidth("image");
   const statusWidth = colWidth("status");
+  if (compact) {
+    return all.map((r) => r.image.padEnd(imageWidth) + r.status.padEnd(statusWidth) + r.name);
+  }
+  const idWidth = colWidth("id");
   return all.map((r) => r.id.padEnd(idWidth) + r.image.padEnd(imageWidth) + r.status.padEnd(statusWidth) + r.name);
 }
 
-const DOCKER_PS_OUTPUT = formatDockerPsOutput(CONTAINERS);
-
 export default function HomelabSection() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth < 640) setIsMobile(true);
+  }, []);
+
+  const dockerPsOutput = formatDockerPsOutput(CONTAINERS, { compact: isMobile });
+
   return (
     <div id="homelab">
       <div className="scene__browser homelab__terminal-wrap">
         <Terminal
           username="xpanago@n10"
           commands={["docker ps"]}
-          outputs={{ 0: DOCKER_PS_OUTPUT }}
+          outputs={{ 0: dockerPsOutput }}
         />
       </div>
       <Reveal style={{ padding: "30px 56px 0" }}>

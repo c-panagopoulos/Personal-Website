@@ -14,10 +14,8 @@ export default function ProjectScene({
   facts,
   showBrowserPreview = true,
   divider = false,
-  mirror = false,
 }) {
   const sceneClass = ["scene", divider && "scene--divider"].filter(Boolean).join(" ");
-  const gridClass = ["scene__grid", mirror && "scene__grid--mirror"].filter(Boolean).join(" ");
 
   return (
     <div id={id} className={sceneClass}>
@@ -36,7 +34,7 @@ export default function ProjectScene({
           </div>
         </Reveal>
       )}
-      <div className={gridClass}>
+      <div className="scene__grid">
         <Reveal>
           <div className="scene__kicker">
             <span className="scene__kicker-num">SCENE {sceneNumber}</span>

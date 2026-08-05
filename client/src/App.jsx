@@ -67,19 +67,12 @@ export default function App() {
         </Reveal>
       </div>
 
-      <div className="statement statement--center">
-        <Reveal as="h2" className="statement__text">
-          Hermes.
-        </Reveal>
-      </div>
-
       <ProjectScene
         id="scene-02"
         sceneNumber="02"
         sceneName="HERMES"
         showBrowserPreview={false}
         divider
-        mirror
         title="A support chatbot that only answers what it can cite."
         body="Customers ask questions, the bot retrieves the closest matching chunks from internal docs via pgvector, and answers only from those — streamed token by token, sources attached. When a customer seems dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
         ctaLabel="Read more"
@@ -108,12 +101,6 @@ export default function App() {
           So I built
           <br />
           my own infrastructure.
-        </Reveal>
-      </div>
-
-      <div className="statement statement--center">
-        <Reveal as="h2" className="statement__text">
-          Homelab.
         </Reveal>
       </div>
 
