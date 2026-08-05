@@ -1,18 +1,17 @@
 :root {
-  --bg: #0b1220;
-  --bg-panel-a: #0f172a;
-  --bg-panel-b: #111c33;
-  --bg-panel-c: #1e293b;
-  --bg-panel-d: #060b16;
-  --accent: #60a5fa;
-  --accent-hover: #93c5fd;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #64748b;
-  --text-quiet: #475569;
-  --text-faint: #334a68;
-  --border: rgba(96, 165, 250, 0.16);
-  --border-strong: rgba(96, 165, 250, 0.4);
+  --bg: #29272e;
+  --bg-panel-a: #37353e;
+  --bg-panel-d: #201f24;
+  --accent: #a68b8b;
+  --accent-hover: #c7b0b0;
+  --accent-solid: #715a5a;
+  --text-primary: #d3dad9;
+  --text-secondary: #a6aba9;
+  --text-tertiary: #7d827f;
+  --text-quiet: #5c605e;
+  --text-faint: #46474a;
+  --border: rgba(113, 90, 90, 0.16);
+  --border-strong: rgba(113, 90, 90, 0.4);
   --font-sans: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
@@ -140,7 +139,7 @@ button {
   }
 }
 .resizable-navbar__body--visible {
-  background: rgba(15, 23, 42, 0.88);
+  background: rgba(33, 31, 36, 0.88);
   border: 1px solid var(--border);
 }
 .resizable-navbar__items {
@@ -180,7 +179,7 @@ button {
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  background: rgba(96, 165, 250, 0.12);
+  background: rgba(113, 90, 90, 0.12);
 }
 .resizable-navbar__item-label {
   position: relative;
@@ -206,7 +205,7 @@ button {
   }
 }
 .resizable-navbar__mobile--visible {
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(33, 31, 36, 0.92);
   border: 1px solid var(--border);
 }
 .resizable-navbar__mobile-header {
@@ -224,7 +223,7 @@ button {
   height: 36px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(96, 165, 250, 0.08);
+  background: rgba(113, 90, 90, 0.08);
   color: var(--text-primary);
   cursor: pointer;
 }
@@ -237,10 +236,10 @@ button {
   flex-direction: column;
   gap: 4px;
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.97);
+  background: rgba(33, 31, 36, 0.97);
   border: 1px solid var(--border);
   padding: 14px;
-  box-shadow: 0 20px 50px rgba(2, 6, 16, 0.5);
+  box-shadow: 0 20px 50px rgba(11, 10, 12, 0.5);
 }
 .resizable-navbar__mobile-link {
   padding: 12px 14px;
@@ -253,7 +252,7 @@ button {
 }
 .resizable-navbar__mobile-link:hover {
   color: var(--accent);
-  background: rgba(96, 165, 250, 0.08);
+  background: rgba(113, 90, 90, 0.08);
 }
 
 .nav__brand {
@@ -265,15 +264,14 @@ button {
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  border: 1px solid var(--border-strong);
-  background: rgba(96, 165, 250, 0.12);
+  background: var(--accent-solid);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--text-primary);
 }
 .nav__bracket {
   display: inline-flex;
@@ -373,7 +371,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: var(--bg-panel-b);
+  background: var(--bg-panel-a);
 }
 .hero__panel-head {
   display: flex;
@@ -404,8 +402,8 @@ button {
 
 /* --- Cards (retrieval result cards, right panel) --- */
 .card {
-  background: var(--bg-panel-c);
-  border: 1px solid rgba(96, 165, 250, 0.18);
+  background: var(--bg-panel-a);
+  border: 1px solid rgba(113, 90, 90, 0.18);
   border-radius: 12px;
   padding: 18px 20px;
   display: flex;
@@ -416,7 +414,7 @@ button {
 }
 .card:hover {
   transform: translateY(-4px);
-  border-color: rgba(96, 165, 250, 0.5);
+  border-color: rgba(113, 90, 90, 0.5);
 }
 .card__head {
   display: flex;
@@ -446,7 +444,7 @@ button {
   margin-top: 2px;
 }
 .tag {
-  background: rgba(96, 165, 250, 0.12);
+  background: rgba(113, 90, 90, 0.12);
   color: var(--accent-hover);
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -457,7 +455,7 @@ button {
 /* --- Assistant widget (shared by hero mini card and full section) --- */
 .assistant-card {
   background: rgba(30, 41, 59, 0.66);
-  border: 1px solid rgba(96, 165, 250, 0.2);
+  border: 1px solid rgba(113, 90, 90, 0.2);
   border-radius: 14px;
   padding: 20px 22px;
   min-height: 150px;
@@ -502,7 +500,7 @@ button {
 .shimmer-chip {
   height: 22px;
   border-radius: 6px;
-  background: linear-gradient(90deg, #1e293b 0px, #2c3d55 80px, #1e293b 160px);
+  background: linear-gradient(90deg, #3a3740 0px, #4c4750 80px, #3a3740 160px);
   background-size: 400px 100%;
   animation: shimmer 1.4s linear infinite;
   display: inline-block;
@@ -543,8 +541,8 @@ button {
 .source-chip {
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  background: rgba(96, 165, 250, 0.1);
-  border: 1px solid rgba(96, 165, 250, 0.22);
+  background: rgba(113, 90, 90, 0.1);
+  border: 1px solid rgba(113, 90, 90, 0.22);
   color: var(--accent-hover);
   padding: 4px 9px;
   border-radius: 6px;
@@ -555,15 +553,15 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--bg-panel-c);
-  border: 1px solid rgba(96, 165, 250, 0.28);
+  background: var(--bg-panel-a);
+  border: 1px solid rgba(113, 90, 90, 0.28);
   border-radius: 14px;
   padding: 13px 13px 13px 20px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .chat-input:focus-within {
-  border-color: rgba(96, 165, 250, 0.55);
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.07);
+  border-color: rgba(113, 90, 90, 0.55);
+  box-shadow: 0 0 0 4px rgba(113, 90, 90, 0.07);
 }
 .chat-input__prompt {
   font-family: var(--font-mono);
@@ -612,7 +610,7 @@ button {
   gap: 9px;
 }
 .chip {
-  background: rgba(96, 165, 250, 0.08);
+  background: rgba(113, 90, 90, 0.08);
   border: 1px solid rgba(148, 163, 184, 0.3);
   color: #cbd5e1;
   font-family: var(--font-sans);
@@ -632,12 +630,12 @@ button {
 }
 .chip--ghost {
   background: transparent;
-  color: #8fb4e8;
+  color: #c2a5a5;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   border-radius: 999px;
   padding: 8px 14px;
-  border: 1px solid rgba(96, 165, 250, 0.22);
+  border: 1px solid rgba(113, 90, 90, 0.22);
 }
 .chip--ghost:hover {
   border-color: var(--accent);
@@ -685,7 +683,7 @@ button {
 .scene__browser-frame {
   position: relative;
   aspect-ratio: 2.6 / 1;
-  background: linear-gradient(180deg, #111a2c, var(--bg));
+  background: linear-gradient(180deg, #211f26, var(--bg));
   border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
@@ -703,7 +701,7 @@ button {
   align-items: center;
   gap: 8px;
   padding: 0 12px;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(33, 31, 36, 0.7);
 }
 .scene__browser-dot {
   width: 8px;
@@ -723,13 +721,13 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: repeating-linear-gradient(115deg, rgba(96, 165, 250, 0.045) 0 2px, transparent 2px 16px);
+  background: repeating-linear-gradient(115deg, rgba(113, 90, 90, 0.045) 0 2px, transparent 2px 16px);
 }
 .scene__browser-tag {
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.24em;
-  color: #3f5170;
+  color: #5e5257;
 }
 /* --- Terminal (Aceternity "Terminal", restyled) --- */
 .terminal {
@@ -747,7 +745,7 @@ button {
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, #0d1420, #0a0e14);
+  background: linear-gradient(180deg, #18161a, #121114);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
 }
 .terminal__bar {
@@ -755,7 +753,7 @@ button {
   align-items: center;
   gap: 10px;
   padding: 14px 18px;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(33, 31, 36, 0.75);
   border-bottom: 1px solid var(--border);
 }
 .terminal__dots {
@@ -895,7 +893,7 @@ button {
 .scene__kicker-rule {
   width: 40px;
   height: 1px;
-  background: rgba(96, 165, 250, 0.35);
+  background: rgba(113, 90, 90, 0.35);
 }
 .scene__kicker-name {
   font-family: var(--font-mono);
@@ -925,25 +923,27 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid rgba(96, 165, 250, 0.4);
+  background: var(--text-primary);
+  border: none;
   border-radius: 8px;
   padding: 13px 20px;
   text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: background 0.25s ease, transform 0.2s ease;
 }
 .btn:hover {
-  background: rgba(96, 165, 250, 0.12);
-  border-color: rgba(96, 165, 250, 0.75);
+  background: #fff;
+  transform: translateY(-1px);
 }
 .btn__label {
   font-size: 0.98rem;
-  color: var(--text-primary);
+  font-weight: 600;
+  color: var(--bg-panel-a);
 }
 .btn__tag {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.16em;
-  color: var(--accent);
+  color: var(--accent-solid);
 }
 
 .facts {
@@ -1011,8 +1011,8 @@ button {
   display: flex;
   flex-direction: column;
   background: var(--bg-panel-d);
-  border-top: 1px solid rgba(96, 165, 250, 0.28);
-  border-bottom: 1px solid rgba(96, 165, 250, 0.28);
+  border-top: 1px solid rgba(113, 90, 90, 0.28);
+  border-bottom: 1px solid rgba(113, 90, 90, 0.28);
 }
 .assistant-section__topbar {
   display: flex;
@@ -1020,7 +1020,7 @@ button {
   justify-content: space-between;
   padding: 14px 22px;
   border-bottom: 1px solid var(--border);
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(33, 31, 36, 0.6);
 }
 .assistant-section__body {
   flex: 1;
@@ -1097,7 +1097,7 @@ button {
   flex-direction: column;
   gap: 14px;
   animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  background: rgba(6, 11, 22, 0.55);
+  background: rgba(16, 15, 17, 0.55);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   border-radius: 14px;
@@ -1106,12 +1106,12 @@ button {
 .chat-bubble--user {
   align-self: flex-end;
   max-width: 72%;
-  background: rgba(96, 165, 250, 0.14);
-  border: 1px solid rgba(96, 165, 250, 0.26);
+  background: rgba(113, 90, 90, 0.14);
+  border: 1px solid rgba(113, 90, 90, 0.26);
   border-radius: 12px 12px 4px 12px;
   padding: 11px 14px;
   font-size: 0.95rem;
-  color: #dbe6f5;
+  color: #d9d0d0;
 }
 .chat-bubble--assistant {
   display: flex;
@@ -1121,11 +1121,10 @@ button {
   width: 24px;
   height: 24px;
   border-radius: 7px;
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  background: rgba(96, 165, 250, 0.1);
+  background: var(--accent-solid);
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: var(--accent);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1151,10 +1150,10 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid rgba(96, 165, 250, 0.28);
+  border: 1px solid rgba(113, 90, 90, 0.28);
   border-radius: 10px;
   padding: 12px 14px;
-  background: rgba(11, 18, 32, 0.7);
+  background: rgba(25, 23, 27, 0.7);
   max-width: 760px;
 }
 .assistant-input__field {
@@ -1209,7 +1208,7 @@ button {
 .stack-section__head-rule {
   flex: 1;
   height: 1px;
-  background: rgba(96, 165, 250, 0.2);
+  background: rgba(113, 90, 90, 0.2);
 }
 .stack-section__head-note {
   font-family: var(--font-mono);
@@ -1276,21 +1275,21 @@ button {
   transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .stack-tag:hover {
-  border-color: rgba(96, 165, 250, 0.5);
-  background: rgba(96, 165, 250, 0.06);
+  border-color: rgba(113, 90, 90, 0.5);
+  background: rgba(113, 90, 90, 0.06);
   color: var(--text-primary);
   transform: translateY(-2px);
 }
 .stack-tag--active {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(96, 165, 250, 0.08);
+  background: rgba(113, 90, 90, 0.08);
 }
 
 .stack-answer-panel {
-  border: 1px solid rgba(96, 165, 250, 0.22);
+  border: 1px solid rgba(113, 90, 90, 0.22);
   border-radius: 13px;
-  background: rgba(11, 18, 32, 0.7);
+  background: rgba(25, 23, 27, 0.7);
   padding: 32px;
 }
 .stack-answer-panel__idle {
@@ -1340,7 +1339,7 @@ button {
 .contact-section__eyebrow-rule {
   flex: 1;
   height: 1px;
-  background: rgba(96, 165, 250, 0.2);
+  background: rgba(113, 90, 90, 0.2);
 }
 .contact-section__title {
   margin: 0;
@@ -1426,7 +1425,7 @@ button {
   bottom: 0;
   z-index: 30;
   padding: 10px 16px 14px;
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(33, 31, 36, 0.92);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--border);
   justify-content: center;
@@ -1459,13 +1458,13 @@ button {
   transition: color 0.25s ease, background 0.25s ease;
 }
 .dock__item:hover {
-  background: rgba(96, 165, 250, 0.12);
+  background: rgba(113, 90, 90, 0.12);
   color: var(--accent);
 }
 .dock__ask {
   height: 46px;
-  border: 1px solid rgba(96, 165, 250, 0.4);
-  background: linear-gradient(180deg, rgba(96, 165, 250, 0.16), rgba(96, 165, 250, 0.08));
+  border: 1px solid rgba(113, 90, 90, 0.4);
+  background: linear-gradient(180deg, rgba(113, 90, 90, 0.16), rgba(113, 90, 90, 0.08));
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -1819,7 +1818,7 @@ button {
 /* --- Motion carousel (Embla + Motion, restyled) --- */
 .motion-carousel {
   width: 100%;
-  background: linear-gradient(180deg, #0d1420, #0a0e14);
+  background: linear-gradient(180deg, #18161a, #121114);
   border: 0.5px solid rgba(138, 145, 134, 0.15);
   border-radius: 10px;
   padding: 16px 20px 22px;
@@ -1886,9 +1885,9 @@ button {
   width: 100%;
   overflow: hidden;
   border-radius: 8px;
-  border: 1px solid rgba(96, 165, 250, 0.16);
-  background: repeating-linear-gradient(115deg, rgba(96, 165, 250, 0.05) 0 2px, transparent 2px 16px),
-    linear-gradient(180deg, #111a2c, #0b1220);
+  border: 1px solid rgba(113, 90, 90, 0.16);
+  background: repeating-linear-gradient(115deg, rgba(113, 90, 90, 0.05) 0 2px, transparent 2px 16px),
+    linear-gradient(180deg, #211f26, #19171b);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1896,7 +1895,7 @@ button {
   transition: border-color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .motion-carousel__slide:hover {
-  border-color: rgba(96, 165, 250, 0.32);
+  border-color: rgba(113, 90, 90, 0.32);
 }
 .motion-carousel__slide-img {
   width: 100%;
@@ -1914,9 +1913,9 @@ button {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(10, 14, 20, 0.72);
-  border: 1px solid rgba(96, 165, 250, 0.22);
-  color: #85b7eb;
+  background: rgba(20, 19, 22, 0.72);
+  border: 1px solid rgba(113, 90, 90, 0.22);
+  color: #c2a5a5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1936,9 +1935,9 @@ button {
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #dbe6f5;
-  background: rgba(10, 14, 20, 0.72);
-  border: 1px solid rgba(96, 165, 250, 0.22);
+  color: #d9d0d0;
+  background: rgba(20, 19, 22, 0.72);
+  border: 1px solid rgba(113, 90, 90, 0.22);
   border-radius: 5px;
   padding: 4px 9px;
 }
@@ -1946,7 +1945,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.24em;
-  color: #3f5170;
+  color: #5e5257;
   text-transform: uppercase;
 }
 .motion-carousel__controls {
@@ -1960,7 +1959,7 @@ button {
   height: 32px;
   flex: none;
   border-radius: 50%;
-  background: rgba(13, 20, 32, 0.8);
+  background: rgba(28, 26, 30, 0.8);
   border: 1px solid rgba(138, 145, 134, 0.18);
   color: #8a9186;
   display: flex;
@@ -1970,8 +1969,8 @@ button {
   transition: border-color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .motion-carousel__arrow:hover:not(:disabled) {
-  border-color: rgba(55, 138, 221, 0.5);
-  color: #85b7eb;
+  border-color: rgba(166, 139, 139, 0.5);
+  color: #c2a5a5;
 }
 .motion-carousel__arrow:disabled {
   opacity: 0.35;
@@ -2006,7 +2005,7 @@ button {
   justify-content: center;
   gap: 16px;
   padding: 32px;
-  background: rgba(4, 6, 10, 0.96);
+  background: rgba(8, 7, 9, 0.96);
   backdrop-filter: blur(10px);
   cursor: zoom-out;
 }
@@ -2016,7 +2015,7 @@ button {
   width: auto;
   height: auto;
   border-radius: 10px;
-  border: 1px solid rgba(96, 165, 250, 0.22);
+  border: 1px solid rgba(113, 90, 90, 0.22);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
   cursor: default;
 }
@@ -2025,7 +2024,7 @@ button {
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #dbe6f5;
+  color: #d9d0d0;
 }
 .motion-lightbox__close {
   position: fixed;
@@ -2035,9 +2034,9 @@ button {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(13, 20, 32, 0.85);
+  background: rgba(28, 26, 30, 0.85);
   border: 1px solid rgba(138, 145, 134, 0.22);
-  color: #dbe6f5;
+  color: #d9d0d0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2045,6 +2044,6 @@ button {
   transition: border-color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .motion-lightbox__close:hover {
-  border-color: rgba(55, 138, 221, 0.5);
-  color: #85b7eb;
+  border-color: rgba(166, 139, 139, 0.5);
+  color: #c2a5a5;
 }

@@ -22,7 +22,7 @@ const DotField = memo(
     // "Thinking" ring: an expanding glow wave from the field's center,
     // looping while true. Independent of the cursor bulge above.
     pulseActive = false,
-    pulseColor = "#a9c9f5",
+    pulseColor = "#d9c4c4",
     pulseSpeed = 1,
     ...rest
   }) => {

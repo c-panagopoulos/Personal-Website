@@ -53,10 +53,10 @@ export default function StackSection() {
               dotSpacing={11}
               bulgeStrength={26}
               cursorRadius={180}
-              gradientFrom="rgba(55, 138, 221, 0.65)"
-              gradientTo="rgba(42, 58, 82, 0.4)"
+              gradientFrom="rgba(166, 139, 139, 0.65)"
+              gradientTo="rgba(50, 47, 54, 0.4)"
               pulseActive={chat.open && !chat.done}
-              pulseColor="#a9c9f5"
+              pulseColor="#d9c4c4"
             />
           </div>
           {chat.open ? (
