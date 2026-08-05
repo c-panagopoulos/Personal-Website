@@ -200,7 +200,7 @@ function DotBar({ selected, onClick }) {
       onClick={onClick}
       layout
       initial={false}
-      animate={{ width: selected ? 20 : 12, backgroundColor: selected ? "#a68b8b" : "#232a36" }}
+      animate={{ width: selected ? 20 : 12, backgroundColor: selected ? "#b39d9d" : "#3a3640" }}
       transition={transition}
       aria-label="Go to slide"
     />

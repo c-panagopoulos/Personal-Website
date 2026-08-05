@@ -9,6 +9,7 @@ import StackSection from "./components/StackSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
 import DockNav from "./components/DockNav.jsx";
 import Reveal from "./components/Reveal.jsx";
+import WipeReveal from "./components/WipeReveal.jsx";
 
 const HERMES_SLIDES = [
   { name: "chat-ui", label: "Chat UI", src: "/images/hermes-homepage.png" },
@@ -24,7 +25,7 @@ export default function App() {
       <Hero />
 
       <div className="statement">
-        <Reveal as="h2" className="statement__text">
+        <WipeReveal as="h2" className="statement__text">
           I kept forgetting
           <br />
           to log my study.
@@ -32,7 +33,7 @@ export default function App() {
           So I built
           <br />
           TapStudy.
-        </Reveal>
+        </WipeReveal>
       </div>
 
       <MacbookScroll src="/images/dashboard.png" alt="tapstudy dashboard" />
@@ -56,7 +57,7 @@ export default function App() {
       />
 
       <div className="statement">
-        <Reveal as="h2" className="statement__text">
+        <WipeReveal as="h2" className="statement__text">
           One started as
           <br />
           a personal itch.
@@ -64,7 +65,7 @@ export default function App() {
           The other had to
           <br />
           survive real customers.
-        </Reveal>
+        </WipeReveal>
       </div>
 
       <ProjectScene
@@ -73,6 +74,7 @@ export default function App() {
         sceneName="HERMES"
         showBrowserPreview={false}
         divider
+        factsLayout="inline"
         title="A support chatbot that only answers what it can cite."
         body="Customers ask questions, the bot retrieves the closest matching chunks from internal docs via pgvector, and answers only from those — streamed token by token, sources attached. When a customer seems dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
         ctaLabel="Read more"
@@ -93,7 +95,7 @@ export default function App() {
       <AssistantSection />
 
       <div className="statement">
-        <Reveal as="h2" className="statement__text">
+        <WipeReveal as="h2" className="statement__text">
           Software
           <br />
           fails.
@@ -101,7 +103,7 @@ export default function App() {
           So I built
           <br />
           my own infrastructure.
-        </Reveal>
+        </WipeReveal>
       </div>
 
       <HomelabSection />

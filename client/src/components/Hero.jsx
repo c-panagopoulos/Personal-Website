@@ -51,7 +51,7 @@ export default function Hero() {
                   bulgeStrength={26}
                   cursorRadius={180}
                   gradientFrom="rgba(166, 139, 139, 0.65)"
-                  gradientTo="rgba(50, 47, 54, 0.4)"
+                  gradientTo="rgba(60, 56, 68, 0.4)"
                 />
               </div>
               <div className="assistant-card__question">&gt; {chat.question}</div>

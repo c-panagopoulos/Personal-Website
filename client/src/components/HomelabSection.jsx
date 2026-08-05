@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Terminal from "./Terminal.jsx";
+import ScrambleText from "./ScrambleText.jsx";
 
 const CONTAINERS = [
   { id: "307b9a57b4a7", image: "tapstudy:latest", status: "Up 38 seconds", name: "tapstudy" },
@@ -70,8 +71,7 @@ export default function HomelabSection() {
       <div className="section-lead">
         <Reveal className="section-lead__inner">
           <h3 className="section-lead__title">
-            If it breaks at 3am,
-            <br />I am the on-call.
+            <ScrambleText lines={["If it breaks at 3am,", "I am the on-call."]} />
           </h3>
           <p className="section-lead__body">
             An Intel N100 running my personal cloud: Nextcloud, n8n, Tailscale, no open ports. One automation
@@ -89,7 +89,7 @@ export default function HomelabSection() {
             </div>
             <div className="fact">
               <div className="fact__label">UPTIME</div>
-              <div className="fact__value">148 days</div>
+              <div className="fact__value">_ days</div>
             </div>
           </div>
           <div style={{ marginTop: 30 }}>
