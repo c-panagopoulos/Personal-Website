@@ -664,6 +664,13 @@ button {
     font-size: 3.2rem;
   }
 }
+.statement--center {
+  justify-content: center;
+}
+.statement--center .statement__text {
+  text-align: center;
+  margin: 0 auto;
+}
 
 /* --- Project scene --- */
 .scene {

@@ -25,11 +25,13 @@ export default function App() {
 
       <div className="statement">
         <Reveal as="h2" className="statement__text">
-          Everything after
+          I kept forgetting
           <br />
-          this line is
+          to log my study.
           <br />
-          still running.
+          So I built
+          <br />
+          TapStudy.
         </Reveal>
       </div>
 
@@ -65,6 +67,12 @@ export default function App() {
         </Reveal>
       </div>
 
+      <div className="statement statement--center">
+        <Reveal as="h2" className="statement__text">
+          Hermes.
+        </Reveal>
+      </div>
+
       <ProjectScene
         id="scene-02"
         sceneNumber="02"
@@ -90,6 +98,24 @@ export default function App() {
       </div>
 
       <AssistantSection />
+
+      <div className="statement">
+        <Reveal as="h2" className="statement__text">
+          Software
+          <br />
+          fails.
+          <br />
+          So I built
+          <br />
+          my own infrastructure.
+        </Reveal>
+      </div>
+
+      <div className="statement statement--center">
+        <Reveal as="h2" className="statement__text">
+          Homelab.
+        </Reveal>
+      </div>
 
       <HomelabSection />
 
