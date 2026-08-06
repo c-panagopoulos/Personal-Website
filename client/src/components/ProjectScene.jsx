@@ -9,10 +9,12 @@ export default function ProjectScene({
   browserTag,
   title,
   body,
+  proof,
+  how,
+  stack,
   ctaLabel,
   ctaTag,
   ctaHref,
-  facts,
   factsLayout = "column",
   showBrowserPreview = true,
   divider = false,
@@ -48,16 +50,31 @@ export default function ProjectScene({
             <ScrambleText lines={[title]} />
           </h3>
           <p className="scene__body">{body}</p>
-          {factsLayout === "inline" && (
-            <div className="scene__facts--inline">
-              {facts.map((fact) => (
-                <span key={fact.label}>
-                  <span className="fact__label">{fact.label} </span>
-                  {fact.lines.join(" · ")}
-                </span>
+
+          {proof?.length > 0 && (
+            <ul className="scene__proof">
+              {proof.map((item) => (
+                <li className="scene__proof-item" key={item}>
+                  <span className="scene__proof-mark">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {how && <p className="scene__how">{how}</p>}
+
+          {factsLayout === "inline" && stack?.length > 0 && (
+            <div className="scene__stack scene__stack--inline">
+              {stack.map((group) => (
+                <div className="scene__stack-group" key={group.label}>
+                  <span className="scene__stack-label">{group.label}</span>
+                  <span className="scene__stack-value">{group.items.join(" · ")}</span>
+                </div>
               ))}
             </div>
           )}
+
           {ctaHref && (
             <div style={{ marginTop: 32, display: "flex", gap: 14 }}>
               <a className="btn" href={ctaHref} target={ctaHref.startsWith("http") ? "_blank" : undefined} rel={ctaHref.startsWith("http") ? "noreferrer" : undefined}>
@@ -67,16 +84,16 @@ export default function ProjectScene({
             </div>
           )}
         </Reveal>
-        {factsLayout === "column" && (
-          <Reveal className="facts">
-            {facts.map((fact) => (
-              <div className="fact" key={fact.label}>
-                <div className="fact__label">{fact.label}</div>
-                <div className="fact__value">
-                  {fact.lines.map((line, i) => (
+        {factsLayout === "column" && stack?.length > 0 && (
+          <Reveal className="scene__stack">
+            {stack.map((group) => (
+              <div className="scene__stack-group" key={group.label}>
+                <div className="scene__stack-label">{group.label}</div>
+                <div className="scene__stack-value">
+                  {group.items.map((item, i) => (
                     <span key={i}>
-                      {line}
-                      {i < fact.lines.length - 1 && <br />}
+                      {item}
+                      {i < group.items.length - 1 && <br />}
                     </span>
                   ))}
                 </div>

@@ -919,24 +919,6 @@ button {
     grid-template-columns: 1fr;
   }
 }
-.scene__facts--inline {
-  margin-top: 28px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 14px;
-  max-width: 700px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-soft);
-}
-.scene__facts--inline .fact__label {
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  color: var(--text-quiet);
-  margin-right: 4px;
-}
 .scene__kicker {
   display: flex;
   align-items: center;
@@ -978,6 +960,82 @@ button {
   text-wrap: pretty;
 }
 
+/* Evidence the project is real, before any mention of the stack. */
+.scene__proof {
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  max-width: 560px;
+}
+.scene__proof-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+.scene__proof-mark {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* A single engineering note — what's technically interesting, quoted like an annotation. */
+.scene__how {
+  margin: 24px 0 0;
+  max-width: 580px;
+  padding-left: 16px;
+  border-left: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--text-tertiary);
+}
+
+/* Stack — last, quietest: a spec sheet, not a headline. */
+.scene__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.scene__stack-group {
+  text-align: right;
+}
+.scene__stack-label {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+}
+.scene__stack-value {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-quiet);
+  margin-top: 6px;
+  line-height: 1.7;
+}
+.scene__stack--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 28px;
+  max-width: 700px;
+}
+.scene__stack--inline .scene__stack-group {
+  text-align: left;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.scene__stack--inline .scene__stack-value {
+  margin-top: 0;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -1005,14 +1063,6 @@ button {
   color: var(--accent);
 }
 
-.facts {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-.facts .fact {
-  text-align: right;
-}
 .facts--row {
   display: flex;
   flex-wrap: wrap;

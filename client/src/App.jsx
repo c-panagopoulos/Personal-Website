@@ -44,15 +44,19 @@ export default function App() {
         sceneName="TAPSTUDY"
         showBrowserPreview={false}
         title="A study tracker you start by tapping your phone."
-        body="I kept forgetting to log study sessions, so I stuck an NFC tag on my desk — tap to start, tap to stop. Auth, rate limiting and error handling went in before the first session was ever recorded. Two years later it is still the first thing I touch in the morning."
+        body="I kept forgetting to log study sessions, so I stuck an NFC tag on my desk — tap to start, tap to stop. It's still the first thing I touch every morning."
+        proof={[
+          "Running every morning for two years",
+          "Single Docker container, own hardware",
+          "NFC-triggered — no app to open",
+        ]}
+        how="Auth, rate limiting and error handling shipped before the first session was ever logged — it was never a toy."
         ctaLabel="Live demo"
         ctaTag="TAPSTUDY"
         ctaHref="#scene-01"
-        facts={[
-          { label: "STACK", lines: ["React · Express", "PostgreSQL"] },
-          { label: "DEPLOY", lines: ["single-image Docker", "own hardware"] },
-          { label: "AI", lines: ["local Ollama", "prompt-hardened"] },
-          { label: "USERS", lines: ["me,", "every morning"] },
+        stack={[
+          { label: "BUILT WITH", items: ["React 19", "Express", "PostgreSQL"] },
+          { label: "RUNS ON", items: ["Docker", "local Ollama"] },
         ]}
       />
 
@@ -76,15 +80,20 @@ export default function App() {
         divider
         factsLayout="inline"
         title="A support chatbot that only answers what it can cite."
-        body="Customers ask questions, the bot retrieves the closest matching chunks from internal docs via pgvector, and answers only from those — streamed token by token, sources attached. When a customer seems dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
+        body="Customers ask questions; the bot answers only from what it can cite — no hallucinated policy, no made-up support replies."
+        proof={[
+          "Answers only from cited sources",
+          "Token-streamed replies, sources attached",
+          "Auto-escalates dissatisfied customers to Salesforce",
+          "Self-hosted on Hetzner",
+        ]}
+        how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. When a customer sounds dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
         ctaLabel="Read more"
         ctaTag="HERMES"
         ctaHref="#assistant"
-        facts={[
-          { label: "STACK", lines: ["Node · Express", "PostgreSQL"] },
-          { label: "DEPLOY", lines: ["Dockerized", "self-hosted, Hetzner"] },
-          { label: "AI", lines: ["RAG · pgvector", "streamed via SSE"] },
-          { label: "ESCALATION", lines: ["n8n → Salesforce", "case per dissatisfied customer"] },
+        stack={[
+          { label: "BUILT WITH", items: ["Node", "Express", "PostgreSQL"] },
+          { label: "RUNS ON", items: ["Docker", "Hetzner", "n8n"] },
         ]}
       />
 
