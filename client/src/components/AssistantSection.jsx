@@ -1,4 +1,4 @@
-import { useChat } from "../hooks/useChat.js";
+import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
 import DotField from "./DotField.jsx";
@@ -11,7 +11,7 @@ const CHIPS = [
 ];
 
 export default function AssistantSection() {
-  const chat = useChat();
+  const chat = useSharedChat();
 
   return (
     <div id="assistant" className="assistant-section">

@@ -320,22 +320,15 @@ button {
 }
 /* --- Hero --- */
 .hero {
-  display: grid;
-  grid-template-columns: 1.18fr 0.82fr;
   min-height: 100vh;
   background: var(--bg);
-}
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
 }
 
 .hero__left {
   padding: 56px 56px 112px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--border);
+  min-height: 100vh;
   background-image: radial-gradient(640px 420px at 10% 5%, rgba(211, 218, 217, 0.045), transparent 70%);
 }
 .hero__byline {
@@ -388,90 +381,11 @@ button {
   margin-top: 4px;
 }
 
-.hero__right {
-  padding: 56px 40px 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  background-color: var(--surface);
-  background-image: radial-gradient(circle at 85% 0%, rgba(211, 218, 217, 0.05), transparent 60%);
-}
-.hero__panel-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .hero__panel-label {
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.16em;
   color: var(--text-tertiary);
-}
-.live-dot {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: #4ade80;
-  animation: fadeIn 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-.hero__footnote {
-  margin-top: auto;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--text-quiet);
-  line-height: 1.8;
-}
-
-/* --- Cards (retrieval result cards, right panel) --- */
-.card {
-  background: var(--surface-elevated);
-  border: 1px solid var(--border-strong);
-  border-radius: 12px;
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  transition: border-color 0.3s ease;
-}
-.card:hover {
-  border-color: var(--accent-border);
-}
-.card__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.card__title {
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-.card__score {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  color: var(--accent);
-}
-.card__body {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 0;
-}
-.card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 2px;
-}
-.tag {
-  background: rgba(211, 218, 217, 0.08);
-  color: var(--text-soft);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  padding: 3px 8px;
-  border-radius: 5px;
 }
 
 /* --- Assistant widget (shared by hero mini card and full section) --- */
