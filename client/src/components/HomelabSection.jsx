@@ -54,7 +54,7 @@ export default function HomelabSection() {
   const dockerPsOutput = formatDockerPsOutput(CONTAINERS, { compact: isMobile });
 
   return (
-    <div id="homelab">
+    <div id="homelab" className="homelab-section">
       <div className="scene__browser homelab__terminal-wrap">
         <Terminal
           username="xpanago@n10"
