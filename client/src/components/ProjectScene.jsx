@@ -1,6 +1,22 @@
 import Reveal from "./Reveal.jsx";
 import ScrambleText from "./ScrambleText.jsx";
 
+function StackGroup({ group }) {
+  return (
+    <div className="scene__stack-group">
+      <div className="scene__stack-label">{group.label}</div>
+      <div className="scene__stack-value">
+        {group.items.map((item, i) => (
+          <span key={i}>
+            {item}
+            {i < group.items.length - 1 && <br />}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectScene({
   id,
   sceneNumber,
@@ -67,16 +83,13 @@ export default function ProjectScene({
           {factsLayout === "inline" && stack?.length > 0 && (
             <div className="scene__stack scene__stack--inline">
               {stack.map((group) => (
-                <div className="scene__stack-group" key={group.label}>
-                  <span className="scene__stack-label">{group.label}</span>
-                  <span className="scene__stack-value">{group.items.join(" · ")}</span>
-                </div>
+                <StackGroup group={group} key={group.label} />
               ))}
             </div>
           )}
 
           {ctaHref && (
-            <div style={{ marginTop: 32, display: "flex", gap: 14 }}>
+            <div style={{ marginTop: 40, display: "flex", gap: 14 }}>
               <a className="btn" href={ctaHref} target={ctaHref.startsWith("http") ? "_blank" : undefined} rel={ctaHref.startsWith("http") ? "noreferrer" : undefined}>
                 <span className="btn__label">{ctaLabel}</span>
                 <span className="btn__tag">{ctaTag}</span>
@@ -87,17 +100,7 @@ export default function ProjectScene({
         {factsLayout === "column" && stack?.length > 0 && (
           <Reveal className="scene__stack">
             {stack.map((group) => (
-              <div className="scene__stack-group" key={group.label}>
-                <div className="scene__stack-label">{group.label}</div>
-                <div className="scene__stack-value">
-                  {group.items.map((item, i) => (
-                    <span key={i}>
-                      {item}
-                      {i < group.items.length - 1 && <br />}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <StackGroup group={group} key={group.label} />
             ))}
           </Reveal>
         )}

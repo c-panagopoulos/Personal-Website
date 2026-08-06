@@ -55,8 +55,8 @@ export default function App() {
         ctaTag="TAPSTUDY"
         ctaHref="#scene-01"
         stack={[
-          { label: "BUILT WITH", items: ["React 19", "Express", "PostgreSQL"] },
-          { label: "RUNS ON", items: ["Docker", "local Ollama"] },
+          { label: "ENGINEERING", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC read via Web NFC API"] },
+          { label: "CONSTRAINTS", items: ["Self-hosted, own hardware", "Local Ollama, no external API", "Single-user by design"] },
         ]}
       />
 
@@ -92,8 +92,8 @@ export default function App() {
         ctaTag="HERMES"
         ctaHref="#assistant"
         stack={[
-          { label: "BUILT WITH", items: ["Node", "Express", "PostgreSQL"] },
-          { label: "RUNS ON", items: ["Docker", "Hetzner", "n8n"] },
+          { label: "ENGINEERING", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "n8n → Salesforce escalation"] },
+          { label: "CONSTRAINTS", items: ["Self-hosted on Hetzner", "No hosted LLM API", "Escalates instead of guessing"] },
         ]}
       />
 

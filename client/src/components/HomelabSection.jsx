@@ -78,21 +78,29 @@ export default function HomelabSection() {
             plans my day from sleep and calendar data; another turns photos of handwritten notes into searchable
             cards. Running my own infrastructure taught me what production actually costs.
           </p>
-          <div className="facts--row" style={{ marginTop: 30 }}>
-            <div className="fact">
-              <div className="fact__label">HOST</div>
-              <div className="fact__value">Intel N100 · Linux</div>
+          <div className="scene__stack scene__stack--inline">
+            <div className="scene__stack-group">
+              <div className="scene__stack-label">ENGINEERING</div>
+              <div className="scene__stack-value">
+                Docker Compose, nine services
+                <br />
+                Tailscale mesh, zero open ports
+                <br />
+                n8n automations, daily use
+              </div>
             </div>
-            <div className="fact">
-              <div className="fact__label">ACCESS</div>
-              <div className="fact__value">Tailscale mesh</div>
-            </div>
-            <div className="fact">
-              <div className="fact__label">UPTIME</div>
-              <div className="fact__value">_ days</div>
+            <div className="scene__stack-group">
+              <div className="scene__stack-label">CONSTRAINTS</div>
+              <div className="scene__stack-value">
+                Single Intel N100
+                <br />
+                No open ports
+                <br />
+                Home network only
+              </div>
             </div>
           </div>
-          <div style={{ marginTop: 30 }}>
+          <div style={{ marginTop: 40 }}>
             <a className="btn" href="https://github.com/c-panagopoulos" target="_blank" rel="noreferrer">
               <span className="btn__label">GitHub</span>
               <span className="btn__tag">HOMELAB / COMPOSE</span>
