@@ -1,12 +1,17 @@
 :root {
-  /* Backgrounds — the only two surfaces the page ever tints with */
-  --bg: #37353e;
-  --surface: #44444e;
-  --surface-elevated: #4c4c56;
+  /* Backgrounds — a tight family of near-black warm-charcoal tones, each
+     only a couple of points apart, so consecutive sections read as scenes
+     of one story rather than distinct flat blocks. */
+  --bg: #242129;
+  --scene-2: #25222b;
+  --scene-3: #27242d;
+  --scene-4: #2a2731;
+  --surface: #2d2a35;
+  --surface-elevated: #35323d;
 
   /* Neutral borders — separate content, never colored */
-  --border: rgba(211, 218, 217, 0.08);
-  --border-strong: rgba(211, 218, 217, 0.14);
+  --border: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.09);
 
   /* Neutral shadows */
   --shadow-soft: rgba(0, 0, 0, 0.25);
@@ -428,10 +433,9 @@ button {
   flex-direction: column;
   gap: 9px;
   animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 .card:hover {
-  transform: translateY(-4px);
   border-color: var(--accent-border);
 }
 .card__head {
@@ -691,11 +695,13 @@ button {
 .scene--divider {
   padding-top: 88px;
   border-top: 1px solid var(--border);
-  background: var(--surface);
+  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0 2px, transparent 2px 26px),
+    radial-gradient(ellipse at top, var(--surface) 0%, var(--scene-3) 45%, var(--bg) 100%);
 }
 .hermes-evidence {
   padding: 0 0 40px;
-  background: var(--surface);
+  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0 2px, transparent 2px 26px),
+    radial-gradient(ellipse at top, var(--surface) 0%, var(--scene-3) 45%, var(--bg) 100%);
   border-bottom: 1px solid var(--border);
 }
 .scene__browser {
@@ -767,7 +773,7 @@ button {
   border-radius: 10px;
   border: 1px solid var(--border);
   background: linear-gradient(180deg, #18161a, #121114);
-  box-shadow: 0 30px 60px var(--shadow-strong);
+  box-shadow: 0 10px 24px var(--shadow-soft);
 }
 .terminal__bar {
   display: flex;
@@ -1056,7 +1062,8 @@ button {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--surface);
+  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0 2px, transparent 2px 26px),
+    radial-gradient(ellipse at top, var(--surface) 0%, var(--scene-4) 45%, var(--bg) 100%);
   border-top: 1px solid var(--border-strong);
   border-bottom: 1px solid var(--border-strong);
 }
@@ -1240,7 +1247,8 @@ button {
 /* --- Stack section --- */
 .stack-section {
   padding: 96px 56px;
-  background: var(--surface);
+  background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0 2px, transparent 2px 26px),
+    radial-gradient(ellipse at top, var(--surface-elevated) 0%, var(--surface) 45%, var(--scene-3) 100%);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -2067,7 +2075,7 @@ button {
   height: auto;
   border-radius: 10px;
   border: 1px solid var(--border-strong);
-  box-shadow: 0 30px 80px var(--shadow-strong);
+  box-shadow: 0 12px 32px var(--shadow-soft);
   cursor: default;
 }
 .motion-lightbox__caption {
