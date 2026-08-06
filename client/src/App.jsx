@@ -2,7 +2,6 @@ import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
 import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
-import TapStudyEvidence from "./components/TapStudyEvidence.jsx";
 import MotionCarousel from "./components/MotionCarousel.jsx";
 import AssistantSection from "./components/AssistantSection.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
@@ -54,12 +53,12 @@ export default function App() {
             "NFC-triggered — no app to open",
           ]}
           how="Auth, rate limiting and error handling shipped before the first session was ever logged — it was never a toy."
-          evidence={<TapStudyEvidence />}
           ctaLabel="Live demo"
           ctaTag="TAPSTUDY"
-          ctaHref="#scene-01"
+          ctaHref="https://tapstudy.cpanagopoulos.dev"
+          githubHref="https://github.com/c-panagopoulos/tapstudy"
           stack={[
-            { label: "ENGINEERING", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC read via Web NFC API"] },
+            { label: "ENGINEERING", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC read via Web NFC API", "Rate limiting + input validation"] },
             { label: "CONSTRAINTS", items: ["Self-hosted, own hardware", "Local Ollama, no external API", "Single-user by design"] },
           ]}
         />
@@ -82,7 +81,7 @@ export default function App() {
           sceneName="HERMES"
           showBrowserPreview={false}
           divider
-          factsLayout="inline"
+          factsLayout="column"
           title="A support chatbot that only answers what it can cite."
           body="Customers ask questions; the bot answers only from what it can cite — no hallucinated policy, no made-up support replies."
           proof={[
@@ -92,9 +91,10 @@ export default function App() {
             "Self-hosted on Hetzner",
           ]}
           how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. When a customer sounds dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
-          ctaLabel="Read more"
+          ctaLabel="Live demo"
           ctaTag="HERMES"
-          ctaHref="#assistant"
+          ctaHref="https://hermes.cpanagopoulos.dev"
+          githubHref="https://github.com/c-panagopoulos/hermes-ai"
           stack={[
             { label: "ENGINEERING", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "n8n → Salesforce escalation"] },
             { label: "CONSTRAINTS", items: ["Self-hosted on Hetzner", "No hosted LLM API", "Escalates instead of guessing"] },
