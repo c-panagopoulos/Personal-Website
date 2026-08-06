@@ -2,6 +2,8 @@ import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
 import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
+import TapStudyEvidence from "./components/TapStudyEvidence.jsx";
+import HermesEvidence from "./components/HermesEvidence.jsx";
 import MotionCarousel from "./components/MotionCarousel.jsx";
 import AssistantSection from "./components/AssistantSection.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
@@ -51,6 +53,7 @@ export default function App() {
           "NFC-triggered — no app to open",
         ]}
         how="Auth, rate limiting and error handling shipped before the first session was ever logged — it was never a toy."
+        evidence={<TapStudyEvidence />}
         ctaLabel="Live demo"
         ctaTag="TAPSTUDY"
         ctaHref="#scene-01"
@@ -88,6 +91,7 @@ export default function App() {
           "Self-hosted on Hetzner",
         ]}
         how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. When a customer sounds dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
+        evidence={<HermesEvidence />}
         ctaLabel="Read more"
         ctaTag="HERMES"
         ctaHref="#assistant"

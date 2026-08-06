@@ -28,6 +28,7 @@ export default function ProjectScene({
   proof,
   how,
   stack,
+  evidence,
   ctaLabel,
   ctaTag,
   ctaHref,
@@ -96,13 +97,22 @@ export default function ProjectScene({
               </a>
             </div>
           )}
+
+          {factsLayout === "inline" && evidence && (
+            <Reveal className="scene__evidence-wrap">{evidence}</Reveal>
+          )}
         </Reveal>
-        {factsLayout === "column" && stack?.length > 0 && (
-          <Reveal className="scene__stack">
-            {stack.map((group) => (
-              <StackGroup group={group} key={group.label} />
-            ))}
-          </Reveal>
+        {factsLayout === "column" && (evidence || stack?.length > 0) && (
+          <div className="scene__side">
+            {evidence && <Reveal>{evidence}</Reveal>}
+            {stack?.length > 0 && (
+              <Reveal className="scene__stack">
+                {stack.map((group) => (
+                  <StackGroup group={group} key={group.label} />
+                ))}
+              </Reveal>
+            )}
+          </div>
         )}
       </div>
     </div>

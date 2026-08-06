@@ -107,6 +107,26 @@ export default function HomelabSection() {
             </a>
           </div>
         </Reveal>
+
+        <Reveal className="scene__side">
+          <div className="evidence-panel">
+            <div className="evidence-panel__section">
+              <div className="evidence-panel__label">TOPOLOGY</div>
+              <div className="evidence-tree">
+                <span className="evidence-tree__root">Tailscale mesh</span>
+                {"\n"} └─ n10 · Intel N100
+                {CONTAINERS.map((c, i) => (
+                  <span key={c.id}>
+                    {"\n"}
+                    {"     "}
+                    {i < CONTAINERS.length - 1 ? "├─ " : "└─ "}
+                    {c.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </div>
   );
