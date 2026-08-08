@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
@@ -13,53 +12,9 @@ const CHIPS = [
   "What would you build next?",
 ];
 
-const DEMO_QUESTION = "Why pgvector over a managed vector DB?";
-const DEMO_ANSWER =
-  "Because I run everything on one Intel N100 with no managed services — pgvector rides inside the same Postgres I already use, so there's no extra system to operate or pay for.";
-const DEMO_SOURCES = [{ source: "hermes.md" }, { source: "homelab.md" }];
-
-// A scripted example turn using the real retrieval/thinking/typewriter visuals
-// so first-time visitors see the interaction before touching anything. Yields
-// immediately to a real conversation the moment one starts (shared with Hero).
-function useScriptedDemo(active) {
-  const [stage, setStage] = useState("idle"); // idle | turn | searching | sources | answer
-  const [answerDisplay, setAnswerDisplay] = useState("");
-  const timersRef = useRef([]);
-  const rafRef = useRef(null);
-
-  useEffect(() => {
-    if (!active) return undefined;
-    const at = (ms, fn) => timersRef.current.push(setTimeout(fn, ms));
-    at(2200, () => setStage("turn"));
-    at(2650, () => setStage("searching"));
-    at(3550, () => setStage("sources"));
-    at(4150, () => {
-      setStage("answer");
-      const start = performance.now();
-      const duration = 1600;
-      const tick = (now) => {
-        const progress = Math.min(1, (now - start) / duration);
-        setAnswerDisplay(DEMO_ANSWER.slice(0, Math.floor(progress * DEMO_ANSWER.length)));
-        if (progress < 1) rafRef.current = requestAnimationFrame(tick);
-      };
-      rafRef.current = requestAnimationFrame(tick);
-    });
-    return () => {
-      timersRef.current.forEach(clearTimeout);
-      timersRef.current = [];
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [active]);
-
-  return { stage, answerDisplay, done: answerDisplay === DEMO_ANSWER };
-}
-
 export default function AssistantSection() {
   const chat = useSharedChat();
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
-  const demo = useScriptedDemo(visible && !chat.open);
-
-  const showDemo = visible && !chat.open;
 
   return (
     <div id="assistant" className="assistant-section" ref={ref}>
@@ -146,22 +101,6 @@ export default function AssistantSection() {
                   </div>
                 )}
                 {chat.error && <p className="chat-bubble__text--muted">{chat.error}</p>}
-              </div>
-            )}
-            {showDemo && demo.stage !== "idle" && (
-              <div className="chat-turn">
-                <div className="chat-bubble--user">{DEMO_QUESTION}</div>
-                {demo.stage === "searching" && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-                {(demo.stage === "sources" || demo.stage === "answer") && <SourceChips sources={DEMO_SOURCES} />}
-                {demo.stage === "answer" && (
-                  <div className="chat-bubble--assistant">
-                    <div className="chat-bubble__avatar">cp</div>
-                    <p className="chat-bubble__text">
-                      {demo.answerDisplay}
-                      {!demo.done && <span className="caret">▍</span>}
-                    </p>
-                  </div>
-                )}
               </div>
             )}
           </div>
