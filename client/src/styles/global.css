@@ -1633,7 +1633,7 @@ button {
 
 /* --- Assistant intermission section --- */
 .assistant-section {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: var(--scene-4);
@@ -1711,7 +1711,7 @@ button {
 .assistant-section__main {
   padding: 48px 56px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 0;
   box-shadow: inset 0 0 90px 20px var(--scene-4);
 }
