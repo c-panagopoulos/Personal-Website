@@ -43,7 +43,7 @@ export function NavBody({ children, className = "", visible }) {
   return (
     <motion.div
       animate={{
-        boxShadow: visible ? "0 8px 32px rgba(2, 6, 16, 0.45), 0 0 0 1px rgba(211, 218, 217, 0.1)" : "none",
+        boxShadow: visible ? "0 14px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(211, 218, 217, 0.16)" : "none",
         width: visible ? "42%" : "100%",
         y: visible ? 14 : 0,
       }}
@@ -88,7 +88,7 @@ export function MobileNav({ children, className = "", visible }) {
   return (
     <motion.div
       animate={{
-        boxShadow: visible ? "0 8px 32px rgba(2, 6, 16, 0.45), 0 0 0 1px rgba(211, 218, 217, 0.1)" : "none",
+        boxShadow: visible ? "0 14px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(211, 218, 217, 0.16)" : "none",
         width: visible ? "94%" : "100%",
         borderRadius: visible ? "16px" : "22px",
         y: visible ? 14 : 0,

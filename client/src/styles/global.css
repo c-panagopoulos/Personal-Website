@@ -394,7 +394,7 @@ button {
 }
 .resizable-navbar__body--visible {
   background: #1e1c22;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-brighter);
 }
 /* Unshrunk (top of page): edge-to-edge instead of the shrunk state's
    centered, width-capped pill — logo hugs the left edge, links the right. */
@@ -472,7 +472,7 @@ button {
 }
 .resizable-navbar__mobile--visible {
   background: #1e1c22;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-brighter);
 }
 .resizable-navbar__mobile-header {
   display: flex;
