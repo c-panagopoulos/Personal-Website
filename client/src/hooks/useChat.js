@@ -3,6 +3,7 @@ import { streamChat } from "../lib/api.js";
 
 const emptyTurn = () => ({
   question: "",
+  origin: null,
   isRetrieving: false,
   isThinking: false,
   sources: [],
@@ -16,9 +17,15 @@ const emptyTurn = () => ({
 
 // A list of turns, not one flat turn — so a caller that wants the full
 // back-and-forth (AssistantSection's scrollable chat) can render `history`,
-// while a caller that only ever shows the latest exchange (Hero's inline
-// preview, StackSection's own instance) keeps working unchanged against the
-// spread-out "current turn" fields, which are just a view over the last item.
+// while a caller that only ever shows the latest exchange (StackSection's
+// own instance) keeps working unchanged against the spread-out "current
+// turn" fields, which are just a view over the last item. Each turn also
+// carries the `origin` string passed to `ask()` (or null) — Hero shares
+// this same instance with AssistantSection so a question asked in Hero
+// still shows up in the Intermission's full history, but Hero itself must
+// not reflect the globally-latest turn if that turn was actually started
+// from the Intermission's own composer — it looks up its own turn by
+// origin instead of trusting `current`.
 export function useChat() {
   const [turns, setTurns] = useState([]);
   const controllerRef = useRef(null);
@@ -33,13 +40,13 @@ export function useChat() {
   }, []);
 
   const ask = useCallback(
-    (question) => {
+    (question, origin = null) => {
       if (!question || !question.trim()) return;
       controllerRef.current?.abort();
       const controller = new AbortController();
       controllerRef.current = controller;
 
-      setTurns((prev) => [...prev, { ...emptyTurn(), question, isRetrieving: true }]);
+      setTurns((prev) => [...prev, { ...emptyTurn(), question, origin, isRetrieving: true }]);
 
       streamChat(
         question,

@@ -20,6 +20,14 @@ function randomScrambleChar() {
 
 export default function Hero() {
   const chat = useSharedChat();
+  // Hero shares one chat instance with the Intermission section (asking in
+  // Hero seeds Intermission's history, so "continue below" has something to
+  // show) — but that means the globally-latest turn isn't necessarily
+  // Hero's own. Look up the turn Hero itself started instead of trusting
+  // the shared "current turn" view, or a question asked from Intermission
+  // first would incorrectly show up here and lock this composer too.
+  const heroTurn = chat.history.find((t) => t.origin === "hero");
+  const open = Boolean(heroTurn);
   const [bylineDisplay, setBylineDisplay] = useState("");
 
   useEffect(() => {
@@ -83,26 +91,26 @@ export default function Hero() {
             <div style={{ animation: `composerPop 0.7s ${EASE} 2s both, glowPulse 4.2s ease-in-out 2s infinite` }}>
               <ChatInput
                 placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
-                onSend={chat.ask}
-                disabled={chat.open}
+                onSend={(question) => chat.ask(question, "hero")}
+                disabled={open}
               />
             </div>
 
-            <div className={"hero-answer" + (chat.open ? " hero-answer--open" : "")}>
+            <div className={"hero-answer" + (open ? " hero-answer--open" : "")}>
               <div className="hero-answer__clip">
                 <div className="hero-answer__inner">
                   <span className="hero-answer__label">ANSWER</span>
-                  {chat.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-                  {chat.showSources && <SourceChips sources={chat.sources} />}
-                  {chat.isThinking && <ThinkingDots note="sources locked — writing an answer" />}
-                  {chat.hasText && (
+                  {heroTurn?.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
+                  {heroTurn?.showSources && <SourceChips sources={heroTurn.sources} />}
+                  {heroTurn?.isThinking && <ThinkingDots note="sources locked — writing an answer" />}
+                  {heroTurn?.hasText && (
                     <p className="hero-answer__text">
-                      {chat.text}
-                      {!chat.done && <span className="caret">▍</span>}
+                      {heroTurn.text}
+                      {!heroTurn.done && <span className="caret">▍</span>}
                     </p>
                   )}
-                  {chat.error && <p className="chat-bubble__text--muted">{chat.error}</p>}
-                  {chat.done && (
+                  {heroTurn?.error && <p className="chat-bubble__text--muted">{heroTurn.error}</p>}
+                  {heroTurn?.done && (
                     <a className="hero-answer__jump" href="#assistant">
                       see exactly how it answered — continue below ↓
                     </a>
@@ -111,13 +119,13 @@ export default function Hero() {
               </div>
             </div>
 
-            {!chat.open && (
+            {!open && (
               <div className="chip-row">
                 {CHIPS.map((label, i) => (
                   <button
                     key={label}
                     className="chip"
-                    onClick={() => chat.ask(label)}
+                    onClick={() => chat.ask(label, "hero")}
                     style={{ animation: `chipPop 0.55s ${EASE} ${2.3 + i * 0.12}s both` }}
                   >
                     {label}

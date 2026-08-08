@@ -141,7 +141,7 @@ export default function AssistantSection() {
                   <button
                     key={label}
                     className="chip chip--ghost"
-                    onClick={() => chat.ask(label)}
+                    onClick={() => chat.ask(label, "assistant")}
                     style={anim(visible, "composerPop", 0.5, 1.8 + i * 0.05)}
                   >
                     {label}
@@ -149,7 +149,11 @@ export default function AssistantSection() {
                 ))}
               </div>
               <div style={anim(visible, "composerPop", 0.5, 1.95)}>
-                <ChatInput variant="assistant" placeholder="Ask anything about the work above…" onSend={chat.ask} />
+                <ChatInput
+                  variant="assistant"
+                  placeholder="Ask anything about the work above…"
+                  onSend={(question) => chat.ask(question, "assistant")}
+                />
               </div>
             </div>
           </div>
