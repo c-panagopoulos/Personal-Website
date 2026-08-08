@@ -50,7 +50,7 @@ export function NavBody({ children, className = "", visible }) {
       }}
       transition={{ type: "spring", stiffness: 200, damping: 50 }}
       style={{ minWidth: 460 }}
-      className={`resizable-navbar__body ${visible ? "resizable-navbar__body--visible" : ""} ${className}`}
+      className={`resizable-navbar__body ${visible ? "resizable-navbar__body--visible" : "resizable-navbar__body--wide"} ${className}`}
     >
       {/* Match the original: NavBody clones `visible` onto its own children
           too, so the logo/items can compact themselves as it shrinks. */}
@@ -65,7 +65,7 @@ export function NavItems({ items, className = "", onItemClick, visible }) {
   return (
     <motion.div
       onMouseLeave={() => setHovered(null)}
-      className={`resizable-navbar__items ${visible ? "resizable-navbar__items--compact" : ""} ${className}`}
+      className={`resizable-navbar__items ${visible ? "resizable-navbar__items--compact" : "resizable-navbar__items--edge"} ${className}`}
     >
       {items.map((item, idx) => (
         <a

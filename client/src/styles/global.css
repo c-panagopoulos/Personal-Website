@@ -396,6 +396,11 @@ button {
   background: rgba(30, 28, 34, 0.88);
   border: 1px solid var(--border);
 }
+/* Unshrunk (top of page): edge-to-edge instead of the shrunk state's
+   centered, width-capped pill — logo hugs the left edge, links the right. */
+.resizable-navbar__body--wide {
+  max-width: none;
+}
 .resizable-navbar__items {
   position: absolute;
   inset: 0;
@@ -425,6 +430,13 @@ button {
 }
 .resizable-navbar__items--compact .resizable-navbar__item {
   padding: 8px 11px;
+}
+/* Unshrunk: a normal flex child (not the shrunk state's absolute-centered
+   overlay) so .resizable-navbar__body's own space-between pushes it to the
+   far right, opposite the logo. */
+.resizable-navbar__items--edge {
+  position: static;
+  flex: none;
 }
 .resizable-navbar__item:hover {
   color: var(--accent);

@@ -26,12 +26,9 @@ function Brand({ visible }) {
         <span className="nav__bracket-edge">]</span>
       </span>
       {!visible && (
-        <>
-          <span className="nav__name">
-            panagopoulos<span>.dev</span>
-          </span>
-          <span className="nav__name caret">_</span>
-        </>
+        <span className="nav__name">
+          panagopoulos<span>.dev</span>
+        </span>
       )}
     </div>
   );
