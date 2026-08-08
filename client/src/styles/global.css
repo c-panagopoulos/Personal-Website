@@ -534,8 +534,11 @@ button {
   color: var(--text-quiet);
 }
 /* --- Hero --- */
+/* Gradient lives on .hero (not .hero__left) so it spans the full section
+   including the nav strip above .hero__left — otherwise the nav sits on
+   .hero's flat --bg with a hard seam where .hero__left's gradient begins. */
 .hero {
-  background: var(--bg);
+  background: radial-gradient(circle at 20% 20%, #3a3742, #201f24 75%);
 }
 
 .hero__left {
@@ -545,7 +548,6 @@ button {
   flex-direction: column;
   justify-content: center;
   padding: clamp(28px, 8vw, 96px) clamp(20px, 7vw, 88px);
-  background: radial-gradient(circle at 20% 20%, #3a3742, #201f24 75%);
   overflow: hidden;
 }
 .hero__dotgrid {
