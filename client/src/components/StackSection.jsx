@@ -1,7 +1,8 @@
-import Reveal from "./Reveal.jsx";
 import { useChat } from "../hooks/useChat.js";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
 import DotField from "./DotField.jsx";
+import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
+import { anim } from "../lib/anim.js";
 
 const STACK_GROUPS = [
   { label: "Frontend", items: ["React", "Vite"] },
@@ -13,33 +14,39 @@ const STACK_GROUPS = [
 
 export default function StackSection() {
   const chat = useChat();
+  const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
 
   return (
-    <div id="stack" className="stack-section">
+    <div id="stack" className="stack-section" ref={ref}>
       <div className="stack-section__inner">
-        <Reveal className="stack-section__head">
-          <span className="stack-section__head-label">STACK</span>
-          <span className="stack-section__head-rule" />
-          <span className="stack-section__head-note">EVERY ITEM IS A QUESTION</span>
-        </Reveal>
-        <p className="stack-section__lede">
+        <div className="stack-section__head">
+          <span className="stack-section__head-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
+            STACK
+          </span>
+          <span className="stack-section__head-rule" style={anim(visible, "ruleGrow", 0.55, 0.25)} />
+          <span className="stack-section__head-note" style={anim(visible, "rowRise", 0.4, 0.1)}>
+            EVERY ITEM IS A QUESTION
+          </span>
+        </div>
+        <p className="stack-section__lede" style={anim(visible, "sceneRiseBlur", 0.6, 0.5)}>
           No proficiency bars. Click anything below and the assistant defends the choice.
         </p>
 
         <div className="stack-panel">
-          <Reveal className="stack-groups">
-            {STACK_GROUPS.map((group) => (
-              <div className="stack-group" key={group.label}>
+          <div className="stack-groups">
+            {STACK_GROUPS.map((group, gi) => (
+              <div className="stack-group" key={group.label} style={anim(visible, "rowRise", 0.4, 0.9 + gi * 0.1)}>
                 <div className="stack-group__head">
                   <span className="stack-group__label">{group.label}</span>
                   <span className="stack-group__rule" />
                 </div>
                 <div className="stack-tags">
-                  {group.items.map((name) => (
+                  {group.items.map((name, ti) => (
                     <button
                       key={name}
                       className={"stack-tag" + (chat.question === `Why did you choose ${name}?` ? " stack-tag--active" : "")}
                       onClick={() => chat.ask(`Why did you choose ${name}?`)}
+                      style={anim(visible, "tagPop", 0.4, 1.0 + gi * 0.1 + ti * 0.06)}
                     >
                       {name}
                     </button>
@@ -47,11 +54,11 @@ export default function StackSection() {
                 </div>
               </div>
             ))}
-          </Reveal>
+          </div>
 
-          <div className="stack-panel__divider" />
+          <div className="stack-panel__divider" style={anim(visible, "dividerGrow", 0.8, 1.5)} />
 
-          <div className="stack-answer-panel shader-panel">
+          <div className="stack-answer-panel shader-panel" style={anim(visible, "panelFade", 0.6, 1.7, "ease")}>
             <div className="shader-panel__canvas">
               <DotField
                 dotRadius={2.2}
@@ -79,7 +86,7 @@ export default function StackSection() {
                 {chat.error && <p className="chat-bubble__text--muted">{chat.error}</p>}
               </div>
             ) : (
-              <div className="stack-answer-panel__idle">
+              <div className="stack-answer-panel__idle" style={anim(visible, "sceneRiseBlur", 0.5, 1.9)}>
                 <span className="stack-answer-panel__idle-label">STACK Q&amp;A</span>
                 <p>Click anything on the left to see why it&rsquo;s there.</p>
               </div>

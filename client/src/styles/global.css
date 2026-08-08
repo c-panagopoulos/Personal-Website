@@ -107,6 +107,221 @@ button {
   }
 }
 
+/* --- Cinematic scroll-triggered entrances (see lib/anim.js + useSceneTrigger) --- */
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes rowRise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes titleWipe {
+  0% {
+    opacity: 1;
+    filter: blur(7px);
+    clip-path: polygon(0% 0%, 0% 0%, -22% 100%, -22% 100%);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    clip-path: polygon(0% 0%, 130% 0%, 130% 100%, -22% 100%);
+  }
+}
+@keyframes sceneRiseBlur {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+@keyframes composerPop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes chipPop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes curtainL {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-101%);
+  }
+}
+@keyframes curtainR {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(101%);
+  }
+}
+@keyframes flareLine {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(166, 139, 139, 0), 0 24px 60px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(166, 139, 139, 0.06), 0 24px 60px rgba(0, 0, 0, 0.4);
+  }
+}
+@keyframes avatarSpring {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-12deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.08) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+@keyframes ruleGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes ctaPop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes tagPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes dividerGrow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes panelFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes terminalRise {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes treeRise {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes linkRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes zoomSettle {
+  0% {
+    opacity: 0;
+    filter: blur(22px);
+    transform: scale(1.7);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+@keyframes vignettePulse {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .caret {
   animation: caret 1s step-end infinite;
   color: var(--accent);
@@ -389,11 +604,37 @@ button {
   flex-direction: column;
   gap: 14px;
 }
-.hero__hint {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--text-quiet);
-  margin-top: 4px;
+/* position:fixed (not absolute-within-hero__left) so the curtain sweeps the
+   full viewport including the sticky navbar's strip, not just the hero body
+   below it. z-index sits above the navbar's own 40 so it covers it. */
+.hero__curtain {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 45;
+  width: 50%;
+  background: var(--bg);
+  pointer-events: none;
+}
+.hero__curtain--left {
+  left: 0;
+  animation: curtainL 0.9s cubic-bezier(0.65, 0, 0.15, 1) 0.15s both;
+}
+.hero__curtain--right {
+  right: 0;
+  animation: curtainR 0.9s cubic-bezier(0.65, 0, 0.15, 1) 0.15s both;
+}
+.hero__flare {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: 46;
+  background: linear-gradient(90deg, transparent, rgba(211, 218, 217, 0.7), transparent);
+  transform-origin: center;
+  animation: flareLine 0.7s ease-out 0.1s both;
+  pointer-events: none;
 }
 
 .hero__panel-label {

@@ -1,4 +1,3 @@
-import NavBar from "./components/NavBar.jsx";
 import Hero from "./components/Hero.jsx";
 import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
@@ -8,9 +7,10 @@ import HomelabSection from "./components/HomelabSection.jsx";
 import StackSection from "./components/StackSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
 import DockNav from "./components/DockNav.jsx";
-import Reveal from "./components/Reveal.jsx";
-import WipeReveal from "./components/WipeReveal.jsx";
+import StatementReveal from "./components/StatementReveal.jsx";
 import { ChatProvider } from "./context/ChatContext.jsx";
+import { useSceneTrigger } from "./hooks/useSceneTrigger.js";
+import { anim } from "./lib/anim.js";
 
 const HERMES_SLIDES = [
   { name: "chat-ui", label: "Chat UI", src: "/images/hermes-homepage.png" },
@@ -20,22 +20,15 @@ const HERMES_SLIDES = [
 ];
 
 export default function App() {
+  const [hermesEvidenceRef, hermesEvidenceVisible] = useSceneTrigger({ threshold: 0.15 });
+
   return (
     <ChatProvider>
       <div className="page">
-        <NavBar />
         <Hero />
 
         <div className="statement">
-          <WipeReveal as="h2" className="statement__text">
-            I kept forgetting
-            <br />
-            to log my study.
-            <br />
-            So I built
-            <br />
-            TapStudy.
-          </WipeReveal>
+          <StatementReveal lines={["I kept forgetting", "to log my study.", "So I built", "TapStudy."]} />
         </div>
 
         <MacbookScroll src="/images/dashboard.png" alt="tapstudy dashboard" />
@@ -64,15 +57,7 @@ export default function App() {
         />
 
         <div className="statement">
-          <WipeReveal as="h2" className="statement__text">
-            One started as
-            <br />
-            a personal itch.
-            <br />
-            The other had to
-            <br />
-            survive real customers.
-          </WipeReveal>
+          <StatementReveal lines={["One started as", "a personal itch.", "The other had to", "survive real customers."]} />
         </div>
 
         <ProjectScene
@@ -101,22 +86,14 @@ export default function App() {
           ]}
         />
 
-        <div className="hermes-evidence">
+        <div className="hermes-evidence" ref={hermesEvidenceRef} style={anim(hermesEvidenceVisible, "sceneRiseBlur", 0.6, 0)}>
           <MotionCarousel slides={HERMES_SLIDES} terminalHost="hermes.local" />
         </div>
 
         <AssistantSection />
 
         <div className="statement">
-          <WipeReveal as="h2" className="statement__text">
-            Software
-            <br />
-            fails.
-            <br />
-            So I built
-            <br />
-            my own infrastructure.
-          </WipeReveal>
+          <StatementReveal lines={["Software", "fails.", "So I built", "my own infrastructure."]} />
         </div>
 
         <HomelabSection />
@@ -124,10 +101,17 @@ export default function App() {
         <StackSection />
 
         <div className="statement" style={{ justifyContent: "center" }}>
-          <Reveal as="p" className="statement__text" style={{ fontSize: "3.2rem", textAlign: "center", margin: "0 auto" }}>
-            Years on a support line before I wrote a line of code. Most of debugging is still just{" "}
-            <span style={{ color: "var(--accent)" }}>listening</span>.
-          </Reveal>
+          <StatementReveal
+            as="p"
+            align="center"
+            style={{ fontSize: "3.2rem" }}
+            lines={[
+              "Years on a support line before I wrote a line of code.",
+              <>
+                Most of debugging is still just <span style={{ color: "var(--accent)" }}>listening</span>.
+              </>,
+            ]}
+          />
         </div>
 
         <ContactSection />

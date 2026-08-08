@@ -1,30 +1,48 @@
+import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
+import { anim } from "../lib/anim.js";
+
+const LINKS = [
+  { href: "mailto:hello@panagopoulos.dev", label: "EMAIL", value: "say hello →", external: false },
+  { href: "https://github.com/c-panagopoulos", label: "GITHUB", value: "the source →", external: true },
+  { href: "#contact", label: "LINKEDIN", value: "the formal one →", external: false },
+];
+
 export default function ContactSection() {
+  const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
+
   return (
-    <div id="contact" className="contact-section">
+    <div id="contact" className="contact-section" ref={ref}>
       <div className="contact-section__eyebrow">
-        <span className="contact-section__eyebrow-label">END CREDITS</span>
-        <span className="contact-section__eyebrow-rule" />
+        <span className="contact-section__eyebrow-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
+          END CREDITS
+        </span>
+        <span className="contact-section__eyebrow-rule" style={anim(visible, "ruleGrow", 0.6, 0.25)} />
       </div>
-      <h2 className="contact-section__title">Still scrolling?</h2>
-      <p className="contact-section__body">
+      <h2 className="contact-section__title" style={anim(visible, "titleWipe", 0.8, 0.6)}>
+        Still scrolling?
+      </h2>
+      <p className="contact-section__body" style={anim(visible, "sceneRiseBlur", 0.65, 1.3)}>
         A project idea, feedback on anything above, or an open role. I answer within a day.
       </p>
       <div className="contact-grid">
-        <a className="contact-link" href="mailto:hello@panagopoulos.dev">
-          <span className="contact-link__label">EMAIL</span>
-          <span className="contact-link__value">say hello →</span>
-        </a>
-        <a className="contact-link" href="https://github.com/c-panagopoulos" target="_blank" rel="noreferrer">
-          <span className="contact-link__label">GITHUB</span>
-          <span className="contact-link__value">the source →</span>
-        </a>
-        <a className="contact-link" href="#contact">
-          <span className="contact-link__label">LINKEDIN</span>
-          <span className="contact-link__value">the formal one →</span>
-        </a>
+        {LINKS.map((link, i) => (
+          <a
+            key={link.label}
+            className="contact-link"
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noreferrer" : undefined}
+            style={anim(visible, "linkRise", 0.5, 1.6 + i * 0.12)}
+          >
+            <span className="contact-link__label">{link.label}</span>
+            <span className="contact-link__value">{link.value}</span>
+          </a>
+        ))}
       </div>
       <div className="contact-footer">
-        <span className="contact-footer__copy">© CHARALAMPOS PANAGOPOULOS · ATHENS</span>
+        <span className="contact-footer__copy" style={anim(visible, "rowRise", 0.4, 2.1)}>
+          © CHARALAMPOS PANAGOPOULOS · ATHENS
+        </span>
       </div>
     </div>
   );

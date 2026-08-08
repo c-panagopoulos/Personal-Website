@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Terminal from "./Terminal.jsx";
-import ScrambleText from "./ScrambleText.jsx";
+import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
+import { anim } from "../lib/anim.js";
 
 const CONTAINERS = [
   { id: "307b9a57b4a7", image: "tapstudy:latest", status: "Up 38 seconds", name: "tapstudy" },
@@ -51,11 +52,12 @@ export default function HomelabSection() {
     if (window.innerWidth < 640) setIsMobile(true);
   }, []);
 
+  const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
   const dockerPsOutput = formatDockerPsOutput(CONTAINERS, { compact: isMobile });
 
   return (
-    <div id="homelab" className="homelab-section">
-      <div className="scene__browser homelab__terminal-wrap">
+    <div id="homelab" className="homelab-section" ref={ref}>
+      <div className="scene__browser homelab__terminal-wrap" style={anim(visible, "terminalRise", 0.7, 0.3)}>
         <Terminal
           username="xpanago@n10"
           commands={["docker ps"]}
@@ -69,17 +71,18 @@ export default function HomelabSection() {
       </Reveal>
 
       <div className="section-lead">
-        <Reveal className="section-lead__inner">
+        <div className="section-lead__inner">
           <h3 className="section-lead__title">
-            <ScrambleText lines={["If it breaks at 3am,", "I am the on-call."]} />
+            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.75, 1.8) }}>If it breaks at 3am,</span>
+            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.75, 1.95) }}>I am the on-call.</span>
           </h3>
-          <p className="section-lead__body">
+          <p className="section-lead__body" style={anim(visible, "sceneRiseBlur", 0.7, 2.3)}>
             An Intel N100 running my personal cloud: Nextcloud, n8n, Tailscale, no open ports. One automation
             plans my day from sleep and calendar data; another turns photos of handwritten notes into searchable
             cards. Running my own infrastructure taught me what production actually costs.
           </p>
           <div className="scene__stack scene__stack--inline">
-            <div className="scene__stack-group">
+            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.6)}>
               <div className="scene__stack-label">ENGINEERING</div>
               <div className="scene__stack-value">
                 Docker Compose, nine services
@@ -89,7 +92,7 @@ export default function HomelabSection() {
                 n8n automations, daily use
               </div>
             </div>
-            <div className="scene__stack-group">
+            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.7)}>
               <div className="scene__stack-label">CONSTRAINTS</div>
               <div className="scene__stack-value">
                 Single Intel N100
@@ -101,22 +104,34 @@ export default function HomelabSection() {
             </div>
           </div>
           <div style={{ marginTop: 40 }}>
-            <a className="btn" href="https://github.com/c-panagopoulos" target="_blank" rel="noreferrer">
+            <a
+              className="btn"
+              href="https://github.com/c-panagopoulos"
+              target="_blank"
+              rel="noreferrer"
+              style={anim(visible, "ctaPop", 0.5, 2.9)}
+            >
               <span className="btn__label">GitHub</span>
               <span className="btn__tag">HOMELAB / COMPOSE</span>
             </a>
           </div>
-        </Reveal>
+        </div>
 
-        <Reveal className="scene__side">
+        <div className="scene__side">
           <div className="evidence-panel">
             <div className="evidence-panel__section">
-              <div className="evidence-panel__label">TOPOLOGY</div>
+              <div className="evidence-panel__label" style={anim(visible, "rowRise", 0.4, 2.2)}>
+                TOPOLOGY
+              </div>
               <div className="evidence-tree">
-                <span className="evidence-tree__root">Tailscale mesh</span>
-                {"\n"} └─ n10 · Intel N100
+                <span className="evidence-tree__root" style={anim(visible, "treeRise", 0.35, 2.35)}>
+                  Tailscale mesh
+                </span>
+                <span style={anim(visible, "treeRise", 0.35, 2.43)}>
+                  {"\n"} └─ n10 · Intel N100
+                </span>
                 {CONTAINERS.map((c, i) => (
-                  <span key={c.id}>
+                  <span key={c.id} style={anim(visible, "treeRise", 0.35, 2.51 + i * 0.06)}>
                     {"\n"}
                     {"     "}
                     {i < CONTAINERS.length - 1 ? "├─ " : "└─ "}
@@ -126,7 +141,7 @@ export default function HomelabSection() {
               </div>
             </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </div>
   );

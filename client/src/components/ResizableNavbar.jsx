@@ -6,7 +6,7 @@
 import { useRef, useState, Children, isValidElement, cloneElement } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "motion/react";
 
-export function Navbar({ children, className = "" }) {
+export function Navbar({ children, className = "", style }) {
   const ref = useRef(null);
   const { scrollY } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const [visible, setVisible] = useState(false);
@@ -16,7 +16,7 @@ export function Navbar({ children, className = "" }) {
   });
 
   return (
-    <motion.div ref={ref} className={`resizable-navbar ${className}`}>
+    <motion.div ref={ref} className={`resizable-navbar ${className}`} style={style}>
       {Children.map(children, (child) => (isValidElement(child) ? cloneElement(child, { visible }) : child))}
     </motion.div>
   );

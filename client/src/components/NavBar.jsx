@@ -37,11 +37,11 @@ function Brand({ visible }) {
   );
 }
 
-export default function NavBar() {
+export default function NavBar({ style }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <Navbar>
+    <Navbar style={style}>
       <NavBody>
         <Brand />
         <NavItems items={LINKS} />
