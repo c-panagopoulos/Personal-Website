@@ -42,10 +42,14 @@ export function SourceChips({ sources }) {
   );
 }
 
+const COLLAPSED_SNIPPET_HEIGHT = "4.8em"; // ~3 lines at this text's line-height
+
 export function RetrievedChunks({ sources, threshold }) {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [overflowing, setOverflowing] = useState(false);
+  const [fullHeights, setFullHeights] = useState({});
   const listRef = useRef(null);
+  const snippetRefs = useRef([]);
 
   const checkOverflow = useCallback(() => {
     const el = listRef.current;
@@ -54,10 +58,27 @@ export function RetrievedChunks({ sources, threshold }) {
   }, []);
 
   // Re-check whenever the chunk list itself changes (new question) or an
-  // entry expands/collapses (changes the list's scrollHeight).
+  // entry expands/collapses (its clip height changes over the transition,
+  // so re-check once it's settled too).
   useEffect(() => {
     checkOverflow();
+    const timer = setTimeout(checkOverflow, 320);
+    return () => clearTimeout(timer);
   }, [sources, expandedIndex, checkOverflow]);
+
+  // Measure each chunk's true full-text height once up front (the snippet
+  // paragraph itself is never clamped — only its wrapper's max-height is —
+  // so scrollHeight always reports the real, unclipped height) so expand
+  // can animate to an exact target instead of a generic large max-height,
+  // which makes short chunks finish "growing" almost instantly instead of
+  // over the full transition.
+  useEffect(() => {
+    const next = {};
+    snippetRefs.current.forEach((el, i) => {
+      if (el) next[i] = el.scrollHeight;
+    });
+    setFullHeights(next);
+  }, [sources]);
 
   if (!sources?.length) return null;
 
@@ -92,9 +113,14 @@ export function RetrievedChunks({ sources, threshold }) {
               <div className="retrieved-chunk__bar">
                 <div className="retrieved-chunk__bar-fill" style={{ width: `${Math.round(src.score * 100)}%` }} />
               </div>
-              <p className={"retrieved-chunk__snippet" + (isExpanded ? " retrieved-chunk__snippet--full" : "")}>
-                {isExpanded ? src.content : src.snippet}
-              </p>
+              <div
+                className="retrieved-chunk__snippet-clip"
+                style={{ maxHeight: isExpanded ? `${fullHeights[i] ?? 2000}px` : COLLAPSED_SNIPPET_HEIGHT }}
+              >
+                <p className="retrieved-chunk__snippet" ref={(el) => (snippetRefs.current[i] = el)}>
+                  {src.content || src.snippet}
+                </p>
+              </div>
             </button>
           );
         })}

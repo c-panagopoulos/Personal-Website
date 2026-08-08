@@ -958,26 +958,23 @@ button {
 .retrieved-chunk--top .retrieved-chunk__bar-fill {
   background: var(--accent-text);
 }
+.retrieved-chunk__snippet-clip {
+  overflow: hidden;
+  transition: max-height 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
 .retrieved-chunk__snippet {
   margin: 6px 0 0;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   line-height: 1.55;
   color: rgba(211, 218, 217, 0.6);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  white-space: pre-wrap;
 }
 .retrieved-chunk--top .retrieved-chunk__snippet {
   color: rgba(211, 218, 217, 0.85);
 }
-.retrieved-chunk__snippet--full {
-  display: block;
-  -webkit-line-clamp: unset;
-  overflow: visible;
+.retrieved-chunk--expanded .retrieved-chunk__snippet {
   color: var(--text-soft);
-  white-space: pre-wrap;
 }
 .retrieved-chunks__threshold {
   flex-shrink: 0;
