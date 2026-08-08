@@ -393,7 +393,7 @@ button {
   }
 }
 .resizable-navbar__body--visible {
-  background: rgba(30, 28, 34, 0.88);
+  background: #1e1c22;
   border: 1px solid var(--border);
 }
 /* Unshrunk (top of page): edge-to-edge instead of the shrunk state's
@@ -471,7 +471,7 @@ button {
   }
 }
 .resizable-navbar__mobile--visible {
-  background: rgba(30, 28, 34, 0.92);
+  background: #1e1c22;
   border: 1px solid var(--border);
 }
 .resizable-navbar__mobile-header {
@@ -502,7 +502,7 @@ button {
   flex-direction: column;
   gap: 4px;
   border-radius: 14px;
-  background: rgba(30, 28, 34, 0.97);
+  background: #1e1c22;
   border: 1px solid var(--border);
   padding: 14px;
   box-shadow: 0 20px 50px var(--shadow-strong);

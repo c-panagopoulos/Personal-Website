@@ -43,7 +43,6 @@ export function NavBody({ children, className = "", visible }) {
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(12px)" : "none",
         boxShadow: visible ? "0 8px 32px rgba(2, 6, 16, 0.45), 0 0 0 1px rgba(211, 218, 217, 0.1)" : "none",
         width: visible ? "42%" : "100%",
         y: visible ? 14 : 0,
@@ -89,7 +88,6 @@ export function MobileNav({ children, className = "", visible }) {
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(12px)" : "none",
         boxShadow: visible ? "0 8px 32px rgba(2, 6, 16, 0.45), 0 0 0 1px rgba(211, 218, 217, 0.1)" : "none",
         width: visible ? "94%" : "100%",
         borderRadius: visible ? "16px" : "22px",
