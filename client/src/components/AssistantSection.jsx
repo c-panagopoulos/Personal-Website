@@ -7,7 +7,7 @@ import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
 const CHIPS = [
-  "Walk me through the RAG pipeline",
+  "How does this assistant retrieve information?",
   "What breaks most often in the homelab?",
   "Why pgvector over a managed vector DB?",
   "What would you build next?",
