@@ -29,7 +29,7 @@ router.post("/chat", async (req, res) => {
     const chunks = await retrieve(question);
     sseWrite(res, "sources", {
       threshold: MIN_SCORE,
-      chunks: chunks.map(({ source, score, snippet }) => ({ source, score, snippet })),
+      chunks: chunks.map(({ source, score, snippet, content }) => ({ source, score, snippet, content })),
     });
 
     const context = chunks.length

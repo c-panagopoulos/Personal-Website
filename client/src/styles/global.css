@@ -819,11 +819,24 @@ button {
   overflow-y: auto;
 }
 .retrieved-chunk {
+  display: block;
+  width: 100%;
+  text-align: left;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 10px;
   background: var(--surface);
+  font-family: inherit;
+  cursor: pointer;
   animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.retrieved-chunk:hover {
+  border-color: var(--border-strong);
+}
+.retrieved-chunk--expanded {
+  background: var(--surface-elevated);
+  border-color: var(--accent-border);
 }
 .retrieved-chunk__head {
   display: flex;
@@ -853,6 +866,13 @@ button {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.retrieved-chunk__snippet--full {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  color: var(--text-soft);
+  white-space: pre-wrap;
 }
 .retrieved-chunks__threshold {
   font-family: var(--font-mono);
