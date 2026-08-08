@@ -1553,6 +1553,10 @@ button {
   flex-direction: column;
   gap: 16px;
   max-width: 760px;
+  max-height: 480px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
 }
 .chat-turn {
   display: flex;

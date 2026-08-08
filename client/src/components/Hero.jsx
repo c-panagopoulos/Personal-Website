@@ -84,6 +84,7 @@ export default function Hero() {
               <ChatInput
                 placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
                 onSend={chat.ask}
+                disabled={chat.open}
               />
             </div>
 
@@ -110,18 +111,20 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="chip-row">
-              {CHIPS.map((label, i) => (
-                <button
-                  key={label}
-                  className="chip"
-                  onClick={() => chat.ask(label)}
-                  style={{ animation: `chipPop 0.55s ${EASE} ${2.3 + i * 0.12}s both` }}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+            {!chat.open && (
+              <div className="chip-row">
+                {CHIPS.map((label, i) => (
+                  <button
+                    key={label}
+                    className="chip"
+                    onClick={() => chat.ask(label)}
+                    style={{ animation: `chipPop 0.55s ${EASE} ${2.3 + i * 0.12}s both` }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

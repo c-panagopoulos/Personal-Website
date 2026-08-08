@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
@@ -12,9 +13,42 @@ const CHIPS = [
   "What would you build next?",
 ];
 
+function ChatTurn({ turn }) {
+  return (
+    <div className="chat-turn">
+      <div className="chat-bubble--user">{turn.question}</div>
+      {turn.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
+      {turn.showSources && <SourceChips sources={turn.sources} />}
+      {turn.isThinking && <ThinkingDots note="" />}
+      {turn.hasText && (
+        <div className="chat-bubble--assistant">
+          <div className="chat-bubble__avatar">cp</div>
+          <p className="chat-bubble__text">
+            {turn.text}
+            {!turn.done && <span className="caret">▍</span>}
+          </p>
+        </div>
+      )}
+      {turn.error && <p className="chat-bubble__text--muted">{turn.error}</p>}
+    </div>
+  );
+}
+
 export default function AssistantSection() {
   const chat = useSharedChat();
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
+  const threadRef = useRef(null);
+
+  // Scroll only the bounded .chat-thread container itself, not
+  // scrollIntoView — that walks up through every scrollable ancestor
+  // including the page itself, which yanks the whole viewport down to this
+  // section even when a question was asked from Hero's composer (Hero and
+  // this section share one chat instance, so every history change fires
+  // here regardless of which composer triggered it).
+  useEffect(() => {
+    const el = threadRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [chat.history]);
 
   return (
     <div id="assistant" className="assistant-section" ref={ref}>
@@ -84,25 +118,10 @@ export default function AssistantSection() {
             used, so you can catch it being wrong.
           </p>
 
-          <div className="chat-thread">
-            {chat.open && (
-              <div className="chat-turn">
-                <div className="chat-bubble--user">{chat.question}</div>
-                {chat.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-                {chat.showSources && <SourceChips sources={chat.sources} />}
-                {chat.isThinking && <ThinkingDots note="" />}
-                {chat.hasText && (
-                  <div className="chat-bubble--assistant">
-                    <div className="chat-bubble__avatar">cp</div>
-                    <p className="chat-bubble__text">
-                      {chat.text}
-                      {!chat.done && <span className="caret">▍</span>}
-                    </p>
-                  </div>
-                )}
-                {chat.error && <p className="chat-bubble__text--muted">{chat.error}</p>}
-              </div>
-            )}
+          <div className="chat-thread" ref={threadRef}>
+            {chat.history.map((turn, i) => (
+              <ChatTurn key={i} turn={turn} />
+            ))}
           </div>
 
           <div className="assistant-section__composer">

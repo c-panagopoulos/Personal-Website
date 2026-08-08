@@ -23,6 +23,7 @@ export default function ChatInput({ onSend, placeholder, disabled, variant = "he
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
+          disabled={disabled}
         />
         <button className="assistant-input__send" onClick={send} disabled={disabled}>
           ENTER
@@ -40,6 +41,7 @@ export default function ChatInput({ onSend, placeholder, disabled, variant = "he
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
+        disabled={disabled}
       />
       <button className="chat-input__send" onClick={send} disabled={disabled}>
         ↑
