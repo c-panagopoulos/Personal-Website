@@ -28,11 +28,14 @@ export function ThinkingDots({ note }) {
 
 export function SourceChips({ sources }) {
   if (!sources?.length) return null;
+  // Multiple retrieved chunks often come from the same file — one chip per
+  // unique source, not one per chunk.
+  const uniqueSources = [...new Set(sources.map((src) => src.source))];
   return (
     <div className="source-chips">
-      {sources.map((src) => (
-        <span className="source-chip" key={src.source}>
-          {src.source}
+      {uniqueSources.map((source) => (
+        <span className="source-chip" key={source}>
+          {source}
         </span>
       ))}
     </div>
