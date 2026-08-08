@@ -50,6 +50,7 @@ export default function Hero() {
 
   return (
     <div className="hero">
+      <div className="hero__backdrop" />
       <div className="hero__curtain hero__curtain--left" />
       <div className="hero__curtain hero__curtain--right" />
       <div className="hero__flare" />
