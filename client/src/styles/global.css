@@ -388,7 +388,7 @@ button {
   justify-content: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
 }
 @media (min-width: 1024px) {
   .resizable-navbar__items {
@@ -513,25 +513,24 @@ button {
   display: inline-flex;
   align-items: center;
   height: 30px;
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1;
 }
 .nav__bracket-edge {
-  color: var(--text-secondary);
+  color: var(--accent);
 }
 .nav__bracket-id {
-  color: var(--accent);
+  color: var(--text-primary);
   padding: 0 3px;
 }
 .nav__name {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-primary);
 }
 .nav__name span {
-  color: var(--text-quiet);
+  color: var(--text-tertiary);
 }
 /* --- Hero --- */
 /* Gradient lives on .hero (not .hero__left) so it spans the full section
