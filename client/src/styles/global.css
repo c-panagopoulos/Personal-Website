@@ -1,4 +1,9 @@
 :root {
+  /* Set (and kept in sync on resize) by ResizableNavbar.jsx from the nav's
+     real rendered height — this fallback only applies before that first
+     measurement lands. */
+  --nav-height: 64px;
+
   /* Backgrounds — a tight family of near-black warm-charcoal tones, each
      only a couple of points apart, so consecutive sections read as scenes
      of one story rather than distinct flat blocks. */
@@ -1633,7 +1638,7 @@ button {
 
 /* --- Assistant intermission section --- */
 .assistant-section {
-  height: 100vh;
+  height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
   background-color: var(--scene-4);

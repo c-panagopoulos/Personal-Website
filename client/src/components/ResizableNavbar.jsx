@@ -3,7 +3,7 @@
 // `motion` was already a real dependency (MotionCarousel), so the scroll-
 // driven shrink animation and the hover-highlight/mobile-menu transitions
 // are kept exactly as built: framer-motion springs, not CSS transitions.
-import { useRef, useState, Children, isValidElement, cloneElement } from "react";
+import { useEffect, useRef, useState, Children, isValidElement, cloneElement } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "motion/react";
 
 export function Navbar({ children, className = "", style }) {
@@ -14,6 +14,23 @@ export function Navbar({ children, className = "", style }) {
   useMotionValueEvent(scrollY, "change", (latest) => {
     setVisible(latest > 100);
   });
+
+  // Exposed as a CSS var so viewport-height sections (e.g. the assistant
+  // section) can subtract the nav's real rendered height instead of a fixed
+  // 100vh — the nav is sticky and still reserves its own flow space above
+  // any section below it, so a plain 100vh section plus this nav always
+  // overflows the viewport by exactly the nav's height.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const setNavHeightVar = () => {
+      document.documentElement.style.setProperty("--nav-height", `${el.getBoundingClientRect().height}px`);
+    };
+    setNavHeightVar();
+    const observer = new ResizeObserver(setNavHeightVar);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.div ref={ref} className={`resizable-navbar ${className}`} style={style}>
