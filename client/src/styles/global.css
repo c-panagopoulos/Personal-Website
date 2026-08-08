@@ -861,27 +861,39 @@ button {
   gap: 8px;
   margin-top: 10px;
   overflow-y: auto;
-  /* Style the real scrollbar instead of a separate custom rail element next
-     to it — a fake rail alongside a native `overflow-y: auto` scrollbar
-     just shows two scrollbars for one scroll area. */
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-text) rgba(255, 255, 255, 0.14);
-}
-.retrieved-chunks::-webkit-scrollbar {
-  width: 5px;
-}
-.retrieved-chunks::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 3px;
-}
-.retrieved-chunks::-webkit-scrollbar-thumb {
-  background: var(--accent-text);
-  border-radius: 2px;
 }
 .retrieved-chunks--overflowing {
   -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
 }
+
+/* Shared scrollbar treatment for the two scrollable lists in the assistant
+   section (retrieved chunks, chat thread) — thin and reserved at all times
+   (so nothing shifts width on hover), but the thumb only takes color when
+   the pointer is actually over the list, invisible otherwise. */
+.retrieved-chunks,
+.chat-thread {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.retrieved-chunks:hover,
+.chat-thread:hover {
+  scrollbar-color: var(--border-strong) transparent;
+}
+.retrieved-chunks::-webkit-scrollbar,
+.chat-thread::-webkit-scrollbar {
+  width: 5px;
+}
+.retrieved-chunks::-webkit-scrollbar-thumb,
+.chat-thread::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+}
+.retrieved-chunks:hover::-webkit-scrollbar-thumb,
+.chat-thread:hover::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+}
+
 .retrieved-chunk {
   display: block;
   width: 100%;
@@ -1748,8 +1760,6 @@ button {
   gap: 14px;
   overflow-y: auto;
   padding-right: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
 }
 .chat-row--user {
   display: flex;
