@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { retrieve } from "../rag/retrieve.js";
-import { chatStream } from "../ollama.js";
+import { chatStream } from "../groq.js";
 
 const router = Router();
 

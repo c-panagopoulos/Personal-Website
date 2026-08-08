@@ -8,23 +8,27 @@ import { embed } from "../ollama.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONTENT_DIR = path.join(__dirname, "..", "..", "content");
 
-function chunkText(text, maxLen = 700, overlap = 150) {
-  const paragraphs = text
-    .split(/\n\s*\n/)
-    .map((p) => p.trim())
-    .filter(Boolean);
-
+// Sentence-aware packing, ported from the real Hermes backend's chunker
+// (server/src/routes/chat.js's sibling project — private repo, read directly
+// off disk): splits on sentence boundaries so a chunk never gets cut
+// mid-sentence, and overlap is measured in words carried from the tail of
+// one chunk into the start of the next, not raw characters.
+function chunkText(text, chunkSize = 500, overlap = 50) {
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
   const chunks = [];
   let current = "";
-  for (const para of paragraphs) {
-    if (current && (current.length + para.length + 2) > maxLen) {
-      chunks.push(current);
-      current = current.slice(-overlap) + "\n\n" + para;
+
+  for (const sentence of sentences) {
+    if ((current + sentence).length > chunkSize && current.length > 0) {
+      chunks.push(current.trim());
+      const words = current.split(" ");
+      current = words.slice(-overlap).join(" ") + " " + sentence;
     } else {
-      current = current ? `${current}\n\n${para}` : para;
+      current += sentence;
     }
   }
-  if (current) chunks.push(current);
+
+  if (current.trim()) chunks.push(current.trim());
   return chunks;
 }
 

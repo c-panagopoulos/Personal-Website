@@ -44,7 +44,7 @@ export default function AssistantSection() {
           </div>
           <div style={anim(visible, "rowRise", 0.4, 0.5)}>
             <div className="assistant-section__sidebar-block-label">RETRIEVAL</div>
-            <div className="assistant-section__sidebar-block-value">pgvector · cosine · top-k 4</div>
+            <div className="assistant-section__sidebar-block-value">pgvector · cosine · top-k 6</div>
           </div>
           <div style={anim(visible, "rowRise", 0.4, 0.65)}>
             <div className="assistant-section__sidebar-block-label">MODEL</div>
