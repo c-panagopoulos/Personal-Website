@@ -15,22 +15,27 @@ const CHIPS = [
 
 function ChatTurn({ turn }) {
   return (
-    <div className="chat-turn">
-      <div className="chat-bubble--user">{turn.question}</div>
+    <>
+      <div className="chat-row--user">
+        <div className="chat-bubble--user">{turn.question}</div>
+      </div>
       {turn.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-      {turn.showSources && <SourceChips sources={turn.sources} />}
+      {turn.showSources && !turn.hasText && <SourceChips sources={turn.sources} />}
       {turn.isThinking && <ThinkingDots note="" />}
       {turn.hasText && (
-        <div className="chat-bubble--assistant">
+        <div className="chat-row--assistant">
           <div className="chat-bubble__avatar">cp</div>
-          <p className="chat-bubble__text">
-            {turn.text}
-            {!turn.done && <span className="caret">▍</span>}
-          </p>
+          <div className="chat-bubble__content">
+            {turn.showSources && <SourceChips sources={turn.sources} />}
+            <p className="chat-bubble__text">
+              {turn.text}
+              {!turn.done && <span className="caret">▍</span>}
+            </p>
+          </div>
         </div>
       )}
       {turn.error && <p className="chat-bubble__text--muted">{turn.error}</p>}
-    </div>
+    </>
   );
 }
 
@@ -64,7 +69,7 @@ export default function AssistantSection() {
       </div>
       <div className="assistant-section__body">
         <div className="assistant-section__sidebar">
-          <div style={anim(visible, "rowRise", 0.4, 0.35)}>
+          <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.35)}>
             <div className="assistant-section__sidebar-block-label">SOURCES INDEXED</div>
             <div className="assistant-section__sidebar-block-value">
               cv.md
@@ -76,24 +81,25 @@ export default function AssistantSection() {
               about-me.md
             </div>
           </div>
-          <div style={anim(visible, "rowRise", 0.4, 0.5)}>
-            <div className="assistant-section__sidebar-block-label">RETRIEVAL</div>
-            <div className="assistant-section__sidebar-block-value">pgvector · cosine · top-k 6</div>
-          </div>
-          <div style={anim(visible, "rowRise", 0.4, 0.65)}>
-            <div className="assistant-section__sidebar-block-label">MODEL</div>
-            <div className="assistant-section__sidebar-block-value">
-              ollama, local — embeddings
-              <br />
-              groq — chat
+          <div className="assistant-section__sidebar-row">
+            <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.5)}>
+              <div className="assistant-section__sidebar-block-label">RETRIEVAL</div>
+              <div className="assistant-section__sidebar-block-value">
+                pgvector
+                <br />
+                cosine · top-k 6
+              </div>
+            </div>
+            <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.65)}>
+              <div className="assistant-section__sidebar-block-label">MODEL</div>
+              <div className="assistant-section__sidebar-block-value">
+                ollama, local
+                <br />
+                groq — chat
+              </div>
             </div>
           </div>
-          {chat.sources.length > 0 && (
-            <div style={{ animation: "rowRise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both" }}>
-              <div className="assistant-section__sidebar-block-label">RETRIEVED CHUNKS</div>
-              <RetrievedChunks sources={chat.sources} threshold={chat.threshold} />
-            </div>
-          )}
+          {chat.sources.length > 0 && <RetrievedChunks sources={chat.sources} threshold={chat.threshold} />}
           <div className="assistant-section__sidebar-footnote" style={anim(visible, "rowRise", 0.4, 0.8)}>
             IT ONLY ANSWERS FROM
             <br />
@@ -113,38 +119,38 @@ export default function AssistantSection() {
               pulseColor="#9c8683"
             />
           </div>
-          <div className="shader-panel__fade shader-panel__fade--x" />
-          <div className="shader-panel__fade shader-panel__fade--y" />
-          <h3 className="assistant-section__title">
-            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1) }}>Stop reading about me.</span>
-            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1.15) }}>Ask instead.</span>
-          </h3>
-          <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
-            This is the same assistant I built for Hermes, pointed at my own repos and CV. It shows the chunks it
-            used, so you can catch it being wrong.
-          </p>
+          <div className="assistant-section__main-inner">
+            <h3 className="assistant-section__title">
+              <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1) }}>Stop reading about me.</span>
+              <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1.15) }}>Ask instead.</span>
+            </h3>
+            <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
+              This is the same assistant I built for Hermes, pointed at my own repos and CV. It shows the chunks it
+              used, so you can catch it being wrong.
+            </p>
 
-          <div className="chat-thread" ref={threadRef}>
-            {chat.history.map((turn, i) => (
-              <ChatTurn key={i} turn={turn} />
-            ))}
-          </div>
-
-          <div className="assistant-section__composer">
-            <div className="chip-row" style={{ marginBottom: 14 }}>
-              {CHIPS.map((label, i) => (
-                <button
-                  key={label}
-                  className="chip chip--ghost"
-                  onClick={() => chat.ask(label)}
-                  style={anim(visible, "composerPop", 0.5, 1.8 + i * 0.05)}
-                >
-                  {label}
-                </button>
+            <div className="chat-thread" ref={threadRef}>
+              {chat.history.map((turn, i) => (
+                <ChatTurn key={i} turn={turn} />
               ))}
             </div>
-            <div style={anim(visible, "composerPop", 0.5, 1.95)}>
-              <ChatInput variant="assistant" placeholder="Ask anything about the work above…" onSend={chat.ask} />
+
+            <div className="assistant-section__composer">
+              <div className="chip-row" style={{ marginBottom: 14 }}>
+                {CHIPS.map((label, i) => (
+                  <button
+                    key={label}
+                    className="chip chip--ghost"
+                    onClick={() => chat.ask(label)}
+                    style={anim(visible, "composerPop", 0.5, 1.8 + i * 0.05)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <div style={anim(visible, "composerPop", 0.5, 1.95)}>
+                <ChatInput variant="assistant" placeholder="Ask anything about the work above…" onSend={chat.ask} />
+              </div>
             </div>
           </div>
         </div>
