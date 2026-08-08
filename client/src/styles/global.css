@@ -2650,8 +2650,8 @@ button {
 .motion-carousel__controls {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: center;
+  gap: 16px;
 }
 .motion-carousel__arrow {
   width: 32px;
@@ -2745,4 +2745,31 @@ button {
 .motion-lightbox__close:hover {
   border-color: var(--accent-border);
   color: var(--accent);
+}
+.motion-lightbox__arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 201;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(28, 26, 30, 0.85);
+  border: 1px solid rgba(138, 145, 134, 0.22);
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.motion-lightbox__arrow:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+.motion-lightbox__arrow--left {
+  left: 20px;
+}
+.motion-lightbox__arrow--right {
+  right: 20px;
 }

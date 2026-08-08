@@ -48,7 +48,28 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", containScroll: false });
   const { selectedIndex, scrollSnaps, prevDisabled, nextDisabled, onDotClick, onPrev, onNext } =
     useEmblaControls(emblaApi);
-  const [zoomedSlide, setZoomedSlide] = useState(null);
+  const [zoomedIndex, setZoomedIndex] = useState(null);
+
+  // Lightbox prev/next also moves the underlying carousel, so closing it
+  // (or the "see exactly how it answered" style continuity elsewhere on the
+  // site) leaves the strip on whichever slide was last viewed, not wherever
+  // it happened to be when the lightbox was first opened.
+  const zoomPrev = useCallback(() => {
+    setZoomedIndex((i) => {
+      if (i == null) return i;
+      const next = (i - 1 + slides.length) % slides.length;
+      emblaApi?.scrollTo(next);
+      return next;
+    });
+  }, [emblaApi, slides.length]);
+  const zoomNext = useCallback(() => {
+    setZoomedIndex((i) => {
+      if (i == null) return i;
+      const next = (i + 1) % slides.length;
+      emblaApi?.scrollTo(next);
+      return next;
+    });
+  }, [emblaApi, slides.length]);
 
   const current = slides[selectedIndex] ?? slides[0];
   const fileNumber = String(selectedIndex + 1).padStart(2, "0");
@@ -74,8 +95,9 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
                   className="motion-carousel__slide"
                   initial={false}
                   animate={{ scale: isActive ? 1 : 0.9 }}
+                  whileHover={slide.src ? { scale: isActive ? 1.035 : 0.93 } : undefined}
                   transition={transition}
-                  onClick={() => slide.src && setZoomedSlide(slide)}
+                  onClick={() => slide.src && setZoomedIndex(index)}
                 >
                   {slide.src ? (
                     <>
@@ -125,16 +147,26 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
 
       <p className="motion-carousel__meta">{slides.map((s) => s.label).join(" · ")}</p>
 
-      <Lightbox slide={zoomedSlide} onClose={() => setZoomedSlide(null)} />
+      <Lightbox
+        slides={slides}
+        index={zoomedIndex}
+        onClose={() => setZoomedIndex(null)}
+        onPrev={zoomPrev}
+        onNext={zoomNext}
+      />
     </div>
   );
 }
 
-function Lightbox({ slide, onClose }) {
+function Lightbox({ slides, index, onClose, onPrev, onNext }) {
+  const slide = index != null ? slides[index] : null;
+
   useEffect(() => {
     if (!slide) return undefined;
     const onKey = (event) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "ArrowLeft") onPrev();
+      if (event.key === "ArrowRight") onNext();
     };
     window.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
@@ -143,7 +175,7 @@ function Lightbox({ slide, onClose }) {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
     };
-  }, [slide, onClose]);
+  }, [slide, onClose, onPrev, onNext]);
 
   return createPortal(
     <AnimatePresence>
@@ -167,7 +199,24 @@ function Lightbox({ slide, onClose }) {
           >
             <CloseIcon />
           </motion.button>
+          {slides.length > 1 && (
+            <motion.button
+              type="button"
+              className="motion-lightbox__arrow motion-lightbox__arrow--left"
+              onClick={(event) => {
+                event.stopPropagation();
+                onPrev();
+              }}
+              aria-label="Previous image"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <ChevronIcon direction="left" />
+            </motion.button>
+          )}
           <motion.img
+            key={slide.name}
             className="motion-lightbox__img"
             src={slide.src}
             alt={slide.label}
@@ -177,6 +226,22 @@ function Lightbox({ slide, onClose }) {
             transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.9 }}
             onClick={(event) => event.stopPropagation()}
           />
+          {slides.length > 1 && (
+            <motion.button
+              type="button"
+              className="motion-lightbox__arrow motion-lightbox__arrow--right"
+              onClick={(event) => {
+                event.stopPropagation();
+                onNext();
+              }}
+              aria-label="Next image"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <ChevronIcon direction="right" />
+            </motion.button>
+          )}
           <motion.span
             className="motion-lightbox__caption"
             initial={{ opacity: 0, y: 4 }}
