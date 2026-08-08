@@ -853,38 +853,34 @@ button {
   padding: 2px 7px;
   border-radius: 5px;
 }
-.retrieved-chunks-card__body {
+.retrieved-chunks {
   flex: 1;
   min-height: 0;
   display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-.retrieved-chunks {
-  flex: 1;
-  min-width: 0;
-  display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 10px;
   overflow-y: auto;
+  /* Style the real scrollbar instead of a separate custom rail element next
+     to it — a fake rail alongside a native `overflow-y: auto` scrollbar
+     just shows two scrollbars for one scroll area. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-text) rgba(255, 255, 255, 0.14);
+}
+.retrieved-chunks::-webkit-scrollbar {
+  width: 5px;
+}
+.retrieved-chunks::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+}
+.retrieved-chunks::-webkit-scrollbar-thumb {
+  background: var(--accent-text);
+  border-radius: 2px;
 }
 .retrieved-chunks--overflowing {
   -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
-}
-.retrieved-chunks__rail {
-  flex-shrink: 0;
-  width: 5px;
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: 3px;
-  position: relative;
-}
-.retrieved-chunks__rail-thumb {
-  position: absolute;
-  left: 0;
-  right: 0;
-  background: var(--accent-text);
-  border-radius: 2px;
 }
 .retrieved-chunk {
   display: block;
