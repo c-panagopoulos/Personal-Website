@@ -1,8 +1,8 @@
 import { pool } from "../db.js";
 import { embed } from "../ollama.js";
 
-const TOP_K = Number(process.env.RETRIEVAL_TOP_K || 4);
-const MIN_SCORE = 0.35;
+const TOP_K = Number(process.env.RETRIEVAL_TOP_K || 6);
+export const MIN_SCORE = 0.35;
 
 export async function retrieve(question) {
   const queryEmbedding = await embed(question);

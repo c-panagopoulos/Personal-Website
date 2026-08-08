@@ -6,6 +6,7 @@ const emptyTurn = () => ({
   isRetrieving: false,
   isThinking: false,
   sources: [],
+  threshold: null,
   showSources: false,
   text: "",
   hasText: false,
@@ -43,8 +44,8 @@ export function useChat() {
       streamChat(
         question,
         {
-          onSources: (sources) => {
-            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: true, sources, showSources: true }));
+          onSources: ({ chunks, threshold }) => {
+            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: true, sources: chunks, threshold, showSources: true }));
           },
           onToken: (token) => {
             updateLast((t) => ({ ...t, isThinking: false, hasText: true, text: t.text + token }));

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
-import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import { RetrievalStatus, RetrievedChunks, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
 import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
@@ -83,11 +83,17 @@ export default function AssistantSection() {
           <div style={anim(visible, "rowRise", 0.4, 0.65)}>
             <div className="assistant-section__sidebar-block-label">MODEL</div>
             <div className="assistant-section__sidebar-block-value">
-              ollama, local
+              ollama, local — embeddings
               <br />
-              embeddings + chat
+              groq — chat
             </div>
           </div>
+          {chat.sources.length > 0 && (
+            <div style={{ animation: "rowRise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both" }}>
+              <div className="assistant-section__sidebar-block-label">RETRIEVED CHUNKS</div>
+              <RetrievedChunks sources={chat.sources} threshold={chat.threshold} />
+            </div>
+          )}
           <div className="assistant-section__sidebar-footnote" style={anim(visible, "rowRise", 0.4, 0.8)}>
             IT ONLY ANSWERS FROM
             <br />

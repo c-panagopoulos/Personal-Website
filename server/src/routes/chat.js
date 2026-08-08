@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { retrieve } from "../rag/retrieve.js";
+import { retrieve, MIN_SCORE } from "../rag/retrieve.js";
 import { chatStream } from "../groq.js";
 
 const router = Router();
@@ -27,11 +27,10 @@ router.post("/chat", async (req, res) => {
 
   try {
     const chunks = await retrieve(question);
-    sseWrite(
-      res,
-      "sources",
-      chunks.map(({ source, score, snippet }) => ({ source, score, snippet }))
-    );
+    sseWrite(res, "sources", {
+      threshold: MIN_SCORE,
+      chunks: chunks.map(({ source, score, snippet }) => ({ source, score, snippet })),
+    });
 
     const context = chunks.length
       ? chunks.map((c) => `Source: ${c.source}\n${c.content}`).join("\n\n---\n\n")

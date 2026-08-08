@@ -810,6 +810,58 @@ button {
   animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
+.retrieved-chunks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 9px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.retrieved-chunk {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--surface);
+  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.retrieved-chunk__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.retrieved-chunk__source {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+.retrieved-chunk__score {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-quiet);
+}
+.retrieved-chunk__snippet {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  line-height: 1.55;
+  color: var(--text-tertiary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.retrieved-chunks__threshold {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  padding-top: 2px;
+}
+
 .chat-input {
   display: flex;
   align-items: center;
