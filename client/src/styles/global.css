@@ -534,19 +534,23 @@ button {
 }
 /* --- Hero --- */
 .hero {
+  position: relative;
   background: var(--bg);
 }
-/* position:fixed (not a background on .hero/.hero__left) so the gradient
-   spans the full viewport height including the nav strip, regardless of
-   NavBar's actual DOM position — NavBar lives at .page level (sibling of
-   Hero, not nested inside it) so it can stay sticky past the hero section,
-   which means .hero's own box no longer includes the nav strip above it. */
+/* Absolutely positioned within .hero (not position:fixed) so it scrolls
+   away naturally with the rest of the hero content — an earlier fixed,
+   viewport-height version stayed pinned behind every later section forever,
+   subtly tinting every section's own background site-wide. Extends upward
+   by a fixed offset (comfortably past the navbar's ~54-60px real height)
+   to still cover the nav strip above .hero, since NavBar lives at .page
+   level (sibling of Hero, not nested inside it) so it can stay sticky past
+   the hero section. */
 .hero__backdrop {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: -80px;
   left: 0;
   right: 0;
-  height: 100vh;
+  bottom: 0;
   z-index: 0;
   background: radial-gradient(circle at 20% 20%, #3a3742, #201f24 75%);
   pointer-events: none;
