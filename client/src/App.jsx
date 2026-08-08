@@ -1,4 +1,5 @@
 import Hero from "./components/Hero.jsx";
+import NavBar from "./components/NavBar.jsx";
 import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
 import MotionCarousel from "./components/MotionCarousel.jsx";
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <ChatProvider>
       <div className="page">
+        <NavBar style={{ animation: "heroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 1.15s both" }} />
         <Hero />
 
         <div className="statement">

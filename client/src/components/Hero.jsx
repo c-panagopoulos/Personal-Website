@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
-import NavBar from "./NavBar.jsx";
 
 const CHIPS = [
   "What's Hermes?",
@@ -51,8 +50,6 @@ export default function Hero() {
 
   return (
     <div className="hero">
-      <NavBar style={{ animation: `heroRise 0.7s ${EASE} 1.15s both` }} />
-
       <div className="hero__curtain hero__curtain--left" />
       <div className="hero__curtain hero__curtain--right" />
       <div className="hero__flare" />
