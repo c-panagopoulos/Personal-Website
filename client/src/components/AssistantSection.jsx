@@ -27,26 +27,26 @@ function ChatTurn({ turn }) {
   const [rowRef, visible] = useSceneTrigger({ threshold: 0.1 });
   return (
     <>
-      <div className="chat-row--user" ref={rowRef} style={anim(visible, "rise", 0.4)}>
+      <div className="chat-row--user" ref={rowRef} style={anim(visible, "rise", 0.8)}>
         <div className="chat-bubble--user">{turn.question}</div>
       </div>
       {turn.isRetrieving && (
-        <div style={anim(visible, "rise", 0.4)}>
+        <div style={anim(visible, "rise", 0.8)}>
           <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />
         </div>
       )}
       {turn.showSources && !turn.hasText && (
-        <div style={anim(visible, "rise", 0.4)}>
+        <div style={anim(visible, "rise", 0.8)}>
           <SourceChips sources={turn.sources} />
         </div>
       )}
       {turn.isThinking && (
-        <div style={anim(visible, "rise", 0.4)}>
+        <div style={anim(visible, "rise", 0.8)}>
           <ThinkingDots note="" />
         </div>
       )}
       {turn.hasText && (
-        <div className="chat-row--assistant" style={anim(visible, "rise", 0.4)}>
+        <div className="chat-row--assistant" style={anim(visible, "rise", 0.8)}>
           <div className="chat-bubble__avatar">cp</div>
           <div className="chat-bubble__content">
             {turn.showSources && <SourceChips sources={turn.sources} />}
