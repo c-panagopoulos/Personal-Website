@@ -73,12 +73,7 @@ const DotField = memo(
         canvas.style.height = `${h}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        sizeRef.current = {
-          w,
-          h,
-          offsetX: rect.left + window.scrollX,
-          offsetY: rect.top + window.scrollY,
-        };
+        sizeRef.current = { w, h };
 
         buildDots(w, h);
       }
@@ -104,9 +99,14 @@ const DotField = memo(
       }
 
       function onMouseMove(e) {
-        const s = sizeRef.current;
-        mouseRef.current.x = e.pageX - s.offsetX;
-        mouseRef.current.y = e.pageY - s.offsetY;
+        // Measured fresh (not cached from the last resize) so a layout
+        // shift elsewhere on the page — e.g. an element above this canvas
+        // changing height — can't leave the cursor mapping stale; resize
+        // and ResizeObserver only fire when this canvas's own box changes,
+        // not when its position on the page moves.
+        const rect = canvas.getBoundingClientRect();
+        mouseRef.current.x = e.clientX - rect.left;
+        mouseRef.current.y = e.clientY - rect.top;
       }
 
       function updateMouseSpeed() {
