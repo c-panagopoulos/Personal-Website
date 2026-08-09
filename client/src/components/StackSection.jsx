@@ -9,7 +9,7 @@ const STACK_GROUPS = [
   { label: "Backend", items: ["Express", "SSE"] },
   { label: "Data", items: ["Postgres", "pgvector"] },
   { label: "Infrastructure", items: ["Docker", "Linux", "Tailscale"] },
-  { label: "AI", items: ["Ollama", "RAG"] },
+  { label: "AI", items: ["Ollama"] },
 ];
 
 export default function StackSection() {
