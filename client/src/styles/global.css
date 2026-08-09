@@ -59,11 +59,20 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   font-family: var(--font-sans);
   color: var(--text-primary);
+  /* Safety net against horizontal overflow from transform-scaled entrance
+     animations (e.g. StatementReveal's zoomSettle starts at scale(1.7) while
+     paused/off-screen, which is wide enough to overflow narrow viewports
+     before the section has scrolled into view and settled). */
+  overflow-x: hidden;
 }
 
 a {
@@ -1039,6 +1048,7 @@ button {
   font-size: clamp(13px, 3.2vw, 14.5px);
   color: #d3dad9;
   padding: 6px 0;
+  text-overflow: ellipsis;
 }
 .chat-input__send {
   width: clamp(36px, 9vw, 42px);
@@ -1343,6 +1353,18 @@ button {
     display: none;
   }
 }
+@media (max-width: 420px) {
+  /* Even the compact docker-ps column format (image + status + name, no
+     container ID) runs up to ~52 characters on the longest row — too wide
+     for 0.68rem/14px padding on a phone-width screen, wrapping every row
+     onto two lines. Shrink further so it fits on one line. */
+  .terminal {
+    font-size: 0.54rem;
+  }
+  .terminal__body {
+    padding: 8px;
+  }
+}
 
 .scene__grid {
   display: grid;
@@ -1627,6 +1649,18 @@ button {
   border-top: 1px solid var(--border-strong);
   border-bottom: 1px solid var(--border-strong);
 }
+@media (max-width: 900px) {
+  /* At this width .assistant-section__body collapses sidebar + main into a
+     single stacked column, which needs more vertical room than one
+     viewport-height box can give it — a fixed height here just let the chat
+     thread and composer silently overflow below the section instead of
+     being clipped or scrollable. min-height lets the section grow with its
+     stacked content instead. */
+  .assistant-section {
+    height: auto;
+    min-height: calc(100vh - var(--nav-height));
+  }
+}
 .assistant-section__topbar {
   display: flex;
   align-items: center;
@@ -1845,6 +1879,7 @@ button {
 }
 .assistant-input__field {
   flex: 1;
+  min-width: 0;
   border: none;
   outline: none;
   background: transparent;
@@ -1852,6 +1887,7 @@ button {
   font-size: 0.82rem;
   color: var(--text-primary);
   padding: 6px 0;
+  text-overflow: ellipsis;
 }
 .assistant-input__send {
   width: 36px;
@@ -2151,10 +2187,6 @@ button {
   .dock {
     grid-template-columns: 40px minmax(0, 1fr) 40px;
   }
-  .dock__item--stack,
-  .dock__item--homelab {
-    display: none;
-  }
 }
 .dock__item {
   height: 44px;
@@ -2169,6 +2201,16 @@ button {
 .dock__item:hover {
   background: var(--accent-bg-hover);
   color: var(--accent);
+}
+/* Placed after the base .dock__item rule (same specificity) so this
+   actually wins the cascade — it previously sat before .dock__item in the
+   stylesheet and got silently overridden by it, leaving both icons visible
+   and wrapping the dock onto two rows on narrow phones. */
+@media (max-width: 560px) {
+  .dock__item--stack,
+  .dock__item--homelab {
+    display: none;
+  }
 }
 .dock__ask {
   height: 46px;
