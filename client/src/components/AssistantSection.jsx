@@ -13,20 +13,21 @@ const CHIPS = [
   "What would you build next?",
 ];
 
-function ChatTurn({ turn, visible }) {
-  // A plain always-on CSS animation here plays the instant a message is
-  // created — which, for a question asked from Hero, is the moment it's
-  // clicked, seconds before the visitor actually scrolls down to see this
-  // section. By the time it's on screen the animation already finished, so
-  // it reads as popping in with no effect at all. Gate it on the section's
-  // own scroll-trigger `visible` instead, same as everything else in it: if
-  // the section isn't in view yet, it stays frozen at its pre-animation
-  // state and plays once it actually scrolls into view; if the section is
-  // already in view (the normal case while actively chatting), it plays
-  // immediately on mount as expected.
+function ChatTurn({ turn }) {
+  // Each turn gets its own fresh scroll trigger instead of reusing the
+  // section's single `visible` flag — that flag is one-shot and, once
+  // fired, stays true forever, including on a visit where the visitor
+  // already scrolled past this section earlier (e.g. explored the whole
+  // page once) before coming back to Hero to ask a new question. In that
+  // case the section-level flag is already true, so a message asked from
+  // Hero would play its entrance animation immediately at click-time —
+  // off-screen, finished long before they scroll down to see it. A
+  // per-turn trigger checks this specific row's actual position the
+  // moment it's created, regardless of the section's scroll history.
+  const [rowRef, visible] = useSceneTrigger({ threshold: 0.1 });
   return (
     <>
-      <div className="chat-row--user" style={anim(visible, "rise", 0.4)}>
+      <div className="chat-row--user" ref={rowRef} style={anim(visible, "rise", 0.4)}>
         <div className="chat-bubble--user">{turn.question}</div>
       </div>
       {turn.isRetrieving && (
@@ -153,7 +154,7 @@ export default function AssistantSection() {
 
             <div className="chat-thread" ref={threadRef}>
               {chat.history.map((turn, i) => (
-                <ChatTurn key={i} turn={turn} visible={visible} />
+                <ChatTurn key={i} turn={turn} />
               ))}
             </div>
 
