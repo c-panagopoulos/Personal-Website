@@ -1029,7 +1029,7 @@ button {
   height: clamp(36px, 9vw, 42px);
   border: none;
   border-radius: 12px;
-  background: #a68b8b;
+  background: var(--text-primary);
   color: var(--bg);
   cursor: pointer;
   display: flex;
@@ -1039,7 +1039,7 @@ button {
   transition: transform 0.18s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.25s ease;
 }
 .chat-input__send:hover {
-  background: #c7b0b0;
+  background: #edefee;
   transform: translateY(-2px);
 }
 .chat-input__send:active {
@@ -1842,7 +1842,7 @@ button {
   height: 36px;
   flex-shrink: 0;
   border: none;
-  background: #a68b8b;
+  background: var(--text-primary);
   color: var(--bg);
   border-radius: 8px;
   cursor: pointer;
@@ -1852,7 +1852,7 @@ button {
   transition: background 0.25s ease;
 }
 .assistant-input__send:hover {
-  background: #c7b0b0;
+  background: #edefee;
 }
 .assistant-input__send:disabled {
   opacity: 0.5;
