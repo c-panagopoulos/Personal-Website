@@ -85,11 +85,11 @@ export default function HomelabSection() {
           <ul className="scene__proof">
             <li className="scene__proof-item" style={anim(visible, "rowRise", 0.4, 2.42)}>
               <span className="scene__proof-mark">›</span>
-              Daily routine is AI-drafted, but <b>calendar-safe by design</b>
+              <span>Daily routine is AI-drafted, but <b>calendar-safe by design</b></span>
             </li>
             <li className="scene__proof-item" style={anim(visible, "rowRise", 0.4, 2.5)}>
               <span className="scene__proof-mark">›</span>
-              Handwritten notes → Nextcloud Deck cards, <b>~9 minutes saved</b> per note (estimated)
+              <span>Handwritten notes → Nextcloud Deck cards, <b>~9 minutes saved</b> per note (estimated)</span>
             </li>
           </ul>
 
@@ -99,35 +99,13 @@ export default function HomelabSection() {
             writes through events the model itself marks enabled.
           </p>
 
-          <div className="scene__stack scene__stack--inline">
-            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.78)}>
-              <div className="scene__stack-label">ENGINEERING</div>
-              <div className="scene__stack-value">
-                Docker Compose, nine services
-                <br />
-                Tailscale mesh, zero open ports
-                <br />
-                n8n automations, daily use
-              </div>
-            </div>
-            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.88)}>
-              <div className="scene__stack-label">CONSTRAINTS</div>
-              <div className="scene__stack-value">
-                Single Intel N100
-                <br />
-                No open ports
-                <br />
-                Home network only
-              </div>
-            </div>
-          </div>
           <div style={{ marginTop: 40 }}>
             <a
               className="btn"
               href="https://github.com/c-panagopoulos"
               target="_blank"
               rel="noreferrer"
-              style={anim(visible, "ctaPop", 0.5, 3.05)}
+              style={anim(visible, "ctaPop", 0.5, 2.8)}
             >
               <span className="btn__label">GitHub</span>
               <span className="btn__tag">HOMELAB / COMPOSE</span>
@@ -136,26 +114,23 @@ export default function HomelabSection() {
         </div>
 
         <div className="scene__side">
-          <div className="evidence-panel">
-            <div className="evidence-panel__section">
-              <div className="evidence-panel__label" style={anim(visible, "rowRise", 0.4, 2.2)}>
-                TOPOLOGY
+          <div className="scene__stack-panel">
+            <div className="scene__stack scene__stack--grid">
+              <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.4)}>
+                <div className="scene__stack-label">Engineering</div>
+                <div className="scene__stack-value">
+                  <div>Docker Compose, nine services</div>
+                  <div>Tailscale mesh, zero open ports</div>
+                  <div>n8n automations, daily use</div>
+                </div>
               </div>
-              <div className="evidence-tree">
-                <span className="evidence-tree__root" style={anim(visible, "treeRise", 0.35, 2.35)}>
-                  Tailscale mesh
-                </span>
-                <span style={anim(visible, "treeRise", 0.35, 2.43)}>
-                  {"\n"} └─ n10 · Intel N100
-                </span>
-                {CONTAINERS.map((c, i) => (
-                  <span key={c.id} style={anim(visible, "treeRise", 0.35, 2.51 + i * 0.06)}>
-                    {"\n"}
-                    {"     "}
-                    {i < CONTAINERS.length - 1 ? "├─ " : "└─ "}
-                    {c.name}
-                  </span>
-                ))}
+              <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.5)}>
+                <div className="scene__stack-label">Constraints</div>
+                <div className="scene__stack-value">
+                  <div>Single Intel N100</div>
+                  <div>No open ports</div>
+                  <div>Home network only</div>
+                </div>
               </div>
             </div>
           </div>

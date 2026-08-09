@@ -91,7 +91,7 @@ export default function ProjectScene({
               {proof.map((item, i) => (
                 <li className="scene__proof-item" key={i} style={anim(visible, "rowRise", 0.4, 1.25 + i * 0.08)}>
                   <span className="scene__proof-mark">›</span>
-                  {item}
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
