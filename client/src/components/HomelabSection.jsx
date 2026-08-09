@@ -79,10 +79,28 @@ export default function HomelabSection() {
           <p className="section-lead__body" style={anim(visible, "sceneRiseBlur", 0.7, 2.3)}>
             An Intel N100 running my personal cloud: Nextcloud, n8n, Tailscale, no open ports. One automation
             plans my day from sleep and calendar data; another turns photos of handwritten notes into searchable
-            cards. Running my own infrastructure taught me what production actually costs.
+            cards. There is no DevOps team here. If it breaks, I fix it.
           </p>
+
+          <ul className="scene__proof">
+            <li className="scene__proof-item" style={anim(visible, "rowRise", 0.4, 2.42)}>
+              <span className="scene__proof-mark">›</span>
+              Daily routine is AI-drafted, but <b>calendar-safe by design</b>
+            </li>
+            <li className="scene__proof-item" style={anim(visible, "rowRise", 0.4, 2.5)}>
+              <span className="scene__proof-mark">›</span>
+              Handwritten notes → Nextcloud Deck cards, <b>~9 minutes saved</b> per note (estimated)
+            </li>
+          </ul>
+
+          <p className="scene__how" style={anim(visible, "sceneRiseBlur", 0.6, 2.62)}>
+            Sleep score comes in over an NFC tag — a handful of predefined values, sidestepping a proprietary
+            sleep-tracker API. The AI drafts the day's plan; the workflow validates the structure and only
+            writes through events the model itself marks enabled.
+          </p>
+
           <div className="scene__stack scene__stack--inline">
-            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.6)}>
+            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.78)}>
               <div className="scene__stack-label">ENGINEERING</div>
               <div className="scene__stack-value">
                 Docker Compose, nine services
@@ -92,7 +110,7 @@ export default function HomelabSection() {
                 n8n automations, daily use
               </div>
             </div>
-            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.7)}>
+            <div className="scene__stack-group" style={anim(visible, "rowRise", 0.45, 2.88)}>
               <div className="scene__stack-label">CONSTRAINTS</div>
               <div className="scene__stack-value">
                 Single Intel N100
@@ -109,7 +127,7 @@ export default function HomelabSection() {
               href="https://github.com/c-panagopoulos"
               target="_blank"
               rel="noreferrer"
-              style={anim(visible, "ctaPop", 0.5, 2.9)}
+              style={anim(visible, "ctaPop", 0.5, 3.05)}
             >
               <span className="btn__label">GitHub</span>
               <span className="btn__tag">HOMELAB / COMPOSE</span>
