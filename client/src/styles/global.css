@@ -1409,6 +1409,10 @@ button {
   color: var(--accent);
   flex-shrink: 0;
 }
+.scene__proof-item b {
+  font-weight: 600;
+  color: var(--text-brightest);
+}
 
 /* A single engineering note — what's technically interesting, quoted like an annotation. */
 .scene__how {
@@ -1416,10 +1420,11 @@ button {
   max-width: 580px;
   padding-left: 16px;
   border-left: 1px solid var(--border-strong);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  line-height: 1.75;
-  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(211, 218, 217, 0.7);
 }
 
 /* Metadata — last, quietest: terminal-style spec sheet, not a headline. */
@@ -1454,20 +1459,55 @@ button {
 .scene__stack--inline .scene__stack-group {
   text-align: left;
 }
-.scene__stack--grid,
-.scene__stack--inline.scene__stack--grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* Grid variant (TapStudy / Hermes side panel only — Homelab uses --inline
+   and is deliberately excluded from this boxed, higher-contrast treatment). */
+.scene__stack-panel {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 26px 26px 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+.scene__stack--grid {
+  display: flex;
+  flex-direction: column;
   gap: 0;
 }
 .scene__stack--grid .scene__stack-group {
   text-align: left;
-  padding: 14px 0 14px 18px;
-  border-left: 1px solid var(--border);
+  padding: 0;
+}
+.scene__stack--grid .scene__stack-group:not(:last-child) {
+  position: relative;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+.scene__stack--grid .scene__stack-group:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.1) 80%, transparent);
+}
+.scene__stack--grid .scene__stack-label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--accent-hover);
+  margin-bottom: 16px;
 }
 .scene__stack--grid .scene__stack-value {
-  margin-top: 7px;
-  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 2px;
+  margin-top: 0;
+  font-size: 0.76rem;
+  color: rgba(211, 218, 217, 0.78);
+  line-height: 1.5;
 }
 
 /* --- Evidence panels: project-specific proof, not screenshots or badges --- */
@@ -1666,6 +1706,25 @@ button {
   padding: 14px 22px;
   border-bottom: 1px solid var(--border);
   background: #1e1c22;
+}
+.assistant-breadcrumb {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+.assistant-breadcrumb__cp {
+  color: var(--accent);
+}
+.assistant-breadcrumb__sep {
+  color: rgba(211, 218, 217, 0.32);
+}
+.assistant-breadcrumb__current {
+  color: var(--text-primary);
+}
+.assistant-breadcrumb__status {
+  color: rgba(211, 218, 217, 0.55);
 }
 .assistant-section__body {
   flex: 1;
@@ -2118,7 +2177,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.58rem;
   letter-spacing: 0.2em;
-  color: var(--text-quiet);
+  color: var(--accent-hover);
 }
 .contact-link__value {
   font-size: 1.3rem;
@@ -2135,7 +2194,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.16em;
-  color: var(--text-faint);
+  color: rgba(211, 218, 217, 0.5);
 }
 
 /* --- Dock nav --- */

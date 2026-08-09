@@ -81,14 +81,13 @@ export default function AssistantSection() {
   return (
     <div id="assistant" className="assistant-section" ref={ref}>
       <div className="assistant-section__topbar" style={anim(visible, "rowRise", 0.4, 0.15)}>
-        <div className="nav__brand">
-          <div className="nav__mark" style={{ width: 26, height: 26 }}>
-            cp
-          </div>
-          <span className="nav__name">assistant</span>
-          <span className="hero__panel-label">· RETRIEVAL ONLINE</span>
+        <div className="assistant-breadcrumb">
+          <span className="assistant-breadcrumb__cp">cp</span>
+          <span className="assistant-breadcrumb__sep">/</span>
+          <span className="assistant-breadcrumb__current">assistant</span>
+          <span className="assistant-breadcrumb__sep">/</span>
+          <span className="assistant-breadcrumb__status">retrieval-online</span>
         </div>
-        <span className="hero__label">INTERMISSION</span>
       </div>
       <div className="assistant-section__body">
         <div className="assistant-section__sidebar">

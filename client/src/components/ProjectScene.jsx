@@ -20,10 +20,7 @@ function StackGroup({ group, style }) {
       <div className="scene__stack-label">{group.label}</div>
       <div className="scene__stack-value">
         {group.items.map((item, i) => (
-          <span key={i}>
-            {item}
-            {i < group.items.length - 1 && <br />}
-          </span>
+          <div key={i}>{item}</div>
         ))}
       </div>
     </div>
@@ -92,8 +89,8 @@ export default function ProjectScene({
           {proof?.length > 0 && (
             <ul className="scene__proof">
               {proof.map((item, i) => (
-                <li className="scene__proof-item" key={item} style={anim(visible, "rowRise", 0.4, 1.25 + i * 0.08)}>
-                  <span className="scene__proof-mark">✓</span>
+                <li className="scene__proof-item" key={i} style={anim(visible, "rowRise", 0.4, 1.25 + i * 0.08)}>
+                  <span className="scene__proof-mark">›</span>
                   {item}
                 </li>
               ))}
@@ -149,10 +146,12 @@ export default function ProjectScene({
           <div className="scene__side">
             {evidence && <Reveal>{evidence}</Reveal>}
             {stack?.length > 0 && (
-              <div className="scene__stack scene__stack--grid">
-                {stack.map((group, i) => (
-                  <StackGroup group={group} key={group.label} style={anim(visible, "rowRise", 0.45, 0.9 + i * 0.15)} />
-                ))}
+              <div className="scene__stack-panel">
+                <div className="scene__stack scene__stack--grid">
+                  {stack.map((group, i) => (
+                    <StackGroup group={group} key={group.label} style={anim(visible, "rowRise", 0.45, 0.9 + i * 0.15)} />
+                  ))}
+                </div>
               </div>
             )}
           </div>

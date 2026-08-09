@@ -2,9 +2,9 @@ import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
 const LINKS = [
-  { href: "mailto:hello@panagopoulos.dev", label: "EMAIL", value: "say hello →", external: false },
-  { href: "https://github.com/c-panagopoulos", label: "GITHUB", value: "the source →", external: true },
-  { href: "#contact", label: "LINKEDIN", value: "the formal one →", external: false },
+  { href: "mailto:hello@panagopoulos.dev", label: "EMAIL", value: "actually reads these", external: false },
+  { href: "https://github.com/c-panagopoulos", label: "GITHUB", value: "commit history and all", external: true },
+  { href: "#contact", label: "LINKEDIN", value: "if you must", external: false },
 ];
 
 export default function ContactSection() {

@@ -43,10 +43,10 @@ export default function App() {
           title="A study tracker you start by tapping your phone."
           body="I kept forgetting to log study sessions, so I stuck an NFC tag on my desk — tap to start, tap to stop. It's still the first thing I touch every morning."
           proof={[
-            "Ships as one Docker image — dev machine to homelab, no registry",
-            "NFC tag as a URL record — no app, nothing to open",
-            "AI insights are fact-checked before they're shown",
-            "Public demo is read-only, blocked at the backend",
+            <>Ships as <b>one Docker image</b> — dev machine to homelab, no registry</>,
+            <>NFC tag as a <b>URL record</b> — no app, nothing to open</>,
+            <>AI insights are <b>fact-checked</b> before they're shown</>,
+            <>Public demo is <b>read-only</b>, blocked at the backend</>,
           ]}
           how="A local model (qwen2.5:1.5b, via Ollama) writes the insight sentences, but never does the arithmetic — every number is computed in JavaScript first and the model's only job is turning an already-correct fact into a sentence. Prompt-injection attempts get caught and discarded by a fact-check pass afterward, not just prompted around."
           ctaLabel="Live demo"
@@ -54,8 +54,8 @@ export default function App() {
           ctaHref="https://tapstudy.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/tapstudy"
           stack={[
-            { label: "ENGINEERING", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC tag → URL record, no Web NFC API", "Global error handling, no leaked stack traces"] },
-            { label: "CONSTRAINTS", items: ["Self-hosted, own hardware", "Local Ollama, no external API", "Single-user by design"] },
+            { label: "Engineering", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC tag → URL record, no Web NFC API", "Global error handling, no leaked stack traces"] },
+            { label: "Constraints", items: ["Self-hosted, own hardware", "Local Ollama, no external API", "Single-user by design"] },
           ]}
         />
 
@@ -73,10 +73,10 @@ export default function App() {
           title="A support chatbot that only answers what it can cite."
           body="Customers ask questions; the bot answers only from what it can cite — no hallucinated policy, no made-up support replies."
           proof={[
-            "Answers only from cited sources",
-            "Token-streamed replies, sources attached",
-            "Resists prompt-injection and role-escalation attempts",
-            "JWT-protected admin panel — live stats + doc ingestion",
+            <>Answers only from <b>cited sources</b></>,
+            <><b>Token-streamed</b> replies, sources attached</>,
+            <>Resists <b>prompt-injection</b> and role-escalation attempts</>,
+            <><b>JWT-protected</b> admin panel — live stats + doc ingestion</>,
           ]}
           how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. A message matching escalation keywords — a lawyer, a formal complaint — opens a case for a human agent through a configurable webhook, instead of letting the bot keep guessing."
           ctaLabel="Live demo"
@@ -84,8 +84,8 @@ export default function App() {
           ctaHref="https://hermes.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/hermes-ai"
           stack={[
-            { label: "ENGINEERING", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "JWT + bcrypt admin auth", "n8n escalation webhook"] },
-            { label: "CONSTRAINTS", items: ["Self-hosted on Hetzner", "Groq in prod, Ollama in dev", "Escalates instead of guessing"] },
+            { label: "Engineering", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "JWT + bcrypt admin auth", "n8n escalation webhook"] },
+            { label: "Constraints", items: ["Self-hosted on Hetzner", "Groq in prod, Ollama in dev", "Escalates instead of guessing"] },
           ]}
         />
 
