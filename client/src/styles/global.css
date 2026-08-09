@@ -779,7 +779,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 .retrieval-status__chips {
   display: flex;
@@ -804,7 +803,6 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 .thinking-dots__row {
   display: flex;
@@ -1776,13 +1774,11 @@ button {
 .chat-row--user {
   display: flex;
   justify-content: flex-end;
-  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 .chat-row--assistant {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 .chat-bubble--user {
   max-width: 80%;

@@ -13,17 +13,39 @@ const CHIPS = [
   "What would you build next?",
 ];
 
-function ChatTurn({ turn }) {
+function ChatTurn({ turn, visible }) {
+  // A plain always-on CSS animation here plays the instant a message is
+  // created — which, for a question asked from Hero, is the moment it's
+  // clicked, seconds before the visitor actually scrolls down to see this
+  // section. By the time it's on screen the animation already finished, so
+  // it reads as popping in with no effect at all. Gate it on the section's
+  // own scroll-trigger `visible` instead, same as everything else in it: if
+  // the section isn't in view yet, it stays frozen at its pre-animation
+  // state and plays once it actually scrolls into view; if the section is
+  // already in view (the normal case while actively chatting), it plays
+  // immediately on mount as expected.
   return (
     <>
-      <div className="chat-row--user">
+      <div className="chat-row--user" style={anim(visible, "rise", 0.4)}>
         <div className="chat-bubble--user">{turn.question}</div>
       </div>
-      {turn.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-      {turn.showSources && !turn.hasText && <SourceChips sources={turn.sources} />}
-      {turn.isThinking && <ThinkingDots note="" />}
+      {turn.isRetrieving && (
+        <div style={anim(visible, "rise", 0.4)}>
+          <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />
+        </div>
+      )}
+      {turn.showSources && !turn.hasText && (
+        <div style={anim(visible, "rise", 0.4)}>
+          <SourceChips sources={turn.sources} />
+        </div>
+      )}
+      {turn.isThinking && (
+        <div style={anim(visible, "rise", 0.4)}>
+          <ThinkingDots note="" />
+        </div>
+      )}
       {turn.hasText && (
-        <div className="chat-row--assistant">
+        <div className="chat-row--assistant" style={anim(visible, "rise", 0.4)}>
           <div className="chat-bubble__avatar">cp</div>
           <div className="chat-bubble__content">
             {turn.showSources && <SourceChips sources={turn.sources} />}
@@ -131,7 +153,7 @@ export default function AssistantSection() {
 
             <div className="chat-thread" ref={threadRef}>
               {chat.history.map((turn, i) => (
-                <ChatTurn key={i} turn={turn} />
+                <ChatTurn key={i} turn={turn} visible={visible} />
               ))}
             </div>
 
