@@ -113,9 +113,9 @@ export default function Terminal({
   outputs = {},
   username = "guest",
   className = "",
-  typingSpeed = 50,
+  typingSpeed = 32,
   delayBetweenCommands = 800,
-  initialDelay = 500,
+  initialDelay = 320,
 }) {
   const containerRef = useRef(null);
   const contentRef = useRef(null);
@@ -172,13 +172,13 @@ export default function Terminal({
       const t = setTimeout(() => {
         setLines((prev) => [...prev, { type: "output", content: currentOutputs[outputIdx] }]);
         setOutputIdx((i) => i + 1);
-      }, 150);
+      }, 90);
       return () => clearTimeout(t);
     }
     if (outputIdx >= currentOutputs.length) {
       const t = setTimeout(() => {
         setPhase(isLastCommand ? "done" : "pausing");
-      }, 300);
+      }, 170);
       return () => clearTimeout(t);
     }
     return undefined;

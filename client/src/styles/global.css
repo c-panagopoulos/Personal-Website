@@ -1190,18 +1190,18 @@ button {
 /* --- Terminal (Aceternity "Terminal", restyled) --- */
 .terminal {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1040px;
   margin: 0 auto;
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: 1.02rem;
 }
 .homelab-section {
   background-color: var(--bg);
   background-image: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 34px);
 }
 .homelab__terminal-wrap {
-  padding-top: 56px;
-  padding-bottom: 56px;
+  padding-top: 120px;
+  padding-bottom: 64px;
 }
 .terminal__frame {
   overflow: hidden;
@@ -1248,7 +1248,7 @@ button {
   width: 52px;
 }
 .terminal__body {
-  height: 420px;
+  max-height: 420px;
   overflow-y: auto;
   padding: 22px 24px;
   scrollbar-width: none;
@@ -1320,7 +1320,7 @@ button {
     font-size: 0.68rem;
   }
   .terminal__body {
-    height: 300px;
+    max-height: 300px;
     padding: 14px;
   }
   .terminal__bar-spacer {
