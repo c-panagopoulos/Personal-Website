@@ -54,16 +54,13 @@ export default function MacbookScroll({ src, alt, title }) {
 
   const scaleX = interpolate(progress, [0, 0.3], [1.2, isMobile ? 1 : 1.5]);
   const scaleY = interpolate(progress, [0, 0.3], [0.6, isMobile ? 1 : 1.5]);
-  // The original component's translateY (0-1500px) is tuned for a much taller
-  // scroll rig than ours and drags the screen far past the keyboard/base by
-  // the time it's "open" — keep it small so the screen stays docked above
-  // the base instead of overshooting into the next section.
-  const translateY = interpolate(progress, [0, 0.3], [0, 40]);
+  const translateY = interpolate(progress, [0, 1], [0, 1500]);
   const rotate = interpolate(progress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTranslate = interpolate(progress, [0, 0.3], [0, 100]);
   const textOpacity = interpolate(progress, [0, 0.2], [1, 0]);
 
   return (
+    <div className="macbook-scroll-wrap">
     <div ref={ref} className="macbook-scroll">
       <h2
         className="macbook-scroll__title"
@@ -125,6 +122,7 @@ export default function MacbookScroll({ src, alt, title }) {
         </div>
         <div className="macbook-scroll__chin" />
       </div>
+    </div>
     </div>
   );
 }
