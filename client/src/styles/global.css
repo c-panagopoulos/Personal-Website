@@ -588,7 +588,13 @@ button {
 
 .hero__left {
   position: relative;
-  min-height: 100vh;
+  /* Not a plain 100vh — the sticky nav lives outside .hero (a sibling in
+     App.jsx, so it can stay sticky past the hero section) and still
+     reserves its own flow space above it, so a full 100vh box here always
+     extends past the visible viewport by the nav's height. That pushes the
+     vertically-centered content down off-center within the box that's
+     actually visible. */
+  min-height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
   justify-content: center;
