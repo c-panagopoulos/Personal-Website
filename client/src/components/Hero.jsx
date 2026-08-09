@@ -7,15 +7,49 @@ const CHIPS = [
   "What's Hermes?",
   "Tell me about tapstudy",
   "Why Ollama instead of a hosted API?",
-  "Are you open to opportunities?",
+  "Am I a fit for a junior role?",
 ];
 
-const BYLINE = "CHARALAMPOS PANAGOPOULOS · FULL-STACK";
+const NAME_LINE = "CHARALAMPOS PANAGOPOULOS";
+const ROLE_LINE = "JUNIOR FULL-STACK SOFTWARE ENGINEER";
 const SCRAMBLE_CHARS = "!<>-_\\/[]{}=+*^?#$%&";
 const EASE = "cubic-bezier(0.2, 0.7, 0.2, 1)";
 
 function randomScrambleChar() {
   return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+}
+
+// Reveals `text` by resolving random scramble characters into the real
+// string over `duration`ms, starting `delay`ms after mount — used to give
+// the byline's two lines their own independent, staggered reveal.
+function useScramble(text, delay, duration) {
+  const [display, setDisplay] = useState("");
+
+  useEffect(() => {
+    let raf;
+    const start = performance.now();
+    const tick = (now) => {
+      const elapsed = now - start - delay;
+      if (elapsed < 0) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      const progress = Math.min(1, elapsed / duration);
+      const revealCount = Math.floor(progress * text.length);
+      let out = "";
+      for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        out += ch === " " ? ch : i < revealCount ? ch : randomScrambleChar();
+      }
+      setDisplay(out);
+      if (progress < 1) raf = requestAnimationFrame(tick);
+      else setDisplay(text);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [text, delay, duration]);
+
+  return display;
 }
 
 export default function Hero() {
@@ -28,33 +62,8 @@ export default function Hero() {
   // first would incorrectly show up here and lock this composer too.
   const heroTurn = chat.history.find((t) => t.origin === "hero");
   const open = Boolean(heroTurn);
-  const [bylineDisplay, setBylineDisplay] = useState("");
-
-  useEffect(() => {
-    let raf;
-    const start = performance.now();
-    const delay = 550;
-    const duration = 850;
-    const tick = (now) => {
-      const elapsed = now - start - delay;
-      if (elapsed < 0) {
-        raf = requestAnimationFrame(tick);
-        return;
-      }
-      const progress = Math.min(1, elapsed / duration);
-      const revealCount = Math.floor(progress * BYLINE.length);
-      let out = "";
-      for (let i = 0; i < BYLINE.length; i++) {
-        const ch = BYLINE[i];
-        out += ch === " " || ch === "·" ? ch : i < revealCount ? ch : randomScrambleChar();
-      }
-      setBylineDisplay(out);
-      if (progress < 1) raf = requestAnimationFrame(tick);
-      else setBylineDisplay(BYLINE);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
+  const nameDisplay = useScramble(NAME_LINE, 550, 650);
+  const roleDisplay = useScramble(ROLE_LINE, 750, 750);
 
   return (
     <div className="hero">
@@ -74,8 +83,13 @@ export default function Hero() {
               alt="Charalampos"
               style={{ animation: "avatarSpring 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both" }}
             />
-            <span className="hero__label" style={{ whiteSpace: "pre", minWidth: 1 }}>
-              {bylineDisplay || " "}
+            <span className="hero__label-group">
+              <span className="hero__label" style={{ whiteSpace: "pre", minWidth: 1 }}>
+                {nameDisplay || " "}
+              </span>
+              <span className="hero__label hero__label--muted" style={{ whiteSpace: "pre", minWidth: 1 }}>
+                {roleDisplay || " "}
+              </span>
             </span>
           </div>
           <h1 className="hero__title">
@@ -84,7 +98,11 @@ export default function Hero() {
             <span style={{ display: "block", animation: `titleWipe 0.8s ${EASE} 1.3s both` }}>to exist.</span>
           </h1>
           <p className="hero__subtitle" style={{ animation: `sceneRiseBlur 0.8s ${EASE} 1.7s both` }}>
-            Ask the assistant below anything about the work that follows — it only answers from my repos and CV.
+            I build full-stack applications, AI tools, and the infrastructure behind them - usually to solve a
+            problem I actually have.
+          </p>
+          <p className="hero__status" style={{ animation: `sceneRiseBlur 0.6s ${EASE} 1.85s both` }}>
+            OPEN TO JUNIOR SOFTWARE ENGINEERING ROLES
           </p>
 
           <div className="hero__interact">
@@ -112,7 +130,7 @@ export default function Hero() {
                   {heroTurn?.error && <p className="chat-bubble__text--muted">{heroTurn.error}</p>}
                   {heroTurn?.done && (
                     <a className="hero-answer__jump" href="#assistant">
-                      see exactly how it answered — continue below ↓
+                      see exactly how it answered - continue below ↓
                     </a>
                   )}
                 </div>
