@@ -43,17 +43,18 @@ export default function App() {
           title="A study tracker you start by tapping your phone."
           body="I kept forgetting to log study sessions, so I stuck an NFC tag on my desk — tap to start, tap to stop. It's still the first thing I touch every morning."
           proof={[
-            "Running every morning for two years",
-            "Single Docker container, own hardware",
-            "NFC-triggered — no app to open",
+            "Ships as one Docker image — dev machine to homelab, no registry",
+            "NFC tag as a URL record — no app, nothing to open",
+            "AI insights are fact-checked before they're shown",
+            "Public demo is read-only, blocked at the backend",
           ]}
-          how="Auth, rate limiting and error handling shipped before the first session was ever logged — it was never a toy."
+          how="A local model (qwen2.5:1.5b, via Ollama) writes the insight sentences, but never does the arithmetic — every number is computed in JavaScript first and the model's only job is turning an already-correct fact into a sentence. Prompt-injection attempts get caught and discarded by a fact-check pass afterward, not just prompted around."
           ctaLabel="Live demo"
           ctaTag="TAPSTUDY"
           ctaHref="https://tapstudy.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/tapstudy"
           stack={[
-            { label: "ENGINEERING", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC read via Web NFC API", "Rate limiting + input validation"] },
+            { label: "ENGINEERING", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC tag → URL record, no Web NFC API", "Global error handling, no leaked stack traces"] },
             { label: "CONSTRAINTS", items: ["Self-hosted, own hardware", "Local Ollama, no external API", "Single-user by design"] },
           ]}
         />
@@ -74,17 +75,17 @@ export default function App() {
           proof={[
             "Answers only from cited sources",
             "Token-streamed replies, sources attached",
-            "Auto-escalates dissatisfied customers to Salesforce",
-            "Self-hosted on Hetzner",
+            "Resists prompt-injection and role-escalation attempts",
+            "JWT-protected admin panel — live stats + doc ingestion",
           ]}
-          how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. When a customer sounds dissatisfied, an n8n webhook opens a case in Salesforce for a human agent."
+          how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. A message matching escalation keywords — a lawyer, a formal complaint — opens a case for a human agent through a configurable webhook, instead of letting the bot keep guessing."
           ctaLabel="Live demo"
           ctaTag="HERMES"
           ctaHref="https://hermes.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/hermes-ai"
           stack={[
-            { label: "ENGINEERING", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "n8n → Salesforce escalation"] },
-            { label: "CONSTRAINTS", items: ["Self-hosted on Hetzner", "No hosted LLM API", "Escalates instead of guessing"] },
+            { label: "ENGINEERING", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "JWT + bcrypt admin auth", "n8n escalation webhook"] },
+            { label: "CONSTRAINTS", items: ["Self-hosted on Hetzner", "Groq in prod, Ollama in dev", "Escalates instead of guessing"] },
           ]}
         />
 
