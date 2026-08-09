@@ -88,7 +88,7 @@ export default function Hero() {
           </p>
 
           <div className="hero__interact">
-            <div style={{ animation: `composerPop 0.7s ${EASE} 2s both, glowPulse 4.2s ease-in-out 2s infinite` }}>
+            <div style={{ animation: `composerPop 0.7s ${EASE} 2s both` }}>
               <ChatInput
                 placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
                 onSend={(question) => chat.ask(question, "hero")}
