@@ -4,9 +4,8 @@ import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
 
 const CHIPS = [
-  "What's Hermes?",
-  "Tell me about tapstudy",
-  "Why Ollama instead of a hosted API?",
+  "What have you built?",
+  "What technologies do you use?",
   "Am I a fit for a junior role?",
 ];
 
