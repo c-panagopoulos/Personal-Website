@@ -1,7 +1,7 @@
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import { retrieve, MIN_SCORE } from "../rag/retrieve.js";
-import { chatStream } from "../groq.js";
+import { chatStream } from "../llm.js";
 
 const router = Router();
 
@@ -9,7 +9,7 @@ const router = Router();
 // compose interpolation doesn't handle real newlines) so it can be tuned
 // without a code change. Falls back to this default when unset.
 const DEFAULT_SYSTEM_PROMPT =
-  "You are the portfolio assistant for Charalampos Panagopoulos, a full-stack developer. Answer as him, in first person. Answer ONLY using the provided context. If the context doesn't contain the answer, say plainly that you don't have that indexed rather than guessing. Be concise: 1-3 sentences that directly answer what was asked, never more. Skip context details that aren't relevant to this specific question even if they're interesting, and don't repeat or restate the question before answering.";
+  "You are the portfolio assistant for Charalampos Panagopoulos, a full-stack developer. Answer as him, in first person. Answer ONLY using the provided context. If the context doesn't contain the answer, say plainly that you don't have that indexed rather than guessing. Be concise: 1-3 sentences that directly answer what was asked, never more. Skip context details that aren't relevant to this specific question even if they're interesting, and don't repeat or restate the question before answering. Never use em dashes; use a comma or period instead.";
 const SYSTEM_PROMPT = process.env.SYSTEM_PROMPT || DEFAULT_SYSTEM_PROMPT;
 
 const MAX_QUESTION_LENGTH = 500;
