@@ -52,7 +52,7 @@ export default function App() {
             <>Ships as <b>one Docker image</b> — dev machine to homelab, no registry</>,
             <>NFC tag as a <b>URL record</b> — no app, nothing to open</>,
             <>AI insights are <b>fact-checked</b> before they're shown</>,
-            <>Public demo is <b>read-only</b>, blocked at the backend</>,
+            <>Screen readers get an <b>LLM-narrated description</b> of the chart, not a readout of raw numbers</>,
           ]}
           how="A local model (qwen2.5:1.5b, via Ollama) writes the insight sentences, but never does the arithmetic — every number is computed in JavaScript first and the model's only job is turning an already-correct fact into a sentence. Prompt-injection attempts get caught and discarded by a fact-check pass afterward, not just prompted around."
           ctaLabel="Live demo"
