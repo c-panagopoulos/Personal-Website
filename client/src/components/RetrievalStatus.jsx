@@ -42,7 +42,13 @@ export function SourceChips({ sources }) {
   );
 }
 
-const COLLAPSED_SNIPPET_HEIGHT = "4.8em"; // ~3 lines at this text's line-height
+// Was "4.8em" — em on this element resolves against an inherited font-size
+// (13.3px) that doesn't match the snippet text's own (10.56px), so it
+// actually clipped ~3.5 lines instead of 3, cutting the 4th line off
+// mid-character. A precise px value (margin-top 6px + 3 lines at this
+// text's real 16.368px line-height) shows exactly 3 full lines, never a
+// partial one.
+const COLLAPSED_SNIPPET_HEIGHT = "56px";
 
 export function RetrievedChunks({ sources, threshold }) {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -71,11 +77,16 @@ export function RetrievedChunks({ sources, threshold }) {
   // so scrollHeight always reports the real, unclipped height) so expand
   // can animate to an exact target instead of a generic large max-height,
   // which makes short chunks finish "growing" almost instantly instead of
-  // over the full transition.
+  // over the full transition. scrollHeight alone omits the paragraph's own
+  // margin-top, which the clip wrapper still has to make room for — without
+  // it the expanded clip lands a few px short and clips the last line the
+  // same way the collapsed one did.
   useEffect(() => {
     const next = {};
     snippetRefs.current.forEach((el, i) => {
-      if (el) next[i] = el.scrollHeight;
+      if (!el) return;
+      const marginTop = parseFloat(getComputedStyle(el).marginTop) || 0;
+      next[i] = el.scrollHeight + marginTop;
     });
     setFullHeights(next);
   }, [sources]);

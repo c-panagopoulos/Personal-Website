@@ -213,33 +213,35 @@ export default function AssistantSection() {
 
   const sidebarContent = (
     <div className="assistant-section__sidebar">
-      <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.35)}>
-        <div className="assistant-section__sidebar-block-label">SOURCES INDEXED</div>
-        <div className="assistant-section__sidebar-block-value">
-          cv.md
-          <br />
-          tapstudy.md
-          <br />
-          hermes.md
-          <br />
-          about-me.md
-        </div>
-      </div>
       <div className="assistant-section__sidebar-row">
-        <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.5)}>
-          <div className="assistant-section__sidebar-block-label">RETRIEVAL</div>
+        <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.35)}>
+          <div className="assistant-section__sidebar-block-label">SOURCES INDEXED</div>
           <div className="assistant-section__sidebar-block-value">
-            pgvector
+            cv.md
             <br />
-            cosine · top-k 6
+            tapstudy.md
+            <br />
+            hermes.md
+            <br />
+            about-me.md
           </div>
         </div>
-        <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.65)}>
-          <div className="assistant-section__sidebar-block-label">MODEL</div>
-          <div className="assistant-section__sidebar-block-value">
-            ollama, local
-            <br />
-            groq — chat
+        <div className="assistant-section__sidebar-col">
+          <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.5)}>
+            <div className="assistant-section__sidebar-block-label">RETRIEVAL</div>
+            <div className="assistant-section__sidebar-block-value">
+              pgvector
+              <br />
+              cosine · top-k 6
+            </div>
+          </div>
+          {/* Was "ollama, local / groq — chat" — Ollama's role is already
+              covered by the RETRIEVAL card above (embeddings for pgvector);
+              this card is specifically about what generates the answer
+              text, which is Groq alone. */}
+          <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.65)}>
+            <div className="assistant-section__sidebar-block-label">MODEL</div>
+            <div className="assistant-section__sidebar-block-value">groq</div>
           </div>
         </div>
       </div>

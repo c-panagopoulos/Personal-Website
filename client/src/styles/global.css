@@ -1847,6 +1847,13 @@ button {
   min-width: 0;
   padding: 12px 14px;
 }
+.assistant-section__sidebar-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .assistant-section__sidebar-block-label {
   font-family: var(--font-mono);
   font-size: 0.68rem;
