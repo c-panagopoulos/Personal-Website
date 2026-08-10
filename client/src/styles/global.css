@@ -59,20 +59,11 @@
   box-sizing: border-box;
 }
 
-html {
-  overflow-x: hidden;
-}
-
 body {
   margin: 0;
   background: var(--bg);
   font-family: var(--font-sans);
   color: var(--text-primary);
-  /* Safety net against horizontal overflow from transform-scaled entrance
-     animations (e.g. StatementReveal's zoomSettle starts at scale(1.7) while
-     paused/off-screen, which is wide enough to overflow narrow viewports
-     before the section has scrolled into view and settled). */
-  overflow-x: hidden;
 }
 
 a {
@@ -1122,6 +1113,12 @@ button {
   display: flex;
   align-items: center;
   padding: 0 56px;
+  /* Clips StatementReveal's zoomSettle overflow (starts at scale(1.7) while
+     paused/off-screen) locally, instead of on html/body — overflow-x:hidden
+     on an ancestor of the sticky nav silently breaks position:sticky, which
+     is exactly what happened when this lived on body. .statement is a
+     sibling of the nav, not an ancestor, so this can't touch it. */
+  overflow: hidden;
   background-color: var(--scene-3);
   background-image: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.02) 0 2px, transparent 2px 26px);
 }
@@ -1696,7 +1693,10 @@ button {
 }
 @media (max-width: 900px) {
   .assistant-section__body {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr), not bare 1fr — otherwise the track grows to fit a
+       child's intrinsic min-content width instead of clamping to the
+       container, which was overflowing the page by ~5px on phones. */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 .assistant-section__sidebar {
@@ -2262,7 +2262,10 @@ button {
   display: flex;
   min-height: 200vh;
   flex-shrink: 0;
-  transform: scale(0.35);
+  /* Bigger than the original's 0.35 — at that size, combined with the
+     scroll-linked growth animation, the "screen fills the frame" moment
+     barely registered on phones. */
+  transform: scale(0.6);
   transform-origin: top center;
   flex-direction: column;
   align-items: center;
@@ -2272,7 +2275,7 @@ button {
 }
 @media (min-width: 640px) {
   .macbook-scroll {
-    transform: scale(0.5);
+    transform: scale(0.75);
   }
 }
 @media (min-width: 768px) {

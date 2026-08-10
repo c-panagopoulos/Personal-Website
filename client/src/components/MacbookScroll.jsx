@@ -46,14 +46,14 @@ function useScrollProgress(ref) {
 export default function MacbookScroll({ src, alt, title }) {
   const ref = useRef(null);
   const progress = useScrollProgress(ref);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    if (window.innerWidth < 768) setIsMobile(true);
-  }, []);
-
-  const scaleX = interpolate(progress, [0, 0.3], [1.2, isMobile ? 1 : 1.5]);
-  const scaleY = interpolate(progress, [0, 0.3], [0.6, isMobile ? 1 : 1.5]);
+  // The original component caps mobile's growth at 1 instead of 1.5, which
+  // (combined with the smaller container scale in CSS) made the "screen
+  // grows to fill the frame" moment barely register on phones. Let it grow
+  // the same amount everywhere; the container's own CSS scale still keeps
+  // the resting size proportionate to the viewport.
+  const scaleX = interpolate(progress, [0, 0.3], [1.2, 1.5]);
+  const scaleY = interpolate(progress, [0, 0.3], [0.6, 1.5]);
   const translateY = interpolate(progress, [0, 1], [0, 1500]);
   const rotate = interpolate(progress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTranslate = interpolate(progress, [0, 0.3], [0, 100]);
