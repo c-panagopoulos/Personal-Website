@@ -2251,6 +2251,9 @@ button {
   justify-content: center;
   gap: 12px;
   background: rgba(14, 13, 15, 0.55);
+  /* Keeps the mobile auto-scroll-to-answer from landing flush under the
+     sticky navbar — scroll-margin-top is respected by scrollIntoView(). */
+  scroll-margin-top: calc(var(--nav-height, 60px) + 20px);
 }
 @media (max-width: 900px) {
   /* In a column flex container (mobile's .stack-panel), flex-basis and

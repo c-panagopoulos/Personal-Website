@@ -50,8 +50,12 @@ export default function StackSection() {
   const [question, setQuestion] = useState(null);
   const [phase, setPhase] = useState("idle"); // idle | thinking | done
   const timeoutRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
+  useEffect(() => {
+    if (window.innerWidth <= 900) setIsMobile(true);
+  }, []);
 
   const ask = (name) => {
     setQuestion(name);
@@ -61,6 +65,18 @@ export default function StackSection() {
     // feeling deliberate instead of an instant pop, matching how the real
     // assistant panels elsewhere on the site settle in.
     timeoutRef.current = setTimeout(() => setPhase("done"), 400);
+
+    // On mobile the answer panel sits below the tag grid (column layout),
+    // often off-screen — bring it into view by its id, same reduced-motion-
+    // aware scrollIntoView pattern used for nav links elsewhere on the site.
+    // Not needed on desktop, where the panel already sits beside the tags.
+    if (isMobile) {
+      const el = document.getElementById("stack-answer");
+      if (el) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }
+    }
   };
 
   return (
@@ -106,7 +122,7 @@ export default function StackSection() {
 
           <div className="stack-panel__divider" style={anim(visible, "dividerGrow", 0.8, 1.5)} />
 
-          <div className="stack-answer-panel shader-panel" style={anim(visible, "panelFade", 0.6, 1.7, "ease")}>
+          <div id="stack-answer" className="stack-answer-panel shader-panel" style={anim(visible, "panelFade", 0.6, 1.7, "ease")}>
             <div className="shader-panel__canvas">
               <DotField
                 dotRadius={2.2}
