@@ -62,7 +62,7 @@ export default function ProjectScene({
         <div>
           <div className="scene__kicker">
             <span className="scene__kicker-num" style={anim(visible, "rowRise", 0.5, 0.1)}>
-              SCENE {sceneNumber}
+              PROJECT {sceneNumber}
             </span>
             <span className="scene__kicker-rule" style={anim(visible, "ruleGrow", 0.5, 0.35)} />
             <span className="scene__kicker-name">

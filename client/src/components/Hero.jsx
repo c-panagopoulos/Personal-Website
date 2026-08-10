@@ -143,10 +143,13 @@ export default function Hero() {
                       </p>
                     )}
                     <ChatError error={heroTurn?.error} />
+                    {/* Plain text, not a jump link — a click-to-#assistant
+                        anchor skips every section in between, which is
+                        exactly the scroll-through the rest of the page is
+                        built for. This just nudges them to keep scrolling
+                        naturally instead. */}
                     {heroTurn?.done && (
-                      <a className="hero-answer__jump" href="#assistant">
-                        see exactly how it answered - continue below ↓
-                      </a>
+                      <span className="hero-answer__jump">keep scrolling to see how I answered ↓</span>
                     )}
                   </div>
                 </div>
