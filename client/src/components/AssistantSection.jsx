@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
@@ -94,27 +94,6 @@ function ChatTurn({ turn }) {
   );
 }
 
-// Measures the active panel's real height (via ResizeObserver) so the
-// wrapper below can animate to it instead of snapping — same technique as
-// animate-ui's useAutoHeight, sized down to just what this needs.
-function useAutoHeight(dep) {
-  const innerRef = useRef(null);
-  const [height, setHeight] = useState(null);
-
-  useLayoutEffect(() => {
-    const el = innerRef.current;
-    if (!el) return undefined;
-    const measure = () => setHeight(el.getBoundingClientRect().height);
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dep]);
-
-  return { innerRef, height };
-}
-
 // Small icon-only toggle instead of a full-width labeled tab bar — lives in
 // the topbar (next to the breadcrumb, always rendered regardless of which
 // panel is active) rather than its own row, since on mobile the nav plus
@@ -172,37 +151,36 @@ function AssistantTabToggle({ activeTab, onChange, sourcesCount }) {
   );
 }
 
-// Cross-fade/blur panel switch + auto-height, ported from animate-ui's Tabs
-// component (github.com/imskyleen/animate-ui) — the trigger UI lives
-// separately above (AssistantTabToggle), this is just the panel side.
+// Cross-fade/blur panel switch, ported from animate-ui's Tabs component
+// (github.com/imskyleen/animate-ui) — the trigger UI lives separately above
+// (AssistantTabToggle), this is just the panel side. Both panels fill a
+// fixed, viewport-bound height (see .assistant-tabs in global.css) instead
+// of each animating to its own natural content height — with a fixed
+// height, they always match each other exactly (idle or mid-conversation),
+// and each panel's own overflowing part (chat-thread / retrieved-chunks)
+// scrolls internally instead of growing the whole page and pushing the
+// topbar's tab toggle off-screen.
 function AssistantTabPanels({ activeTab, panels }) {
-  const { innerRef, height } = useAutoHeight(activeTab);
-
   return (
     <div className="assistant-tabs">
-      <motion.div
-        className="assistant-tabs__panels"
-        animate={{ height: height ?? "auto" }}
-        transition={{ type: "spring", stiffness: 200, damping: 30 }}
-      >
-        <div ref={innerRef}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              role="tabpanel"
-              id={`assistant-panel-${activeTab}`}
-              aria-labelledby={`assistant-tab-${activeTab}`}
-              tabIndex={0}
-              initial={{ opacity: 0, filter: "blur(4px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, filter: "blur(4px)" }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            >
-              {panels[activeTab]}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </motion.div>
+      <div className="assistant-tabs__panels">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            role="tabpanel"
+            id={`assistant-panel-${activeTab}`}
+            aria-labelledby={`assistant-tab-${activeTab}`}
+            tabIndex={0}
+            className="assistant-tabs__panel"
+            initial={{ opacity: 0, filter: "blur(4px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, filter: "blur(4px)" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            {panels[activeTab]}
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -293,10 +271,16 @@ export default function AssistantSection() {
           <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1) }}>Stop reading about me.</span>
           <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1.15) }}>Ask instead.</span>
         </h3>
-        <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
-          This is the same assistant I built for Hermes, pointed at my own repos and CV. It shows the chunks it
-          used, so you can catch it being wrong.
-        </p>
+        {/* On mobile, once a question is asked, the subtitle and suggested
+            chips are just dead weight above the fold pushing the actual
+            conversation (and the tab toggle back up top) further out of
+            reach — desktop has room to keep them, mobile doesn't. */}
+        {!(isMobile && chat.open) && (
+          <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
+            This is the same assistant I built for Hermes, pointed at my own repos and CV. It shows the chunks it
+            used, so you can catch it being wrong.
+          </p>
+        )}
 
         <div className="chat-thread" ref={threadRef}>
           {chat.history.map((turn, i) => (
@@ -305,18 +289,20 @@ export default function AssistantSection() {
         </div>
 
         <div className="assistant-section__composer">
-          <div className="chip-row" style={{ marginBottom: 14 }}>
-            {CHIPS.map((label, i) => (
-              <button
-                key={label}
-                className="chip chip--ghost"
-                onClick={() => chat.ask(label, "assistant")}
-                style={anim(visible, "composerPop", 0.5, 1.8 + i * 0.05)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          {!(isMobile && chat.open) && (
+            <div className="chip-row" style={{ marginBottom: 14 }}>
+              {CHIPS.map((label, i) => (
+                <button
+                  key={label}
+                  className="chip chip--ghost"
+                  onClick={() => chat.ask(label, "assistant")}
+                  style={anim(visible, "composerPop", 0.5, 1.8 + i * 0.05)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
           <div style={anim(visible, "composerPop", 0.5, 1.95)}>
             <ChatInput
               variant="assistant"

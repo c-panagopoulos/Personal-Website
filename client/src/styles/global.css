@@ -1667,18 +1667,6 @@ button {
   border-top: 1px solid var(--border-strong);
   border-bottom: 1px solid var(--border-strong);
 }
-@media (max-width: 900px) {
-  /* At this width .assistant-section__body collapses sidebar + main into a
-     single stacked column, which needs more vertical room than one
-     viewport-height box can give it — a fixed height here just let the chat
-     thread and composer silently overflow below the section instead of
-     being clipped or scrollable. min-height lets the section grow with its
-     stacked content instead. */
-  .assistant-section {
-    height: auto;
-    min-height: calc(100vh - var(--nav-height));
-  }
-}
 .assistant-section__topbar {
   display: flex;
   align-items: center;
@@ -1796,21 +1784,39 @@ button {
   justify-content: center;
 }
 .assistant-tabs {
-  padding: 16px 0 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 .assistant-tabs__panels {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+}
+/* The swapped-in panel itself — fills the fixed height above exactly, so
+   Chat and Sources always occupy the same footprint (idle or not); whatever
+   overflows scrolls inside .chat-thread / .retrieved-chunks, not the page. */
+.assistant-tabs__panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 .assistant-tabs .assistant-section__sidebar {
   border-right: none;
 }
 .assistant-section__sidebar {
+  flex: 1;
   border-right: 1px solid var(--border-strong);
   padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-height: 0;
+  overflow-y: auto;
   background: var(--surface-deep);
 }
 .assistant-section__sidebar-card {
@@ -1853,6 +1859,7 @@ button {
   line-height: 1.9;
 }
 .assistant-section__main {
+  flex: 1;
   padding: 48px 56px;
   display: flex;
   justify-content: flex-start;
@@ -1872,8 +1879,11 @@ button {
   }
   .assistant-section__main {
     /* Was 48px 56px — 56px a side left barely any room for the input field
-       to actually type into on a phone-width screen. */
-    padding: 32px 18px;
+       to actually type into on a phone-width screen. Top trimmed down from
+       32px too, now that the tab toggle sits right above instead of a
+       separate full-width tab row — less dead space needed before the
+       title. */
+    padding: 18px 18px 32px;
   }
 }
 .assistant-section__title {
