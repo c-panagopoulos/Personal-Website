@@ -1694,6 +1694,59 @@ button {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+/* Mobile-only: chat + sources as two tabs instead of stacking both in one
+   column — the sources/chunks panel grows with the conversation and was
+   pushing new chat messages further down the page every time. Sliding-pill
+   indicator and cross-fade/blur panel switch, same technique as
+   animate-ui's Tabs (layoutId shared-element transition + AnimatePresence),
+   rewritten directly since this only ever needs two fixed tabs. */
+.assistant-tabs {
+  padding: 16px 22px 0;
+}
+.assistant-tabs__list {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-deep);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+}
+.assistant-tabs__tab {
+  position: relative;
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+.assistant-tabs__tab[aria-selected="true"] {
+  color: var(--text-primary);
+}
+.assistant-tabs__pill {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+}
+.assistant-tabs__label {
+  position: relative;
+  z-index: 1;
+}
+.assistant-tabs__panels {
+  overflow: hidden;
+  margin-top: 16px;
+}
+.assistant-tabs .assistant-section__sidebar {
+  border-right: none;
+}
 .assistant-section__sidebar {
   border-right: 1px solid var(--border-strong);
   padding: 22px;
