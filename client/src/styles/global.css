@@ -1125,11 +1125,27 @@ button {
 .statement__text {
   margin: 0;
   font-weight: 500;
-  font-size: clamp(3.2rem, 1.5rem + 6vw, 7rem);
+  font-size: clamp(2.5rem, 1.5rem + 6vw, 7rem);
   line-height: 0.95;
   letter-spacing: -0.05em;
   color: var(--text-primary);
   max-width: 1000px;
+  /* At this size a single long word (e.g. "infrastructure") can be wider
+     than the whole line on a narrow phone — without this it overflows past
+     the right padding instead of wrapping, which reads as off-center. Kept
+     as a safety net; the media query below does the real work of avoiding
+     the break in the first place. */
+  overflow-wrap: break-word;
+}
+@media (max-width: 360px) {
+  /* Below ~357px even the fluid clamp above renders "infrastructure" wider
+     than the line, forcing an ugly mid-word break. Bisected against the
+     real rendered word (not just an isolated width estimate) across
+     300-360px so it stays intact on its own line at every width in this
+     band — everything wider than 360px already fits with the clamp above. */
+  .statement__text {
+    font-size: clamp(1.7rem, -1.4rem + 16.7vw, 2.3rem);
+  }
 }
 
 /* --- Project scene --- */
