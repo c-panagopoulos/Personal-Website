@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import { ThinkingDots } from "./RetrievalStatus.jsx";
 import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
@@ -45,8 +45,6 @@ const STACK_ANSWERS = {
   Git: "I use Git because it's non-negotiable, every project here, from TapStudy to this site, lives in a repo with real commit history so I can see exactly what changed and roll it back the moment I break something.",
 };
 
-const STACK_SOURCES = [{ source: "about-me.md" }];
-
 export default function StackSection() {
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
   const [question, setQuestion] = useState(null);
@@ -86,8 +84,9 @@ export default function StackSection() {
             {STACK_GROUPS.map((group, gi) => (
               <div className="stack-group" key={group.label} style={anim(visible, "rowRise", 0.4, 0.9 + gi * 0.1)}>
                 <div className="stack-group__head">
+                  <span className="stack-group__rule stack-group__rule--start" />
                   <span className="stack-group__label">{group.label}</span>
-                  <span className="stack-group__rule" />
+                  <span className="stack-group__rule stack-group__rule--end" />
                 </div>
                 <div className="stack-tags">
                   {group.items.map((name, ti) => (
@@ -125,18 +124,15 @@ export default function StackSection() {
                 <div className="assistant-card__question">&gt; Why did you choose {question}?</div>
                 {phase === "thinking" && <ThinkingDots note="" />}
                 {phase === "done" && (
-                  <>
-                    <SourceChips sources={STACK_SOURCES} />
-                    <p className="assistant-card__answer" aria-live="polite">
-                      {STACK_ANSWERS[question]}
-                    </p>
-                  </>
+                  <p className="assistant-card__answer" aria-live="polite">
+                    {STACK_ANSWERS[question]}
+                  </p>
                 )}
               </div>
             ) : (
               <div className="stack-answer-panel__idle" style={anim(visible, "sceneRiseBlur", 0.5, 1.9)}>
                 <span className="stack-answer-panel__idle-label">STACK Q&amp;A</span>
-                <p>Click anything on the left to see why it&rsquo;s there.</p>
+                <p>Click any tag to see why it&rsquo;s there.</p>
               </div>
             )}
           </div>

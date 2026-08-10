@@ -2148,6 +2148,15 @@ button {
   .stack-panel {
     flex-direction: column;
   }
+  .stack-section {
+    padding: 96px 20px;
+  }
+  .stack-groups {
+    padding: 24px 20px;
+  }
+  .stack-tags {
+    justify-content: center;
+  }
 }
 .stack-groups {
   flex: 1;
@@ -2172,11 +2181,31 @@ button {
   font-size: 0.62rem;
   letter-spacing: 0.24em;
   color: var(--text-tertiary);
+  white-space: nowrap;
 }
 .stack-group__rule {
   width: 26px;
   height: 1px;
   background: var(--accent-border);
+}
+.stack-group__rule--start {
+  display: none;
+}
+@media (max-width: 900px) {
+  .stack-group__head {
+    justify-content: center;
+  }
+  .stack-group__rule {
+    flex: 1;
+    width: auto;
+  }
+  .stack-group__rule--start {
+    display: block;
+    background: linear-gradient(to left, var(--accent-border), transparent);
+  }
+  .stack-group__rule--end {
+    background: linear-gradient(to right, var(--accent-border), transparent);
+  }
 }
 .stack-tags {
   display: flex;
@@ -2222,6 +2251,16 @@ button {
   justify-content: center;
   gap: 12px;
   background: rgba(14, 13, 15, 0.55);
+}
+@media (max-width: 900px) {
+  /* In a column flex container (mobile's .stack-panel), flex-basis and
+     min-height apply to the height axis — the desktop sizing above forced
+     this into a tall, mostly-empty block instead of hugging its content. */
+  .stack-answer-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 24px 20px 26px;
+  }
 }
 .stack-answer-panel__idle {
   display: flex;
