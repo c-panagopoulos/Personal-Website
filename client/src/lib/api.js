@@ -57,7 +57,11 @@ export async function streamChat(question, { onSources, onToken, onDone, onError
           onToken?.(data);
         }
       } else if (event === "done") {
-        onDone?.();
+        try {
+          onDone?.(JSON.parse(data));
+        } catch {
+          onDone?.({});
+        }
       } else if (event === "error") {
         try {
           const parsed = JSON.parse(data);

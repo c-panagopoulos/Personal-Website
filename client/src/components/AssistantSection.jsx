@@ -240,10 +240,12 @@ export default function AssistantSection() {
           {/* Was "ollama, local / groq — chat" — Ollama's role is already
               covered by the RETRIEVAL card above (embeddings for pgvector);
               this card is specifically about what generates the answer
-              text, which is Groq alone. */}
+              text. Reflects whichever provider actually answered the
+              latest question — chat.js falls back to Gemini when Groq's
+              quota is exhausted, so this shouldn't just always say "groq". */}
           <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.65)}>
             <div className="assistant-section__sidebar-block-label">MODEL</div>
-            <div className="assistant-section__sidebar-block-value">groq</div>
+            <div className="assistant-section__sidebar-block-value">{chat.provider || "groq"}</div>
           </div>
         </div>
       </div>

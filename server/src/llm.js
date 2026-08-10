@@ -65,6 +65,8 @@ async function streamFromProvider(provider, messages, onToken) {
   }
 }
 
+// Returns which provider/model actually answered — callers surface this in
+// the UI (the sidebar's MODEL field) so a fallback to Gemini isn't silent.
 export async function chatStream(messages, onToken) {
   if (!PROVIDERS.length) {
     throw new Error("No LLM provider configured — set GROQ_API_KEY or GEMINI_API_KEY in .env.");
@@ -78,7 +80,7 @@ export async function chatStream(messages, onToken) {
       // read), so falling through to the next provider never mixes partial
       // output from two different models in one answer.
       await streamFromProvider(provider, messages, onToken);
-      return;
+      return { provider: provider.name, model: provider.model };
     } catch (err) {
       console.error(`${provider.name} failed${PROVIDERS.length > 1 ? ", trying next provider" : ""}:`, err.message);
       lastError = err;

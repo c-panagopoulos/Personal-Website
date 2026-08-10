@@ -13,6 +13,8 @@ const emptyTurn = () => ({
   hasText: false,
   done: false,
   error: null,
+  provider: null,
+  model: null,
 });
 
 // A list of turns, not one flat turn — so a caller that wants the full
@@ -57,8 +59,8 @@ export function useChat() {
           onToken: (token) => {
             updateLast((t) => ({ ...t, isThinking: false, hasText: true, text: t.text + token }));
           },
-          onDone: () => {
-            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, done: true }));
+          onDone: ({ provider, model } = {}) => {
+            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, done: true, provider, model }));
           },
           onError: (error) => {
             updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, error, done: true }));

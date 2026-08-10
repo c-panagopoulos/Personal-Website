@@ -68,11 +68,11 @@ router.post("/chat", chatLimiter, async (req, res) => {
       { role: "user", content: `Context:\n${context}\n\nQuestion: ${question}` },
     ];
 
-    await chatStream(messages, (token) => {
+    const usedProvider = await chatStream(messages, (token) => {
       sseWrite(res, "token", token);
     });
 
-    sseWrite(res, "done", {});
+    sseWrite(res, "done", usedProvider);
   } catch (err) {
     // The real error (DB down, Groq quota, whatever) is only useful
     // server-side — the client gets a friendly, in-character message
