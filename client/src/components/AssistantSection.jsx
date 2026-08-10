@@ -267,9 +267,16 @@ export default function AssistantSection() {
         />
       </div>
       <div className="assistant-section__main-inner">
+        {/* Delay used to stagger behind the topbar (1s/1.15s) for the
+            one-time page-scroll reveal, but this whole panel also remounts
+            on every mobile tab switch back to Chat — replaying that same
+            delay there made the title visibly lag behind the chat rows
+            below it, which animate in via their own independent trigger at
+            delay 0. Matching that keeps title and messages in sync on every
+            replay, at the cost of a slightly less staggered first reveal. */}
         <h3 className="assistant-section__title">
-          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1) }}>Stop reading about me.</span>
-          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 1.15) }}>Ask instead.</span>
+          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0) }}>Stop reading about me.</span>
+          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0.15) }}>Ask instead.</span>
         </h3>
         {/* On mobile, once a question is asked, the subtitle and suggested
             chips are just dead weight above the fold pushing the actual
