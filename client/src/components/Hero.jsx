@@ -72,7 +72,7 @@ export default function Hero() {
           <div className="hero__byline">
             <img
               className="hero__avatar"
-              src="/images/prof3.png"
+              src="/images/prof3.webp"
               alt="Charalampos"
               style={{ animation: "avatarSpring 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both" }}
             />

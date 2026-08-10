@@ -90,7 +90,7 @@ function Brand({ visible }) {
       </span>
       {!visible && (
         <span className="nav__name">
-          panagopoulos<span>.dev</span>
+          cpanagopoulos<span>.dev</span>
         </span>
       )}
     </button>
