@@ -58,7 +58,7 @@ export function NavBody({ children, className = "", visible }) {
   );
 }
 
-export function NavItems({ items, className = "", onItemClick, visible }) {
+export function NavItems({ items, className = "", onItemClick, visible, activeLink }) {
   const [hovered, setHovered] = useState(null);
 
   return (
@@ -72,7 +72,7 @@ export function NavItems({ items, className = "", onItemClick, visible }) {
           href={item.link}
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="resizable-navbar__item"
+          className={`resizable-navbar__item ${item.link === activeLink ? "resizable-navbar__item--active" : ""}`}
         >
           {hovered === idx && (
             <motion.div layoutId="resizable-navbar-hover" className="resizable-navbar__item-highlight" />

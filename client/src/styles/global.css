@@ -398,6 +398,11 @@ button {
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.82rem;
+  /* This box spans the full NavBody width (inset: 0), including the empty
+     flex space on either side of the centered links — in the shrunk/compact
+     state that empty space sits directly over the logo button and was
+     swallowing its clicks. Only the links themselves need to be clickable. */
+  pointer-events: none;
 }
 @media (min-width: 1024px) {
   .resizable-navbar__items {
@@ -409,6 +414,7 @@ button {
   padding: 8px 18px;
   color: var(--text-secondary);
   text-decoration: none;
+  pointer-events: auto;
   transition: color 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), padding 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .resizable-navbar__items--compact {
@@ -426,6 +432,10 @@ button {
 }
 .resizable-navbar__item:hover {
   color: var(--accent);
+}
+.resizable-navbar__item--active {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 .resizable-navbar__item-highlight {
   position: absolute;
@@ -506,11 +516,21 @@ button {
   color: var(--accent);
   background: var(--accent-bg);
 }
+.resizable-navbar__mobile-link--active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
 
 .nav__brand {
   display: flex;
   align-items: center;
   gap: 11px;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
 .nav__mark {
   width: 30px;
