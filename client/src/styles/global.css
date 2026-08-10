@@ -1125,16 +1125,11 @@ button {
 .statement__text {
   margin: 0;
   font-weight: 500;
-  font-size: 7rem;
+  font-size: clamp(3.2rem, 1.5rem + 6vw, 7rem);
   line-height: 0.95;
   letter-spacing: -0.05em;
   color: var(--text-primary);
   max-width: 1000px;
-}
-@media (max-width: 900px) {
-  .statement__text {
-    font-size: 3.2rem;
-  }
 }
 
 /* --- Project scene --- */
@@ -1404,7 +1399,7 @@ button {
 .scene__title {
   margin: 0;
   font-weight: 500;
-  font-size: 3.4rem;
+  font-size: clamp(2.1rem, 1.5rem + 2.2vw, 3.4rem);
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-primary);
@@ -1617,15 +1612,10 @@ button {
 .section-lead__title {
   margin: 0;
   font-weight: 500;
-  font-size: 4rem;
+  font-size: clamp(2.4rem, 1.6rem + 2.8vw, 4rem);
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-primary);
-}
-@media (max-width: 900px) {
-  .section-lead__title {
-    font-size: 2.4rem;
-  }
 }
 .section-lead__body {
   margin: 22px 0 0;
@@ -1769,7 +1759,7 @@ button {
 .assistant-section__title {
   margin: 0;
   font-weight: 500;
-  font-size: 2.8rem;
+  font-size: clamp(1.9rem, 1.4rem + 1.7vw, 2.8rem);
   line-height: 1.04;
   letter-spacing: -0.035em;
   color: var(--text-primary);
@@ -2089,15 +2079,10 @@ button {
 .contact-section__title {
   margin: 0;
   font-weight: 500;
-  font-size: 4.4rem;
+  font-size: clamp(2.6rem, 1.7rem + 3vw, 4.4rem);
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-primary);
-}
-@media (max-width: 900px) {
-  .contact-section__title {
-    font-size: 2.6rem;
-  }
 }
 .contact-section__body {
   margin: 18px 0 0;
@@ -2270,7 +2255,12 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 0;
+  /* padding lives in this element's own (unscaled) coordinate space, so it
+     gets visually shrunk by the transform: scale(0.6) above along with
+     everything else — needs to be well more than the sticky nav's height to
+     actually clear it. Zero padding here (matching the original component)
+     let the title render straight under/behind the nav on phones. */
+  padding: 280px 0 80px;
   perspective: 800px;
 }
 @media (min-width: 640px) {
