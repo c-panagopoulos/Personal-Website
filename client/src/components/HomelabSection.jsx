@@ -67,9 +67,13 @@ export default function HomelabSection() {
         />
       </div>
       <Reveal className="homelab__caption">
-        <span className="scene__browser-title" style={{ marginLeft: 0 }}>
-          SCENE 03 · ONE MINI PC, EVERYTHING IN DOCKER, NO ONE TO CALL
-        </span>
+        <div className="scene__kicker" style={{ marginBottom: 0 }}>
+          <span className="scene__browser-title" style={{ marginLeft: 0 }}>
+            ONE MINI PC, EVERY SERVICE RUNNING IN DOCKER
+          </span>
+          <span className="scene__kicker-rule" />
+          <span className="scene__kicker-name">HOMELAB</span>
+        </div>
       </Reveal>
 
       <div className="section-lead">
@@ -96,9 +100,9 @@ export default function HomelabSection() {
           </ul>
 
           <p className="scene__how" style={anim(visible, "sceneRiseBlur", 0.6, 2.62)}>
-            Sleep score comes in over an NFC tag — a handful of predefined values, sidestepping a proprietary
-            sleep-tracker API. The AI drafts the day's plan; the workflow validates the structure and only
-            writes through events the model itself marks enabled.
+            For the daily-routine automation, sleep score comes in over an NFC tag — a handful of predefined
+            values, sidestepping a proprietary sleep-tracker API. The AI drafts the day's plan; the workflow
+            validates the structure and only writes through events the model itself marks enabled.
           </p>
 
           <div style={{ marginTop: 40 }}>
