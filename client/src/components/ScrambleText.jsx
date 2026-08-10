@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&01";
-const FRAMES = 14;
-const FRAME_MS = 40;
-const LINE_STAGGER_MS = 110;
+const FRAMES = 18;
+const DEFAULT_FRAME_MS = 65;
+const DEFAULT_LINE_STAGGER_MS = 180;
 
 function randomChar() {
   return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
@@ -16,7 +16,12 @@ function scramble(text) {
     .join("");
 }
 
-export default function ScrambleText({ lines, as: Tag = "span" }) {
+export default function ScrambleText({
+  lines,
+  as: Tag = "span",
+  frameMs = DEFAULT_FRAME_MS,
+  lineStaggerMs = DEFAULT_LINE_STAGGER_MS,
+}) {
   const [display, setDisplay] = useState(() => lines.map(scramble));
   const ref = useRef(null);
   const startedRef = useRef(false);
@@ -54,8 +59,8 @@ export default function ScrambleText({ lines, as: Tag = "span" }) {
                     return next;
                   });
                 }
-              }, FRAME_MS);
-            }, lineIndex * LINE_STAGGER_MS);
+              }, frameMs);
+            }, lineIndex * lineStaggerMs);
           });
         });
       },

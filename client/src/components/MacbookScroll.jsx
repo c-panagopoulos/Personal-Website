@@ -63,7 +63,9 @@ export default function MacbookScroll({ src, alt, title }) {
         className="macbook-scroll__title"
         style={{ transform: `translateY(${textTranslate}px)`, opacity: textOpacity }}
       >
-        {title || <ScrambleText lines={["tapstudy runs on a tap", "of an nfc tag."]} />}
+        {title || (
+          <ScrambleText lines={["tapstudy runs on a tap", "of an nfc tag."]} frameMs={40} lineStaggerMs={110} />
+        )}
       </h2>
 
       <div className="macbook-scroll__lid-wrap">
