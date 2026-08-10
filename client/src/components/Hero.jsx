@@ -62,6 +62,12 @@ export default function Hero() {
   // first would incorrectly show up here and lock this composer too.
   const heroTurn = chat.history.find((t) => t.origin === "hero");
   const open = Boolean(heroTurn);
+  // Collapsing the drawer via the prompt-icon toggle is purely a display
+  // choice, layered on top of `open` — it never touches chat.history, so
+  // reopening it (or asking from the assistant section instead) always
+  // shows the same answer instead of losing it.
+  const [manuallyClosed, setManuallyClosed] = useState(false);
+  const panelOpen = open && !manuallyClosed;
   const nameDisplay = useScramble(NAME_LINE, 550, 650);
   const roleDisplay = useScramble(ROLE_LINE, 750, 750);
 
@@ -119,9 +125,11 @@ export default function Hero() {
                 placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
                 onSend={(question) => chat.ask(question, "hero")}
                 disabled={open}
+                promptExpanded={panelOpen}
+                onPromptClick={open ? () => setManuallyClosed((v) => !v) : undefined}
               />
 
-              <div className={"hero-answer" + (open ? " hero-answer--open" : "")}>
+              <div className={"hero-answer" + (panelOpen ? " hero-answer--open" : "")}>
                 <div className="hero-answer__clip">
                   <div className="hero-answer__inner">
                     <span className="hero-answer__label">ANSWER</span>

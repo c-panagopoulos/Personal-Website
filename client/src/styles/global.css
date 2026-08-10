@@ -1031,6 +1031,22 @@ button {
   color: #a68b8b;
   font-size: 16px;
 }
+/* Once there's an answer, this doubles as a collapse toggle — rotates to
+   point down (open) or back to "❯" (collapsed), timed with the same
+   duration/easing as .hero-answer's own grid-template-rows transition so
+   the glyph and the drawer read as one movement. */
+.chat-input__prompt--toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  transform: rotate(0deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.chat-input__prompt--toggle.chat-input__prompt--open {
+  transform: rotate(90deg);
+}
 .chat-input__field {
   flex: 1;
   min-width: 0;

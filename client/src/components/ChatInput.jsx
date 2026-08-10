@@ -47,7 +47,7 @@ function SendIcon({ size = 16 }) {
   );
 }
 
-export default function ChatInput({ onSend, placeholder, disabled, variant = "hero" }) {
+export default function ChatInput({ onSend, placeholder, disabled, variant = "hero", promptExpanded = false, onPromptClick }) {
   const [value, setValue] = useState("");
 
   const send = () => {
@@ -87,9 +87,28 @@ export default function ChatInput({ onSend, placeholder, disabled, variant = "he
     );
   }
 
+  // Once there's an answer to show/hide, the otherwise-decorative prompt
+  // glyph doubles as a collapse toggle — rotating from "❯" to pointing down
+  // mirrors the drawer's own open state, and clicking it again just hides
+  // the drawer (chat.history is untouched, so reopening shows the same
+  // answer rather than re-asking).
+  const prompt = onPromptClick ? (
+    <button
+      type="button"
+      className={"chat-input__prompt chat-input__prompt--toggle" + (promptExpanded ? " chat-input__prompt--open" : "")}
+      onClick={onPromptClick}
+      aria-label={promptExpanded ? "Collapse answer" : "Expand answer"}
+      aria-expanded={promptExpanded}
+    >
+      ❯
+    </button>
+  ) : (
+    <span className="chat-input__prompt" aria-hidden="true">❯</span>
+  );
+
   return (
     <div className="chat-input">
-      <span className="chat-input__prompt" aria-hidden="true">❯</span>
+      {prompt}
       <input
         className="chat-input__field"
         aria-label={placeholder || "Ask a question"}
