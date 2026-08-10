@@ -95,7 +95,7 @@ export default function Hero() {
             problem I actually have.
           </p>
           <p className="hero__status" style={{ animation: `sceneRiseBlur 0.6s ${EASE} 1.85s both` }}>
-            OPEN TO JUNIOR SOFTWARE ENGINEERING ROLES
+            OPEN TO JUNIOR FULL-STACK WEB DEVELOPER ROLES
           </p>
 
           <div className="hero__interact">

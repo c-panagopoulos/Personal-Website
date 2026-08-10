@@ -1,6 +1,6 @@
 # About Charalampos Panagopoulos
 
-I'm a full-stack developer based in Athens, Greece, currently looking for junior software engineering
+I'm a full-stack developer based in Athens, Greece, currently looking for junior full-stack web developer
 roles, ideally ones that involve AI-assisted products, retrieval systems, or infrastructure work.
 
 Before I wrote any production code, I spent years on customer support lines. That job left a mark on how I
