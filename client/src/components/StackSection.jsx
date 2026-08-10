@@ -12,12 +12,6 @@ const STACK_GROUPS = [
   { label: "AI", items: ["Ollama", "RAG"] },
 ];
 
-// Every "why did you choose X" answer here is fixed, word for word, the
-// same for every visitor — pulled straight from about-me.md's own
-// tech-reasoning paragraphs (the same source the real RAG assistant would
-// retrieve for these exact questions). Running a live retrieval + LLM call
-// for a Q&A pair that never changes just burns tokens for no benefit, so
-// this section answers locally instead of asking the assistant.
 const STACK_ANSWERS = {
   React:
     "I use React and Vite on the frontend because these projects are React apps that need a fast dev loop. That's the reason I use them, not because they're trendy.",
@@ -48,7 +42,7 @@ const STACK_ANSWERS = {
 export default function StackSection() {
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
   const [question, setQuestion] = useState(null);
-  const [phase, setPhase] = useState("idle"); // idle | thinking | done
+  const [phase, setPhase] = useState("idle");
   const timeoutRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -61,15 +55,8 @@ export default function StackSection() {
     setQuestion(name);
     setPhase("thinking");
     clearTimeout(timeoutRef.current);
-    // Answer is already known instantly — this just keeps the reveal
-    // feeling deliberate instead of an instant pop, matching how the real
-    // assistant panels elsewhere on the site settle in.
     timeoutRef.current = setTimeout(() => setPhase("done"), 400);
 
-    // On mobile the answer panel sits below the tag grid (column layout),
-    // often off-screen — bring it into view by its id, same reduced-motion-
-    // aware scrollIntoView pattern used for nav links elsewhere on the site.
-    // Not needed on desktop, where the panel already sits beside the tags.
     if (isMobile) {
       const el = document.getElementById("stack-answer");
       if (el) {

@@ -13,8 +13,6 @@ export async function streamChat(question, { onSources, onToken, onDone, onError
   }
 
   if (!response.ok || !response.body) {
-    // Rate-limit (429) and bad-input (400) responses are plain JSON, not
-    // SSE — the stream never starts for those.
     try {
       const body = await response.json();
       onError?.({ type: body.type || "generic", message: body.message || `Request failed (${response.status})` });

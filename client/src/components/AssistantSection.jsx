@@ -39,16 +39,6 @@ const TABS = [
 ];
 
 function ChatTurn({ turn }) {
-  // Each turn gets its own fresh scroll trigger instead of reusing the
-  // section's single `visible` flag — that flag is one-shot and, once
-  // fired, stays true forever, including on a visit where the visitor
-  // already scrolled past this section earlier (e.g. explored the whole
-  // page once) before coming back to Hero to ask a new question. In that
-  // case the section-level flag is already true, so a message asked from
-  // Hero would play its entrance animation immediately at click-time —
-  // off-screen, finished long before they scroll down to see it. A
-  // per-turn trigger checks this specific row's actual position the
-  // moment it's created, regardless of the section's scroll history.
   const [rowRef, visible] = useSceneTrigger({ threshold: 0.1 });
   return (
     <>
@@ -94,19 +84,9 @@ function ChatTurn({ turn }) {
   );
 }
 
-// Small icon-only toggle instead of a full-width labeled tab bar — lives in
-// the topbar (next to the breadcrumb, always rendered regardless of which
-// panel is active) rather than its own row, since on mobile the nav plus
-// this section's own headline already eat most of the viewport before any
-// chat content shows. Same sliding-pill technique as before, just applied
-// to two small squares instead of full-width labeled tabs. The sources
-// badge is the only feedback that anything changed over there when a
-// question resolves while you're still looking at the Chat panel.
 function AssistantTabToggle({ activeTab, onChange, sourcesCount }) {
   const tabRefs = useRef({});
 
-  // Standard ARIA tabs roving-tabindex pattern: arrow keys move both focus
-  // and selection between the two tabs instead of requiring Tab+Enter.
   const handleKeyDown = (event) => {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
@@ -196,15 +176,6 @@ export default function AssistantSection() {
     if (window.innerWidth <= 900) setIsMobile(true);
   }, []);
 
-  // Scroll only the bounded .chat-thread container itself, not
-  // scrollIntoView — that walks up through every scrollable ancestor
-  // including the page itself, which yanks the whole viewport down to this
-  // section even when a question was asked from Hero's composer (Hero and
-  // this section share one chat instance, so every history change fires
-  // here regardless of which composer triggered it). Also re-runs when the
-  // mobile Chat tab becomes active again — switching tabs remounts
-  // .chat-thread, which would otherwise land scrolled to the top instead of
-  // the latest message.
   useEffect(() => {
     if (isMobile && activeTab !== "chat") return;
     const el = threadRef.current;
@@ -237,12 +208,6 @@ export default function AssistantSection() {
               cosine · top-k 6
             </div>
           </div>
-          {/* Was "ollama, local / groq — chat" — Ollama's role is already
-              covered by the RETRIEVAL card above (embeddings for pgvector);
-              this card is specifically about what generates the answer
-              text. Reflects whichever provider actually answered the
-              latest question — chat.js falls back to Gemini when Groq's
-              quota is exhausted, so this shouldn't just always say "groq". */}
           <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.65)}>
             <div className="assistant-section__sidebar-block-label">MODEL</div>
             <div className="assistant-section__sidebar-block-value">{chat.provider || "groq"}</div>
@@ -273,21 +238,10 @@ export default function AssistantSection() {
         />
       </div>
       <div className="assistant-section__main-inner">
-        {/* Delay used to stagger behind the topbar (1s/1.15s) for the
-            one-time page-scroll reveal, but this whole panel also remounts
-            on every mobile tab switch back to Chat — replaying that same
-            delay there made the title visibly lag behind the chat rows
-            below it, which animate in via their own independent trigger at
-            delay 0. Matching that keeps title and messages in sync on every
-            replay, at the cost of a slightly less staggered first reveal. */}
         <h3 className="assistant-section__title">
           <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0) }}>Stop reading about me.</span>
           <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0.15) }}>Ask instead.</span>
         </h3>
-        {/* On mobile, once a question is asked, the subtitle and suggested
-            chips are just dead weight above the fold pushing the actual
-            conversation (and the tab toggle back up top) further out of
-            reach — desktop has room to keep them, mobile doesn't. */}
         {!(isMobile && chat.open) && (
           <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
             This is the same assistant I built for Hermes, pointed at my own repos and CV. It shows the chunks it

@@ -67,9 +67,6 @@ export default function ScrambleText({ lines, as: Tag = "span" }) {
 
   return (
     <Tag ref={ref} aria-label={lines.join(" ")}>
-      {/* The scramble is purely decorative and passes through gibberish
-          mid-animation — hidden from assistive tech, which gets the real
-          text immediately via aria-label above instead. */}
       <span aria-hidden="true">
         {display.map((line, i) => (
           <span key={i}>

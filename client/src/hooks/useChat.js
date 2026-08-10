@@ -17,17 +17,6 @@ const emptyTurn = () => ({
   model: null,
 });
 
-// A list of turns, not one flat turn — so a caller that wants the full
-// back-and-forth (AssistantSection's scrollable chat) can render `history`,
-// while a caller that only ever shows the latest exchange (StackSection's
-// own instance) keeps working unchanged against the spread-out "current
-// turn" fields, which are just a view over the last item. Each turn also
-// carries the `origin` string passed to `ask()` (or null) — Hero shares
-// this same instance with AssistantSection so a question asked in Hero
-// still shows up in the Intermission's full history, but Hero itself must
-// not reflect the globally-latest turn if that turn was actually started
-// from the Intermission's own composer — it looks up its own turn by
-// origin instead of trusting `current`.
 export function useChat() {
   const [turns, setTurns] = useState([]);
   const controllerRef = useRef(null);
@@ -63,11 +52,6 @@ export function useChat() {
             updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, done: true, provider, model }));
           },
           onError: (error) => {
-            // Clears any partial text already streamed in, not just future
-            // tokens — the backend can flag a response mid-stream (e.g. a
-            // caught system-prompt leak), after a few tokens of it already
-            // went out. The error message should be the only thing shown,
-            // never a fragment of whatever got flagged.
             updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, text: "", hasText: false, error, done: true }));
           },
         },

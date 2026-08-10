@@ -41,19 +41,11 @@ function useEmblaControls(emblaApi) {
 }
 
 export default function MotionCarousel({ slides }) {
-  // containScroll:false + matching CSS padding on the viewport (see
-  // .motion-carousel__viewport) so align:"center" also centers the first
-  // and last slide, not just the interior ones (Embla's default trims the
-  // edge snap points, which is what made them hug the container edges).
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", containScroll: false });
   const { selectedIndex, scrollSnaps, prevDisabled, nextDisabled, onDotClick, onPrev, onNext } =
     useEmblaControls(emblaApi);
   const [zoomedIndex, setZoomedIndex] = useState(null);
 
-  // Lightbox prev/next also moves the underlying carousel, so closing it
-  // (or the "see exactly how it answered" style continuity elsewhere on the
-  // site) leaves the strip on whichever slide was last viewed, not wherever
-  // it happened to be when the lightbox was first opened.
   const zoomPrev = useCallback(() => {
     setZoomedIndex((i) => {
       if (i == null) return i;
@@ -185,8 +177,6 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
       if (event.key === "Escape") onClose();
       if (event.key === "ArrowLeft") onPrev();
       if (event.key === "ArrowRight") onNext();
-      // Basic focus trap — keeps Tab cycling within the dialog's own
-      // focusable elements instead of escaping into the page behind it.
       if (event.key === "Tab") {
         const focusable = containerRef.current?.querySelectorAll(
           'button, [href], [tabindex]:not([tabindex="-1"])'
@@ -212,10 +202,6 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
     };
   }, [slide, onClose, onPrev, onNext]);
 
-  // Move focus into the dialog when it opens (the close button, so Escape/
-  // Tab both work immediately) and restore it to whatever triggered the
-  // lightbox once it closes, instead of leaving focus stranded on a
-  // now-hidden element.
   useEffect(() => {
     if (slide) {
       previouslyFocused.current = document.activeElement;
@@ -279,11 +265,6 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
             exit={{ opacity: 0, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.9 }}
             onClick={(event) => event.stopPropagation()}
-            // Same pointer gesture covers mouse drag and touch swipe, so
-            // this is prev/next on mobile for free — no separate touch
-            // handling needed. dragConstraints pins it back to center once
-            // released; the constraint itself never lets it travel far
-            // enough to look like it's actually panning.
             drag={slides.length > 1 ? "x" : false}
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.7}

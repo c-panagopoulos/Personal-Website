@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-// Fires once, the moment a section actually enters the viewport — not on
-// mount. A blind timeout fires regardless of scroll position (sections animate
-// off-screen); this instead: waits two rAFs for layout to settle, checks
-// getBoundingClientRect immediately (covers sections already in view on load),
-// then falls back to an IntersectionObserver plus a passive scroll/resize
-// re-check (some observer setups miss the first paint in composed trees).
 export function useSceneTrigger({ threshold = 0.15 } = {}) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);

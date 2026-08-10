@@ -29,9 +29,6 @@ export default function App() {
           Skip to main content
         </a>
         <NavBar style={{ animation: "heroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 1.15s both" }} />
-        {/* tabIndex=-1: a plain <main> isn't natively focusable, so
-            following the skip link would scroll here without actually
-            moving keyboard focus — this makes the fragment jump land. */}
         <main id="main" tabIndex={-1}>
         <Hero />
 
@@ -111,7 +108,7 @@ export default function App() {
           <StatementReveal
             as="p"
             align="center"
-            style={{ fontSize: "3.2rem" }}
+            style={{ fontSize: "clamp(1.6rem, 1rem + 3.2vw, 3.2rem)" }}
             lines={[
               "Years on a support line before I wrote a line of code.",
               <>

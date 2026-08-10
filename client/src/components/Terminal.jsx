@@ -216,10 +216,6 @@ export default function Terminal({
   );
 
   return (
-    // Purely decorative — a simulated character-by-character typing demo
-    // whose content (docker/compose commands) is already covered in real
-    // prose around it. Hidden from assistive tech instead of exposing a
-    // constantly-mutating half-typed command line.
     <div ref={containerRef} aria-hidden="true" className={["terminal", className].filter(Boolean).join(" ")}>
       <div className="terminal__frame">
         <div className="terminal__bar">

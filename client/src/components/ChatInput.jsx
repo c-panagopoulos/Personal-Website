@@ -87,11 +87,6 @@ export default function ChatInput({ onSend, placeholder, disabled, variant = "he
     );
   }
 
-  // Once there's an answer to show/hide, the otherwise-decorative prompt
-  // glyph doubles as a collapse toggle — rotating from "❯" to pointing down
-  // mirrors the drawer's own open state, and clicking it again just hides
-  // the drawer (chat.history is untouched, so reopening shows the same
-  // answer rather than re-asking).
   const prompt = onPromptClick ? (
     <button
       type="button"

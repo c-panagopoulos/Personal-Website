@@ -19,8 +19,6 @@ const DotField = memo(
     waveAmplitude = 0,
     gradientFrom = "rgba(211, 218, 217, 0.3)",
     gradientTo = "rgba(68, 68, 78, 0.4)",
-    // "Thinking" ring: an expanding glow wave from the field's center,
-    // looping while true. Independent of the cursor bulge above.
     pulseActive = false,
     pulseColor = "#9c8683",
     pulseSpeed = 1,
@@ -99,11 +97,6 @@ const DotField = memo(
       }
 
       function onMouseMove(e) {
-        // Measured fresh (not cached from the last resize) so a layout
-        // shift elsewhere on the page — e.g. an element above this canvas
-        // changing height — can't leave the cursor mapping stale; resize
-        // and ResizeObserver only fire when this canvas's own box changes,
-        // not when its position on the page moves.
         const rect = canvas.getBoundingClientRect();
         mouseRef.current.x = e.clientX - rect.left;
         mouseRef.current.y = e.clientY - rect.top;
@@ -133,10 +126,6 @@ const DotField = memo(
         const len = dots.length;
         const t = frameCount * 0.02;
 
-        // Proximity-based, not speed-based: the original decays engagement
-        // to 0 the instant the cursor stops moving, which reads as "the
-        // bulge doesn't work" on a still hover. Keep it active for as long
-        // as the cursor is actually near the field.
         const withinField = m.x > -p.cursorRadius && m.x < w + p.cursorRadius && m.y > -p.cursorRadius && m.y < h + p.cursorRadius;
         const targetEngagement = withinField ? 1 : 0;
         engagement.current += (targetEngagement - engagement.current) * 0.12;
@@ -252,9 +241,6 @@ const DotField = memo(
       window.addEventListener("mousemove", onMouseMove, { passive: true });
       rafRef.current = requestAnimationFrame(tick);
 
-      // The original only re-measured on window resize, so a parent that
-      // grows from its own content (e.g. a chat bubble expanding as text
-      // streams in) left the dot field clipped to its initial, smaller size.
       const parentResizeObserver = new ResizeObserver(resize);
       parentResizeObserver.observe(canvas.parentElement);
 

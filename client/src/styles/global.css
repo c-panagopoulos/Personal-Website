@@ -1,12 +1,6 @@
 :root {
-  /* Set (and kept in sync on resize) by ResizableNavbar.jsx from the nav's
-     real rendered height — this fallback only applies before that first
-     measurement lands. */
   --nav-height: 64px;
 
-  /* Backgrounds — a tight family of near-black warm-charcoal tones, each
-     only a couple of points apart, so consecutive sections read as scenes
-     of one story rather than distinct flat blocks. */
   --bg: #242129;
   --scene-2: #25222b;
   --scene-3: #27242d;
@@ -14,15 +8,12 @@
   --surface: #2d2a35;
   --surface-elevated: #35323d;
 
-  /* Neutral borders — separate content, never colored */
   --border: rgba(255, 255, 255, 0.05);
   --border-strong: rgba(255, 255, 255, 0.09);
 
-  /* Neutral shadows */
   --shadow-soft: rgba(0, 0, 0, 0.25);
   --shadow-strong: rgba(0, 0, 0, 0.35);
 
-  /* Text — one base color, alpha steps for hierarchy */
   --text-primary: #d3dad9;
   --text-soft: rgba(211, 218, 217, 0.85);
   --text-secondary: rgba(211, 218, 217, 0.68);
@@ -30,7 +21,6 @@
   --text-quiet: rgba(211, 218, 217, 0.32);
   --text-faint: rgba(211, 218, 217, 0.2);
 
-  /* Accent — interactive only: buttons, hover, active, focus, links, selected chips */
   --accent: #715a5a;
   --accent-hover: #8d7b7b;
   --accent-text: #c7a8a8;
@@ -39,11 +29,6 @@
   --accent-bg-active: rgba(113, 90, 90, 0.2);
   --accent-border: rgba(113, 90, 90, 0.4);
 
-  /* A few brighter/deeper variants on the existing surface and border
-     families, used where a panel needs to read as raised or a border needs
-     more contrast than --border/--border-strong give (e.g. cards sitting on
-     top of an already-dark sidebar). Not new hues — same families, wider
-     range. */
   --surface-deep: #201e25;
   --surface-emphasis: #3d3944;
   --border-soft: rgba(255, 255, 255, 0.1);
@@ -125,7 +110,6 @@ button {
   }
 }
 
-/* --- Cinematic scroll-triggered entrances (see lib/anim.js + useSceneTrigger) --- */
 @keyframes heroRise {
   from {
     opacity: 0;
@@ -382,8 +366,6 @@ button {
   background: #1e1c22;
   border: 1px solid var(--border-brighter);
 }
-/* Unshrunk (top of page): edge-to-edge instead of the shrunk state's
-   centered, width-capped pill — logo hugs the left edge, links the right. */
 .resizable-navbar__body--wide {
   max-width: none;
 }
@@ -398,10 +380,6 @@ button {
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  /* This box spans the full NavBody width (inset: 0), including the empty
-     flex space on either side of the centered links — in the shrunk/compact
-     state that empty space sits directly over the logo button and was
-     swallowing its clicks. Only the links themselves need to be clickable. */
   pointer-events: none;
 }
 @media (min-width: 1024px) {
@@ -423,9 +401,6 @@ button {
 .resizable-navbar__items--compact .resizable-navbar__item {
   padding: 8px 11px;
 }
-/* Unshrunk: a normal flex child (not the shrunk state's absolute-centered
-   overlay) so .resizable-navbar__body's own space-between pushes it to the
-   far right, opposite the logo. */
 .resizable-navbar__items--edge {
   position: static;
   flex: none;
@@ -568,19 +543,10 @@ button {
 .nav__name span {
   color: var(--text-tertiary);
 }
-/* --- Hero --- */
 .hero {
   position: relative;
   background: var(--bg);
 }
-/* Absolutely positioned within .hero (not position:fixed) so it scrolls
-   away naturally with the rest of the hero content — an earlier fixed,
-   viewport-height version stayed pinned behind every later section forever,
-   subtly tinting every section's own background site-wide. Extends upward
-   by a fixed offset (comfortably past the navbar's ~54-60px real height)
-   to still cover the nav strip above .hero, since NavBar lives at .page
-   level (sibling of Hero, not nested inside it) so it can stay sticky past
-   the hero section. */
 .hero__backdrop {
   position: absolute;
   top: -80px;
@@ -594,12 +560,6 @@ button {
 
 .hero__left {
   position: relative;
-  /* Not a plain 100vh — the sticky nav lives outside .hero (a sibling in
-     App.jsx, so it can stay sticky past the hero section) and still
-     reserves its own flow space above it, so a full 100vh box here always
-     extends past the visible viewport by the nav's height. That pushes the
-     vertically-centered content down off-center within the box that's
-     actually visible. */
   min-height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
@@ -679,9 +639,6 @@ button {
   flex-direction: column;
   gap: 14px;
 }
-/* position:fixed (not absolute-within-hero__left) so the curtain sweeps the
-   full viewport including the sticky navbar's strip, not just the hero body
-   below it. z-index sits above the navbar's own 40 so it covers it. */
 .hero__curtain {
   position: fixed;
   top: 0;
@@ -719,9 +676,6 @@ button {
   color: var(--text-tertiary);
 }
 
-/* Answer drawer: expands beneath the input instead of floating above it.
-   No border/margin of its own — it's inside .hero-composer's shared shell,
-   flush against the input row right above it. */
 .hero-answer {
   display: grid;
   grid-template-rows: 0fr;
@@ -735,9 +689,6 @@ button {
   min-height: 0;
 }
 .hero-answer__inner {
-  /* Blends from the input box's own background (rgba(25,23,27,.85)) into
-     the darker answer color instead of an abrupt seam where the drawer
-     opens right beneath it. */
   background: linear-gradient(180deg, rgba(25, 23, 27, 0.85) 0%, rgba(16, 15, 17, 0.9) 28px, rgba(16, 15, 17, 0.9) 100%);
   padding: 18px 22px 20px;
   display: flex;
@@ -772,7 +723,6 @@ button {
   margin-top: 2px;
 }
 
-/* --- Assistant widget (shared by hero mini card and full section) --- */
 .assistant-card {
   background: rgba(55, 53, 62, 0.85);
   border: 1px solid var(--border-strong);
@@ -908,10 +858,6 @@ button {
   mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
 }
 
-/* Shared scrollbar treatment for the two scrollable lists in the assistant
-   section (retrieved chunks, chat thread) — thin and reserved at all times
-   (so nothing shifts width on hover), but the thumb only takes color when
-   the pointer is actually over the list, invisible otherwise. */
 .retrieved-chunks,
 .chat-thread {
   scrollbar-width: thin;
@@ -1026,8 +972,6 @@ button {
   padding-top: 8px;
 }
 
-/* Border/shadow/radius live on .hero-composer (the shared shell around
-   this and .hero-answer below it) instead of here — see that rule for why. */
 .hero-composer {
   border-radius: 16px;
   border: 1px solid rgba(113, 90, 90, 0.32);
@@ -1050,10 +994,6 @@ button {
   color: #a68b8b;
   font-size: 16px;
 }
-/* Once there's an answer, this doubles as a collapse toggle — rotates to
-   point down (open) or back to "❯" (collapsed), timed with the same
-   duration/easing as .hero-answer's own grid-template-rows transition so
-   the glyph and the drawer read as one movement. */
 .chat-input__prompt--toggle {
   background: none;
   border: none;
@@ -1150,11 +1090,6 @@ button {
   display: flex;
   align-items: center;
   padding: 0 56px;
-  /* Clips StatementReveal's zoomSettle overflow (starts at scale(1.7) while
-     paused/off-screen) locally, instead of on html/body — overflow-x:hidden
-     on an ancestor of the sticky nav silently breaks position:sticky, which
-     is exactly what happened when this lived on body. .statement is a
-     sibling of the nav, not an ancestor, so this can't touch it. */
   overflow: hidden;
   background-color: var(--scene-3);
   background-image: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.02) 0 2px, transparent 2px 26px);
@@ -1167,25 +1102,14 @@ button {
   letter-spacing: -0.05em;
   color: var(--text-primary);
   max-width: 1000px;
-  /* At this size a single long word (e.g. "infrastructure") can be wider
-     than the whole line on a narrow phone — without this it overflows past
-     the right padding instead of wrapping, which reads as off-center. Kept
-     as a safety net; the media query below does the real work of avoiding
-     the break in the first place. */
   overflow-wrap: break-word;
 }
 @media (max-width: 360px) {
-  /* Below ~357px even the fluid clamp above renders "infrastructure" wider
-     than the line, forcing an ugly mid-word break. Bisected against the
-     real rendered word (not just an isolated width estimate) across
-     300-360px so it stays intact on its own line at every width in this
-     band — everything wider than 360px already fits with the clamp above. */
   .statement__text {
     font-size: clamp(1.7rem, -1.4rem + 16.7vw, 2.3rem);
   }
 }
 
-/* --- Project scene --- */
 .scene {
   padding: 0 0 40px;
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px);
@@ -1399,10 +1323,6 @@ button {
   }
 }
 @media (max-width: 420px) {
-  /* Even the compact docker-ps column format (image + status + name, no
-     container ID) runs up to ~52 characters on the longest row — too wide
-     for 0.68rem/14px padding on a phone-width screen, wrapping every row
-     onto two lines. Shrink further so it fits on one line. */
   .terminal {
     font-size: 0.54rem;
   }
@@ -1413,11 +1333,6 @@ button {
 
 .scene__grid {
   display: grid;
-  /* minmax(0, 1fr), not bare 1fr — bare 1fr's minimum is auto, which floors
-     the track at its content's min-content width instead of letting it
-     shrink to fit, so the column (and the padding after it) got pushed past
-     the container on narrow screens. Same bug as .assistant-section__body
-     had, just not yet caught here. */
   grid-template-columns: minmax(0, 1fr) 400px;
   gap: 56px;
   padding: 40px 56px 0;
@@ -1429,8 +1344,6 @@ button {
 @media (max-width: 900px) {
   .scene__grid {
     grid-template-columns: minmax(0, 1fr);
-    /* Was 56px a side — same as desktop — noticeably tighter than Hero's
-       own ~20-26px mobile padding right above it in the page. */
     padding: 40px 20px 0;
   }
 }
@@ -1476,8 +1389,6 @@ button {
   text-wrap: pretty;
 }
 
-/* Evidence the project is real, before any mention of the stack. Spacing does
-   the hierarchy work here: tight within the list, generous around it. */
 .scene__proof {
   margin: 36px 0 0;
   padding: 0;
@@ -1506,7 +1417,6 @@ button {
   color: var(--text-brightest);
 }
 
-/* A single engineering note — what's technically interesting, quoted like an annotation. */
 .scene__how {
   margin: 32px 0 0;
   max-width: 580px;
@@ -1519,7 +1429,6 @@ button {
   color: rgba(211, 218, 217, 0.7);
 }
 
-/* Metadata — last, quietest: terminal-style spec sheet, not a headline. */
 .scene__stack {
   display: flex;
   flex-direction: column;
@@ -1551,8 +1460,6 @@ button {
 .scene__stack--inline .scene__stack-group {
   text-align: left;
 }
-/* Grid variant (TapStudy / Hermes side panel only — Homelab uses --inline
-   and is deliberately excluded from this boxed, higher-contrast treatment). */
 .scene__stack-panel {
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1602,7 +1509,6 @@ button {
   line-height: 1.5;
 }
 
-/* --- Evidence panels: project-specific proof, not screenshots or badges --- */
 .scene__side {
   display: flex;
   flex-direction: column;
@@ -1622,13 +1528,7 @@ button {
   border-radius: 8px;
   padding: 13px 20px;
   text-decoration: none;
-  /* Lets the GithubMark icon's fill="currentColor" pick up the right shade
-     without its own override — dark here (light background), overridden to
-     light below for the secondary (transparent-background) variant. */
   color: var(--bg);
-  /* transform is animated inline by the Button component's whileHover/
-     whileTap (motion/react) — an inline style always wins over this
-     transition anyway, so only background is left for CSS to own. */
   transition: background 0.25s ease;
 }
 .btn:hover {
@@ -1654,10 +1554,6 @@ button {
   gap: 14px;
 }
 @media (max-width: 480px) {
-  /* At full size the two buttons' combined width only fits from a certain
-     viewport width up — below that they'd overflow the page instead of
-     sitting side by side. Shrink padding/type just enough to buy back the
-     needed width. */
   .scene__cta-row {
     gap: 10px;
   }
@@ -1670,7 +1566,6 @@ button {
   }
 }
 
-/* --- Homelab / statement sections --- */
 .section-lead {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 400px;
@@ -1712,7 +1607,6 @@ button {
   text-wrap: pretty;
 }
 
-/* --- Assistant intermission section --- */
 .assistant-section {
   height: calc(100vh - var(--nav-height));
   display: flex;
@@ -1750,10 +1644,6 @@ button {
   color: rgba(211, 218, 217, 0.55);
 }
 @media (max-width: 380px) {
-  /* The icon toggle now shares this row with the breadcrumb (see
-     .assistant-tab-toggle below) — below ~380px there's no longer room for
-     the full "retrieval-online" status too without wrapping to a second
-     line, so drop the least essential part of the breadcrumb first. */
   .assistant-breadcrumb__status {
     display: none;
   }
@@ -1769,22 +1659,9 @@ button {
 }
 @media (max-width: 900px) {
   .assistant-section__body {
-    /* minmax(0, 1fr), not bare 1fr — otherwise the track grows to fit a
-       child's intrinsic min-content width instead of clamping to the
-       container, which was overflowing the page by ~5px on phones. */
     grid-template-columns: minmax(0, 1fr);
   }
 }
-/* Mobile-only: chat + sources as two tabs instead of stacking both in one
-   column — the sources/chunks panel grows with the conversation and was
-   pushing new chat messages further down the page every time. Trigger UI is
-   a small icon toggle in the topbar (not its own full-width row) — the nav
-   plus this section's own headline already eat most of the viewport on
-   mobile before any chat content shows, so a labeled tab bar was just more
-   chrome eating the same scarce space. Sliding-pill indicator and
-   cross-fade/blur panel switch, same technique as animate-ui's Tabs
-   (layoutId shared-element transition + AnimatePresence), rewritten
-   directly since this only ever needs two fixed tabs. */
 .assistant-tab-toggle {
   display: flex;
   gap: 4px;
@@ -1817,8 +1694,6 @@ button {
   border: 1px solid var(--border-bright);
   border-radius: 8px;
 }
-/* Only feedback that the Sources panel changed while you're still looking
-   at Chat — count of chunks the latest question retrieved. */
 .assistant-tab-toggle__badge {
   position: absolute;
   top: -4px;
@@ -1851,9 +1726,6 @@ button {
   flex-direction: column;
   overflow: hidden;
 }
-/* The swapped-in panel itself — fills the fixed height above exactly, so
-   Chat and Sources always occupy the same footprint (idle or not); whatever
-   overflows scrolls inside .chat-thread / .retrieved-chunks, not the page. */
 .assistant-tabs__panel {
   flex: 1;
   min-height: 0;
@@ -1940,11 +1812,6 @@ button {
     max-width: 100%;
   }
   .assistant-section__main {
-    /* Was 48px 56px — 56px a side left barely any room for the input field
-       to actually type into on a phone-width screen. Top trimmed down from
-       32px too, now that the tab toggle sits right above instead of a
-       separate full-width tab row — less dead space needed before the
-       title. */
     padding: 18px 18px 32px;
   }
 }
@@ -2008,12 +1875,6 @@ button {
 .chat-bubble__content {
   flex: 1;
   min-width: 0;
-  /* Not var(--scene-4) — that's the same color as .assistant-section__main
-     itself (and the dot canvas is opaque-covered inside this card's own
-     background), so the card had zero visual separation from the page
-     around it. --surface-elevated is the same "raised card" token already
-     used for the sidebar cards, so this reads as a deliberately raised
-     element instead of a flat, textureless gap in the background. */
   background: var(--surface-elevated);
   border-left: 2px solid var(--accent);
   border-radius: 12px;
@@ -2047,9 +1908,6 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  /* Same resting/focus colors as .chat-input (Hero's composer) for
-     consistency between the two — just without its big drop shadow, which
-     doesn't suit sitting inside this section's own bordered card. */
   border: 1px solid rgba(113, 90, 90, 0.32);
   border-radius: 10px;
   padding: 12px 14px;
@@ -2093,7 +1951,6 @@ button {
   cursor: not-allowed;
 }
 
-/* --- Stack section --- */
 .stack-section {
   padding: 96px 56px;
   background: var(--surface);
@@ -2251,14 +2108,9 @@ button {
   justify-content: center;
   gap: 12px;
   background: rgba(14, 13, 15, 0.55);
-  /* Keeps the mobile auto-scroll-to-answer from landing flush under the
-     sticky navbar — scroll-margin-top is respected by scrollIntoView(). */
   scroll-margin-top: calc(var(--nav-height, 60px) + 20px);
 }
 @media (max-width: 900px) {
-  /* In a column flex container (mobile's .stack-panel), flex-basis and
-     min-height apply to the height axis — the desktop sizing above forced
-     this into a tall, mostly-empty block instead of hugging its content. */
   .stack-answer-panel {
     flex: 1 1 auto;
     min-height: 0;
@@ -2289,7 +2141,6 @@ button {
   animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
-/* --- Contact --- */
 .contact-section {
   padding: 96px 56px 72px;
   background: var(--bg);
@@ -2397,19 +2248,11 @@ button {
   display: flex;
   min-height: 200vh;
   flex-shrink: 0;
-  /* Bigger than the original's 0.35 — at that size, combined with the
-     scroll-linked growth animation, the "screen fills the frame" moment
-     barely registered on phones. */
   transform: scale(0.6);
   transform-origin: top center;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* padding lives in this element's own (unscaled) coordinate space, so it
-     gets visually shrunk by the transform: scale(0.6) above along with
-     everything else — needs to be well more than the sticky nav's height to
-     actually clear it. Zero padding here (matching the original component)
-     let the title render straight under/behind the nav on phones. */
   padding: 280px 0 80px;
   perspective: 800px;
 }
@@ -2661,7 +2504,6 @@ button {
   }
 }
 
-/* --- Shader background panels (chat surfaces) --- */
 .shader-panel {
   position: relative;
   isolation: isolate;
@@ -2675,8 +2517,6 @@ button {
   position: absolute;
   inset: 0;
   z-index: 0;
-  /* DotField controls its own visual weight via gradientFrom/gradientTo
-     alpha, so this wrapper stays fully opaque (no extra dimming on top). */
   opacity: 1;
   pointer-events: none;
   transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -2720,8 +2560,6 @@ button {
   overflow: hidden;
   border-radius: 8px;
   --slide-basis: 82%;
-  /* Matches the slide's flex-basis so align:"center" can also center the
-     first/last slide instead of hugging them against the viewport edge. */
   padding: 0 calc((100% - var(--slide-basis)) / 2);
 }
 .motion-carousel__track {
@@ -2732,9 +2570,6 @@ button {
   flex: 0 0 var(--slide-basis);
   min-width: 0;
   margin-right: 16px;
-  /* Match the actual screenshots (~1920x960) instead of a tall fixed height,
-     so object-fit: contain isn't shrinking them into a thin letterboxed
-     strip. */
   aspect-ratio: 1.98 / 1;
   display: flex;
 }
@@ -2943,7 +2778,6 @@ button {
   right: 20px;
 }
 
-/* --- Accessibility --- */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -2977,14 +2811,6 @@ button {
   outline-offset: 2px;
 }
 
-/* This whole site is built around scroll-triggered entrance animations
-   (see lib/anim.js) plus a few large parallax/scramble effects — all real
-   motion, not subtle transitions, which is exactly what
-   prefers-reduced-motion exists for. Collapse every CSS animation/
-   transition to effectively instant instead of trying to special-case each
-   one; content still appears (animationPlayState still flips to "running"),
-   it just stops moving. motion/react's own animations are handled
-   separately via <MotionConfig reducedMotion="user"> in main.jsx. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

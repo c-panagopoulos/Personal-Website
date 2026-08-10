@@ -18,9 +18,6 @@ const CONTAINERS = [
   { id: "8983d8dbc8c4", image: "vaultwarden/server:latest", status: "Up 38 seconds (starting)", name: "vaultwarden" },
 ];
 
-// Strips a registry hostname + org segment (e.g. "ghcr.io/mealie-recipes/")
-// so image names stay readable on narrow terminals; "vaultwarden/server:latest"
-// has no such prefix and is left as-is.
 function shortenImage(image) {
   return image.replace(/^[\w.-]+\.[a-z]{2,}\/[\w-]+\//, "");
 }

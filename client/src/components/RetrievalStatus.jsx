@@ -28,8 +28,6 @@ export function ThinkingDots({ note }) {
 
 export function SourceChips({ sources }) {
   if (!sources?.length) return null;
-  // Multiple retrieved chunks often come from the same file — one chip per
-  // unique source, not one per chunk.
   const uniqueSources = [...new Set(sources.map((src) => src.source))];
   return (
     <div className="source-chips">
@@ -42,12 +40,6 @@ export function SourceChips({ sources }) {
   );
 }
 
-// Was "4.8em" — em on this element resolves against an inherited font-size
-// (13.3px) that doesn't match the snippet text's own (10.56px), so it
-// actually clipped ~3.5 lines instead of 3, cutting the 4th line off
-// mid-character. A precise px value (margin-top 6px + 3 lines at this
-// text's real 16.368px line-height) shows exactly 3 full lines, never a
-// partial one.
 const COLLAPSED_SNIPPET_HEIGHT = "56px";
 
 export function RetrievedChunks({ sources, threshold }) {
@@ -63,24 +55,12 @@ export function RetrievedChunks({ sources, threshold }) {
     setOverflowing(el.scrollHeight > el.clientHeight + 1);
   }, []);
 
-  // Re-check whenever the chunk list itself changes (new question) or an
-  // entry expands/collapses (its clip height changes over the transition,
-  // so re-check once it's settled too).
   useEffect(() => {
     checkOverflow();
     const timer = setTimeout(checkOverflow, 320);
     return () => clearTimeout(timer);
   }, [sources, expandedIndex, checkOverflow]);
 
-  // Measure each chunk's true full-text height once up front (the snippet
-  // paragraph itself is never clamped — only its wrapper's max-height is —
-  // so scrollHeight always reports the real, unclipped height) so expand
-  // can animate to an exact target instead of a generic large max-height,
-  // which makes short chunks finish "growing" almost instantly instead of
-  // over the full transition. scrollHeight alone omits the paragraph's own
-  // margin-top, which the clip wrapper still has to make room for — without
-  // it the expanded clip lands a few px short and clips the last line the
-  // same way the collapsed one did.
   useEffect(() => {
     const next = {};
     snippetRefs.current.forEach((el, i) => {

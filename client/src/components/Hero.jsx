@@ -19,9 +19,6 @@ function randomScrambleChar() {
   return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
 }
 
-// Reveals `text` by resolving random scramble characters into the real
-// string over `duration`ms, starting `delay`ms after mount — used to give
-// the byline's two lines their own independent, staggered reveal.
 function useScramble(text, delay, duration) {
   const [display, setDisplay] = useState("");
 
@@ -54,18 +51,8 @@ function useScramble(text, delay, duration) {
 
 export default function Hero() {
   const chat = useSharedChat();
-  // Hero shares one chat instance with the Intermission section (asking in
-  // Hero seeds Intermission's history, so "continue below" has something to
-  // show) — but that means the globally-latest turn isn't necessarily
-  // Hero's own. Look up the turn Hero itself started instead of trusting
-  // the shared "current turn" view, or a question asked from Intermission
-  // first would incorrectly show up here and lock this composer too.
   const heroTurn = chat.history.find((t) => t.origin === "hero");
   const open = Boolean(heroTurn);
-  // Collapsing the drawer via the prompt-icon toggle is purely a display
-  // choice, layered on top of `open` — it never touches chat.history, so
-  // reopening it (or asking from the assistant section instead) always
-  // shows the same answer instead of losing it.
   const [manuallyClosed, setManuallyClosed] = useState(false);
   const panelOpen = open && !manuallyClosed;
   const nameDisplay = useScramble(NAME_LINE, 550, 650);
@@ -89,9 +76,6 @@ export default function Hero() {
               alt="Charalampos"
               style={{ animation: "avatarSpring 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both" }}
             />
-            {/* Scrambling reveal is decorative and passes through gibberish
-                mid-animation — hidden from assistive tech, which gets the
-                real name/role immediately via aria-label instead. */}
             <span className="hero__label-group" aria-label={`${NAME_LINE}, ${ROLE_LINE}`}>
               <span className="hero__label" style={{ whiteSpace: "pre", minWidth: 1 }} aria-hidden="true">
                 {nameDisplay || " "}
@@ -115,11 +99,6 @@ export default function Hero() {
           </p>
 
           <div className="hero__interact">
-            {/* Input row and answer drawer share one bordered/shadowed shell
-                (overflow:hidden clips both to the same rounded corners)
-                instead of each carrying its own border — otherwise there's
-                a visible seam (duplicate border lines + gap) exactly where
-                they should read as one continuous box. */}
             <div className="hero-composer" style={{ animation: `composerPop 0.7s ${EASE} 2s both` }}>
               <ChatInput
                 placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
@@ -143,11 +122,6 @@ export default function Hero() {
                       </p>
                     )}
                     <ChatError error={heroTurn?.error} />
-                    {/* Plain text, not a jump link — a click-to-#assistant
-                        anchor skips every section in between, which is
-                        exactly the scroll-through the rest of the page is
-                        built for. This just nudges them to keep scrolling
-                        naturally instead. */}
                     {heroTurn?.done && (
                       <span className="hero-answer__jump">keep scrolling to see how I answered ↓</span>
                     )}

@@ -9,9 +9,6 @@ import {
   MobileNavToggle,
 } from "./ResizableNavbar.jsx";
 
-// Order matches the actual page flow (assistant, then homelab, then stack) —
-// a mismatch here previously made the highlighted item jump around oddly
-// once scroll-spy landed on whichever section the visitor was really in.
 const LINKS = [
   { name: "work", link: "#scene-01" },
   { name: "assistant", link: "#assistant" },
@@ -22,10 +19,6 @@ const LINKS = [
 
 const SECTION_IDS = LINKS.map((item) => item.link.slice(1));
 
-// Whichever section's top has scrolled past the nav is "current" — not a
-// one-shot IntersectionObserver trigger, since this needs to keep tracking
-// as the visitor scrolls back and forth, and "work" should stay highlighted
-// across both project scenes between the scene-01 and assistant anchors.
 function useActiveSection(ids) {
   const [active, setActive] = useState(ids[0]);
 
@@ -36,10 +29,6 @@ function useActiveSection(ids) {
     let ticking = false;
     const update = () => {
       ticking = false;
-      // At the very bottom of the page the last section's top can never
-      // cross the offset line if it's shorter than a viewport, since the
-      // browser stops scrolling once it runs out of document — without this
-      // check, the last nav item can never light up.
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
       if (atBottom) {
         setActive(els[els.length - 1].id);
@@ -76,8 +65,6 @@ function scrollToTarget(el) {
   el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
 }
 
-// Shared by both the desktop pill nav and the mobile menu links — reads the
-// href straight off the clicked anchor instead of needing per-item handlers.
 function handleNavClick(event) {
   const href = event.currentTarget.getAttribute("href");
   if (!href || !href.startsWith("#")) return;
@@ -89,9 +76,6 @@ function handleNavClick(event) {
 
 function scrollToTop(event) {
   event.preventDefault();
-  // Scrolls the top of #main into view rather than calling window.scrollTo
-  // directly — same scrollIntoView path as the nav links above, kept
-  // consistent rather than mixing two different smooth-scroll APIs.
   const el = document.getElementById("main") || document.body;
   scrollToTarget(el);
 }

@@ -6,9 +6,6 @@ function scrollToContact(event) {
   el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
 }
 
-// Shared renderer for chat error turns — a plain message for most failures,
-// plus a nudge toward the contact section for rate-limited visitors instead
-// of just telling them to stop.
 export default function ChatError({ error, className = "chat-bubble__text--muted" }) {
   if (!error) return null;
   return (

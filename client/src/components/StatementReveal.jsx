@@ -1,11 +1,5 @@
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 
-// Cinematic zoom-settle + a radial vignette flash, once per block, replacing
-// the old scroll-driven diagonal-stripe mask reveal. The vignette is
-// position:fixed (true viewport edges) rather than absolute inside the
-// padded/max-width text column — an absolute inset:0 there only reaches the
-// column's own box, which reads as a visible dark rectangle instead of a
-// full-bleed spotlight fading into the section background.
 export default function StatementReveal({ as: Tag = "h2", lines, align = "left", style, ...rest }) {
   const [ref, visible] = useSceneTrigger({ threshold: 0.35 });
   const isCenter = align === "center";

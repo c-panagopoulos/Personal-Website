@@ -12,15 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(
   helmet({
-    // Google Fonts is a cross-origin subresource without CORP headers of
-    // its own; the default 'require-corp' embedder policy blocks it.
     crossOriginEmbedderPolicy: false,
-    // This app itself is only ever served over plain HTTP, whether that's
-    // localhost, Tailscale, or (once deployed) behind a Cloudflare Tunnel
-    // that terminates TLS at the edge. The default upgrade-insecure-requests
-    // directive rewrites every asset request to https:// regardless, which
-    // this origin can't answer, so the JS/CSS bundle fails to load entirely
-    // (a blank page) instead of just not being upgraded.
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {

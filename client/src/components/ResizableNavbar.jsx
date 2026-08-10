@@ -15,11 +15,6 @@ export function Navbar({ children, className = "", style }) {
     setVisible(latest > 100);
   });
 
-  // Exposed as a CSS var so viewport-height sections (e.g. the assistant
-  // section) can subtract the nav's real rendered height instead of a fixed
-  // 100vh — the nav is sticky and still reserves its own flow space above
-  // any section below it, so a plain 100vh section plus this nav always
-  // overflows the viewport by exactly the nav's height.
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -51,8 +46,6 @@ export function NavBody({ children, className = "", visible }) {
       style={{ minWidth: 460 }}
       className={`resizable-navbar__body ${visible ? "resizable-navbar__body--visible" : "resizable-navbar__body--wide"} ${className}`}
     >
-      {/* Match the original: NavBody clones `visible` onto its own children
-          too, so the logo/items can compact themselves as it shrinks. */}
       {Children.map(children, (child) => (isValidElement(child) ? cloneElement(child, { visible }) : child))}
     </motion.div>
   );

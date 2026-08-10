@@ -15,12 +15,7 @@ function interpolate(t, inputRange, outputRange) {
   return outputRange[last];
 }
 
-// Mirrors framer-motion's useScroll({ target, offset: ["start start", "end start"] }):
-// 0 when the element's top reaches the viewport top, 1 when its bottom does.
 function useScrollProgress(ref) {
-  // Reduced-motion users get the settled end state directly instead of a
-  // scroll-linked parallax — this is a JS-driven inline transform, so the
-  // CSS-level prefers-reduced-motion override in global.css can't reach it.
   const prefersReducedMotion =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const [progress, setProgress] = useState(prefersReducedMotion ? 1 : 0);
@@ -53,11 +48,6 @@ export default function MacbookScroll({ src, alt, title }) {
   const ref = useRef(null);
   const progress = useScrollProgress(ref);
 
-  // The original component caps mobile's growth at 1 instead of 1.5, which
-  // (combined with the smaller container scale in CSS) made the "screen
-  // grows to fill the frame" moment barely register on phones. Let it grow
-  // the same amount everywhere; the container's own CSS scale still keeps
-  // the resting size proportionate to the viewport.
   const scaleX = interpolate(progress, [0, 0.3], [1.2, 1.5]);
   const scaleY = interpolate(progress, [0, 0.3], [0.6, 1.5]);
   const translateY = interpolate(progress, [0, 1], [0, 1500]);
@@ -90,9 +80,6 @@ export default function MacbookScroll({ src, alt, title }) {
         <div
           className="macbook-scroll__lid-front"
           style={{
-            // Order matters for 3D transforms: match framer-motion's canonical
-            // composition order (translate, then scale, then rotate) exactly,
-            // or the rotated/scaled result lands in the wrong place.
             transform: `translateY(${translateY}px) scaleX(${scaleX}) scaleY(${scaleY}) rotateX(${rotate}deg)`,
           }}
         >
