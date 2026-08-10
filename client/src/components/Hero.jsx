@@ -109,33 +109,38 @@ export default function Hero() {
           </p>
 
           <div className="hero__interact">
-            <div style={{ animation: `composerPop 0.7s ${EASE} 2s both` }}>
+            {/* Input row and answer drawer share one bordered/shadowed shell
+                (overflow:hidden clips both to the same rounded corners)
+                instead of each carrying its own border — otherwise there's
+                a visible seam (duplicate border lines + gap) exactly where
+                they should read as one continuous box. */}
+            <div className="hero-composer" style={{ animation: `composerPop 0.7s ${EASE} 2s both` }}>
               <ChatInput
                 placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
                 onSend={(question) => chat.ask(question, "hero")}
                 disabled={open}
               />
-            </div>
 
-            <div className={"hero-answer" + (open ? " hero-answer--open" : "")}>
-              <div className="hero-answer__clip">
-                <div className="hero-answer__inner">
-                  <span className="hero-answer__label">ANSWER</span>
-                  {heroTurn?.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-                  {heroTurn?.showSources && <SourceChips sources={heroTurn.sources} />}
-                  {heroTurn?.isThinking && <ThinkingDots note="sources locked — writing an answer" />}
-                  {heroTurn?.hasText && (
-                    <p className="hero-answer__text" aria-live="polite">
-                      {heroTurn.text}
-                      {!heroTurn.done && <span className="caret" aria-hidden="true">▍</span>}
-                    </p>
-                  )}
-                  <ChatError error={heroTurn?.error} />
-                  {heroTurn?.done && (
-                    <a className="hero-answer__jump" href="#assistant">
-                      see exactly how it answered - continue below ↓
-                    </a>
-                  )}
+              <div className={"hero-answer" + (open ? " hero-answer--open" : "")}>
+                <div className="hero-answer__clip">
+                  <div className="hero-answer__inner">
+                    <span className="hero-answer__label">ANSWER</span>
+                    {heroTurn?.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
+                    {heroTurn?.showSources && <SourceChips sources={heroTurn.sources} />}
+                    {heroTurn?.isThinking && <ThinkingDots note="sources locked — writing an answer" />}
+                    {heroTurn?.hasText && (
+                      <p className="hero-answer__text" aria-live="polite">
+                        {heroTurn.text}
+                        {!heroTurn.done && <span className="caret" aria-hidden="true">▍</span>}
+                      </p>
+                    )}
+                    <ChatError error={heroTurn?.error} />
+                    {heroTurn?.done && (
+                      <a className="hero-answer__jump" href="#assistant">
+                        see exactly how it answered - continue below ↓
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
