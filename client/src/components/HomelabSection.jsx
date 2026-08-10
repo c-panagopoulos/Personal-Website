@@ -103,7 +103,7 @@ export default function HomelabSection() {
 
           <div style={{ marginTop: 40 }}>
             <span style={anim(visible, "ctaPop", 0.5, 2.8)}>
-              <Button href="https://github.com/c-panagopoulos" target="_blank" rel="noreferrer">
+              <Button href="https://github.com/c-panagopoulos/n8n-automations" target="_blank" rel="noreferrer">
                 <span className="btn__label">GitHub</span>
               </Button>
             </span>
