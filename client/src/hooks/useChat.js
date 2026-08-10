@@ -63,7 +63,12 @@ export function useChat() {
             updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, done: true, provider, model }));
           },
           onError: (error) => {
-            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, error, done: true }));
+            // Clears any partial text already streamed in, not just future
+            // tokens — the backend can flag a response mid-stream (e.g. a
+            // caught system-prompt leak), after a few tokens of it already
+            // went out. The error message should be the only thing shown,
+            // never a fragment of whatever got flagged.
+            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, text: "", hasText: false, error, done: true }));
           },
         },
         controller.signal
