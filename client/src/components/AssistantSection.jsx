@@ -215,11 +215,13 @@ export default function AssistantSection() {
         </div>
       </div>
       {chat.sources.length > 0 && <RetrievedChunks sources={chat.sources} threshold={chat.threshold} />}
-      <div className="assistant-section__sidebar-footnote" style={anim(visible, "rowRise", 0.4, 0.8)}>
-        IT ONLY ANSWERS FROM
-        <br />
-        WHAT IT CAN CITE
-      </div>
+      {!isMobile && (
+        <div className="assistant-section__sidebar-footnote" style={anim(visible, "rowRise", 0.4, 0.8)}>
+          IT ONLY ANSWERS FROM
+          <br />
+          WHAT IT CAN CITE
+        </div>
+      )}
     </div>
   );
 
@@ -288,9 +290,9 @@ export default function AssistantSection() {
         <div className="assistant-breadcrumb">
           <span className="assistant-breadcrumb__cp">cp</span>
           <span className="assistant-breadcrumb__sep">/</span>
-          <span className="assistant-breadcrumb__current">assistant</span>
+          <span className="assistant-breadcrumb__status">assistant</span>
           <span className="assistant-breadcrumb__sep">/</span>
-          <span className="assistant-breadcrumb__status">retrieval-online</span>
+          <span className="assistant-breadcrumb__current">retrieval-online</span>
         </div>
         {isMobile && (
           <AssistantTabToggle activeTab={activeTab} onChange={setActiveTab} sourcesCount={chat.sources.length} />
