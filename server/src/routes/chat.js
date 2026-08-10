@@ -5,9 +5,12 @@ import { chatStream } from "../groq.js";
 
 const router = Router();
 
-const SYSTEM_PROMPT = `You are the portfolio assistant for Charalampos Panagopoulos, a full-stack developer.
-Answer ONLY using the provided context. If the context doesn't contain the answer, say plainly that you
-don't have that indexed rather than guessing. Keep answers to 2-4 sentences, first person as Charalampos.`;
+// Overridable via the SYSTEM_PROMPT env var (single-line — .env/docker
+// compose interpolation doesn't handle real newlines) so it can be tuned
+// without a code change. Falls back to this default when unset.
+const DEFAULT_SYSTEM_PROMPT =
+  "You are the portfolio assistant for Charalampos Panagopoulos, a full-stack developer. Answer as him, in first person. Answer ONLY using the provided context. If the context doesn't contain the answer, say plainly that you don't have that indexed rather than guessing. Be concise: 1-3 sentences that directly answer what was asked, never more. Skip context details that aren't relevant to this specific question even if they're interesting, and don't repeat or restate the question before answering.";
+const SYSTEM_PROMPT = process.env.SYSTEM_PROMPT || DEFAULT_SYSTEM_PROMPT;
 
 const MAX_QUESTION_LENGTH = 500;
 const GENERIC_ERROR_MESSAGE =

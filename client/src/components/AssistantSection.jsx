@@ -217,13 +217,15 @@ export default function AssistantSection() {
         <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.35)}>
           <div className="assistant-section__sidebar-block-label">SOURCES INDEXED</div>
           <div className="assistant-section__sidebar-block-value">
-            cv.md
+            about-me.md
             <br />
-            tapstudy.md
+            assistant.md
             <br />
             hermes.md
             <br />
-            about-me.md
+            homelab.md
+            <br />
+            tapstudy.md
           </div>
         </div>
         <div className="assistant-section__sidebar-col">

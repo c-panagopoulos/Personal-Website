@@ -41,6 +41,7 @@ services:
       GROQ_API_KEY: ${GROQ_API_KEY}
       GROQ_CHAT_MODEL: ${GROQ_CHAT_MODEL:-llama-3.3-70b-versatile}
       RETRIEVAL_TOP_K: ${RETRIEVAL_TOP_K:-10}
+      SYSTEM_PROMPT: ${SYSTEM_PROMPT}
     ports:
       - "3100:3000"
 
