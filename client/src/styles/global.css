@@ -1387,6 +1387,9 @@ button {
 @media (max-width: 900px) {
   .scene__grid {
     grid-template-columns: minmax(0, 1fr);
+    /* Was 56px a side — same as desktop — noticeably tighter than Hero's
+       own ~20-26px mobile padding right above it in the page. */
+    padding: 40px 20px 0;
   }
 }
 .scene__kicker {
@@ -1635,6 +1638,15 @@ button {
 @media (max-width: 900px) {
   .section-lead {
     grid-template-columns: minmax(0, 1fr);
+    padding: 96px 20px;
+  }
+}
+.homelab__caption {
+  padding: 30px 56px 0;
+}
+@media (max-width: 900px) {
+  .homelab__caption {
+    padding: 30px 20px 0;
   }
 }
 .section-lead__inner {
@@ -2190,6 +2202,11 @@ button {
   padding: 96px 56px 72px;
   background: var(--bg);
   border-top: 1px solid var(--border);
+}
+@media (max-width: 900px) {
+  .contact-section {
+    padding: 96px 20px 72px;
+  }
 }
 .contact-section__eyebrow {
   display: flex;

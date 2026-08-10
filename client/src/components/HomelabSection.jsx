@@ -66,7 +66,7 @@ export default function HomelabSection() {
           outputs={{ 0: dockerPsOutput }}
         />
       </div>
-      <Reveal style={{ padding: "30px 56px 0" }}>
+      <Reveal className="homelab__caption">
         <span className="scene__browser-title" style={{ marginLeft: 0 }}>
           SCENE 03 · ONE MINI PC, EVERYTHING IN DOCKER, NO ONE TO CALL
         </span>
