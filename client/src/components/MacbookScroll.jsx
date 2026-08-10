@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import ScrambleText from "./ScrambleText.jsx";
 
 const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
 
@@ -62,13 +63,7 @@ export default function MacbookScroll({ src, alt, title }) {
         className="macbook-scroll__title"
         style={{ transform: `translateY(${textTranslate}px)`, opacity: textOpacity }}
       >
-        {title || (
-          <>
-            tapstudy runs on a tap.
-            <br />
-            no kidding.
-          </>
-        )}
+        {title || <ScrambleText lines={["tapstudy runs on a tap", "of an nfc tag."]} />}
       </h2>
 
       <div className="macbook-scroll__lid-wrap">

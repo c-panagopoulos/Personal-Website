@@ -44,7 +44,7 @@ export default function App() {
           sceneName="TAPSTUDY"
           showBrowserPreview={false}
           title="A study tracker you start by tapping your phone."
-          body="I wanted an honest record of how much I was actually studying alongside a full-time job, so I stuck an NFC tag on my desk instead of a timer app — tap to start, tap to stop. It's still the first thing I touch every morning."
+          body="I wanted an honest record of how much I was actually studying alongside a full-time job, so I stuck an NFC tag on my desk instead of a timer app — tap to start, tap to stop."
           proof={[
             <>Ships as <b>one Docker image</b> — dev machine to homelab, no registry</>,
             <>NFC tag as a <b>URL record</b> — no app, nothing to open</>,

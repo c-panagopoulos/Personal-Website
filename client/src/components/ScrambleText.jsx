@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&01";
-const FRAMES = 18;
-const FRAME_MS = 65;
-const LINE_STAGGER_MS = 180;
+const FRAMES = 14;
+const FRAME_MS = 40;
+const LINE_STAGGER_MS = 110;
 
 function randomChar() {
   return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
