@@ -37,6 +37,7 @@ function SendIcon({ size = 16 }) {
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
     >
       <motion.g variants={sendIconGroupVariants}>
         <path d="M14.5,21.7c.1.3.4.4.7.3.1,0,.2-.2.3-.3L22,2.7c0-.3,0-.5-.3-.6-.1,0-.2,0-.3,0L2.3,8.5c-.3,0-.4.4-.3.6,0,.1.2.2.3.3l7.9,3.2c.5.2.9.6,1.1,1.1l3.2,7.9Z" />
@@ -62,9 +63,10 @@ export default function ChatInput({ onSend, placeholder, disabled, variant = "he
   if (variant === "assistant") {
     return (
       <div className="assistant-input">
-        <span className="chat-input__prompt">&gt;</span>
+        <span className="chat-input__prompt" aria-hidden="true">&gt;</span>
         <input
           className="assistant-input__field"
+          aria-label={placeholder || "Ask a question"}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -87,9 +89,10 @@ export default function ChatInput({ onSend, placeholder, disabled, variant = "he
 
   return (
     <div className="chat-input">
-      <span className="chat-input__prompt">❯</span>
+      <span className="chat-input__prompt" aria-hidden="true">❯</span>
       <input
         className="chat-input__field"
+        aria-label={placeholder || "Ask a question"}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}

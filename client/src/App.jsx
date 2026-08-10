@@ -26,7 +26,14 @@ export default function App() {
   return (
     <ChatProvider>
       <div className="page">
+        <a className="skip-link" href="#main">
+          Skip to main content
+        </a>
         <NavBar style={{ animation: "heroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 1.15s both" }} />
+        {/* tabIndex=-1: a plain <main> isn't natively focusable, so
+            following the skip link would scroll here without actually
+            moving keyboard focus — this makes the fragment jump land. */}
+        <main id="main" tabIndex={-1}>
         <Hero />
 
         <div className="statement">
@@ -116,6 +123,7 @@ export default function App() {
         </div>
 
         <ContactSection />
+        </main>
         <DockNav />
       </div>
     </ChatProvider>

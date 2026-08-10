@@ -279,7 +279,7 @@ const DotField = memo(
     }, [dotRadius, dotSpacing]);
 
     return (
-      <div className="dot-field-container" {...rest}>
+      <div className="dot-field-container" aria-hidden="true" {...rest}>
         <canvas
           ref={canvasRef}
           style={{

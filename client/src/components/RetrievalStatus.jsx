@@ -2,26 +2,26 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export function RetrievalStatus({ note }) {
   return (
-    <div className="retrieval-status">
-      <div className="retrieval-status__chips">
+    <div className="retrieval-status" role="status" aria-live="polite">
+      <div className="retrieval-status__chips" aria-hidden="true">
         <span className="shimmer-chip" style={{ width: 132 }} />
         <span className="shimmer-chip" style={{ width: 92, animationDelay: "0.2s" }} />
         <span className="shimmer-chip" style={{ width: 110, animationDelay: "0.4s" }} />
       </div>
-      <span className="retrieval-status__note">{note}</span>
+      <span className="retrieval-status__note">{note || "Searching…"}</span>
     </div>
   );
 }
 
 export function ThinkingDots({ note }) {
   return (
-    <div className="thinking-dots">
-      <div className="thinking-dots__row">
+    <div className="thinking-dots" role="status" aria-live="polite">
+      <div className="thinking-dots__row" aria-hidden="true">
         <span className="thinking-dots__dot" />
         <span className="thinking-dots__dot" style={{ animationDelay: "0.18s" }} />
         <span className="thinking-dots__dot" style={{ animationDelay: "0.36s" }} />
       </div>
-      <span className="thinking-dots__note">{note}</span>
+      <span className="thinking-dots__note">{note || "Thinking…"}</span>
     </div>
   );
 }
@@ -105,6 +105,7 @@ export function RetrievedChunks({ sources, threshold }) {
               }
               key={`${src.source}-${i}`}
               onClick={() => setExpandedIndex(isExpanded ? null : i)}
+              aria-expanded={isExpanded}
             >
               <div className="retrieved-chunk__head">
                 <span className="retrieved-chunk__source">{src.source}</span>

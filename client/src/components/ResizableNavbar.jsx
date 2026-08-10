@@ -33,9 +33,9 @@ export function Navbar({ children, className = "", style }) {
   }, []);
 
   return (
-    <motion.div ref={ref} className={`resizable-navbar ${className}`} style={style}>
+    <motion.nav ref={ref} aria-label="Primary" className={`resizable-navbar ${className}`} style={style}>
       {Children.map(children, (child) => (isValidElement(child) ? cloneElement(child, { visible }) : child))}
-    </motion.div>
+    </motion.nav>
   );
 }
 
@@ -110,6 +110,7 @@ export function MobileNavMenu({ children, className = "", isOpen }) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          id="mobile-nav-menu"
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
@@ -124,14 +125,21 @@ export function MobileNavMenu({ children, className = "", isOpen }) {
 
 export function MobileNavToggle({ isOpen, onClick }) {
   return (
-    <button type="button" className="resizable-navbar__toggle" onClick={onClick} aria-label={isOpen ? "Close menu" : "Open menu"}>
+    <button
+      type="button"
+      className="resizable-navbar__toggle"
+      onClick={onClick}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      aria-controls="mobile-nav-menu"
+    >
       {isOpen ? (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
           <line x1="6" y1="6" x2="18" y2="18" />
           <line x1="18" y1="6" x2="6" y2="18" />
         </svg>
       ) : (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
           <line x1="4" y1="7" x2="20" y2="7" />
           <line x1="4" y1="12" x2="20" y2="12" />
           <line x1="4" y1="17" x2="20" y2="17" />

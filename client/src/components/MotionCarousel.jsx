@@ -3,7 +3,7 @@
 // (Embla for scroll/drag/snap, Motion spring transitions on the active
 // slide); only the visual layer (colors, chrome, pagination shape) is
 // restyled to match the site.
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -98,6 +98,19 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
                   whileHover={slide.src ? { scale: isActive ? 1.035 : 0.93 } : undefined}
                   transition={transition}
                   onClick={() => slide.src && setZoomedIndex(index)}
+                  role={slide.src ? "button" : undefined}
+                  tabIndex={slide.src ? 0 : undefined}
+                  aria-label={slide.src ? `Zoom into ${slide.label}` : undefined}
+                  onKeyDown={
+                    slide.src
+                      ? (event) => {
+                          if (event.key === "Enter" || event.key === " ") {
+                            event.preventDefault();
+                            setZoomedIndex(index);
+                          }
+                        }
+                      : undefined
+                  }
                 >
                   {slide.src ? (
                     <>
@@ -130,7 +143,12 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
 
         <div className="motion-carousel__dots">
           {scrollSnaps.map((_, index) => (
-            <DotBar key={index} selected={index === selectedIndex} onClick={() => onDotClick(index)} />
+            <DotBar
+              key={index}
+              index={index}
+              selected={index === selectedIndex}
+              onClick={() => onDotClick(index)}
+            />
           ))}
         </div>
 
@@ -160,6 +178,9 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
 
 function Lightbox({ slides, index, onClose, onPrev, onNext }) {
   const slide = index != null ? slides[index] : null;
+  const closeRef = useRef(null);
+  const containerRef = useRef(null);
+  const previouslyFocused = useRef(null);
 
   useEffect(() => {
     if (!slide) return undefined;
@@ -167,6 +188,23 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
       if (event.key === "Escape") onClose();
       if (event.key === "ArrowLeft") onPrev();
       if (event.key === "ArrowRight") onNext();
+      // Basic focus trap — keeps Tab cycling within the dialog's own
+      // focusable elements instead of escaping into the page behind it.
+      if (event.key === "Tab") {
+        const focusable = containerRef.current?.querySelectorAll(
+          'button, [href], [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable?.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
@@ -177,11 +215,29 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
     };
   }, [slide, onClose, onPrev, onNext]);
 
+  // Move focus into the dialog when it opens (the close button, so Escape/
+  // Tab both work immediately) and restore it to whatever triggered the
+  // lightbox once it closes, instead of leaving focus stranded on a
+  // now-hidden element.
+  useEffect(() => {
+    if (slide) {
+      previouslyFocused.current = document.activeElement;
+      closeRef.current?.focus();
+    } else if (previouslyFocused.current) {
+      previouslyFocused.current.focus();
+      previouslyFocused.current = null;
+    }
+  }, [slide]);
+
   return createPortal(
     <AnimatePresence>
       {slide && (
         <motion.div
+          ref={containerRef}
           className="motion-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={slide.label}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -189,6 +245,7 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
           onClick={onClose}
         >
           <motion.button
+            ref={closeRef}
             type="button"
             className="motion-lightbox__close"
             onClick={onClose}
@@ -257,7 +314,7 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
   );
 }
 
-function DotBar({ selected, onClick }) {
+function DotBar({ index, selected, onClick }) {
   return (
     <motion.button
       type="button"
@@ -267,7 +324,8 @@ function DotBar({ selected, onClick }) {
       initial={false}
       animate={{ width: selected ? 20 : 12, backgroundColor: selected ? "#b39d9d" : "#3a3640" }}
       transition={transition}
-      aria-label="Go to slide"
+      aria-label={`Go to slide ${index + 1}`}
+      aria-current={selected}
     />
   );
 }

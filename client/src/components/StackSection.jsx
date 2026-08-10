@@ -20,9 +20,9 @@ export default function StackSection() {
     <div id="stack" className="stack-section" ref={ref}>
       <div className="stack-section__inner">
         <div className="stack-section__head">
-          <span className="stack-section__head-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
+          <h2 className="stack-section__head-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
             STACK
-          </span>
+          </h2>
           <span className="stack-section__head-rule" style={anim(visible, "ruleGrow", 0.55, 0.25)} />
           <span className="stack-section__head-note" style={anim(visible, "rowRise", 0.4, 0.1)}>
             EVERY ITEM IS A QUESTION
@@ -78,9 +78,9 @@ export default function StackSection() {
                 {chat.showSources && <SourceChips sources={chat.sources} />}
                 {chat.isThinking && <ThinkingDots note="" />}
                 {chat.hasText && (
-                  <p className="assistant-card__answer">
+                  <p className="assistant-card__answer" aria-live="polite">
                     {chat.text}
-                    {!chat.done && <span className="caret">▍</span>}
+                    {!chat.done && <span className="caret" aria-hidden="true">▍</span>}
                   </p>
                 )}
                 {chat.error && <p className="chat-bubble__text--muted">{chat.error}</p>}

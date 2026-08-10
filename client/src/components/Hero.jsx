@@ -82,11 +82,14 @@ export default function Hero() {
               alt="Charalampos"
               style={{ animation: "avatarSpring 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both" }}
             />
-            <span className="hero__label-group">
-              <span className="hero__label" style={{ whiteSpace: "pre", minWidth: 1 }}>
+            {/* Scrambling reveal is decorative and passes through gibberish
+                mid-animation — hidden from assistive tech, which gets the
+                real name/role immediately via aria-label instead. */}
+            <span className="hero__label-group" aria-label={`${NAME_LINE}, ${ROLE_LINE}`}>
+              <span className="hero__label" style={{ whiteSpace: "pre", minWidth: 1 }} aria-hidden="true">
                 {nameDisplay || " "}
               </span>
-              <span className="hero__label hero__label--muted" style={{ whiteSpace: "pre", minWidth: 1 }}>
+              <span className="hero__label hero__label--muted" style={{ whiteSpace: "pre", minWidth: 1 }} aria-hidden="true">
                 {roleDisplay || " "}
               </span>
             </span>
@@ -121,9 +124,9 @@ export default function Hero() {
                   {heroTurn?.showSources && <SourceChips sources={heroTurn.sources} />}
                   {heroTurn?.isThinking && <ThinkingDots note="sources locked — writing an answer" />}
                   {heroTurn?.hasText && (
-                    <p className="hero-answer__text">
+                    <p className="hero-answer__text" aria-live="polite">
                       {heroTurn.text}
-                      {!heroTurn.done && <span className="caret">▍</span>}
+                      {!heroTurn.done && <span className="caret" aria-hidden="true">▍</span>}
                     </p>
                   )}
                   {heroTurn?.error && <p className="chat-bubble__text--muted">{heroTurn.error}</p>}

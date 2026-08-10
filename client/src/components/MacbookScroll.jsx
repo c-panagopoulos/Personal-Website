@@ -18,8 +18,14 @@ function interpolate(t, inputRange, outputRange) {
 // Mirrors framer-motion's useScroll({ target, offset: ["start start", "end start"] }):
 // 0 when the element's top reaches the viewport top, 1 when its bottom does.
 function useScrollProgress(ref) {
-  const [progress, setProgress] = useState(0);
+  // Reduced-motion users get the settled end state directly instead of a
+  // scroll-linked parallax — this is a JS-driven inline transform, so the
+  // CSS-level prefers-reduced-motion override in global.css can't reach it.
+  const prefersReducedMotion =
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [progress, setProgress] = useState(prefersReducedMotion ? 1 : 0);
   useEffect(() => {
+    if (prefersReducedMotion) return undefined;
     let raf = null;
     const update = () => {
       raf = null;

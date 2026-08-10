@@ -56,9 +56,9 @@ function ChatTurn({ turn }) {
           <div className="chat-bubble__avatar">cp</div>
           <div className="chat-bubble__content">
             {turn.showSources && <SourceChips sources={turn.sources} />}
-            <p className="chat-bubble__text">
+            <p className="chat-bubble__text" aria-live="polite">
               {turn.text}
-              {!turn.done && <span className="caret">▍</span>}
+              {!turn.done && <span className="caret" aria-hidden="true">▍</span>}
             </p>
           </div>
         </div>
@@ -97,16 +97,33 @@ function useAutoHeight(dep) {
 // directly instead of ported wholesale.
 function AssistantTabs({ activeTab, onChange, panels }) {
   const { innerRef, height } = useAutoHeight(activeTab);
+  const tabRefs = useRef({});
+
+  // Standard ARIA tabs roving-tabindex pattern: arrow keys move both focus
+  // and selection between the two tabs instead of requiring Tab+Enter.
+  const handleKeyDown = (event) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const idx = TABS.findIndex((t) => t.id === activeTab);
+    const dir = event.key === "ArrowRight" ? 1 : -1;
+    const nextId = TABS[(idx + dir + TABS.length) % TABS.length].id;
+    onChange(nextId);
+    tabRefs.current[nextId]?.focus();
+  };
 
   return (
     <div className="assistant-tabs">
-      <div className="assistant-tabs__list" role="tablist">
+      <div className="assistant-tabs__list" role="tablist" aria-label="Assistant panels" onKeyDown={handleKeyDown}>
         {TABS.map((tab) => (
           <button
             key={tab.id}
+            ref={(el) => (tabRefs.current[tab.id] = el)}
+            id={`assistant-tab-${tab.id}`}
             type="button"
             role="tab"
             aria-selected={activeTab === tab.id}
+            aria-controls={`assistant-panel-${tab.id}`}
+            tabIndex={activeTab === tab.id ? 0 : -1}
             className="assistant-tabs__tab"
             onClick={() => onChange(tab.id)}
           >
@@ -130,6 +147,10 @@ function AssistantTabs({ activeTab, onChange, panels }) {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
+              role="tabpanel"
+              id={`assistant-panel-${activeTab}`}
+              aria-labelledby={`assistant-tab-${activeTab}`}
+              tabIndex={0}
               initial={{ opacity: 0, filter: "blur(4px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, filter: "blur(4px)" }}
