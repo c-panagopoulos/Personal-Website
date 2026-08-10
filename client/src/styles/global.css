@@ -2649,17 +2649,10 @@ button {
   align-items: center;
   gap: 6px;
 }
-.motion-carousel__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #3a3640;
-}
 .motion-carousel__terminal-label {
   font-family: var(--font-mono);
   font-size: 0.66rem;
   color: var(--text-quiet);
-  margin-left: 8px;
 }
 .motion-carousel__viewport {
   overflow: hidden;

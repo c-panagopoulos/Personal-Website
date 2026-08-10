@@ -94,7 +94,7 @@ export default function App() {
         />
 
         <div className="hermes-evidence" ref={hermesEvidenceRef} style={anim(hermesEvidenceVisible, "sceneRiseBlur", 0.6, 0)}>
-          <MotionCarousel slides={HERMES_SLIDES} terminalHost="hermes.local" />
+          <MotionCarousel slides={HERMES_SLIDES} />
         </div>
 
         <AssistantSection />

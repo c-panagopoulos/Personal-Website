@@ -40,7 +40,7 @@ function useEmblaControls(emblaApi) {
   return { selectedIndex, scrollSnaps, prevDisabled, nextDisabled, onDotClick, onPrev, onNext };
 }
 
-export default function MotionCarousel({ slides, terminalHost = "hermes.local" }) {
+export default function MotionCarousel({ slides }) {
   // containScroll:false + matching CSS padding on the viewport (see
   // .motion-carousel__viewport) so align:"center" also centers the first
   // and last slide, not just the interior ones (Embla's default trims the
@@ -77,11 +77,8 @@ export default function MotionCarousel({ slides, terminalHost = "hermes.local" }
   return (
     <div className="motion-carousel">
       <div className="motion-carousel__terminal">
-        <span className="motion-carousel__dot" />
-        <span className="motion-carousel__dot" />
-        <span className="motion-carousel__dot" />
         <span className="motion-carousel__terminal-label">
-          {terminalHost} — evidence/{fileNumber}-{current.name}.png
+          evidence/{fileNumber}-{current.name}.png
         </span>
       </div>
 
@@ -282,6 +279,22 @@ function Lightbox({ slides, index, onClose, onPrev, onNext }) {
             exit={{ opacity: 0, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 280, damping: 28, mass: 0.9 }}
             onClick={(event) => event.stopPropagation()}
+            // Same pointer gesture covers mouse drag and touch swipe, so
+            // this is prev/next on mobile for free — no separate touch
+            // handling needed. dragConstraints pins it back to center once
+            // released; the constraint itself never lets it travel far
+            // enough to look like it's actually panning.
+            drag={slides.length > 1 ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.7}
+            dragMomentum={false}
+            style={{ touchAction: "pan-y" }}
+            onDragEnd={(_event, info) => {
+              const SWIPE_DISTANCE = 80;
+              const SWIPE_VELOCITY = 500;
+              if (info.offset.x < -SWIPE_DISTANCE || info.velocity.x < -SWIPE_VELOCITY) onNext();
+              else if (info.offset.x > SWIPE_DISTANCE || info.velocity.x > SWIPE_VELOCITY) onPrev();
+            }}
           />
           {slides.length > 1 && (
             <motion.button
