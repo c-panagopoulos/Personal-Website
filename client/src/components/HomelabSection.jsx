@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Terminal from "./Terminal.jsx";
 import Button from "./Button.jsx";
-import GithubMark from "./GithubMark.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
@@ -105,7 +104,6 @@ export default function HomelabSection() {
           <div style={{ marginTop: 40 }}>
             <span style={anim(visible, "ctaPop", 0.5, 2.8)}>
               <Button href="https://github.com/c-panagopoulos" target="_blank" rel="noreferrer">
-                <GithubMark />
                 <span className="btn__label">GitHub</span>
               </Button>
             </span>

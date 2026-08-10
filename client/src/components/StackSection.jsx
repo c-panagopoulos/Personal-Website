@@ -70,13 +70,13 @@ export default function StackSection() {
     <div id="stack" className="stack-section" ref={ref}>
       <div className="stack-section__inner">
         <div className="stack-section__head">
-          <h2 className="stack-section__head-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
-            STACK
-          </h2>
-          <span className="stack-section__head-rule" style={anim(visible, "ruleGrow", 0.55, 0.25)} />
           <span className="stack-section__head-note" style={anim(visible, "rowRise", 0.4, 0.1)}>
             EVERY ITEM IS A QUESTION
           </span>
+          <span className="stack-section__head-rule" style={anim(visible, "ruleGrow", 0.55, 0.25)} />
+          <h2 className="stack-section__head-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
+            STACK
+          </h2>
         </div>
         <p className="stack-section__lede" style={anim(visible, "sceneRiseBlur", 0.6, 0.5)}>
           No proficiency bars. Click anything below and I'll tell you why it's there.

@@ -1,7 +1,6 @@
 import Reveal from "./Reveal.jsx";
 import ScrambleText from "./ScrambleText.jsx";
 import Button from "./Button.jsx";
-import GithubMark from "./GithubMark.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
@@ -115,7 +114,6 @@ export default function ProjectScene({
               {githubHref && (
                 <span style={anim(visible, "ctaPop", 0.5, 1.95)}>
                   <Button variant="secondary" href={githubHref} target="_blank" rel="noreferrer">
-                    <GithubMark />
                     <span className="btn__label">GitHub</span>
                   </Button>
                 </span>

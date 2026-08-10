@@ -1761,6 +1761,9 @@ button {
   flex: 1;
   min-width: 0;
   padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .assistant-section__sidebar-col {
   flex: 1;
@@ -1966,10 +1969,10 @@ button {
 .stack-section__head-label {
   margin: 0;
   font-family: var(--font-mono);
-  font-weight: inherit;
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
-  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
 }
 .stack-section__head-rule {
   flex: 1;

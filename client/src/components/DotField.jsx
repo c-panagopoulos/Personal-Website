@@ -236,9 +236,13 @@ const DotField = memo(
         rafRef.current = requestAnimationFrame(tick);
       }
 
+      const isTouchPrimary = window.matchMedia("(pointer: coarse)").matches;
+
       doResize();
       window.addEventListener("resize", resize);
-      window.addEventListener("mousemove", onMouseMove, { passive: true });
+      if (!isTouchPrimary) {
+        window.addEventListener("mousemove", onMouseMove, { passive: true });
+      }
       rafRef.current = requestAnimationFrame(tick);
 
       const parentResizeObserver = new ResizeObserver(resize);
@@ -255,7 +259,9 @@ const DotField = memo(
         clearTimeout(resizeTimer);
         parentResizeObserver.disconnect();
         window.removeEventListener("resize", resize);
-        window.removeEventListener("mousemove", onMouseMove);
+        if (!isTouchPrimary) {
+          window.removeEventListener("mousemove", onMouseMove);
+        }
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
