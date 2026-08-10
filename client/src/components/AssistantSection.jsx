@@ -15,9 +15,27 @@ const CHIPS = [
   "What would you build next?",
 ];
 
+function ChatIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    </svg>
+  );
+}
+
+function SourcesIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
+    </svg>
+  );
+}
+
 const TABS = [
-  { id: "chat", label: "Chat" },
-  { id: "sources", label: "Sources" },
+  { id: "chat", label: "Chat", Icon: ChatIcon },
+  { id: "sources", label: "Sources", Icon: SourcesIcon },
 ];
 
 function ChatTurn({ turn }) {
@@ -97,14 +115,15 @@ function useAutoHeight(dep) {
   return { innerRef, height };
 }
 
-// Sliding-pill tab bar + cross-fade/blur panel switch, ported from
-// animate-ui's Tabs component (github.com/imskyleen/animate-ui) — not the
-// full primitive, which is a generic hover/click/controlled abstraction
-// built for arbitrary tab counts. This only ever needs two fixed tabs, so
-// it's the same layoutId-pill and AnimatePresence-blur technique rewritten
-// directly instead of ported wholesale.
-function AssistantTabs({ activeTab, onChange, panels }) {
-  const { innerRef, height } = useAutoHeight(activeTab);
+// Small icon-only toggle instead of a full-width labeled tab bar — lives in
+// the topbar (next to the breadcrumb, always rendered regardless of which
+// panel is active) rather than its own row, since on mobile the nav plus
+// this section's own headline already eat most of the viewport before any
+// chat content shows. Same sliding-pill technique as before, just applied
+// to two small squares instead of full-width labeled tabs. The sources
+// badge is the only feedback that anything changed over there when a
+// question resolves while you're still looking at the Chat panel.
+function AssistantTabToggle({ activeTab, onChange, sourcesCount }) {
   const tabRefs = useRef({});
 
   // Standard ARIA tabs roving-tabindex pattern: arrow keys move both focus
@@ -120,32 +139,47 @@ function AssistantTabs({ activeTab, onChange, panels }) {
   };
 
   return (
+    <div className="assistant-tab-toggle" role="tablist" aria-label="Assistant panels" onKeyDown={handleKeyDown}>
+      {TABS.map((tab) => (
+        <button
+          key={tab.id}
+          ref={(el) => (tabRefs.current[tab.id] = el)}
+          id={`assistant-tab-${tab.id}`}
+          type="button"
+          role="tab"
+          aria-selected={activeTab === tab.id}
+          aria-controls={`assistant-panel-${tab.id}`}
+          aria-label={tab.label}
+          title={tab.label}
+          tabIndex={activeTab === tab.id ? 0 : -1}
+          className="assistant-tab-toggle__btn"
+          onClick={() => onChange(tab.id)}
+        >
+          {activeTab === tab.id && (
+            <motion.span
+              layoutId="assistant-tabs-pill"
+              className="assistant-tab-toggle__pill"
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            />
+          )}
+          <tab.Icon />
+          {tab.id === "sources" && sourcesCount > 0 && (
+            <span className="assistant-tab-toggle__badge">{sourcesCount}</span>
+          )}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Cross-fade/blur panel switch + auto-height, ported from animate-ui's Tabs
+// component (github.com/imskyleen/animate-ui) — the trigger UI lives
+// separately above (AssistantTabToggle), this is just the panel side.
+function AssistantTabPanels({ activeTab, panels }) {
+  const { innerRef, height } = useAutoHeight(activeTab);
+
+  return (
     <div className="assistant-tabs">
-      <div className="assistant-tabs__list" role="tablist" aria-label="Assistant panels" onKeyDown={handleKeyDown}>
-        {TABS.map((tab) => (
-          <button
-            key={tab.id}
-            ref={(el) => (tabRefs.current[tab.id] = el)}
-            id={`assistant-tab-${tab.id}`}
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab.id}
-            aria-controls={`assistant-panel-${tab.id}`}
-            tabIndex={activeTab === tab.id ? 0 : -1}
-            className="assistant-tabs__tab"
-            onClick={() => onChange(tab.id)}
-          >
-            {activeTab === tab.id && (
-              <motion.span
-                layoutId="assistant-tabs-pill"
-                className="assistant-tabs__pill"
-                transition={{ type: "spring", stiffness: 200, damping: 25 }}
-              />
-            )}
-            <span className="assistant-tabs__label">{tab.label}</span>
-          </button>
-        ))}
-      </div>
       <motion.div
         className="assistant-tabs__panels"
         animate={{ height: height ?? "auto" }}
@@ -305,9 +339,12 @@ export default function AssistantSection() {
           <span className="assistant-breadcrumb__sep">/</span>
           <span className="assistant-breadcrumb__status">retrieval-online</span>
         </div>
+        {isMobile && (
+          <AssistantTabToggle activeTab={activeTab} onChange={setActiveTab} sourcesCount={chat.sources.length} />
+        )}
       </div>
       {isMobile ? (
-        <AssistantTabs activeTab={activeTab} onChange={setActiveTab} panels={{ chat: mainContent, sources: sidebarContent }} />
+        <AssistantTabPanels activeTab={activeTab} panels={{ chat: mainContent, sources: sidebarContent }} />
       ) : (
         <div className="assistant-section__body">
           {sidebarContent}

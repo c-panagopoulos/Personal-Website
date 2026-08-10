@@ -1706,6 +1706,18 @@ button {
 .assistant-breadcrumb__status {
   color: rgba(211, 218, 217, 0.55);
 }
+@media (max-width: 380px) {
+  /* The icon toggle now shares this row with the breadcrumb (see
+     .assistant-tab-toggle below) — below ~380px there's no longer room for
+     the full "retrieval-online" status too without wrapping to a second
+     line, so drop the least essential part of the breadcrumb first. */
+  .assistant-breadcrumb__status {
+    display: none;
+  }
+  .assistant-breadcrumb__sep:last-of-type {
+    display: none;
+  }
+}
 .assistant-section__body {
   flex: 1;
   display: grid;
@@ -1722,54 +1734,72 @@ button {
 }
 /* Mobile-only: chat + sources as two tabs instead of stacking both in one
    column — the sources/chunks panel grows with the conversation and was
-   pushing new chat messages further down the page every time. Sliding-pill
-   indicator and cross-fade/blur panel switch, same technique as
-   animate-ui's Tabs (layoutId shared-element transition + AnimatePresence),
-   rewritten directly since this only ever needs two fixed tabs. */
-.assistant-tabs {
-  padding: 16px 0 0;
-}
-.assistant-tabs__list {
-  position: relative;
+   pushing new chat messages further down the page every time. Trigger UI is
+   a small icon toggle in the topbar (not its own full-width row) — the nav
+   plus this section's own headline already eat most of the viewport on
+   mobile before any chat content shows, so a labeled tab bar was just more
+   chrome eating the same scarce space. Sliding-pill indicator and
+   cross-fade/blur panel switch, same technique as animate-ui's Tabs
+   (layoutId shared-element transition + AnimatePresence), rewritten
+   directly since this only ever needs two fixed tabs. */
+.assistant-tab-toggle {
   display: flex;
   gap: 4px;
-  padding: 4px;
-  background: var(--surface-deep);
-  border: 1px solid var(--border-strong);
-  border-left: none;
-  border-right: none;
 }
-.assistant-tabs__tab {
+.assistant-tab-toggle__btn {
   position: relative;
-  flex: 1;
-  padding: 10px 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: none;
   border-radius: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
   color: var(--text-tertiary);
   cursor: pointer;
   transition: color 0.25s ease;
 }
-.assistant-tabs__tab[aria-selected="true"] {
+.assistant-tab-toggle__btn[aria-selected="true"] {
   color: var(--text-primary);
 }
-.assistant-tabs__pill {
+.assistant-tab-toggle__btn svg {
+  position: relative;
+  z-index: 1;
+}
+.assistant-tab-toggle__pill {
   position: absolute;
   inset: 0;
   background: var(--surface-elevated);
   border: 1px solid var(--border-bright);
   border-radius: 8px;
 }
-.assistant-tabs__label {
-  position: relative;
-  z-index: 1;
+/* Only feedback that the Sources panel changed while you're still looking
+   at Chat — count of chunks the latest question retrieved. */
+.assistant-tab-toggle__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 2;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.assistant-tabs {
+  padding: 16px 0 0;
 }
 .assistant-tabs__panels {
   overflow: hidden;
-  margin-top: 16px;
 }
 .assistant-tabs .assistant-section__sidebar {
   border-right: none;
