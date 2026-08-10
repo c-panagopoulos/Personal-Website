@@ -7,9 +7,17 @@
 // "reveal once it enters view" instead of animating invisibly ahead of time.
 const DEFAULT_EASING = "cubic-bezier(0.2, 0.7, 0.2, 1)";
 
+// Every caller of anim() (project scenes, assistant/homelab/stack/contact
+// sections) feels a bit sluggish at its authored timings — Hero and the big
+// statement quotes don't use this helper at all (their own inline
+// animations), so scaling here speeds up everything else without touching
+// those. Applied to both duration and delay so staggered sequences stay
+// proportional instead of just snapping faster at the end.
+const SPEED = 0.7;
+
 export function anim(visible, name, duration, delay = 0, easing = DEFAULT_EASING) {
   return {
-    animation: `${name} ${duration}s ${easing} ${delay}s both`,
+    animation: `${name} ${duration * SPEED}s ${easing} ${delay * SPEED}s both`,
     animationPlayState: visible ? "running" : "paused",
   };
 }
