@@ -7,7 +7,7 @@ import ChatError from "./ChatError.jsx";
 const CHIPS = [
   "What have you built?",
   "What technologies do you use?",
-  "Am I a fit for a junior role?",
+  "Are you a good fit for a junior role?",
 ];
 
 const NAME_LINE = "CHARALAMPOS PANAGOPOULOS";

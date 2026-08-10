@@ -2214,6 +2214,12 @@ button {
 .contact-link:hover {
   opacity: 0.6;
 }
+@media (max-width: 720px) {
+  .contact-link {
+    padding-left: 0;
+    border-right: none;
+  }
+}
 .contact-link__label {
   font-family: var(--font-mono);
   font-size: 0.58rem;
@@ -2230,6 +2236,11 @@ button {
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
+}
+@media (max-width: 720px) {
+  .contact-footer {
+    justify-content: center;
+  }
 }
 .contact-footer__copy {
   font-family: var(--font-mono);
