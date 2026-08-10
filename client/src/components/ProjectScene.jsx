@@ -112,7 +112,7 @@ export default function ProjectScene({
           )}
 
           {ctaHref && (
-            <div style={{ marginTop: 40, display: "flex", gap: 14 }}>
+            <div style={{ marginTop: 40, display: "flex", flexWrap: "wrap", gap: 14 }}>
               <a
                 className="btn"
                 href={ctaHref}

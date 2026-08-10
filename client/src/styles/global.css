@@ -1360,17 +1360,22 @@ button {
 
 .scene__grid {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  /* minmax(0, 1fr), not bare 1fr — bare 1fr's minimum is auto, which floors
+     the track at its content's min-content width instead of letting it
+     shrink to fit, so the column (and the padding after it) got pushed past
+     the container on narrow screens. Same bug as .assistant-section__body
+     had, just not yet caught here. */
+  grid-template-columns: minmax(0, 1fr) 400px;
   gap: 56px;
   padding: 40px 56px 0;
   align-items: stretch;
 }
 .scene__grid--single {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 @media (max-width: 900px) {
   .scene__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 .scene__kicker {
@@ -1596,14 +1601,14 @@ button {
 /* --- Homelab / statement sections --- */
 .section-lead {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: minmax(0, 1fr) 400px;
   align-items: start;
   gap: 56px;
   padding: 96px 56px;
 }
 @media (max-width: 900px) {
   .section-lead {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 .section-lead__inner {
@@ -1678,7 +1683,7 @@ button {
 .assistant-section__body {
   flex: 1;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 280px minmax(0, 1fr);
   min-height: 0;
 }
 @media (max-width: 900px) {
@@ -2101,7 +2106,7 @@ button {
 }
 @media (max-width: 720px) {
   .contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 .contact-link {
