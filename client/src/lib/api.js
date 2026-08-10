@@ -7,13 +7,20 @@ export async function streamChat(question, { onSources, onToken, onDone, onError
       body: JSON.stringify({ question }),
       signal,
     });
-  } catch (err) {
-    onError?.(err.message || "Network error");
+  } catch {
+    onError?.({ type: "generic", message: "Couldn't reach the server, check your connection and try again." });
     return;
   }
 
   if (!response.ok || !response.body) {
-    onError?.(`Request failed (${response.status})`);
+    // Rate-limit (429) and bad-input (400) responses are plain JSON, not
+    // SSE — the stream never starts for those.
+    try {
+      const body = await response.json();
+      onError?.({ type: body.type || "generic", message: body.message || `Request failed (${response.status})` });
+    } catch {
+      onError?.({ type: "generic", message: `Request failed (${response.status})` });
+    }
     return;
   }
 
@@ -53,9 +60,10 @@ export async function streamChat(question, { onSources, onToken, onDone, onError
         onDone?.();
       } else if (event === "error") {
         try {
-          onError?.(JSON.parse(data).message || "Assistant error");
+          const parsed = JSON.parse(data);
+          onError?.({ type: parsed.type || "generic", message: parsed.message || "Assistant error" });
         } catch {
-          onError?.("Assistant error");
+          onError?.({ type: "generic", message: "Assistant error" });
         }
       }
     }

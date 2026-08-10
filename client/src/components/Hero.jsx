@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import ChatError from "./ChatError.jsx";
 
 const CHIPS = [
   "What have you built?",
@@ -129,7 +130,7 @@ export default function Hero() {
                       {!heroTurn.done && <span className="caret" aria-hidden="true">▍</span>}
                     </p>
                   )}
-                  {heroTurn?.error && <p className="chat-bubble__text--muted">{heroTurn.error}</p>}
+                  <ChatError error={heroTurn?.error} />
                   {heroTurn?.done && (
                     <a className="hero-answer__jump" href="#assistant">
                       see exactly how it answered - continue below ↓

@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import helmet from "helmet";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import chatRouter from "./routes/chat.js";
@@ -9,6 +10,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(
+  helmet({
+    // Google Fonts is a cross-origin subresource without CORP headers of
+    // its own; the default 'require-corp' embedder policy blocks it.
+    crossOriginEmbedderPolicy: false,
+  })
+);
 app.use(express.json());
 app.get("/api/health", (req, res) => res.json({ ok: true }));
 app.use("/api", chatRouter);

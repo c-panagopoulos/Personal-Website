@@ -60,8 +60,8 @@ export function useChat() {
           onDone: () => {
             updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, done: true }));
           },
-          onError: (message) => {
-            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, error: message, done: true }));
+          onError: (error) => {
+            updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, error, done: true }));
           },
         },
         controller.signal

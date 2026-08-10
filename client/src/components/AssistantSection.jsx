@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useSharedChat } from "../context/ChatContext.jsx";
 import ChatInput from "./ChatInput.jsx";
 import { RetrievalStatus, RetrievedChunks, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import ChatError from "./ChatError.jsx";
 import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
@@ -63,7 +64,14 @@ function ChatTurn({ turn }) {
           </div>
         </div>
       )}
-      {turn.error && <p className="chat-bubble__text--muted">{turn.error}</p>}
+      {turn.error && (
+        <div className="chat-row--assistant" style={anim(visible, "rise", 0.8)}>
+          <div className="chat-bubble__avatar">cp</div>
+          <div className="chat-bubble__content">
+            <ChatError error={turn.error} className="chat-bubble__text--muted" />
+          </div>
+        </div>
+      )}
     </>
   );
 }

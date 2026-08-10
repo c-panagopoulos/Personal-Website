@@ -1,5 +1,6 @@
 import { useChat } from "../hooks/useChat.js";
 import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
+import ChatError from "./ChatError.jsx";
 import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
@@ -83,7 +84,7 @@ export default function StackSection() {
                     {!chat.done && <span className="caret" aria-hidden="true">▍</span>}
                   </p>
                 )}
-                {chat.error && <p className="chat-bubble__text--muted">{chat.error}</p>}
+                <ChatError error={chat.error} />
               </div>
             ) : (
               <div className="stack-answer-panel__idle" style={anim(visible, "sceneRiseBlur", 0.5, 1.9)}>
