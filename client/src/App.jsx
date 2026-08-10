@@ -50,7 +50,6 @@ export default function App() {
           ]}
           how="A local model (qwen2.5:1.5b, via Ollama) writes the insight sentences, but never does the arithmetic — every number is computed in JavaScript first and the model's only job is turning an already-correct fact into a sentence. Prompt-injection attempts get caught and discarded by a fact-check pass afterward, not just prompted around."
           ctaLabel="Live demo"
-          ctaTag="TAPSTUDY"
           ctaHref="https://tapstudy.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/tapstudy"
           stack={[
@@ -80,7 +79,6 @@ export default function App() {
           ]}
           how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. A message matching escalation keywords — a lawyer, a formal complaint — opens a case for a human agent through a configurable webhook, instead of letting the bot keep guessing."
           ctaLabel="Live demo"
-          ctaTag="HERMES"
           ctaHref="https://hermes.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/hermes-ai"
           stack={[

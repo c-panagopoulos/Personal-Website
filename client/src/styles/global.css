@@ -1581,22 +1581,21 @@ button {
   border-radius: 8px;
   padding: 13px 20px;
   text-decoration: none;
-  transition: background 0.25s ease, transform 0.2s ease;
+  /* Lets the GithubMark icon's fill="currentColor" pick up the right shade
+     without its own override — dark here (light background), overridden to
+     light below for the secondary (transparent-background) variant. */
+  color: var(--bg);
+  /* transform is animated inline by the Button component's whileHover/
+     whileTap (motion/react) — an inline style always wins over this
+     transition anyway, so only background is left for CSS to own. */
+  transition: background 0.25s ease;
 }
 .btn:hover {
   background: #edefee;
-  transform: translateY(-1px);
 }
 .btn__label {
   font-size: 0.98rem;
   font-weight: 600;
-  color: var(--bg);
-}
-.btn__tag {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  color: var(--accent);
 }
 .btn--secondary {
   background: transparent;
@@ -1608,10 +1607,26 @@ button {
 .btn--secondary:hover {
   background: var(--accent-bg);
   border-color: var(--accent);
-  transform: translateY(-1px);
 }
-.btn--secondary .btn__label {
-  color: var(--text-primary);
+.scene__cta-row {
+  display: flex;
+  gap: 14px;
+}
+@media (max-width: 480px) {
+  /* At full size the two buttons' combined width only fits from a certain
+     viewport width up — below that they'd overflow the page instead of
+     sitting side by side. Shrink padding/type just enough to buy back the
+     needed width. */
+  .scene__cta-row {
+    gap: 10px;
+  }
+  .scene__cta-row .btn {
+    padding: 10px 14px;
+    gap: 6px;
+  }
+  .scene__cta-row .btn__label {
+    font-size: 0.85rem;
+  }
 }
 
 /* --- Homelab / statement sections --- */
