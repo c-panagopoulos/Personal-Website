@@ -11,7 +11,7 @@ const CHIPS = [
 ];
 
 const NAME_LINE = "CHARALAMPOS PANAGOPOULOS";
-const ROLE_LINE = "JUNIOR FULL-STACK SOFTWARE ENGINEER";
+const ROLE_LINE = "JUNIOR FULL-STACK WEB DEVELOPER";
 const SCRAMBLE_CHARS = "!<>-_\\/[]{}=+*^?#$%&";
 const EASE = "cubic-bezier(0.2, 0.7, 0.2, 1)";
 
@@ -77,10 +77,10 @@ export default function Hero() {
               style={{ animation: "avatarSpring 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both" }}
             />
             <span className="hero__label-group" aria-label={`${NAME_LINE}, ${ROLE_LINE}`}>
-              <span className="hero__label" style={{ whiteSpace: "pre", minWidth: 1 }} aria-hidden="true">
+              <span className="hero__label" style={{ whiteSpace: "pre-wrap", minWidth: 1 }} aria-hidden="true">
                 {nameDisplay || " "}
               </span>
-              <span className="hero__label hero__label--muted" style={{ whiteSpace: "pre", minWidth: 1 }} aria-hidden="true">
+              <span className="hero__label hero__label--muted" style={{ whiteSpace: "pre-wrap", minWidth: 1 }} aria-hidden="true">
                 {roleDisplay || " "}
               </span>
             </span>
