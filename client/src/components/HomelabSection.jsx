@@ -57,7 +57,7 @@ export default function HomelabSection() {
     <div id="homelab" className="homelab-section" ref={ref}>
       <div className="scene__browser homelab__terminal-wrap" style={anim(visible, "terminalRise", 0.7, 0.3)}>
         <Terminal
-          username="xpanago@n10"
+          username="panago@homelab"
           commands={["docker ps"]}
           outputs={{ 0: dockerPsOutput }}
         />

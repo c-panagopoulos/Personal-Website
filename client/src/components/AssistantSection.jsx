@@ -246,7 +246,7 @@ export default function AssistantSection() {
         </h3>
         {!(isMobile && chat.open) && (
           <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
-            This is the same assistant I built for Hermes, pointed at my own repos and CV. It shows the chunks it
+            This is the same assistant I built for Hermes, pointed at my own repos. It shows the chunks it
             used, so you can catch it being wrong.
           </p>
         )}
