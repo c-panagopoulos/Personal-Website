@@ -350,11 +350,6 @@ button {
   background: var(--bg);
   min-height: 100vh;
 }
-@media (max-width: 720px) {
-  .page {
-    padding-bottom: 96px;
-  }
-}
 
 /* --- Nav (Aceternity "Resizable Navbar", restyled) --- */
 .resizable-navbar {
@@ -2241,97 +2236,6 @@ button {
   font-size: 0.6rem;
   letter-spacing: 0.16em;
   color: rgba(211, 218, 217, 0.5);
-}
-
-/* --- Dock nav --- */
-.dock {
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 30;
-  padding: 10px 16px 14px;
-  background: rgba(33, 31, 36, 0.92);
-  backdrop-filter: blur(16px);
-  border-top: 1px solid var(--border);
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-@media (max-width: 720px) {
-  .dock {
-    display: grid;
-    grid-template-columns: 44px 44px minmax(0, 420px) 44px 44px;
-  }
-}
-@media (max-width: 560px) {
-  .dock {
-    grid-template-columns: 40px minmax(0, 1fr) 40px;
-  }
-}
-.dock__item {
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-radius: 12px;
-  transition: color 0.25s ease, background 0.25s ease;
-}
-.dock__item:hover {
-  background: var(--accent-bg-hover);
-  color: var(--accent);
-}
-/* Placed after the base .dock__item rule (same specificity) so this
-   actually wins the cascade — it previously sat before .dock__item in the
-   stylesheet and got silently overridden by it, leaving both icons visible
-   and wrapping the dock onto two rows on narrow phones. */
-@media (max-width: 560px) {
-  .dock__item--stack,
-  .dock__item--homelab {
-    display: none;
-  }
-}
-.dock__ask {
-  height: 46px;
-  border: 1px solid var(--accent-border);
-  background: linear-gradient(180deg, var(--accent-bg-hover), var(--accent-bg));
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 0 8px 0 16px;
-  text-decoration: none;
-  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.25s ease;
-}
-.dock__ask:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-}
-.dock__ask-prompt {
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-}
-.dock__ask-label {
-  flex: 1;
-  text-align: left;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-tertiary);
-}
-.dock__ask-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
 }
 
 /* --- Macbook scroll (ported from Aceternity UI's macbook-scroll, Tailwind/framer-motion -> plain CSS/JS) --- */

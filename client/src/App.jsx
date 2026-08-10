@@ -7,7 +7,6 @@ import AssistantSection from "./components/AssistantSection.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
 import StackSection from "./components/StackSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
-import DockNav from "./components/DockNav.jsx";
 import StatementReveal from "./components/StatementReveal.jsx";
 import { ChatProvider } from "./context/ChatContext.jsx";
 import { useSceneTrigger } from "./hooks/useSceneTrigger.js";
@@ -124,7 +123,6 @@ export default function App() {
 
         <ContactSection />
         </main>
-        <DockNav />
       </div>
     </ChatProvider>
   );
