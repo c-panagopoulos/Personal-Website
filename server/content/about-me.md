@@ -8,7 +8,7 @@ debug: most of it is just listening carefully to what someone is actually descri
 anything, reproducing the real problem instead of guessing at it. That habit carried straight over into how
 I build software.
 
-What I build tends to start from something I actually needed. TapStudy exists because I wanted an honest,
+What I build tends to start from something I actually needed. tapstudy exists because I wanted an honest,
 low-friction record of how much I was actually studying alongside a full-time job, not another app to open
 and start manually, just an NFC tag on my desk. Tap to start, tap to stop. Hermes is a support chatbot I
 built for a fictional e-commerce brand that only ever
@@ -62,7 +62,7 @@ grounds every answer in a real, citable chunk of text, which is the whole point 
 On the AI side specifically, I care a lot about not letting a model get away with things it shouldn't:
 computing numbers in code and letting the model only phrase them, validating output before anything gets
 written or shown, and being upfront about what a system can't answer instead of letting it guess. That
-discipline shows up in TapStudy's AI insights, in Hermes' citation-only answers, and in this site's own
+discipline shows up in tapstudy's AI insights, in Hermes' citation-only answers, and in this site's own
 assistant, which is the same retrieval pattern pointed at my own CV and project notes.
 
 I'm not chasing polish for its own sake. I'd rather ship something that solves a real problem for me first,

@@ -20,7 +20,7 @@ const STACK_ANSWERS = {
     "I use Express on the backend because it stays out of the way on small, self-hosted APIs. There's no framework magic to fight when I'm the only one maintaining it.",
   SSE: "I use Server-Sent Events for chat streaming instead of something heavier like WebSockets. It's a one-way token stream from server to client, and a plain EventSource with no extra infrastructure is enough.",
   Postgres:
-    "I use PostgreSQL because it's the one relational database I trust to just work, for TapStudy's session data, Hermes' chat history, and this site's own retrieval alike. It's mature and well-documented, and I've never had to fight it.",
+    "I use PostgreSQL because it's the one relational database I trust to just work, for tapstudy's session data, Hermes' chat history, and this site's own retrieval alike. It's mature and well-documented, and I've never had to fight it.",
   pgvector:
     "I use pgvector on top of Postgres because it means retrieval doesn't need a separate vector database. That saves me one whole service to run, back up, and secure.",
   Docker:
@@ -35,8 +35,8 @@ const STACK_ANSWERS = {
   Bootstrap:
     "I've reached for Bootstrap on earlier projects when the goal was a working UI fast, without hand-rolling every component from scratch. It trades some visual uniqueness for speed, which is a fair trade when shipping something functional matters more than a custom look.",
   Tailwind:
-    "I used Tailwind CSS on TapStudy because utility classes let me iterate on layout fast without context-switching to a separate stylesheet. This site itself uses hand-written CSS instead, a single-page portfolio doesn't need a utility framework's overhead.",
-  Git: "I use Git because it's non-negotiable, every project here, from TapStudy to this site, lives in a repo with real commit history so I can see exactly what changed and roll it back the moment I break something.",
+    "I used Tailwind CSS on tapstudy because utility classes let me iterate on layout fast without context-switching to a separate stylesheet. This site itself uses hand-written CSS instead, a single-page portfolio doesn't need a utility framework's overhead.",
+  Git: "I use Git because it's non-negotiable, every project here, from tapstudy to this site, lives in a repo with real commit history so I can see exactly what changed and roll it back the moment I break something.",
 };
 
 export default function StackSection() {

@@ -33,7 +33,7 @@ export default function App() {
         <Hero />
 
         <div className="statement">
-          <StatementReveal lines={["I wanted to know", "how much I really studied.", "So I built", "TapStudy."]} />
+          <StatementReveal lines={["I wanted to know", "how much I really studied.", "So I built", "tapstudy."]} />
         </div>
 
         <MacbookScroll src="/images/dashboard.png" alt="tapstudy dashboard" />
