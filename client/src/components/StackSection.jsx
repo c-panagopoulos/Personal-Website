@@ -5,7 +5,7 @@ import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
 const STACK_GROUPS = [
-  { label: "Frontend", items: ["React", "Vite", "Framer Motion", "Bootstrap", "Tailwind"] },
+  { label: "Frontend", items: ["React", "Vite", "Bootstrap", "Tailwind"] },
   { label: "Backend", items: ["Express", "SSE"] },
   { label: "Data", items: ["Postgres", "pgvector"] },
   { label: "Infrastructure", items: ["Docker", "Linux", "Tailscale", "Git"] },
@@ -38,8 +38,6 @@ const STACK_ANSWERS = {
   Ollama:
     "I use Ollama for local inference because keeping a model on my own hardware means no per-request bill and nothing leaving the box for parts that don't need to scale. I still reach for a hosted API like Groq when a project genuinely needs speed a home server can't give it.",
   RAG: "RAG, retrieval-augmented generation, is the pattern I chose for anything that answers questions. I'd rather a system say that's not in what I've indexed than confidently make something up, and RAG grounds every answer in a real, citable chunk of text.",
-  "Framer Motion":
-    "I use Framer Motion, now motion/react, for the interactions on this page itself, the tab switcher's sliding pill, the button hover and tap scale, the carousel. It handles shared-layout and gesture animations that plain CSS transitions can't do cleanly.",
   Bootstrap:
     "I've reached for Bootstrap on earlier projects when the goal was a working UI fast, without hand-rolling every component from scratch. It trades some visual uniqueness for speed, which is a fair trade when shipping something functional matters more than a custom look.",
   Tailwind:
