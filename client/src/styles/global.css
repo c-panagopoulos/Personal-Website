@@ -639,6 +639,11 @@ button {
   flex-direction: column;
   gap: 14px;
 }
+@media (max-width: 640px) {
+  .chip-row {
+    order: -1;
+  }
+}
 .hero__curtain {
   position: fixed;
   top: 0;
@@ -2145,13 +2150,13 @@ button {
 }
 
 .contact-section {
-  padding: 96px 56px 72px;
+  padding: 96px 56px 28px;
   background: var(--bg);
   border-top: 1px solid var(--border);
 }
 @media (max-width: 900px) {
   .contact-section {
-    padding: 96px 20px 72px;
+    padding: 96px 20px 28px;
   }
 }
 .contact-section__eyebrow {
