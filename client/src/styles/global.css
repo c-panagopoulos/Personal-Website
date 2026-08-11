@@ -1860,8 +1860,8 @@ button {
 }
 .chat-bubble--user {
   max-width: 80%;
-  background: var(--surface-emphasis);
-  border: 1px solid var(--border-brighter);
+  background: rgba(113, 90, 90, 0.38);
+  border: 1px solid var(--accent-border);
   border-radius: 12px 12px 4px 12px;
   padding: 10px 14px;
   font-size: 0.95rem;
