@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ThinkingDots } from "./RetrievalStatus.jsx";
 import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
+import { useIsMobile } from "../hooks/useIsMobile.js";
 import { anim } from "../lib/anim.js";
 
 const STACK_GROUPS = [
@@ -44,12 +45,9 @@ export default function StackSection() {
   const [question, setQuestion] = useState(null);
   const [phase, setPhase] = useState("idle");
   const timeoutRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile(900);
 
   useEffect(() => () => clearTimeout(timeoutRef.current), []);
-  useEffect(() => {
-    if (window.innerWidth <= 900) setIsMobile(true);
-  }, []);
 
   const ask = (name) => {
     setQuestion(name);

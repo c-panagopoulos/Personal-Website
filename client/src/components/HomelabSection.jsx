@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import Reveal from "./Reveal.jsx";
 import Terminal from "./Terminal.jsx";
 import Button from "./Button.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
+import { useIsMobile } from "../hooks/useIsMobile.js";
 import { anim } from "../lib/anim.js";
 
 const CONTAINERS = [
@@ -45,11 +45,7 @@ function formatDockerPsOutput(rows, { compact = false } = {}) {
 }
 
 export default function HomelabSection() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    if (window.innerWidth < 640) setIsMobile(true);
-  }, []);
-
+  const isMobile = useIsMobile(640);
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
   const dockerPsOutput = formatDockerPsOutput(CONTAINERS, { compact: isMobile });
 

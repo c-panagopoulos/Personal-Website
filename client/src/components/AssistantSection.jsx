@@ -6,6 +6,7 @@ import { RetrievalStatus, RetrievedChunks, SourceChips, ThinkingDots } from "./R
 import ChatError from "./ChatError.jsx";
 import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
+import { useIsMobile } from "../hooks/useIsMobile.js";
 import { anim } from "../lib/anim.js";
 
 const CHIPS = [
@@ -169,12 +170,8 @@ export default function AssistantSection() {
   const chat = useSharedChat();
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
   const threadRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile(900);
   const [activeTab, setActiveTab] = useState("chat");
-
-  useEffect(() => {
-    if (window.innerWidth <= 900) setIsMobile(true);
-  }, []);
 
   useEffect(() => {
     if (isMobile && activeTab !== "chat") return;
