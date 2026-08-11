@@ -101,7 +101,7 @@ export default function Hero() {
           <div className="hero__interact">
             <div className="hero-composer" style={{ animation: `composerPop 0.7s ${EASE} 2s both` }}>
               <ChatInput
-                placeholder="Ask about the stack, the homelab, or whether I'd fit your team…"
+                placeholder="Ask about my stack or homelab…"
                 onSend={(question) => chat.ask(question, "hero")}
                 disabled={open}
                 promptExpanded={panelOpen}

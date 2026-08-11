@@ -640,8 +640,12 @@ button {
   gap: 14px;
 }
 @media (max-width: 640px) {
+  .hero__interact {
+    padding-top: 56px;
+  }
   .chip-row {
     order: -1;
+    gap: 12px;
   }
 }
 .hero__curtain {
