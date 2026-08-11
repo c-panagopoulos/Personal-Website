@@ -1,4 +1,4 @@
-<h1 align="center">panagopoulos.dev</h1>
+<h1 align="center">cpanagopoulos.dev</h1>
 <p align="center"><strong>A portfolio site with a RAG-powered assistant that answers questions about me,<br />grounded only in what it can actually cite.</strong></p>
 
 <p align="center">
