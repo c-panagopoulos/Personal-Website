@@ -17,6 +17,8 @@ const emptyTurn = () => ({
   model: null,
 });
 
+const MAX_HISTORY_TURNS = 6;
+
 export function useChat() {
   const [turns, setTurns] = useState([]);
   const controllerRef = useRef(null);
@@ -37,6 +39,14 @@ export function useChat() {
       const controller = new AbortController();
       controllerRef.current = controller;
 
+      // Only completed, error-free turns count as history — a turn still
+      // streaming or one that got flagged/failed has nothing coherent to
+      // hand back to the model as its own prior answer.
+      const historyPayload = turns
+        .filter((t) => t.hasText && t.done && !t.error)
+        .slice(-MAX_HISTORY_TURNS)
+        .map((t) => ({ question: t.question, answer: t.text }));
+
       setTurns((prev) => [...prev, { ...emptyTurn(), question, origin, isRetrieving: true }]);
 
       streamChat(
@@ -55,10 +65,11 @@ export function useChat() {
             updateLast((t) => ({ ...t, isRetrieving: false, isThinking: false, text: "", hasText: false, error, done: true }));
           },
         },
-        controller.signal
+        controller.signal,
+        historyPayload
       );
     },
-    [updateLast]
+    [updateLast, turns]
   );
 
   const reset = useCallback(() => {

@@ -19,8 +19,31 @@ function containsPromptLeak(text) {
 }
 
 const MAX_QUESTION_LENGTH = 500;
+const MAX_ANSWER_LENGTH = 2000;
+const MAX_HISTORY_TURNS = 6;
 const GENERIC_ERROR_MESSAGE =
   "Something broke on my end, not yours. The model or retrieval pipeline hit a snag, try again in a bit.";
+
+// The client sends back its own prior turns as {question, answer} pairs —
+// trusted no further than any other request body. Capped in both count and
+// per-field length so a direct API call can't stuff the model's context
+// with an unbounded or oversized fake conversation (e.g. planting fabricated
+// "assistant" replies to prime a jailbreak).
+function sanitizeHistory(history) {
+  if (!Array.isArray(history)) return [];
+  return history
+    .filter(
+      (turn) =>
+        turn &&
+        typeof turn.question === "string" &&
+        typeof turn.answer === "string" &&
+        turn.question.length > 0 &&
+        turn.question.length <= MAX_QUESTION_LENGTH &&
+        turn.answer.length > 0 &&
+        turn.answer.length <= MAX_ANSWER_LENGTH
+    )
+    .slice(-MAX_HISTORY_TURNS);
+}
 
 const chatLimiter = rateLimit({
   windowMs: 60 * 1000,
@@ -40,7 +63,7 @@ function sseWrite(res, event, data) {
 }
 
 router.post("/chat", chatLimiter, async (req, res) => {
-  const { question } = req.body || {};
+  const { question, history } = req.body || {};
   if (!question || typeof question !== "string") {
     res.status(400).json({ type: "bad_input", message: "question is required" });
     return;
@@ -49,6 +72,7 @@ router.post("/chat", chatLimiter, async (req, res) => {
     res.status(400).json({ type: "bad_input", message: "That's a lot to ask at once, try a shorter question." });
     return;
   }
+  const priorTurns = sanitizeHistory(history);
 
   res.writeHead(200, {
     "Content-Type": "text/event-stream",
@@ -69,6 +93,10 @@ router.post("/chat", chatLimiter, async (req, res) => {
 
     const messages = [
       { role: "system", content: SYSTEM_PROMPT },
+      ...priorTurns.flatMap((t) => [
+        { role: "user", content: t.question },
+        { role: "assistant", content: t.answer },
+      ]),
       { role: "user", content: `Context:\n${context}\n\nQuestion: ${question}` },
     ];
 

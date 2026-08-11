@@ -1,10 +1,10 @@
-export async function streamChat(question, { onSources, onToken, onDone, onError }, signal) {
+export async function streamChat(question, { onSources, onToken, onDone, onError }, signal, history = []) {
   let response;
   try {
     response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question }),
+      body: JSON.stringify({ question, history }),
       signal,
     });
   } catch {
