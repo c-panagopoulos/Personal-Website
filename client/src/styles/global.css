@@ -2829,6 +2829,10 @@ button {
   outline: 2px solid var(--accent-text);
   outline-offset: 2px;
 }
+.assistant-input__field:focus-visible,
+.chat-input__field:focus-visible {
+  outline: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
