@@ -1,7 +1,8 @@
 # About Charalampos Panagopoulos
 
 I'm a full-stack developer based in Athens, Greece, currently looking for junior full-stack web developer
-roles, ideally ones that involve AI-assisted products, retrieval systems, or infrastructure work.
+roles, ideally ones that involve AI-assisted products, retrieval systems, or infrastructure work. I'm open
+to remote, hybrid, or on-site work.
 
 Before I wrote any production code, I spent years on customer support lines. That job left a mark on how I
 debug: most of it is just listening carefully to what someone is actually describing before touching
@@ -63,7 +64,7 @@ On the AI side specifically, I care a lot about not letting a model get away wit
 computing numbers in code and letting the model only phrase them, validating output before anything gets
 written or shown, and being upfront about what a system can't answer instead of letting it guess. That
 discipline shows up in tapstudy's AI insights, in Hermes' citation-only answers, and in this site's own
-assistant, which is the same retrieval pattern pointed at my own CV and project notes.
+assistant, which is the same retrieval pattern pointed at my own about-me notes and project notes.
 
 I'm not chasing polish for its own sake. I'd rather ship something that solves a real problem for me first,
 then make it good enough that a stranger can use it too.

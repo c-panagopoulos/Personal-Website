@@ -10,10 +10,10 @@ import { useIsMobile } from "../hooks/useIsMobile.js";
 import { anim } from "../lib/anim.js";
 
 const CHIPS = [
+  "What kind of role is Charalampos looking for?",
   "How does this assistant retrieve information?",
-  "What breaks most often in the homelab?",
-  "Why pgvector over a managed vector DB?",
-  "What would you build next?",
+  "Why precompute metrics instead of letting the LLM calculate?",
+  "What's the weakest part of this architecture?",
 ];
 
 function ChatIcon() {
