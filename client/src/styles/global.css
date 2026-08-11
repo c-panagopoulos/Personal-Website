@@ -1864,7 +1864,7 @@ button {
 }
 .chat-bubble--user {
   max-width: 80%;
-  background: rgba(113, 90, 90, 0.38);
+  background: var(--accent);
   border: 1px solid var(--accent-border);
   border-radius: 12px 12px 4px 12px;
   padding: 10px 14px;
