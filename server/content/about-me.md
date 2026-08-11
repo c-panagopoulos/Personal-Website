@@ -13,8 +13,8 @@ low-friction record of how much I was actually studying alongside a full-time jo
 and start manually, just an NFC tag on my desk. Tap to start, tap to stop. Hermes is a support chatbot I
 built for a fictional e-commerce brand that only ever
 answers from what it can cite, with retrieval over PostgreSQL and pgvector and a real escalation path to a
-human for anything it can't confidently answer. Both run self-hosted, on my own hardware, not on someone
-else's cloud.
+human for anything it can't confidently answer. tapstudy runs self-hosted, on my own hardware, not on
+someone else's cloud. Hermes runs on Railway instead.
 
 That hardware is a single Intel N100 mini PC running my own homelab: Nextcloud, n8n automations, and a
 handful of Dockerized side projects, all reachable only over a Tailscale mesh with no ports open to the

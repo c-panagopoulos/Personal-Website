@@ -6,7 +6,7 @@ token streaming over SSE, session tracking, and automatic human-handoff escalati
 the frontend repo's README covers the full architecture.
 
 Live demo: https://hermes.cpanagopoulos.dev — deployed on Vercel with a custom Cloudflare domain, connecting
-to the private Hermes backend running on a cloud server.
+to the private Hermes backend running on Railway.
 
 ## Features
 

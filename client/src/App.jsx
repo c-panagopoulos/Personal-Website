@@ -86,7 +86,7 @@ export default function App() {
           githubHref="https://github.com/c-panagopoulos/hermes-ai"
           stack={[
             { label: "Engineering", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "JWT + bcrypt admin auth", "n8n escalation webhook"] },
-            { label: "Constraints", items: ["Self-hosted on Hetzner", "Groq in prod, Ollama in dev", "Escalates instead of guessing"] },
+            { label: "Constraints", items: ["Deployed on Railway", "Groq in prod, Ollama in dev", "Escalates instead of guessing"] },
           ]}
         />
 
