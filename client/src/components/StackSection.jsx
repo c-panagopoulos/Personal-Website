@@ -6,14 +6,18 @@ import { useIsMobile } from "../hooks/useIsMobile.js";
 import { anim } from "../lib/anim.js";
 
 const STACK_GROUPS = [
-  { label: "Frontend", items: ["React", "Vite", "Bootstrap", "Tailwind"] },
-  { label: "Backend", items: ["Express", "SSE"] },
+  { label: "Frontend", items: ["JavaScript", "React", "Vite", "Bootstrap", "Tailwind"] },
+  { label: "Backend", items: ["Node.js", "Express", "SSE"] },
   { label: "Data", items: ["Postgres", "pgvector"] },
-  { label: "Infrastructure", items: ["Docker", "Linux", "Tailscale", "Git"] },
+  { label: "Infrastructure", items: ["Docker", "Linux", "Tailscale", "Git", "n8n"] },
   { label: "AI", items: ["Ollama", "RAG"] },
 ];
 
 const STACK_ANSWERS = {
+  JavaScript:
+    "JavaScript is the one language every layer of this stack shares, frontend, backend, and the RAG pipeline's glue code alike, so I'm never context-switching to a second language just to get something done.",
+  "Node.js":
+    "Node.js is what lets that same language run the backend too, not just the browser. One runtime and one package ecosystem across the whole stack means fewer tools to juggle when I'm the only one maintaining it.",
   React:
     "I use React and Vite on the frontend because these projects are React apps that need a fast dev loop. That's the reason I use them, not because they're trendy.",
   Vite: "Vite is what actually makes that dev loop fast, instant hot reload instead of waiting on a bundler every time I save. It's paired with React here for that reason, not because it's trendy.",
@@ -38,6 +42,7 @@ const STACK_ANSWERS = {
   Tailwind:
     "I used Tailwind CSS on tapstudy because utility classes let me iterate on layout fast without context-switching to a separate stylesheet. This site itself uses hand-written CSS instead, a single-page portfolio doesn't need a utility framework's overhead.",
   Git: "I use Git because it's non-negotiable, every project here, from tapstudy to this site, lives in a repo with real commit history so I can see exactly what changed and roll it back the moment I break something.",
+  n8n: "n8n runs my homelab automations, one workflow plans my day from sleep and calendar data each morning, another turns photos of handwritten notes into searchable cards. Visual workflows are faster to debug and easier to extend six months later than a pile of hand-rolled scripts.",
 };
 
 export default function StackSection() {
