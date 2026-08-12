@@ -14,7 +14,7 @@ export default function ContactSection() {
     <div id="contact" className="contact-section" ref={ref}>
       <div className="contact-section__eyebrow">
         <span className="contact-section__eyebrow-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
-          END CREDITS
+          CONTACT
         </span>
         <span className="contact-section__eyebrow-rule" style={anim(visible, "ruleGrow", 0.6, 0.25)} />
       </div>
