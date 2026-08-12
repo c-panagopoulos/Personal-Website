@@ -1067,6 +1067,7 @@ button {
   padding: 8px 15px;
   border-radius: 30px;
   cursor: pointer;
+  text-align: left;
   transition: transform 0.22s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
 }
 .chip:hover {
