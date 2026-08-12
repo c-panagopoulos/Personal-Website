@@ -40,15 +40,15 @@ something, it says so instead of guessing.
 
 ```mermaid
 flowchart TD
-    Browser["Browser<br/>React + Vite"] -->|"POST /api/chat<br/>question + history"| API["Express API<br/>rate-limited + Helmet"]
-    API --> Embed["Ollama<br/>embeds the question"]
-    Embed --> Retrieve[("Postgres + pgvector<br/>cosine similarity, top-k")]
-    Retrieve -->|retrieved chunks| Build["Build messages<br/>system + history + context"]
+    Browser["Browser React + Vite"] -->|"POST /api/chat question + history"| API["Express API rate-limited + Helmet"]
+    API --> Embed["Ollama embeds the question"]
+    Embed --> Retrieve[("Postgres + pgvector cosine similarity, top-k")]
+    Retrieve -->|retrieved chunks| Build["Build messages system + history + context"]
     Build --> Groq["Groq — primary"]
     Groq -->|quota exhausted| Gemini["Gemini — fallback"]
     Groq -->|success| Stream["SSE token stream"]
     Gemini --> Stream
-    Stream -->|"leak check against<br/>system prompt"| Browser
+    Stream -->|"leak check against system prompt"| Browser
 ```
 
 Postgres, Ollama, and the app all come up from one `docker compose up` — the same "single image, own
