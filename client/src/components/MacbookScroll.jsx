@@ -100,14 +100,23 @@ export default function MacbookScroll({ src, alt, title }) {
             <SpeakerGrid />
           </div>
         </div>
-        <div className="macbook-scroll__trackpad">
-          <div
-            className="macbook-scroll__nfc"
-            style={{ opacity: clamp((progress - 0.75) / 0.25, 0, 1) }}
-          >
-            <span className="macbook-scroll__nfc-ring" />
-            <span className="macbook-scroll__nfc-ring macbook-scroll__nfc-ring--delay" />
-            <span className="macbook-scroll__nfc-dot" />
+        <div className="macbook-scroll__trackpad-row">
+          <span className="macbook-scroll__nfc-sticker" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M6 18a9 9 0 0 1 0-12" />
+              <path d="M9.5 15a5 5 0 0 1 0-6" />
+              <circle cx="12.5" cy="12" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </span>
+          <div className="macbook-scroll__trackpad">
+            <div
+              className="macbook-scroll__nfc"
+              style={{ opacity: clamp((progress - 0.75) / 0.25, 0, 1) }}
+            >
+              <span className="macbook-scroll__nfc-ring" />
+              <span className="macbook-scroll__nfc-ring macbook-scroll__nfc-ring--delay" />
+              <span className="macbook-scroll__nfc-dot" />
+            </div>
           </div>
         </div>
         <div className="macbook-scroll__chin" />
