@@ -1,8 +1,8 @@
 # About Charalampos Panagopoulos
 
-I'm a full-stack developer based in Athens, Greece, currently looking for junior full-stack web developer
-roles, ideally ones that involve AI-assisted products, retrieval systems, or infrastructure work. I'm open
-to remote, hybrid, or on-site work.
+I'm based in Athens, Greece. I currently work full-time in a non-development role and build software in my
+spare time, and I'm looking to land my first job as a junior full-stack web developer. I'm open to remote,
+hybrid, or on-site work.
 
 Before I wrote any production code, I spent years on customer support lines. That job left a mark on how I
 debug: most of it is just listening carefully to what someone is actually describing before touching
