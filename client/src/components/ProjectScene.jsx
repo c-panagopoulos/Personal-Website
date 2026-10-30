@@ -17,6 +17,21 @@ function StackGroup({ group, style }) {
   );
 }
 
+function ResultGroup({ result, style }) {
+  return (
+    <div className="scene__stack-group" style={style}>
+      <div className="scene__stack-label">Result</div>
+      <div className="scene__result">
+        <span className="scene__result-value">
+          {result.value}
+          {result.outOf && <span className="scene__result-out-of"> / {result.outOf}</span>}
+        </span>
+        {result.caption && <span className="scene__result-caption">{result.caption}</span>}
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectScene({
   id,
   sceneNumber,
@@ -28,13 +43,16 @@ export default function ProjectScene({
   proof,
   how,
   stack,
+  result,
   evidence,
   ctaLabel,
   ctaHref,
   githubHref,
+  secondaryLabel = "GitHub",
   factsLayout = "column",
   showBrowserPreview = true,
   divider = false,
+  children,
 }) {
   const [ref, visible] = useSceneTrigger({ threshold: 0.15 });
   const sceneClass = ["scene", divider && "scene--divider"].filter(Boolean).join(" ");
@@ -97,6 +115,7 @@ export default function ProjectScene({
               {stack.map((group, i) => (
                 <StackGroup group={group} key={group.label} style={anim(visible, "rowRise", 0.45, 0.9 + i * 0.15)} />
               ))}
+              {result && <ResultGroup result={result} style={anim(visible, "rowRise", 0.45, 0.9 + stack.length * 0.15)} />}
             </div>
           )}
 
@@ -114,7 +133,7 @@ export default function ProjectScene({
               {githubHref && (
                 <span style={anim(visible, "ctaPop", 0.5, 1.95)}>
                   <Button variant="secondary" href={githubHref} target="_blank" rel="noreferrer">
-                    <span className="btn__label">GitHub</span>
+                    <span className="btn__label">{secondaryLabel}</span>
                   </Button>
                 </span>
               )}
@@ -134,12 +153,14 @@ export default function ProjectScene({
                   {stack.map((group, i) => (
                     <StackGroup group={group} key={group.label} style={anim(visible, "rowRise", 0.45, 0.9 + i * 0.15)} />
                   ))}
+                  {result && <ResultGroup result={result} style={anim(visible, "rowRise", 0.45, 0.9 + stack.length * 0.15)} />}
                 </div>
               </div>
             )}
           </div>
         )}
       </div>
+      {children}
     </div>
   );
 }

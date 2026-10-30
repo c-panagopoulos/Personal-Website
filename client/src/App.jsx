@@ -4,6 +4,7 @@ import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
 import MotionCarousel from "./components/MotionCarousel.jsx";
 import AssistantSection from "./components/AssistantSection.jsx";
+import AuditSteps from "./components/AuditSteps.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
 import StackSection from "./components/StackSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
@@ -93,6 +94,37 @@ export default function App() {
         <div className="hermes-evidence" ref={hermesEvidenceRef} style={anim(hermesEvidenceVisible, "sceneRiseBlur", 0.6, 0)}>
           <MotionCarousel slides={HERMES_SLIDES} />
         </div>
+
+        <div className="statement">
+          <StatementReveal lines={["Deleted is a claim.", "Gone needs evidence."]} />
+        </div>
+
+        <ProjectScene
+          id="scene-03"
+          sceneNumber="03"
+          sceneName="GHOST DATA"
+          showBrowserPreview={false}
+          title="Deleted doesn't mean gone."
+          body="Built in 24 hours for HackerRank Orchestrate. An agent that audits whether a customer's data is really deleted: across replicas, search indexes, backups, and the sync jobs that quietly bring it back."
+          proof={[
+            <>The model proposes, <b>the code decides</b></>,
+            <>Reads SQL, JSON, <b>six log formats</b>, PDFs and screenshots</>,
+            <>Every finding <b>cites its evidence</b></>,
+            <><b>Zero npm dependencies</b>, byte-identical rebuilds</>,
+          ]}
+          how="LLMs only touch what's genuinely unstructured: whether a request, in any language, actually asks for deletion, and facts that exist only inside an image. Identity, time rules, policy and ordering are plain code. The hard part was separating what the auditor could have known at audit time from what can actually be cited. That change, together with one primary account per person, took status accuracy on the 32 sample cases from 75% to 96.9%."
+          ctaLabel="GitHub"
+          ctaHref="https://github.com/c-panagopoulos/deletion-audit-agent"
+          githubHref="https://github.com/c-panagopoulos/deletion-audit-agent/blob/main/code/docs/decisions.md"
+          secondaryLabel="31 decision records"
+          stack={[
+            { label: "Engineering", items: ["Node.js 22.13+, no dependencies", "Groq gpt-oss-120b for intake", "Gemini vision for PDFs + images", "~$0.17 for all 518 (from an empty cache)"] },
+            { label: "Constraints", items: ["24 hours, solo", "Groq tier I chose: 200k tokens/day", "Refuses to guess unlinkable data"] },
+          ]}
+          result={{ value: "25.2", outOf: "30", caption: "output graded on hidden answers" }}
+        >
+          <AuditSteps />
+        </ProjectScene>
 
         <AssistantSection />
 
