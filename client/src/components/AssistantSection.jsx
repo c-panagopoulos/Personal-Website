@@ -8,6 +8,7 @@ import DotField from "./DotField.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { useIsMobile } from "../hooks/useIsMobile.js";
 import { anim } from "../lib/anim.js";
+import { fetchIndexInfo } from "../lib/api.js";
 
 const CHIPS = [
   "What kind of role is Charalampos looking for?",
@@ -172,6 +173,15 @@ export default function AssistantSection() {
   const threadRef = useRef(null);
   const isMobile = useIsMobile(900);
   const [activeTab, setActiveTab] = useState("chat");
+  const [indexInfo, setIndexInfo] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchIndexInfo(controller.signal)
+      .then(setIndexInfo)
+      .catch(() => {});
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
     if (isMobile && activeTab !== "chat") return;
@@ -185,15 +195,9 @@ export default function AssistantSection() {
         <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.35)}>
           <div className="assistant-section__sidebar-block-label">SOURCES INDEXED</div>
           <div className="assistant-section__sidebar-block-value">
-            about-me.md
-            <br />
-            assistant.md
-            <br />
-            hermes.md
-            <br />
-            homelab.md
-            <br />
-            tapstudy.md
+            {indexInfo?.sources.length
+              ? indexInfo.sources.map((source) => <div key={source}>{source}</div>)
+              : "—"}
           </div>
         </div>
         <div className="assistant-section__sidebar-col">
@@ -202,7 +206,7 @@ export default function AssistantSection() {
             <div className="assistant-section__sidebar-block-value">
               pgvector
               <br />
-              cosine · top-k 6
+              cosine · top-k {indexInfo?.topK ?? "—"}
             </div>
           </div>
           <div className="assistant-section__sidebar-card" style={anim(visible, "rowRise", 0.4, 0.65)}>

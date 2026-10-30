@@ -71,3 +71,9 @@ export async function streamChat(question, { onSources, onToken, onDone, onError
     }
   }
 }
+
+export async function fetchIndexInfo(signal) {
+  const response = await fetch("/api/sources", { signal });
+  if (!response.ok) throw new Error(`Request failed (${response.status})`);
+  return response.json();
+}

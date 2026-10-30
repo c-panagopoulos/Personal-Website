@@ -1,6 +1,6 @@
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
-import { retrieve, MIN_SCORE } from "../rag/retrieve.js";
+import { retrieve, listSources, MIN_SCORE, TOP_K } from "../rag/retrieve.js";
 import { chatStream } from "../llm.js";
 
 const router = Router();
@@ -61,6 +61,15 @@ const chatLimiter = rateLimit({
 function sseWrite(res, event, data) {
   res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
 }
+
+router.get("/sources", async (req, res) => {
+  try {
+    res.json({ sources: await listSources(), topK: TOP_K });
+  } catch (err) {
+    console.error("sources error:", err);
+    res.status(500).json({ type: "generic", message: GENERIC_ERROR_MESSAGE });
+  }
+});
 
 router.post("/chat", chatLimiter, async (req, res) => {
   const { question, history } = req.body || {};
