@@ -15,7 +15,9 @@ and start manually, just an NFC tag on my desk. Tap to start, tap to stop. Herme
 built for a fictional e-commerce brand that only ever
 answers from what it can cite, with retrieval over PostgreSQL and pgvector and a real escalation path to a
 human for anything it can't confidently answer. tapstudy runs self-hosted, on my own hardware, not on
-someone else's cloud. Hermes runs on Railway instead.
+someone else's cloud. Hermes runs on Railway instead. Ghost Data is a deletion-audit agent I built in 24
+hours for HackerRank Orchestrate, which checks whether a customer's data is really gone across replicas,
+search indexes, backups and sync jobs.
 
 That hardware is a single Intel N100 mini PC running my own homelab: Nextcloud, n8n automations, and a
 handful of Dockerized side projects, all reachable only over a Tailscale mesh with no ports open to the
@@ -63,8 +65,14 @@ grounds every answer in a real, citable chunk of text, which is the whole point 
 On the AI side specifically, I care a lot about not letting a model get away with things it shouldn't:
 computing numbers in code and letting the model only phrase them, validating output before anything gets
 written or shown, and being upfront about what a system can't answer instead of letting it guess. That
-discipline shows up in tapstudy's AI insights, in Hermes' citation-only answers, and in this site's own
+discipline shows up in tapstudy's AI insights, in Hermes' citation-only answers, in Ghost Data's rule that
+the model proposes and the code decides, and in this site's own
 assistant, which is the same retrieval pattern pointed at my own about-me notes and project notes.
 
 I'm not chasing polish for its own sake. I'd rather ship something that solves a real problem for me first,
 then make it good enough that a stranger can use it too.
+
+Q: What projects have you built? A: Three main projects. tapstudy, a self-hosted study tracker you start by
+tapping an NFC tag. Hermes, a support chatbot that only answers from what it can cite. Ghost Data, a
+deletion-audit agent I built in 24 hours for HackerRank Orchestrate. Alongside those, this portfolio with its
+own retrieval assistant, and the homelab everything self-hosted runs on.

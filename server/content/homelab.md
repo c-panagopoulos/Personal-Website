@@ -5,8 +5,9 @@ My homelab runs on a single Intel N100 mini PC — low power, always on, quiet e
 ## What's running
 Nine Docker containers, in total. Nextcloud handles personal file storage and sync, backed by its own
 Postgres database and Redis cache. Caddy sits in front of everything as the reverse proxy, routing traffic
-to each service. tapstudy and this portfolio's own backend are the two side projects I've built and run
-there. n8n handles automations: one workflow plans my day from sleep and calendar data each morning,
+to each service. Of the projects I've built myself, only two run there: tapstudy and this
+portfolio's own backend. Everything else on the homelab is open-source software I self-host, not something
+I built. n8n handles automations: one workflow plans my day from sleep and calendar data each morning,
 another turns photos of handwritten notes into searchable cards. A Tailscale mesh handles remote access, so
 no ports are exposed to the public internet.
 
