@@ -216,13 +216,6 @@ export default function AssistantSection() {
         </div>
       </div>
       {chat.sources.length > 0 && <RetrievedChunks sources={chat.sources} threshold={chat.threshold} />}
-      {!isMobile && (
-        <div className="assistant-section__sidebar-footnote" style={anim(visible, "rowRise", 0.4, 0.8)}>
-          IT ONLY ANSWERS FROM
-          <br />
-          WHAT IT CAN CITE
-        </div>
-      )}
     </div>
   );
 
@@ -240,7 +233,7 @@ export default function AssistantSection() {
           pulseColor="#9c8683"
         />
       </div>
-      <div className="assistant-section__main-inner">
+      <div className={"assistant-section__main-inner" + (chat.history.length ? "" : " assistant-section__main-inner--idle")}>
         <h3 className="assistant-section__title">
           <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0) }}>Ask about my work</span>
         </h3>
@@ -286,18 +279,11 @@ export default function AssistantSection() {
 
   return (
     <div id="assistant" className="assistant-section" ref={ref}>
-      <div className="assistant-section__topbar" style={anim(visible, "rowRise", 0.4, 0.15)}>
-        <div className="assistant-breadcrumb">
-          <span className="assistant-breadcrumb__cp">cp</span>
-          <span className="assistant-breadcrumb__sep">/</span>
-          <span className="assistant-breadcrumb__status">assistant</span>
-          <span className="assistant-breadcrumb__sep">/</span>
-          <span className="assistant-breadcrumb__current">retrieval-online</span>
-        </div>
-        {isMobile && (
+      {isMobile && (
+        <div className="assistant-section__topbar" style={anim(visible, "rowRise", 0.4, 0.15)}>
           <AssistantTabToggle activeTab={activeTab} onChange={setActiveTab} sourcesCount={chat.sources.length} />
-        )}
-      </div>
+        </div>
+      )}
       {isMobile ? (
         <AssistantTabPanels activeTab={activeTab} panels={{ chat: mainContent, sources: sidebarContent }} />
       ) : (

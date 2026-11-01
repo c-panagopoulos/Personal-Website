@@ -60,10 +60,6 @@ export default function HomelabSection() {
       </div>
       <Reveal className="homelab__caption">
         <div className="scene__kicker" style={{ marginBottom: 0 }}>
-          <span className="scene__browser-title" style={{ marginLeft: 0 }}>
-            ONE MINI PC, EVERY SERVICE RUNNING IN DOCKER
-          </span>
-          <span className="scene__kicker-rule" />
           <span className="scene__kicker-name">HOMELAB</span>
         </div>
       </Reveal>

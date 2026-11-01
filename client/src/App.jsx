@@ -30,13 +30,12 @@ export default function App() {
         <a className="skip-link" href="#main">
           Skip to main content
         </a>
-        <NavBar style={{ animation: "heroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 1.15s both" }} />
+        <NavBar style={{ animation: "heroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both" }} />
         <main id="main" tabIndex={-1}>
         <Hero />
 
         <ProjectScene
           id="scene-01"
-          sceneNumber="01"
           sceneName="TAPSTUDY"
           showBrowserPreview={false}
           title="A study tracker you start by tapping your phone."
@@ -60,7 +59,6 @@ export default function App() {
 
         <ProjectScene
           id="scene-02"
-          sceneNumber="02"
           sceneName="HERMES"
           showBrowserPreview={false}
           divider
@@ -88,15 +86,8 @@ export default function App() {
           <MotionCarousel slides={HERMES_SLIDES} />
         </div>
 
-        <StatMoment
-          value="75% → 96.9%"
-          label="75% to 96.9%"
-          caption="Ghost Data's status accuracy on the 32 sample cases, after separating what the auditor could know at audit time from what it could actually cite."
-        />
-
         <ProjectScene
           id="scene-03"
-          sceneNumber="03"
           sceneName="GHOST DATA"
           showBrowserPreview={false}
           title="An agent that checks whether deleted customer data is really gone."
@@ -121,9 +112,18 @@ export default function App() {
         </ProjectScene>
 
         <StatMoment
-          value="25.2 / 30"
-          label="25.2 out of 30"
-          caption="Ghost Data's score, graded against answers that were hidden from participants."
+          stats={[
+            {
+              value: "75% → 96.9%",
+              label: "75% to 96.9%",
+              caption: "Status accuracy on the 32 sample cases, after separating what the auditor could know at audit time from what it could actually cite.",
+            },
+            {
+              value: "25.2 / 30",
+              label: "25.2 out of 30",
+              caption: "Final score, graded against answers that were hidden from participants.",
+            },
+          ]}
         />
 
         <AssistantSection />

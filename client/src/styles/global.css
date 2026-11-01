@@ -174,35 +174,6 @@ button {
     transform: translateY(0) scale(1);
   }
 }
-@keyframes curtainL {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-101%);
-  }
-}
-@keyframes curtainR {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(101%);
-  }
-}
-@keyframes flareLine {
-  0% {
-    transform: scaleX(0);
-    opacity: 1;
-  }
-  55% {
-    opacity: 1;
-  }
-  100% {
-    transform: scaleX(1);
-    opacity: 0;
-  }
-}
 @keyframes avatarSpring {
   0% {
     opacity: 0;
@@ -628,35 +599,6 @@ button {
     gap: 12px;
   }
 }
-.hero__curtain {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 45;
-  width: 50%;
-  background: var(--bg);
-  pointer-events: none;
-}
-.hero__curtain--left {
-  left: 0;
-  animation: curtainL 0.9s cubic-bezier(0.65, 0, 0.15, 1) 0.15s both;
-}
-.hero__curtain--right {
-  right: 0;
-  animation: curtainR 0.9s cubic-bezier(0.65, 0, 0.15, 1) 0.15s both;
-}
-.hero__flare {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  z-index: 46;
-  background: linear-gradient(90deg, transparent, rgba(211, 218, 217, 0.7), transparent);
-  transform-origin: center;
-  animation: flareLine 0.7s ease-out 0.1s both;
-  pointer-events: none;
-}
 
 
 .assistant-card {
@@ -1029,16 +971,23 @@ button {
   background: radial-gradient(circle at 30% 50%, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
   animation: vignettePulse 1.6s ease-out 0.05s both;
 }
-.statement__stat {
+.statement__stats {
   position: relative;
   z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(48px, 8vw, 120px);
+}
+.statement__stat {
   margin: 0;
-  max-width: 1000px;
+  flex: 1 1 320px;
+  max-width: 560px;
 }
 .statement__value {
   margin: 0;
   font-weight: 500;
-  font-size: clamp(3rem, 1.5rem + 8vw, 8.5rem);
+  font-size: clamp(2.8rem, 1.2rem + 5vw, 6rem);
   line-height: 0.95;
   letter-spacing: -0.05em;
   color: var(--text-primary);
@@ -1302,17 +1251,6 @@ button {
   align-items: center;
   gap: 14px;
   margin-bottom: 20px;
-}
-.scene__kicker-num {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  color: var(--accent-text);
-}
-.scene__kicker-rule {
-  width: 40px;
-  height: 1px;
-  background: var(--accent-border);
 }
 .scene__kicker-name {
   font-family: var(--font-mono);
@@ -1693,33 +1631,6 @@ button {
   border-bottom: 1px solid var(--border);
   background: #1e1c22;
 }
-.assistant-breadcrumb {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-}
-.assistant-breadcrumb__cp {
-  color: var(--accent-text);
-}
-.assistant-breadcrumb__sep {
-  color: rgba(211, 218, 217, 0.64);
-}
-.assistant-breadcrumb__current {
-  color: var(--text-primary);
-}
-.assistant-breadcrumb__status {
-  color: rgba(211, 218, 217, 0.64);
-}
-@media (max-width: 380px) {
-  .assistant-breadcrumb__status {
-    display: none;
-  }
-  .assistant-breadcrumb__sep:last-of-type {
-    display: none;
-  }
-}
 .assistant-section__body {
   flex: 1;
   display: grid;
@@ -1855,15 +1766,6 @@ button {
   margin-top: 9px;
   line-height: 1.9;
 }
-.assistant-section__sidebar-footnote {
-  flex-shrink: 0;
-  margin-top: auto;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  color: rgba(211, 218, 217, 0.64);
-  line-height: 1.9;
-}
 .assistant-section__main {
   flex: 1;
   padding: 48px 56px;
@@ -1878,6 +1780,18 @@ button {
   display: flex;
   flex-direction: column;
   min-height: 0;
+}
+/* Before the first question, keep everything grouped in the middle instead of
+   leaving an empty thread between the intro and the composer. */
+.assistant-section__main-inner--idle {
+  justify-content: center;
+}
+.assistant-section__main-inner--idle .chat-thread {
+  flex: 0 0 auto;
+  margin-top: 0;
+}
+.assistant-section__main-inner--idle .assistant-section__composer {
+  padding-top: 32px;
 }
 @media (max-width: 900px) {
   .assistant-section__main-inner {
@@ -2042,17 +1956,6 @@ button {
   font-weight: 600;
   letter-spacing: 0.12em;
   color: var(--text-primary);
-}
-.stack-section__head-rule {
-  flex: 1;
-  height: 1px;
-  background: var(--accent-border);
-}
-.stack-section__head-note {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  color: var(--text-tertiary);
 }
 .stack-section__lede {
   margin: 0 0 30px;

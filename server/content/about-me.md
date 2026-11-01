@@ -1,12 +1,21 @@
 # About Charalampos Panagopoulos
 
-I'm based in Athens, Greece. I'm a career changer: I currently work full-time in customer and technical support and
-build software in my spare time, and I'm looking to land my first job as a junior full-stack web developer. I'm open to remote,
-hybrid, or on-site work.
+I'm based in Athens, Greece, and I'm looking for my first job as a junior full-stack web developer. I'm open
+to remote, hybrid, or on-site work.
 
-Working in customer and technical support has taught me to listen until I understand what someone actually
-needs, to explain technical things in plain language, and to stay calm and patient when a customer is
-frustrated.
+How I got into programming: it all started when I began self-hosting a few services to make my everyday life
+easier. The first one was Nextcloud, to get my files off Google Drive. One Docker container became two, two
+became three, and that's how I ended up with a homelab. That's when the open source community impressed me:
+people with passion, working together, have built things that in my opinion are often better than the
+commercial products they compete with. It's also when I saw what a responsibility it is to keep all these
+services running smoothly. All of this fascinated me, and programming was the natural next step.
+
+I'm currently changing careers. I work full-time in customer and technical support, and in my free time I
+build projects like these and keep improving my programming skills.
+
+Support work has taught me to listen until I understand what someone actually needs and to explain technical
+things in plain language. I've also learned to work well under pressure, to deliver results, and to take
+ownership of customer cases until their issue is resolved.
 
 Some of what I build started from something I needed myself. tapstudy exists because I wanted an honest,
 low-friction record of how much I was actually studying alongside a full-time job, not another app to open
@@ -26,8 +35,7 @@ committed to; the other turns photos of handwritten study notes into structured,
 GPT-4o Vision. Running my own infrastructure is where I actually learned what "production" costs: backups,
 monitoring, and being the only person who fixes things when something breaks.
 
-I use React and Vite on the frontend because the projects are React apps that need a fast dev loop. That's
-the reason I use React and Vite, not because they're trendy.
+I use React and Vite on the frontend because the projects are React apps that need a fast dev loop. 
 
 I use Express on the backend because it stays out of the way on small, self-hosted APIs. That's why I use
 Express: there's no framework magic to fight when I'm the only one maintaining it.
@@ -75,3 +83,8 @@ Q: What projects have you built? A: Three main projects. tapstudy, a self-hosted
 tapping an NFC tag. Hermes, a support chatbot that only answers from what it can cite. Ghost Data, a
 deletion-audit agent I built for HackerRank Orchestrate in about 8 to 9 hours of work during the 24-hour hackathon. Alongside those, this portfolio with its
 own retrieval assistant, and the homelab everything self-hosted runs on.
+
+Q: How did you get into programming? A: Through self-hosting. I started with Nextcloud to get my files off
+Google Drive, one Docker container became two, then three, and I ended up with a homelab. The open source
+community and the responsibility of keeping those services running led me to programming. I'm currently
+changing careers: I work full-time in customer and technical support and build projects in my free time.

@@ -18,7 +18,6 @@ function StackGroup({ group, style }) {
 
 export default function ProjectScene({
   id,
-  sceneNumber,
   sceneName,
   browserLabel,
   browserTag,
@@ -61,11 +60,7 @@ export default function ProjectScene({
       <div className={gridClass}>
         <div>
           <div className="scene__kicker">
-            <span className="scene__kicker-num" style={anim(visible, "rowRise", 0.5, 0.1)}>
-              PROJECT {sceneNumber}
-            </span>
-            <span className="scene__kicker-rule" style={anim(visible, "ruleGrow", 0.5, 0.35)} />
-            <span className="scene__kicker-name" style={anim(visible, "rowRise", 0.5, 0.35)}>
+            <span className="scene__kicker-name" style={anim(visible, "rowRise", 0.5, 0.1)}>
               {sceneName}
             </span>
           </div>
