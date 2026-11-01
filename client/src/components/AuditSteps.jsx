@@ -43,9 +43,9 @@ export default function AuditSteps() {
   return (
     <div className="audit-steps" ref={ref}>
       <div className="audit-steps__head">
-        <h4 className="audit-steps__title" style={anim(visible, "titleWipe", 0.75, 0.5)}>
+        <h3 className="audit-steps__title" style={anim(visible, "titleWipe", 0.75, 0.5)}>
           How one request is audited
-        </h4>
+        </h3>
         <span className="audit-steps__hint" style={anim(visible, "sceneRiseBlur", 0.7, 0.9)}>
           Six steps. Tap one to see what it does.
         </span>

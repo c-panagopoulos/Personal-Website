@@ -103,7 +103,7 @@ export default function MotionCarousel({ slides }) {
                 >
                   {slide.src ? (
                     <>
-                      <img className="motion-carousel__slide-img" src={slide.src} alt={slide.label} draggable={false} />
+                      <img className="motion-carousel__slide-img" src={slide.src} alt="" draggable={false} />
                       <span className="motion-carousel__zoom-hint" aria-hidden="true">
                         <ZoomIcon />
                       </span>

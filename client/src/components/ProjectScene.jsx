@@ -64,9 +64,9 @@ export default function ProjectScene({
               {sceneName}
             </span>
           </div>
-          <h3 className="scene__title" style={anim(visible, "titleWipe", 0.75, 0.5)}>
+          <h2 className="scene__title" style={anim(visible, "titleWipe", 0.75, 0.5)}>
             {title}
-          </h3>
+          </h2>
           <p className="scene__body" style={anim(visible, "sceneRiseBlur", 0.7, 1)}>
             {body}
           </p>

@@ -19,8 +19,9 @@ export default function StatMoment({ stats }) {
       <div className="statement__stats">
         {stats.map((stat, i) => (
           <figure className="statement__stat" key={stat.label}>
-            <p className="statement__value" aria-label={stat.label} style={play(0.1 + i * 0.25)}>
+            <p className="statement__value" style={play(0.1 + i * 0.25)}>
               <span aria-hidden="true">{stat.value}</span>
+              <span className="sr-only">{stat.label}</span>
             </p>
             <figcaption className="statement__caption" style={play(0.3 + i * 0.25)}>
               {stat.caption}

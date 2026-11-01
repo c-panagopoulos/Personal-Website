@@ -23,7 +23,7 @@ export default function Hero() {
             </span>
           </div>
           <h1 className="hero__title" style={{ animation: `titleWipe 0.8s ${EASE} 0.35s both` }}>
-            Charalampos
+            {"Charalampos "}
             <br />
             Panagopoulos
           </h1>

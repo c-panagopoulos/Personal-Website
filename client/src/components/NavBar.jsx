@@ -83,11 +83,11 @@ function scrollToTop(event) {
 
 function Brand({ visible }) {
   return (
-    <button type="button" className="nav__brand" onClick={scrollToTop} aria-label="Scroll to top">
+    <button type="button" className="nav__brand" onClick={scrollToTop} title="Scroll to top">
       <span className="nav__bracket">
-        <span className="nav__bracket-edge">[</span>
+        <span className="nav__bracket-edge" aria-hidden="true">[</span>
         <span className="nav__bracket-id">cp</span>
-        <span className="nav__bracket-edge">]</span>
+        <span className="nav__bracket-edge" aria-hidden="true">]</span>
       </span>
       {!visible && (
         <span className="nav__name">

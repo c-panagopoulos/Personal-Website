@@ -234,9 +234,9 @@ export default function AssistantSection() {
         />
       </div>
       <div className={"assistant-section__main-inner" + (chat.history.length ? "" : " assistant-section__main-inner--idle")}>
-        <h3 className="assistant-section__title">
+        <h2 className="assistant-section__title">
           <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0) }}>Ask about my work</span>
-        </h3>
+        </h2>
         {!(isMobile && chat.open) && (
           <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
             It uses the same retrieval approach as Hermes, over notes about my projects and homelab. Each

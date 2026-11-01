@@ -66,9 +66,9 @@ export default function HomelabSection() {
 
       <div className="section-lead">
         <div className="section-lead__inner">
-          <h3 className="section-lead__title">
+          <h2 className="section-lead__title">
             <span style={{ display: "block", ...anim(visible, "titleWipe", 0.75, 1.8) }}>A mini PC that runs my own services.</span>
-          </h3>
+          </h2>
           <p className="section-lead__body" style={anim(visible, "sceneRiseBlur", 0.7, 2.3)}>
             An Intel N100 running Nextcloud, n8n and my own projects in Docker, reachable only over Tailscale.
             One automation plans my day from sleep and calendar data; another turns photos of handwritten notes

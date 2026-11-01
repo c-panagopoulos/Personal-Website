@@ -18,7 +18,7 @@
   --text-soft: rgba(211, 218, 217, 0.85);
   --text-secondary: rgba(211, 218, 217, 0.78);
   --text-tertiary: rgba(211, 218, 217, 0.64);
-  --text-quiet: rgba(211, 218, 217, 0.5);
+  --text-quiet: rgba(211, 218, 217, 0.64);
   --text-faint: rgba(211, 218, 217, 0.2);
 
   --accent: #715a5a;
@@ -1383,7 +1383,7 @@ button {
   font-weight: 700;
   font-size: 1.05rem;
   letter-spacing: -0.01em;
-  color: var(--accent-hover);
+  color: var(--accent-text);
   margin-bottom: 16px;
 }
 .scene__stack--grid .scene__stack-value {
@@ -2182,6 +2182,8 @@ button {
   margin-bottom: 34px;
 }
 .contact-section__eyebrow-label {
+  margin: 0;
+  font-weight: 400;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.3em;
@@ -2248,7 +2250,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.2em;
-  color: var(--accent-hover);
+  color: var(--accent-text);
 }
 .contact-link__value {
   font-size: 1.3rem;

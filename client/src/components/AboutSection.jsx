@@ -7,9 +7,9 @@ export default function AboutSection() {
   return (
     <div id="about" className="about-section" ref={ref}>
       <div className="contact-section__eyebrow">
-        <span className="contact-section__eyebrow-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
+        <h2 className="contact-section__eyebrow-label" style={anim(visible, "rowRise", 0.4, 0.1)}>
           ABOUT
-        </span>
+        </h2>
         <span className="contact-section__eyebrow-rule" style={anim(visible, "ruleGrow", 0.6, 0.25)} />
       </div>
       <div className="about-section__body" style={anim(visible, "sceneRiseBlur", 0.65, 0.5)}>
