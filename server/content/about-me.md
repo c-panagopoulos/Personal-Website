@@ -5,16 +5,16 @@ to remote, hybrid, or on-site work.
 
 How I got into programming: it all started when I began self-hosting a few services to make my everyday life
 easier. The first one was Nextcloud, to get my files off Google Drive. One Docker container became two, two
-became three, and that's how I ended up with a homelab. That's when the open source community impressed me:
+became three, and that's how I ended up with a homelab. That's also when I came to admire the open-source community:
 people with passion, working together, have built things that in my opinion are often better than the
-commercial products they compete with. It's also when I saw what a responsibility it is to keep all these
+commercial products they compete with. I also saw what a responsibility it is to keep all these
 services running smoothly. All of this fascinated me, and programming was the natural next step.
 
 I'm currently changing careers. I work full-time in customer and technical support, and in my free time I
 build projects like these and keep improving my programming skills.
 
 Support work has taught me to listen until I understand what someone actually needs and to explain technical
-things in plain language. I've also learned to work well under pressure, to deliver results, and to take
+things in plain language. I've also learned to work well under pressure and to take
 ownership of customer cases until their issue is resolved.
 
 Some of what I build started from something I needed myself. tapstudy exists because I wanted an honest,

@@ -19,11 +19,11 @@ export default function AboutSection() {
           that's how I ended up with a homelab.
         </p>
         <p>
-          That's when the open source community impressed me: people with passion, working together, have built
+          That's also when I came to admire the open-source community: people with passion, working together, have built
           things that in my opinion are often better than the commercial products they compete with.
         </p>
         <p>
-          It's also when I saw what a responsibility it is to keep all these services running smoothly. All of
+          I also saw what a responsibility it is to keep all these services running smoothly. All of
           this fascinated me, and programming was the natural next step.
         </p>
         <p>
@@ -32,7 +32,7 @@ export default function AboutSection() {
         </p>
         <p>
           Support work has taught me to listen until I understand what someone actually needs and to explain
-          technical things in plain language. I've also learned to work well under pressure, to deliver results,
+          technical things in plain language. I've also learned to work well under pressure
           and to take ownership of customer cases until their issue is resolved.
         </p>
         <p>
