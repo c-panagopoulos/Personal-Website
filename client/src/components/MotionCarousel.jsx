@@ -165,7 +165,7 @@ export default function MotionCarousel({ slides }) {
   );
 }
 
-function Lightbox({ slides, index, onClose, onPrev, onNext }) {
+export function Lightbox({ slides, index, onClose, onPrev, onNext }) {
   const slide = index != null ? slides[index] : null;
   const closeRef = useRef(null);
   const containerRef = useRef(null);
@@ -333,7 +333,7 @@ function ChevronIcon({ direction }) {
   );
 }
 
-function ZoomIcon() {
+export function ZoomIcon() {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="11" cy="11" r="7" />

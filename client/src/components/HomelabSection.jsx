@@ -71,13 +71,12 @@ export default function HomelabSection() {
       <div className="section-lead">
         <div className="section-lead__inner">
           <h3 className="section-lead__title">
-            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.75, 1.8) }}>If it breaks at 3am,</span>
-            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.75, 1.95) }}>I am the on-call.</span>
+            <span style={{ display: "block", ...anim(visible, "titleWipe", 0.75, 1.8) }}>A mini PC that runs my own services.</span>
           </h3>
           <p className="section-lead__body" style={anim(visible, "sceneRiseBlur", 0.7, 2.3)}>
-            An Intel N100 running my personal cloud: Nextcloud, n8n, Tailscale, no open ports. One automation
-            plans my day from sleep and calendar data; another turns photos of handwritten notes into searchable
-            cards. There is no DevOps team here. If it breaks, I fix it.
+            An Intel N100 running Nextcloud, n8n and my own projects in Docker, reachable only over Tailscale.
+            One automation plans my day from sleep and calendar data; another turns photos of handwritten notes
+            into searchable cards. I set it up and maintain it myself.
           </p>
 
           <ul className="scene__proof">
@@ -92,9 +91,9 @@ export default function HomelabSection() {
           </ul>
 
           <p className="scene__how" style={anim(visible, "sceneRiseBlur", 0.6, 2.62)}>
-            For the daily-routine automation, sleep score comes in over an NFC tag — a handful of predefined
-            values, sidestepping a proprietary sleep-tracker API. The AI drafts the day's plan; the workflow
-            validates the structure and only writes through events the model itself marks enabled.
+            For the daily-routine automation, the sleep score comes in over an NFC tag with a few predefined
+            values, so it doesn't depend on a proprietary sleep-tracker API. The AI drafts the day's plan, and
+            the workflow checks its structure and only writes events the model has marked as enabled.
           </p>
 
           <div style={{ marginTop: 40 }}>

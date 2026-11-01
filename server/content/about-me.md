@@ -1,22 +1,21 @@
 # About Charalampos Panagopoulos
 
-I'm based in Athens, Greece. I currently work full-time in a non-development role and build software in my
-spare time, and I'm looking to land my first job as a junior full-stack web developer. I'm open to remote,
+I'm based in Athens, Greece. I'm a career changer: I currently work full-time in customer and technical support and
+build software in my spare time, and I'm looking to land my first job as a junior full-stack web developer. I'm open to remote,
 hybrid, or on-site work.
 
-Before I wrote any production code, I spent years on customer support lines. That job left a mark on how I
-debug: most of it is just listening carefully to what someone is actually describing before touching
-anything, reproducing the real problem instead of guessing at it. That habit carried straight over into how
-I build software.
+Working in customer and technical support has taught me to listen until I understand what someone actually
+needs, to explain technical things in plain language, and to stay calm and patient when a customer is
+frustrated.
 
-What I build tends to start from something I actually needed. tapstudy exists because I wanted an honest,
+Some of what I build started from something I needed myself. tapstudy exists because I wanted an honest,
 low-friction record of how much I was actually studying alongside a full-time job, not another app to open
 and start manually, just an NFC tag on my desk. Tap to start, tap to stop. Hermes is a support chatbot I
 built for a fictional e-commerce brand that only ever
 answers from what it can cite, with retrieval over PostgreSQL and pgvector and a real escalation path to a
 human for anything it can't confidently answer. tapstudy runs self-hosted, on my own hardware, not on
-someone else's cloud. Hermes runs on Railway instead. Ghost Data is a deletion-audit agent I built in 24
-hours for HackerRank Orchestrate, which checks whether a customer's data is really gone across replicas,
+someone else's cloud. Hermes runs on Railway instead. Ghost Data is a deletion-audit agent I built solo for
+HackerRank Orchestrate, in about 8 to 9 hours of work during the 24-hour hackathon, which checks whether a customer's data is really gone across replicas,
 search indexes, backups and sync jobs.
 
 That hardware is a single Intel N100 mini PC running my own homelab: Nextcloud, n8n automations, and a
@@ -25,7 +24,7 @@ public internet. Two of those automations do real work every day, one drafts my 
 sleep score and my calendar, staying inside strict rules so it never overlaps anything I've already
 committed to; the other turns photos of handwritten study notes into structured, searchable cards using
 GPT-4o Vision. Running my own infrastructure is where I actually learned what "production" costs: backups,
-monitoring, and being the only person who gets paged when something breaks at 3am.
+monitoring, and being the only person who fixes things when something breaks.
 
 I use React and Vite on the frontend because the projects are React apps that need a fast dev loop. That's
 the reason I use React and Vite, not because they're trendy.
@@ -74,5 +73,5 @@ then make it good enough that a stranger can use it too.
 
 Q: What projects have you built? A: Three main projects. tapstudy, a self-hosted study tracker you start by
 tapping an NFC tag. Hermes, a support chatbot that only answers from what it can cite. Ghost Data, a
-deletion-audit agent I built in 24 hours for HackerRank Orchestrate. Alongside those, this portfolio with its
+deletion-audit agent I built for HackerRank Orchestrate in about 8 to 9 hours of work during the 24-hour hackathon. Alongside those, this portfolio with its
 own retrieval assistant, and the homelab everything self-hosted runs on.

@@ -242,13 +242,12 @@ export default function AssistantSection() {
       </div>
       <div className="assistant-section__main-inner">
         <h3 className="assistant-section__title">
-          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0) }}>Stop reading about me.</span>
-          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0.15) }}>Ask instead.</span>
+          <span style={{ display: "block", ...anim(visible, "titleWipe", 0.8, 0) }}>Ask about my work</span>
         </h3>
         {!(isMobile && chat.open) && (
           <p className="assistant-section__subtitle" style={anim(visible, "sceneRiseBlur", 0.65, 1.5)}>
-            This is the same assistant I built for Hermes, pointed at my own repos. It shows the chunks it
-            used, so you can catch it being wrong.
+            It uses the same retrieval approach as Hermes, over notes about my projects and homelab. Each
+            answer shows the chunks it was based on, so you can check it.
           </p>
         )}
 

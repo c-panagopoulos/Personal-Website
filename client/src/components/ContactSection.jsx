@@ -2,9 +2,9 @@ import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
 const LINKS = [
-  { href: "mailto:char@panago.anonaddy.com", label: "EMAIL", value: "actually reads these", external: false },
-  { href: "https://github.com/c-panagopoulos", label: "GITHUB", value: "commit history and all", external: true },
-  { href: "https://www.linkedin.com/in/c-panagopoulos/", label: "LINKEDIN", value: "if you must", external: true },
+  { href: "mailto:char@panago.anonaddy.com", label: "EMAIL", value: "char@panago.anonaddy.com", external: false },
+  { href: "https://github.com/c-panagopoulos", label: "GITHUB", value: "github.com/c-panagopoulos", external: true },
+  { href: "https://www.linkedin.com/in/c-panagopoulos/", label: "LINKEDIN", value: "linkedin.com/in/c-panagopoulos", external: true },
 ];
 
 export default function ContactSection() {
@@ -19,10 +19,10 @@ export default function ContactSection() {
         <span className="contact-section__eyebrow-rule" style={anim(visible, "ruleGrow", 0.6, 0.25)} />
       </div>
       <h2 className="contact-section__title" style={anim(visible, "titleWipe", 0.8, 0.6)}>
-        Still scrolling?
+        Get in touch
       </h2>
       <p className="contact-section__body" style={anim(visible, "sceneRiseBlur", 0.65, 1.3)}>
-        A project idea, feedback on anything above, or an open role. I answer within a day.
+        For an open role, a question about a project, or feedback on anything above. I usually reply within a day.
       </p>
       <div className="contact-grid">
         {LINKS.map((link, i) => (

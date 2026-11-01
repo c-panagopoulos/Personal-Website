@@ -225,7 +225,7 @@ export default function Terminal({
             <div className="terminal__dot terminal__dot--green" />
           </div>
           <div className="terminal__bar-title">
-            <span>{username} — bash</span>
+            <span>{username}: bash</span>
           </div>
           <div className="terminal__bar-spacer" />
         </div>

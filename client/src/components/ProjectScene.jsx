@@ -1,5 +1,4 @@
 import Reveal from "./Reveal.jsx";
-import ScrambleText from "./ScrambleText.jsx";
 import Button from "./Button.jsx";
 import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
@@ -17,21 +16,6 @@ function StackGroup({ group, style }) {
   );
 }
 
-function ResultGroup({ result, style }) {
-  return (
-    <div className="scene__stack-group" style={style}>
-      <div className="scene__stack-label">Result</div>
-      <div className="scene__result">
-        <span className="scene__result-value">
-          {result.value}
-          {result.outOf && <span className="scene__result-out-of"> / {result.outOf}</span>}
-        </span>
-        {result.caption && <span className="scene__result-caption">{result.caption}</span>}
-      </div>
-    </div>
-  );
-}
-
 export default function ProjectScene({
   id,
   sceneNumber,
@@ -43,7 +27,6 @@ export default function ProjectScene({
   proof,
   how,
   stack,
-  result,
   evidence,
   ctaLabel,
   ctaHref,
@@ -82,8 +65,8 @@ export default function ProjectScene({
               PROJECT {sceneNumber}
             </span>
             <span className="scene__kicker-rule" style={anim(visible, "ruleGrow", 0.5, 0.35)} />
-            <span className="scene__kicker-name">
-              <ScrambleText lines={[sceneName]} />
+            <span className="scene__kicker-name" style={anim(visible, "rowRise", 0.5, 0.35)}>
+              {sceneName}
             </span>
           </div>
           <h3 className="scene__title" style={anim(visible, "titleWipe", 0.75, 0.5)}>
@@ -115,7 +98,6 @@ export default function ProjectScene({
               {stack.map((group, i) => (
                 <StackGroup group={group} key={group.label} style={anim(visible, "rowRise", 0.45, 0.9 + i * 0.15)} />
               ))}
-              {result && <ResultGroup result={result} style={anim(visible, "rowRise", 0.45, 0.9 + stack.length * 0.15)} />}
             </div>
           )}
 
@@ -153,7 +135,6 @@ export default function ProjectScene({
                   {stack.map((group, i) => (
                     <StackGroup group={group} key={group.label} style={anim(visible, "rowRise", 0.45, 0.9 + i * 0.15)} />
                   ))}
-                  {result && <ResultGroup result={result} style={anim(visible, "rowRise", 0.45, 0.9 + stack.length * 0.15)} />}
                 </div>
               </div>
             )}

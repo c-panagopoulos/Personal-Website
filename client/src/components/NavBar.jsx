@@ -14,6 +14,7 @@ const LINKS = [
   { name: "assistant", link: "#assistant" },
   { name: "homelab", link: "#homelab" },
   { name: "stack", link: "#stack" },
+  { name: "about", link: "#about" },
   { name: "contact", link: "#contact" },
 ];
 

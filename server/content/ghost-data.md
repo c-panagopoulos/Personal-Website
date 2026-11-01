@@ -1,7 +1,7 @@
 # Ghost Data — Deletion-Audit Agent
 
-Ghost Data Still Exists is a deletion-audit agent I designed in 24 hours, solo, for HackerRank Orchestrate in
-October 2026. It checks whether a customer's personal data is really gone after a deletion request. A company
+Ghost Data Still Exists is a deletion-audit agent I designed solo for HackerRank Orchestrate in October 2026,
+in about 8 to 9 hours of work during the 24-hour hackathon. It checks whether a customer's personal data is really gone after a deletion request. A company
 tells a customer their account has been deleted and its dashboards agree, but weeks later the data is still
 in a read replica, a search index, a support attachment, an analytics export and a backup, and a sync job has
 quietly recreated part of what was deleted. The agent investigates each request against the company's own
@@ -14,8 +14,8 @@ needs the organizers' dataset, which isn't public.
 
 ## Quick answers
 
-Q: What is Ghost Data? A: Ghost Data is my hackathon project, a deletion-audit agent I built in 24 hours,
-solo, for HackerRank Orchestrate in October 2026. It checks whether a customer's personal data is really
+Q: What is Ghost Data? A: Ghost Data is my hackathon project, a deletion-audit agent I built solo
+for HackerRank Orchestrate in October 2026, in about 8 to 9 hours of work during the 24-hour hackathon. It checks whether a customer's personal data is really
 deleted across replicas, search indexes, backups and the sync jobs that quietly bring it back.
 
 Q: What score did Ghost Data get in HackerRank Orchestrate? A: Its output for 518 deletion requests was
@@ -119,7 +119,7 @@ cache is reported next to the billed cost.
 
 ## Constraints and limitations
 
-It was built in 24 hours, solo, on a Groq tier I chose with a 200k tokens per day limit. Some accounts and
+It was built solo, in about 8 to 9 hours of work during a 24-hour hackathon, on a Groq tier I chose with a 200k tokens per day limit. Some accounts and
 fully anonymized analytics records have no identifier linking them to the person in the supplied evidence,
 and the agent refuses to guess, which costs some recall. There's no automated unit-test suite yet; behaviour
 is locked by the evaluation harness, byte-identical rebuilds and fault-injection checks.

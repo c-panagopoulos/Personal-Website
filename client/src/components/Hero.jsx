@@ -1,63 +1,8 @@
-import { useEffect, useState } from "react";
-import { useSharedChat } from "../context/ChatContext.jsx";
-import ChatInput from "./ChatInput.jsx";
-import { RetrievalStatus, SourceChips, ThinkingDots } from "./RetrievalStatus.jsx";
-import ChatError from "./ChatError.jsx";
+import Button from "./Button.jsx";
 
-const CHIPS = [
-  "What have you built?",
-  "What technologies do you use?",
-  "Are you a good fit for a junior role?",
-];
-
-const NAME_LINE = "CHARALAMPOS PANAGOPOULOS";
-const ROLE_LINE = "JUNIOR FULL-STACK WEB DEVELOPER";
-const SCRAMBLE_CHARS = "!<>-_\\/[]{}=+*^?#$%&";
 const EASE = "cubic-bezier(0.2, 0.7, 0.2, 1)";
 
-function randomScrambleChar() {
-  return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-}
-
-function useScramble(text, delay, duration) {
-  const [display, setDisplay] = useState("");
-
-  useEffect(() => {
-    let raf;
-    const start = performance.now();
-    const tick = (now) => {
-      const elapsed = now - start - delay;
-      if (elapsed < 0) {
-        raf = requestAnimationFrame(tick);
-        return;
-      }
-      const progress = Math.min(1, elapsed / duration);
-      const revealCount = Math.floor(progress * text.length);
-      let out = "";
-      for (let i = 0; i < text.length; i++) {
-        const ch = text[i];
-        out += ch === " " ? ch : i < revealCount ? ch : randomScrambleChar();
-      }
-      setDisplay(out);
-      if (progress < 1) raf = requestAnimationFrame(tick);
-      else setDisplay(text);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [text, delay, duration]);
-
-  return display;
-}
-
 export default function Hero() {
-  const chat = useSharedChat();
-  const heroTurn = chat.history.find((t) => t.origin === "hero");
-  const open = Boolean(heroTurn);
-  const [manuallyClosed, setManuallyClosed] = useState(false);
-  const panelOpen = open && !manuallyClosed;
-  const nameDisplay = useScramble(NAME_LINE, 550, 650);
-  const roleDisplay = useScramble(ROLE_LINE, 750, 750);
-
   return (
     <div className="hero">
       <div className="hero__backdrop" />
@@ -73,77 +18,33 @@ export default function Hero() {
             <img
               className="hero__avatar"
               src="/images/prof3.webp"
-              alt="Charalampos"
+              alt=""
               style={{ animation: "avatarSpring 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both" }}
             />
-            <span className="hero__label-group" aria-label={`${NAME_LINE}, ${ROLE_LINE}`}>
-              <span className="hero__label" style={{ whiteSpace: "pre-wrap", minWidth: 1 }} aria-hidden="true">
-                {nameDisplay || " "}
-              </span>
-              <span className="hero__label hero__label--muted" style={{ whiteSpace: "pre-wrap", minWidth: 1 }} aria-hidden="true">
-                {roleDisplay || " "}
-              </span>
+            <span className="hero__label" style={{ animation: `sceneRiseBlur 0.6s ${EASE} 0.7s both` }}>
+              JUNIOR FULL-STACK WEB DEVELOPER · ATHENS
             </span>
           </div>
-          <h1 className="hero__title">
-            <span style={{ display: "block", animation: `titleWipe 0.8s ${EASE} 1s both` }}>I build the</span>
-            <span style={{ display: "block", animation: `titleWipe 0.8s ${EASE} 1.15s both` }}>things I needed</span>
-            <span style={{ display: "block", animation: `titleWipe 0.8s ${EASE} 1.3s both` }}>to exist.</span>
+          <h1 className="hero__title" style={{ animation: `titleWipe 0.8s ${EASE} 1s both` }}>
+            Charalampos
+            <br />
+            Panagopoulos
           </h1>
-          <p className="hero__subtitle" style={{ animation: `sceneRiseBlur 0.8s ${EASE} 1.7s both` }}>
-            I build full-stack applications, AI tools, and the infrastructure behind them - usually to solve a
-            problem I actually have.
-          </p>
-          <p className="hero__status" style={{ animation: `sceneRiseBlur 0.6s ${EASE} 1.85s both` }}>
-            OPEN TO JUNIOR FULL-STACK WEB DEVELOPER ROLES
+          <p className="hero__subtitle" style={{ animation: `sceneRiseBlur 0.8s ${EASE} 1.4s both` }}>
+            I got into programming through self-hosting. Now I build web apps with React, Node.js and
+            PostgreSQL, and the homelab they run on.
           </p>
 
-          <div className="hero__interact">
-            <div className="hero-composer" style={{ animation: `composerPop 0.7s ${EASE} 2s both` }}>
-              <ChatInput
-                placeholder="Ask about my stack or homelab…"
-                onSend={(question) => chat.ask(question, "hero")}
-                disabled={open}
-                promptExpanded={panelOpen}
-                onPromptClick={open ? () => setManuallyClosed((v) => !v) : undefined}
-              />
-
-              <div className={"hero-answer" + (panelOpen ? " hero-answer--open" : "")}>
-                <div className="hero-answer__clip">
-                  <div className="hero-answer__inner">
-                    <span className="hero-answer__label">ANSWER</span>
-                    {heroTurn?.isRetrieving && <RetrievalStatus note="searching indexed chunks · repos, cv, notes" />}
-                    {heroTurn?.showSources && <SourceChips sources={heroTurn.sources} />}
-                    {heroTurn?.isThinking && <ThinkingDots note="sources locked — writing an answer" />}
-                    {heroTurn?.hasText && (
-                      <p className="hero-answer__text" aria-live="polite">
-                        {heroTurn.text}
-                        {!heroTurn.done && <span className="caret" aria-hidden="true">▍</span>}
-                      </p>
-                    )}
-                    <ChatError error={heroTurn?.error} />
-                    {heroTurn?.done && (
-                      <span className="hero-answer__jump">keep scrolling to see how I answered ↓</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {!open && (
-              <div className="chip-row">
-                {CHIPS.map((label, i) => (
-                  <button
-                    key={label}
-                    className="chip"
-                    onClick={() => chat.ask(label, "hero")}
-                    style={{ animation: `chipPop 0.55s ${EASE} ${2.3 + i * 0.12}s both` }}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            )}
+          <div className="hero__interact" style={{ animation: `composerPop 0.7s ${EASE} 1.7s both` }}>
+            <Button href="#scene-01">
+              <span className="btn__label">Projects</span>
+            </Button>
+            <Button variant="secondary" href="#assistant">
+              <span className="btn__label">Ask the assistant</span>
+            </Button>
+            <Button variant="secondary" href="https://github.com/c-panagopoulos" target="_blank" rel="noreferrer">
+              <span className="btn__label">GitHub</span>
+            </Button>
           </div>
         </div>
       </div>

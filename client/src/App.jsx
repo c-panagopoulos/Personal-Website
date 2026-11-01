@@ -1,14 +1,15 @@
 import Hero from "./components/Hero.jsx";
 import NavBar from "./components/NavBar.jsx";
-import MacbookScroll from "./components/MacbookScroll.jsx";
 import ProjectScene from "./components/ProjectScene.jsx";
 import MotionCarousel from "./components/MotionCarousel.jsx";
 import AssistantSection from "./components/AssistantSection.jsx";
 import AuditSteps from "./components/AuditSteps.jsx";
 import HomelabSection from "./components/HomelabSection.jsx";
 import StackSection from "./components/StackSection.jsx";
+import AboutSection from "./components/AboutSection.jsx";
 import ContactSection from "./components/ContactSection.jsx";
-import StatementReveal from "./components/StatementReveal.jsx";
+import StatMoment from "./components/StatMoment.jsx";
+import ZoomableShot from "./components/ZoomableShot.jsx";
 import { ChatProvider } from "./context/ChatContext.jsx";
 import { useSceneTrigger } from "./hooks/useSceneTrigger.js";
 import { anim } from "./lib/anim.js";
@@ -33,38 +34,29 @@ export default function App() {
         <main id="main" tabIndex={-1}>
         <Hero />
 
-        <div className="statement">
-          <StatementReveal lines={["I wanted to know", "how much I really studied.", "So I built", "tapstudy."]} />
-        </div>
-
-        <MacbookScroll src="/images/dashboard.png" alt="tapstudy dashboard" />
-
         <ProjectScene
           id="scene-01"
           sceneNumber="01"
           sceneName="TAPSTUDY"
           showBrowserPreview={false}
           title="A study tracker you start by tapping your phone."
-          body="I wanted an honest record of how much I was actually studying alongside a full-time job, so I stuck an NFC tag on my desk instead of a timer app — tap to start, tap to stop."
+          body="I wanted an honest record of how much I was studying alongside a full-time job. An NFC tag on my desk starts and stops each session, so there is no timer app to remember."
           proof={[
-            <>Ships as <b>one Docker image</b> — dev machine to homelab, no registry</>,
-            <>NFC tag as a <b>URL record</b> — no app, nothing to open</>,
+            <>Ships as <b>one Docker image</b>, from my dev machine to the homelab</>,
+            <>The NFC tag holds a plain <b>URL record</b>, so it works without an app</>,
             <>AI insights are <b>fact-checked</b> before they're shown</>,
-            <>Screen readers get an <b>LLM-narrated description</b> of the chart, not a readout of raw numbers</>,
+            <>Screen readers get an <b>LLM-written description</b> of the chart instead of raw numbers</>,
           ]}
-          how="A local model (qwen2.5:1.5b, via Ollama) writes the insight sentences, but never does the arithmetic — every number is computed in JavaScript first and the model's only job is turning an already-correct fact into a sentence. Prompt-injection attempts get caught and discarded by a fact-check pass afterward, not just prompted around."
+          how="A local model (qwen2.5:1.5b via Ollama) writes the insight sentences but never does the arithmetic. Every number is computed in JavaScript first, and the model only turns it into a sentence. A fact-check pass afterwards discards anything that doesn't match, which also catches prompt-injection attempts."
+          evidence={<ZoomableShot src="/images/tapstudy-dashboard.png" label="tapstudy dashboard" alt="tapstudy dashboard with daily study time, AI insights and recent sessions" />}
           ctaLabel="Live demo"
           ctaHref="https://tapstudy.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/tapstudy"
           stack={[
-            { label: "Engineering", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC tag → URL record, no Web NFC API", "Global error handling, no leaked stack traces"] },
-            { label: "Constraints", items: ["Self-hosted, own hardware", "Local Ollama, no external API", "Single-user by design"] },
+            { label: "Engineering", items: ["Single Docker container", "React 19 · Express · PostgreSQL", "NFC tag with a URL record (no Web NFC API)", "Global error handler that hides stack traces"] },
+            { label: "Constraints", items: ["Self-hosted on my own hardware", "Local Ollama only", "Single-user by design"] },
           ]}
         />
-
-        <div className="statement">
-          <StatementReveal lines={["One started as", "a personal itch.", "The other had to", "survive real customers."]} />
-        </div>
 
         <ProjectScene
           id="scene-02"
@@ -74,17 +66,18 @@ export default function App() {
           divider
           factsLayout="column"
           title="A support chatbot that only answers what it can cite."
-          body="Customers ask questions; the bot answers only from what it can cite — no hallucinated policy, no made-up support replies."
+          body="Built for a fictional e-commerce brand. Customers ask questions and the bot answers from the brand's own documents, with the sources attached to every reply."
           proof={[
-            <>Answers only from <b>cited sources</b></>,
-            <><b>Token-streamed</b> replies, sources attached</>,
+            <><b>Token-streamed</b> replies over SSE</>,
             <>Resists <b>prompt-injection</b> and role-escalation attempts</>,
-            <><b>JWT-protected</b> admin panel — live stats + doc ingestion</>,
+            <><b>JWT-protected</b> admin panel with live stats and document upload</>,
+            <>Hands the conversation to <b>a human</b> when it shouldn't keep answering</>,
           ]}
-          how="Retrieves the closest matching chunks from internal docs via pgvector, then answers only from those. A message matching escalation keywords — a lawyer, a formal complaint — opens a case for a human agent through a configurable webhook, instead of letting the bot keep guessing."
+          how="It retrieves the closest matching chunks with pgvector and answers only from those. If a message matches escalation keywords, such as a lawyer or a formal complaint, it opens a case for a human agent through a configurable webhook. The backend is private; the frontend repo is public."
           ctaLabel="Live demo"
           ctaHref="https://hermes.cpanagopoulos.dev"
           githubHref="https://github.com/c-panagopoulos/hermes-ai"
+          secondaryLabel="Frontend repo"
           stack={[
             { label: "Engineering", items: ["PostgreSQL + pgvector", "Token-streamed via SSE", "JWT + bcrypt admin auth", "n8n escalation webhook"] },
             { label: "Constraints", items: ["Deployed on Railway", "Groq in prod, Ollama in dev", "Escalates instead of guessing"] },
@@ -95,60 +88,51 @@ export default function App() {
           <MotionCarousel slides={HERMES_SLIDES} />
         </div>
 
-        <div className="statement">
-          <StatementReveal lines={["Deleted is a claim.", "Gone needs evidence."]} />
-        </div>
+        <StatMoment
+          value="75% → 96.9%"
+          label="75% to 96.9%"
+          caption="Ghost Data's status accuracy on the 32 sample cases, after separating what the auditor could know at audit time from what it could actually cite."
+        />
 
         <ProjectScene
           id="scene-03"
           sceneNumber="03"
           sceneName="GHOST DATA"
           showBrowserPreview={false}
-          title="Deleted doesn't mean gone."
-          body="Built in 24 hours for HackerRank Orchestrate. An agent that audits whether a customer's data is really deleted: across replicas, search indexes, backups, and the sync jobs that quietly bring it back."
+          title="An agent that checks whether deleted customer data is really gone."
+          body="My entry for HackerRank Orchestrate, built solo in about 8 to 9 hours of work during the 24-hour hackathon. It looks through replicas, search indexes, backups, and the sync jobs that can bring deleted data back."
           proof={[
-            <>The model proposes, <b>the code decides</b></>,
+            <>Identity, timing and policy are decided in <b>plain code</b></>,
             <>Reads SQL, JSON, <b>six log formats</b>, PDFs and screenshots</>,
             <>Every finding <b>cites its evidence</b></>,
             <><b>Zero npm dependencies</b>, byte-identical rebuilds</>,
           ]}
-          how="LLMs only touch what's genuinely unstructured: whether a request, in any language, actually asks for deletion, and facts that exist only inside an image. Identity, time rules, policy and ordering are plain code. The hard part was separating what the auditor could have known at audit time from what can actually be cited. That change, together with one primary account per person, took status accuracy on the 32 sample cases from 75% to 96.9%."
+          how="Models are used only for unstructured input: deciding whether a request, in any language, actually asks for deletion, and reading facts that exist only inside an image. Everything else, including the order of the fixes, is plain code."
           ctaLabel="GitHub"
           ctaHref="https://github.com/c-panagopoulos/deletion-audit-agent"
           githubHref="https://github.com/c-panagopoulos/deletion-audit-agent/blob/main/code/docs/decisions.md"
           secondaryLabel="31 decision records"
           stack={[
-            { label: "Engineering", items: ["Node.js 22.13+, no dependencies", "Groq gpt-oss-120b for intake", "Gemini vision for PDFs + images", "~$0.17 for all 518 (from an empty cache)"] },
-            { label: "Constraints", items: ["24 hours, solo", "Groq tier I chose: 200k tokens/day", "Refuses to guess unlinkable data"] },
+            { label: "Engineering", items: ["Node.js 22.13+, no dependencies", "Groq gpt-oss-120b for intake", "Gemini vision for PDFs + images", "~$0.17 for all 518 requests, from an empty cache"] },
+            { label: "Constraints", items: ["Solo, ~8-9 hours of work", "Groq tier I chose: 200k tokens/day", "Refuses to guess unlinkable data"] },
           ]}
-          result={{ value: "25.2", outOf: "30", caption: "output graded on hidden answers" }}
         >
           <AuditSteps />
         </ProjectScene>
 
-        <AssistantSection />
+        <StatMoment
+          value="25.2 / 30"
+          label="25.2 out of 30"
+          caption="Ghost Data's score, graded against answers that were hidden from participants."
+        />
 
-        <div className="statement">
-          <StatementReveal lines={["Software", "fails.", "So I built", "my own infrastructure."]} />
-        </div>
+        <AssistantSection />
 
         <HomelabSection />
 
         <StackSection />
 
-        <div className="statement" style={{ justifyContent: "center" }}>
-          <StatementReveal
-            as="p"
-            align="center"
-            style={{ fontSize: "clamp(1.6rem, 1rem + 3.2vw, 3.2rem)" }}
-            lines={[
-              "Years on a support line before I wrote a line of code.",
-              <>
-                Most of debugging is still just <span style={{ color: "var(--accent)" }}>listening</span>.
-              </>,
-            ]}
-          />
-        </div>
+        <AboutSection />
 
         <ContactSection />
         </main>

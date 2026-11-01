@@ -15,12 +15,12 @@ const STACK_GROUPS = [
 
 const STACK_ANSWERS = {
   JavaScript:
-    "JavaScript is the one language every layer of this stack shares, frontend, backend, and the RAG pipeline's glue code alike, so I'm never context-switching to a second language just to get something done.",
+    "JavaScript is the one language every layer of this stack shares (frontend, backend and the RAG pipeline's glue code), so I'm never context-switching to a second language just to get something done.",
   "Node.js":
     "Node.js is what lets that same language run the backend too, not just the browser. One runtime and one package ecosystem across the whole stack means fewer tools to juggle when I'm the only one maintaining it.",
   React:
-    "I use React and Vite on the frontend because these projects are React apps that need a fast dev loop. That's the reason I use them, not because they're trendy.",
-  Vite: "Vite is what actually makes that dev loop fast, instant hot reload instead of waiting on a bundler every time I save. It's paired with React here for that reason, not because it's trendy.",
+    "I use React and Vite on the frontend because these projects are React apps that need a fast dev loop.",
+  Vite: "Vite is what makes that dev loop fast: changes show up instantly instead of waiting on a bundler every time I save.",
   Express:
     "I use Express on the backend because it stays out of the way on small, self-hosted APIs. There's no framework magic to fight when I'm the only one maintaining it.",
   SSE: "I use Server-Sent Events for chat streaming instead of something heavier like WebSockets. It's a one-way token stream from server to client, and a plain EventSource with no extra infrastructure is enough.",
@@ -29,7 +29,7 @@ const STACK_ANSWERS = {
   pgvector:
     "I use pgvector on top of Postgres because it means retrieval doesn't need a separate vector database. That saves me one whole service to run, back up, and secure.",
   Docker:
-    "Docker is why something I build on my dev machine runs identically on a homelab server. I chose it so I could ship one docker save, ssh, docker load and skip a whole category of environment bugs.",
+    "Docker is why something I build on my dev machine runs identically on a homelab server. I deploy with docker save, ssh and docker load, which avoids a whole category of environment bugs.",
   Linux:
     "Linux is the operating system I chose for my homelab server. It's what self-hosting runs on, and it's the foundation underneath everything else I build there.",
   Tailscale:
@@ -40,9 +40,9 @@ const STACK_ANSWERS = {
   Bootstrap:
     "I've reached for Bootstrap on earlier projects when the goal was a working UI fast, without hand-rolling every component from scratch. It trades some visual uniqueness for speed, which is a fair trade when shipping something functional matters more than a custom look.",
   Tailwind:
-    "I used Tailwind CSS on tapstudy because utility classes let me iterate on layout fast without context-switching to a separate stylesheet. This site itself uses hand-written CSS instead, a single-page portfolio doesn't need a utility framework's overhead.",
-  Git: "I use Git because it's non-negotiable, every project here, from tapstudy to this site, lives in a repo with real commit history so I can see exactly what changed and roll it back the moment I break something.",
-  n8n: "n8n runs my homelab automations, one workflow plans my day from sleep and calendar data each morning, another turns photos of handwritten notes into searchable cards. Visual workflows are faster to debug and easier to extend six months later than a pile of hand-rolled scripts.",
+    "I used Tailwind CSS on tapstudy because utility classes let me iterate on layout fast without context-switching to a separate stylesheet. This site uses hand-written CSS instead, because a single-page portfolio doesn't need a utility framework.",
+  Git: "Every project here, from tapstudy to this site, lives in a Git repo with its full commit history, so I can see what changed and roll back when I break something.",
+  n8n: "n8n runs my homelab automations. One workflow plans my day from sleep and calendar data each morning, another turns photos of handwritten notes into searchable cards. Visual workflows are faster to debug and easier to extend six months later than a pile of hand-rolled scripts.",
 };
 
 export default function StackSection() {
