@@ -8,6 +8,7 @@ import {
   MobileNavMenu,
   MobileNavToggle,
 } from "./ResizableNavbar.jsx";
+import { handleAnchorClick, scrollToTarget } from "../lib/scroll.js";
 
 const LINKS = [
   { name: "work", link: "#scene-01" },
@@ -61,20 +62,6 @@ function useActiveSection(ids) {
   return active;
 }
 
-function scrollToTarget(el) {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-}
-
-function handleNavClick(event) {
-  const href = event.currentTarget.getAttribute("href");
-  if (!href || !href.startsWith("#")) return;
-  const el = document.querySelector(href);
-  if (!el) return;
-  event.preventDefault();
-  scrollToTarget(el);
-}
-
 function scrollToTop(event) {
   event.preventDefault();
   const el = document.getElementById("main") || document.body;
@@ -107,7 +94,7 @@ export default function NavBar({ style }) {
     <Navbar style={style}>
       <NavBody>
         <Brand />
-        <NavItems items={LINKS} activeLink={activeLink} onItemClick={handleNavClick} />
+        <NavItems items={LINKS} activeLink={activeLink} onItemClick={handleAnchorClick} />
       </NavBody>
 
       <MobileNav>
@@ -122,7 +109,7 @@ export default function NavBar({ style }) {
               href={item.link}
               className={`resizable-navbar__mobile-link ${item.link === activeLink ? "resizable-navbar__mobile-link--active" : ""}`}
               onClick={(event) => {
-                handleNavClick(event);
+                handleAnchorClick(event);
                 setMobileOpen(false);
               }}
             >

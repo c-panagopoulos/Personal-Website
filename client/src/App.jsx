@@ -116,12 +116,12 @@ export default function App() {
             {
               value: "75% → 96.9%",
               label: "75% to 96.9%",
-              caption: "Status accuracy on the 32 sample cases, after separating what the auditor could know at audit time from what it could actually cite.",
+              caption: "Status accuracy on the organizers' 32 labelled samples, after separating what the auditor could know at audit time from what it could cite, and keeping one primary account per person.",
             },
             {
               value: "25.2 / 30",
               label: "25.2 out of 30",
-              caption: "Final score, graded against answers that were hidden from participants.",
+              caption: "Official score for the output CSV, graded against the organizers' hidden answers for 518 requests.",
             },
           ]}
         />
