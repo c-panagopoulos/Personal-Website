@@ -2,7 +2,7 @@ import { useSceneTrigger } from "../hooks/useSceneTrigger.js";
 import { anim } from "../lib/anim.js";
 
 const LINKS = [
-  { href: "mailto:char@panago.anonaddy.com", label: "EMAIL", value: "char@panago.anonaddy.com", external: false },
+  { href: "mailto:contact@cpanagopoulos.dev", label: "EMAIL", value: "contact@cpanagopoulos.dev", external: false },
   { href: "https://github.com/c-panagopoulos", label: "GITHUB", value: "github.com/c-panagopoulos", external: true },
   { href: "https://www.linkedin.com/in/c-panagopoulos/", label: "LINKEDIN", value: "linkedin.com/in/c-panagopoulos", external: true },
 ];
